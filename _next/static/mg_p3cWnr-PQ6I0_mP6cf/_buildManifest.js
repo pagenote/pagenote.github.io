@@ -1,0 +1,1 @@
+self.__BUILD_MANIFEST = (function(a){return {"/":[a],"/index":[a],"/snapshot":[a]}}("static\u002Fchunks\u002Facb66ffff2b376b80318587d602c9dec8b8f7c7f.b4b4ee0a77c9df779c38.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
