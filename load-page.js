@@ -9,7 +9,7 @@ const gh = new GitHub();
 var id = window.location.search.match(/pagenote=(.*)$/);
 var pagenoteId = id ? id[1] : '';
 var sessionKey = 'pagenote'+pagenoteId;
-const issue = gh.getIssues('rowthan','rowthan.github.io');
+const issue = gh.getIssues('rowthan','pagenote');
 var metaInfo = {};
 issue.getIssue(pagenoteId,function (err,result,request) {
     if(result && result.body){
