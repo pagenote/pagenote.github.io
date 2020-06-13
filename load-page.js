@@ -76,7 +76,6 @@ function setError(msg) {
 }
 
 function noteUser(info) {
-    console.log(info);
     const noteinfos = [
         {
             x:window.innerWidth - 320,
@@ -93,5 +92,7 @@ function noteUser(info) {
     noteinfos.forEach(function (item) {
         pagenote.record(item,true);
     });
-    pagenote.replay(0);
+    setTimeout(()=>{
+        pagenote.replay(0);
+    },2000)
 }
