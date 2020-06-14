@@ -8,7 +8,7 @@
 <script>
     var a = new URLSearchParams(location.search);
     var redirect = a.get('comeback')||'/';
-    var host = 'https://pagenote.logike.cn?comeback'+redirect;
+    var host = 'https://pagenote.logike.cn?comeback='+redirect;
     window.location.href=`https://github.com/login/oauth/authorize?scope=user%20public_repo&client_id=c4aae381097464aa1024&redirect_uri=${host}`
 </script>
 </body>
