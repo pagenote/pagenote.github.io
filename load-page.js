@@ -69,15 +69,18 @@ function loadPageNote(id,useProxy) {
             injectHtml(metaInfo)
         }
     }).catch(function (e){
-        console.error(e)
-        var httpStatus = e.response.status;
-        switch (httpStatus) {
-            case 404:
-                setError('加载失败，未知快照ID');
-                break;
-            default:
-                setError('加载失败，稍后刷新页面试试？');
-                getCache();
+        try{
+            var httpStatus = e.response.status;
+            switch (httpStatus) {
+                case 404:
+                    setError('加载失败，未知快照ID');
+                    break;
+                default:
+                    setError('加载失败，稍后刷新页面试试？');
+                    getCache();
+            }
+        }catch (e) {
+            setError('加载失败，稍后刷新页面试试？');
         }
         loadPageNote(id,!useProxy);
     }).finally(function () {
