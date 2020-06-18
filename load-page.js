@@ -68,7 +68,7 @@ function loadPageNote(id,useProxy) {
             const metaInfo = JSON.parse(response.data.body);
             injectHtml(metaInfo)
         }
-    }).catch(function (){
+    }).catch(function (e){
         console.error(e)
         var httpStatus = e.response.status;
         switch (httpStatus) {
