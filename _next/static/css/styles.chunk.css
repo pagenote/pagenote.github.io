@@ -19,6 +19,7 @@
 
 .page-detail img.snapshot-img {
   max-width: 100%;
+  box-sizing: border-box;
   border: 1px solid #dee0e3;
   box-shadow: 0 2px 8px 0 rgba(31, 35, 41, 0.06); }
 
@@ -250,6 +251,7 @@
 .pages {
   width: 50%;
   min-width: 400px;
+  min-height: 100vh;
   flex-shrink: 0; }
   .pages .page-group {
     position: relative;
@@ -323,7 +325,7 @@
   top: 0;
   width: 50%;
   max-height: 100vh;
-  overflow: scroll;
+  overflow: auto;
   margin-left: 20px; }
   .notes .empty-tip {
     border: 1px solid;
@@ -337,10 +339,10 @@
     background: #000;
     color: #fff;
     padding: 0 4px;
-    box-shadow: none;
+    box-shadow: 2px 2px 1px #fd2222;
     transition: all 0.3s ease-out; }
     .pages .title .logo-title:hover, .notes .title .logo-title:hover {
-      box-shadow: 2px 2px 1px #fd2222; }
+      box-shadow: none; }
 
 .pages .search, .notes .search {
   width: 100%;
@@ -358,4 +360,20 @@
     opacity: 0; }
   100% {
     opacity: 0.2; } }
+
+.why {
+  max-width: 600px;
+  padding: 12px;
+  margin: 0 auto;
+  font-size: 14px;
+  background-color: #fff; }
+  .why .problem {
+    margin-bottom: 24px; }
+  .why .question {
+    margin-bottom: 12px;
+    font-weight: 500;
+    font-size: 18px; }
+  .why a {
+    color: #0f6c96;
+    text-decoration: none; }
 
