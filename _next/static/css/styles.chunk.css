@@ -1,6 +1,6 @@
 .page-detail {
   box-shadow: 0px 0px 6px 3px #eae6e6;
-  margin: 6px 6px 16px;
+  margin: 6px 0;
   padding: 12px;
   border-radius: 2px; }
   .page-detail .category {
@@ -39,6 +39,7 @@
       padding: 6px 12px; }
     .page-detail .page-header .snapshot-img {
       width: 140px;
+      max-width: 35%;
       box-sizing: border-box; }
       .page-detail .page-header .snapshot-img img {
         cursor: zoom-in;
@@ -75,7 +76,8 @@
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px; }
   .droplabel.show {
-    display: block; }
+    display: block;
+    z-index: 1; }
   .droplabel .select-menu-header {
     padding: 8px 10px;
     line-height: 16px;
@@ -276,11 +278,11 @@
   margin: 12px 12px 12px 0; }
 
 .pages-and-detail {
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
 
 .pages {
   width: 50%;
-  min-width: 400px;
   flex-shrink: 0; }
   .pages .page-group {
     position: relative;
@@ -352,7 +354,7 @@
 .notes {
   position: sticky;
   top: 0;
-  width: 50%;
+  width: calc(50% - 20px);
   margin-left: 20px; }
   .notes .empty-tip {
     border: 1px solid;
@@ -379,6 +381,14 @@
 .pages .group-type, .notes .group-type {
   display: inline-block;
   margin-left: 12px; }
+
+@media screen and (max-width: 720px) {
+  .pages, .notes {
+    width: 100% !important;
+    margin-left: 0;
+    margin-bottom: 24px; }
+  .pages .tab-item {
+    width: calc(50% - 8px); } }
 
 @keyframes fade_out {
   0% {
