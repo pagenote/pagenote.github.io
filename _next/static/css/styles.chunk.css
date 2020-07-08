@@ -2,13 +2,26 @@
   position: relative;
   box-shadow: 0px 0px 3px 1px #eae6e6;
   margin-bottom: 12px;
-  padding: 12px;
   border-radius: 2px;
-  background: #fff; }
+  background: #fff;
+  padding: 12px 12px 12px 12px; }
+  .page-detail:hover .side-bar {
+    display: block; }
+  .page-detail .side-bar {
+    display: none;
+    position: absolute;
+    right: -22px;
+    width: 20px; }
+    .page-detail .side-bar .delete-page-icon {
+      cursor: pointer;
+      border-radius: 20px;
+      border: 1px solid #333;
+      background: #fff; }
   .page-detail .category {
     display: inline-block;
     position: relative;
-    margin-left: 24px; }
+    margin-left: 24px;
+    white-space: nowrap; }
     .page-detail .category .category-name {
       padding: 2px 10px;
       background-color: #ededed;
@@ -41,8 +54,6 @@
       display: flex;
       font-size: 12px;
       color: #999; }
-    .page-detail .page-header .delete-page-icon {
-      display: none; }
     .page-detail .page-header .page-header-meta {
       padding: 6px 12px; }
     .page-detail .page-header .page-img {
@@ -63,34 +74,34 @@
       text-align: center;
       font-size: 12px;
       color: #666; }
-  .page-detail .light {
-    padding: 8px;
-    margin: 8px 0;
-    border-radius: 4px; }
-    .page-detail .light:hover .refer .delete-icon {
-      display: block; }
-    .page-detail .light .refer {
-      position: relative;
-      word-break: break-word;
-      color: #646a73;
-      border-left: 6px solid #bbbfc4;
-      padding-left: 12px;
-      font-size: 12px; }
-      .page-detail .light .refer .delete-icon {
-        display: none;
-        position: absolute;
-        left: -24px;
-        cursor: pointer; }
-    .page-detail .light .note {
-      position: relative;
-      font-size: 14px;
-      color: #333;
-      padding-left: 14px; }
-      .page-detail .light .note:hover .edit-icon {
+    .page-detail .lights .light {
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 4px; }
+      .page-detail .lights .light:hover .refer .delete-icon {
         display: block; }
-      .page-detail .light .note .edit-icon {
-        display: none;
-        cursor: pointer; }
+      .page-detail .lights .light .refer {
+        position: relative;
+        word-break: break-word;
+        color: #646a73;
+        border-left: 6px solid #bbbfc4;
+        padding-left: 12px;
+        font-size: 12px; }
+        .page-detail .lights .light .refer .delete-icon {
+          display: none;
+          position: absolute;
+          left: -24px;
+          cursor: pointer; }
+      .page-detail .lights .light .note {
+        position: relative;
+        font-size: 14px;
+        color: #333;
+        padding-left: 14px; }
+        .page-detail .lights .light .note:hover .edit-icon {
+          display: block; }
+        .page-detail .lights .light .note .edit-icon {
+          display: none;
+          cursor: pointer; }
   .page-detail .snapshots img {
     max-width: 100%;
     cursor: zoom-in; }
@@ -230,7 +241,7 @@
     border-radius: 6px;
     background-color: #f7f48b !important; }
     .page-item.active .page-cliper {
-      color: #f7f48b; }
+      color: #faad14; }
   .page-item:hover {
     background: #f5f5f5; }
     .page-item:hover .page-header .snapshot-button {
@@ -336,6 +347,9 @@
   width: 1px;
   overflow: hidden; }
 
+svg {
+  max-width: 100%; }
+
 .me {
   background: #aacfd0;
   margin: 8px auto 12px;
@@ -347,28 +361,65 @@
     margin: 8px auto 12px;
     width: 1200px; } }
 
+.keyboard {
+  border: 1px solid #e1e4e8;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0px 0px #adadad;
+  color: #404040; }
+
 .empty-tip {
   text-align: center;
   font-size: 14px;
   padding: 32px;
-  margin: 12px 12px 12px 0; }
+  color: #333;
+  line-height: 2em; }
 
 .pages-and-detail {
   display: flex;
-  flex-wrap: wrap;
   box-sizing: border-box;
-  min-height: 90vh; }
+  min-height: 90vh;
+  position: relative; }
+  .pages-and-detail .split-line {
+    flex-shrink: 0;
+    width: 2px;
+    background: #fff;
+    cursor: col-resize;
+    position: relative;
+    z-index: 1;
+    display: block;
+    box-sizing: border-box; }
+    .pages-and-detail .split-line:hover {
+      border: 1px dashed red; }
+
+.pages, .notes {
+  position: relative;
+  padding: 14px 20px; }
+  .pages .title, .notes .title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px; }
+    .pages .title .logo-title, .notes .title .logo-title {
+      background: #000;
+      color: #fff;
+      padding: 0 4px;
+      box-shadow: 2px 2px 1px #fd2222;
+      transition: all 0.3s ease-out; }
+      .pages .title .logo-title:hover, .notes .title .logo-title:hover {
+        box-shadow: none; }
+  .pages .search, .notes .search {
+    width: 100%;
+    padding: 6px 12px;
+    box-sizing: border-box; }
 
 .pages {
-  width: 45%;
   box-sizing: border-box;
   flex-shrink: 0;
+  padding-bottom: 40px;
   border-right: none; }
   .pages .page-group {
     display: flex;
-    margin-top: 12px;
-    position: sticky;
-    top: 0; }
+    margin-top: 12px; }
     .pages .page-group .tabs {
       z-index: 1; }
       .pages .page-group .tabs .group-type {
@@ -439,36 +490,27 @@
       .pages .page-group .page-container .search-keyword {
         background: #fff9c0;
         border-bottom: 2px solid #fddf06; }
+  .pages .action-tips {
+    padding: 2px 12px;
+    border-radius: 2px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 8px; }
 
 .notes {
   position: sticky;
   top: 0;
-  width: calc(55%);
-  box-sizing: border-box;
-  border-left: 1px dashed #fff; }
+  min-width: 30%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  box-sizing: border-box; }
   .notes .empty-tip {
-    border: 1px solid; }
-
-.pages, .notes {
-  padding: 14px 20px; }
-  .pages .title, .notes .title {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 12px; }
-    .pages .title .logo-title, .notes .title .logo-title {
-      background: #000;
-      color: #fff;
-      padding: 0 4px;
-      box-shadow: 2px 2px 1px #fd2222;
-      transition: all 0.3s ease-out; }
-      .pages .title .logo-title:hover, .notes .title .logo-title:hover {
-        box-shadow: none; }
-  .pages .search, .notes .search {
-    width: 100%;
-    padding: 6px 12px;
-    box-sizing: border-box; }
+    border-radius: 6px;
+    background: #fff; }
 
 @media screen and (max-width: 720px) {
+  .pages-and-detail {
+    flex-wrap: wrap; }
   .pages, .notes {
     width: 100% !important;
     margin-left: 0;
