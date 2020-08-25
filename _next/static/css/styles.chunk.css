@@ -11,6 +11,15 @@
   .release .version {
     border-top: 1px solid #e1e4e8;
     margin-top: 12px; }
+    .release .version.latest {
+      animation: shine 3s ease-in-out infinite; }
+      .release .version.latest .brief {
+        border: 1px solid #8BC34A; }
+        .release .version.latest .brief img {
+          max-width: 400px; }
+  .release .version-tip {
+    font-size: 12px;
+    margin-top: 14px; }
   .release .col-3, .release .col-9 {
     padding: 12px; }
   .release .col-3 {
@@ -35,7 +44,6 @@
     .release .brief img {
       max-width: 100%; }
   .release .install-btns {
-    padding: 0 12px;
     margin: 12px 0; }
   .release a.browser-install-btn {
     display: inline-block;
@@ -80,6 +88,10 @@
     .release .col-3, .release .col-9 {
       width: 100%;
       display: block; } }
+
+@keyframes shine {
+  0% { }
+  100% { } }
 
 .page-detail {
   position: relative;
