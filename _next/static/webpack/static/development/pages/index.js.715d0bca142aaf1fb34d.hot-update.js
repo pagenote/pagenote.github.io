@@ -1,4 +1,4 @@
-webpackHotUpdate("static/development/pages/index.js",{
+webpackHotUpdate("static/development/pages/public.js",{
 
 /***/ 1:
 false,
