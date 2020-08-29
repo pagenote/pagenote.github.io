@@ -83,7 +83,9 @@
       width: calc(100% - 24px);
       height: 2em;
       border: none;
-      resize: none; }
+      resize: none;
+      font-size: 12px;
+      text-indent: 1em; }
   .page-detail .lights {
     margin: 12px 0; }
     .page-detail .lights .empty-lights {
@@ -108,6 +110,8 @@
           position: absolute;
           left: -24px;
           cursor: pointer; }
+      .page-detail .lights .light .light-keyword {
+        border-bottom: 1px solid; }
       .page-detail .lights .light .note {
         position: relative;
         font-size: 14px;
@@ -713,4 +717,20 @@ svg {
     -ms-transform: rotateY(-160deg);
     -o-transform: rotateY(-160deg);
     transform: rotateY(-160deg); } }
+
+.why {
+  max-width: 600px;
+  padding: 12px;
+  margin: 0 auto;
+  font-size: 14px;
+  background-color: #fff; }
+  .why .problem {
+    margin-bottom: 24px; }
+  .why .question {
+    margin-bottom: 12px;
+    font-weight: 500;
+    font-size: 18px; }
+  .why a {
+    color: #0f6c96;
+    text-decoration: none; }
 
