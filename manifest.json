@@ -1,0 +1,16 @@
+{
+  "short_name": "PAGENOTE",
+  "name": "PAGENOTE 一页一记智能管理平台",
+  "description": "让你更方便的查看、管理你的PAGENOTE。离线也能使用。",
+  "icons": [
+    {
+      "src": "light-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./me",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
