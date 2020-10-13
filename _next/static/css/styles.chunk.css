@@ -1,3 +1,91 @@
+.setting-page {
+  max-width: 800px;
+  margin: 0 auto; }
+  .setting-page .setting-part {
+    margin-bottom: 24px;
+    position: relative;
+    background: #f8f8f8;
+    padding: 12px;
+    border-radius: 4px; }
+    .setting-page .setting-part a {
+      color: #066ec1; }
+    .setting-page .setting-part .tip {
+      font-size: 12px;
+      color: #999; }
+    .setting-page .setting-part.pagenote {
+      min-height: 120px;
+      position: relative;
+      background: #f7f7f7; }
+      .setting-page .setting-part.pagenote .function-area {
+        height: 120px; }
+  .setting-page .colors {
+    position: absolute;
+    left: 50px;
+    top: 50px; }
+    .setting-page .colors .color-item {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      font-size: 14px;
+      margin-right: 4px;
+      text-align: center;
+      padding: 4px;
+      border-radius: 20px;
+      transition: all 0.4s ease-in-out;
+      cursor: pointer; }
+      .setting-page .colors .color-item:first-child {
+        z-index: 1;
+        top: 0 !important;
+        left: 0 !important;
+        transform: scale(1.5); }
+  .setting-page .save-button {
+    margin-right: 12px; }
+  .setting-page .color-modal {
+    display: none; }
+    .setting-page .color-modal.show {
+      display: block;
+      z-index: 99;
+      position: fixed;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 4px;
+      padding: 12px;
+      border: 1px solid #d2d2d2; }
+    .setting-page .color-modal .setting-title {
+      font-size: 14px;
+      font-weight: bold; }
+    .setting-page .color-modal .predefine-theme {
+      font-size: 14px;
+      margin-top: 12px; }
+      .setting-page .color-modal .predefine-theme .set-color-item {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+        display: inline-block;
+        margin: 0 4px; }
+    .setting-page .color-modal .setting-item {
+      padding: 4px 0;
+      border-bottom: 1px solid #dedede; }
+      .setting-page .color-modal .setting-item .setting-label {
+        color: #333;
+        font-size: 12px; }
+      .setting-page .color-modal .setting-item .color-show {
+        display: inline-block;
+        margin-right: 4px;
+        width: 40px;
+        height: 1em;
+        border: 1px solid #000;
+        vertical-align: text-bottom; }
+      .setting-page .color-modal .setting-item .tip {
+        font-size: 12px;
+        color: #999; }
+      .setting-page .color-modal .setting-item input {
+        width: 34px; }
+  .setting-page .compact-picker {
+    width: 200px !important; }
+  .setting-page .flexbox-fix {
+    display: none !important; }
+
 img {
   max-width: 100%; }
 
@@ -750,134 +838,4 @@ svg {
     -ms-transform: rotateY(-160deg);
     -o-transform: rotateY(-160deg);
     transform: rotateY(-160deg); } }
-
-.setting-page {
-  max-width: 800px;
-  margin: 0 auto; }
-  .setting-page .setting-part {
-    margin-bottom: 24px;
-    position: relative;
-    background: #f8f8f8;
-    padding: 12px;
-    border-radius: 4px; }
-    .setting-page .setting-part a {
-      color: #066ec1; }
-    .setting-page .setting-part .tip {
-      font-size: 12px;
-      color: #999; }
-    .setting-page .setting-part.pagenote {
-      min-height: 120px;
-      position: relative;
-      background: #f7f7f7; }
-      .setting-page .setting-part.pagenote .function-area {
-        height: 120px; }
-  .setting-page .colors {
-    position: absolute;
-    left: 50px;
-    top: 50px; }
-    .setting-page .colors .color-item {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      line-height: 20px;
-      font-size: 14px;
-      margin-right: 4px;
-      text-align: center;
-      padding: 4px;
-      border-radius: 20px;
-      transition: all 0.4s ease-in-out;
-      cursor: pointer; }
-      .setting-page .colors .color-item:first-child {
-        z-index: 1;
-        top: 0 !important;
-        left: 0 !important;
-        transform: scale(1.5); }
-  .setting-page .save-button {
-    margin-right: 12px; }
-  .setting-page .color-modal {
-    display: none; }
-    .setting-page .color-modal.show {
-      display: block;
-      z-index: 99;
-      position: fixed;
-      background: rgba(255, 255, 255, 0.96);
-      border-radius: 4px;
-      padding: 12px;
-      border: 1px solid #d2d2d2; }
-    .setting-page .color-modal .setting-title {
-      font-size: 14px;
-      font-weight: bold; }
-    .setting-page .color-modal .predefine-theme {
-      font-size: 14px;
-      margin-top: 12px; }
-      .setting-page .color-modal .predefine-theme .set-color-item {
-        width: 12px;
-        height: 12px;
-        border-radius: 2px;
-        display: inline-block;
-        margin: 0 4px; }
-    .setting-page .color-modal .setting-item {
-      padding: 4px 0;
-      border-bottom: 1px solid #dedede; }
-      .setting-page .color-modal .setting-item .setting-label {
-        color: #333;
-        font-size: 12px; }
-      .setting-page .color-modal .setting-item .color-show {
-        display: inline-block;
-        margin-right: 4px;
-        width: 40px;
-        height: 1em;
-        border: 1px solid #000;
-        vertical-align: text-bottom; }
-      .setting-page .color-modal .setting-item .tip {
-        font-size: 12px;
-        color: #999; }
-      .setting-page .color-modal .setting-item input {
-        width: 34px; }
-  .setting-page .compact-picker {
-    width: 200px !important; }
-  .setting-page .flexbox-fix {
-    display: none !important; }
-
-.index-page section.points {
-  width: 960px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px; }
-  .index-page section.points.fl {
-    background: #fff; }
-  .index-page section.points.sl {
-    background: #f6f8fa; }
-  .index-page section.points .point {
-    border-radius: 4px;
-    background: antiquewhite;
-    box-sizing: border-box;
-    width: 300px;
-    padding: 12px; }
-    .index-page section.points .point.main {
-      background: #ff7575; }
-    .index-page section.points .point.note {
-      background: #ffd581; }
-    .index-page section.points .point.manage {
-      background: #8bc3f1; }
-    .index-page section.points .point img {
-      width: 300px; }
-    .index-page section.points .point h2 {
-      font-size: 32px;
-      color: #333;
-      margin: 0.4em 0; }
-    .index-page section.points .point article {
-      font-size: 14px;
-      color: #333; }
-
-.index-page .install {
-  padding: 12px;
-  text-align: center;
-  margin: 24px 0; }
-
-.index-page .glance-title {
-  margin: 24px 0;
-  font-size: 20px;
-  text-align: center; }
 
