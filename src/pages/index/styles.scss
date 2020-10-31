@@ -1,0 +1,68 @@
+
+.index-page{
+
+
+
+  section.points{
+    width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    &.fl{
+      background: #fff;
+    }
+    &.sl{
+      background: #f6f8fa;
+    }
+    .point{
+      border-radius: 4px;
+      background: antiquewhite;
+      box-sizing: border-box;
+      //display: flex;
+      //justify-content: space-between;
+      width: 300px;
+      padding: 12px;
+      //margin:0 auto;
+      //align-items: center;
+      &.main{
+        background:#ff7575;
+      }
+      &.note{
+        background: #ffd581;
+      }
+      &.manage{
+        background: #8bc3f1;
+      }
+      img{
+        width: 300px;
+      }
+      h2{
+        font-size: 32px;
+        color: #333;
+        margin: 0.4em 0;
+      }
+      article{
+        font-size: 14px;
+        color: #333;
+      }
+      //.description{
+      //  width: 300px;
+      //  height: 200px;
+      //  border: 1px dashed #999;
+      //  border-radius: 4px;
+      //}
+    }
+  }
+  .install{
+    padding: 12px;
+    text-align: center;
+    //background: #fbfafa;
+    margin: 24px 0;
+  }
+  .glance-title{
+    margin: 24px 0;
+    font-size: 20px;
+    text-align: center;
+  }
+}

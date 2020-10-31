@@ -1,0 +1,6 @@
+{
+  "latest": {
+    "version": "0.11.5",
+    "support": ["chrome","firefox"]
+  }
+}

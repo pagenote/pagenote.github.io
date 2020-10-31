@@ -1,0 +1,32 @@
+.menu{
+  display: inline-block;
+  font-size: 14px;
+  color: #2d0d0d;
+  font-weight: normal;
+  cursor: pointer;
+  .selected{
+    color: #337ab7;
+  }
+  .listModal{
+    z-index: 1;
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0px 0px 4px 3px #e8e8e8;
+    &.hide{
+      display: none !important;
+    }
+
+    .listItem{
+      padding: 4px 12px;
+      &:hover{
+        background: #f1f1f1;
+      }
+    }
+  }
+  &:hover{
+    .listModal{
+      display: block;
+    }
+  }
+}
