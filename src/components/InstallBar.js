@@ -54,10 +54,10 @@ export default function InstallBar() {
                            className="browser-install-btn chrome">
                             Chrome
                         </a>
-                        <a href="https://chrome.google.com/webstore/detail/pagenotehighlight-and-tak/hpekbddiphlmlfjebppjhemobaopekmp?utm_source=blog"
-                           className="browser-install-btn edge">
-                            Edge
-                        </a>
+                        {/*<a href="https://chrome.google.com/webstore/detail/pagenotehighlight-and-tak/hpekbddiphlmlfjebppjhemobaopekmp?utm_source=blog"*/}
+                        {/*   className="browser-install-btn edge">*/}
+                        {/*    Edge*/}
+                        {/*</a>*/}
                         <a className="browser-install-btn ee"
                            href="https://ext.chrome.360.cn/webstore/detail/gielpddfollkffnbiegekliodnahhpfa">360</a>
                         <a className="browser-install-btn offline" onClick={offlineInstall}>离线安装</a>

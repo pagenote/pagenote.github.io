@@ -1,5 +1,4 @@
-
-var version = '0.11.9';
+var version = '0.12.1';
 var cacheName = 'app_package_'+version;
 var apiCacheName = 'api_'+version;
 var cacheFiles = [
@@ -7,7 +6,7 @@ var cacheFiles = [
     '/new',
     '/setting',
     '/me',
-    '/pagenote.js',
+    // '/pagenote.js',
     '/favicon.ico',
 ];
 
@@ -40,7 +39,7 @@ self.addEventListener('fetch', function (e) {
     // console.log('正在请求：' + e.request.url);
 
     // 判断当前请求是否需要缓存
-    var needCache = e.request.url.match(/http.*(lib\/.*\.js|img|icons|\.js$)/);
+    var needCache = e.request.url.match(/http.*(lib\/.*\.js|img|icons|css|\.js$)/);
 
     if (needCache) {
         // 需要缓存

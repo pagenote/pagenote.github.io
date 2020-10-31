@@ -130,7 +130,7 @@ export default class Header extends Component{
                         }
                     </span>
                     <a href="/setting">设置</a>
-                    <a href="/new">新建</a>
+                    {/*<a href="/new">新建</a>*/}
                 </div>
             </section>
         </nav>;

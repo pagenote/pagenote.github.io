@@ -12,51 +12,51 @@ export default class Index extends Component{
   }
 
   componentDidMount() {
-    // const script = document.createElement('script');
-    // script.src = '/pagenote.js';
-    // document.body.appendChild(script);
-    // script.onload = function () {
-    //   const pagenote = new PageNote('pagenote-home',{
-    //     functionColors:[
-    //       {
-    //         icon:'/icons/search.png',
-    //         name:'search',
-    //         shortcut:'s',
-    //         onclick: function (e) {
-    //           const text = pagenote.target ? pagenote.target.text : '';
-    //           if(text){
-    //             window.getSelection().removeAllRanges();
-    //             window.open(`https://www.baidu.com/s?wd=${text}`);
-    //           }
-    //         },
-    //       }
-    //     ]
-    //   });
-    //   pagenote.init(initData);
-    //   setTimeout(function () {
-    //     tipUser();
-    //     this.timer = setInterval(()=>{
-    //       if(pagenote.recordedSteps.length>1){
-    //         clearInterval(this.timer);
-    //       }else{
-    //         tipUser();
-    //       }
-    //     },5000)
-    //   },1000);
-    //
-    //
-    //   function tipUser() {
-    //     const target = document.getElementById('range');
-    //     let selection = window.getSelection();
-    //     let range = document.createRange();
-    //     range.selectNode(target);
-    //     selection.addRange(range);
-    //     const position = target.getBoundingClientRect();
-    //     pagenote.target.x = position.x+200;
-    //     pagenote.target.y = position.y+20;
-    //     pagenote.status = pagenote.CONSTANT.WAITING;
-    //   }
-    // }
+    const script = document.createElement('script');
+    script.src = '/pagenote.js';
+    document.body.appendChild(script);
+    script.onload = function () {
+      const pagenote = new PageNote('pagenote-home',{
+        functionColors:[
+          {
+            icon:'/icons/search.png',
+            name:'search',
+            shortcut:'s',
+            onclick: function (e) {
+              const text = pagenote.target ? pagenote.target.text : '';
+              if(text){
+                window.getSelection().removeAllRanges();
+                window.open(`https://www.baidu.com/s?wd=${text}`);
+              }
+            },
+          }
+        ]
+      });
+      pagenote.init(initData);
+      setTimeout(function () {
+        tipUser();
+        this.timer = setInterval(()=>{
+          if(pagenote.recordedSteps.length>1){
+            clearInterval(this.timer);
+          }else{
+            tipUser();
+          }
+        },5000)
+      },1000);
+
+
+      function tipUser() {
+        const target = document.getElementById('range');
+        let selection = window.getSelection();
+        let range = document.createRange();
+        range.selectNode(target);
+        selection.addRange(range);
+        const position = target.getBoundingClientRect();
+        pagenote.target.x = position.x+200;
+        pagenote.target.y = position.y+20;
+        pagenote.status = pagenote.CONSTANT.WAITING;
+      }
+    }
   }
 
 

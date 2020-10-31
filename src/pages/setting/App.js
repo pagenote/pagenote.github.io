@@ -473,7 +473,8 @@ export default class SettingRender extends Component{
 
           <div className='setting-part'>
             <div className="tip">
-              配置修改后，已打开的标签页刷新后生效。以上配置还不够？了解更多<a href="/pricing">付费定制化服务</a>
+              配置修改后，已打开的标签页刷新后生效。
+              {/*以上配置还不够？了解更多<a href="/pricing">付费定制化服务</a>*/}
             </div>
           </div>
         </div>
