@@ -4,19 +4,15 @@ import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 import Notes from "../../components/notes/Notes"
 import DropMenu from "../../components/DropMenu";
-import PageItem from "../../components/PageItem";
 import Colors from "../../components/Colors";
 import LoadPage from "../../components/tips/LoadPage";
 import PagesIcon from "../../assets/icon/pages.svg";
-import Expand from "../../assets/icon/more.svg";
 import Group from "../../components/Group";
 import Undraw from "../../assets/draw/undraw_text_files_au1q.svg";
 import Empty from "../../assets/draw/empty.svg";
 import Safe from "../../assets/icon/safe.svg"
 import ImportIcon from "../../assets/icon/import.svg";
 import ExportIcon from "../../assets/icon/export.svg";
-import Grid from "../../assets/icon/grid.svg";
-import List from "../../assets/icon/list.svg";
 import Close from "../../assets/icon/close.svg";
 import Setting from "../../assets/icon/setting.svg";
 import {connectServer, groupPages, savePage} from "../../utils/index";
@@ -24,7 +20,7 @@ import {importData} from "../../utils/index_new";
 import {funDownload} from "../../utils/document";
 import './me.scss'
 
-
+const pageSize = 1200;
 
 export default class Index extends Component{
     constructor(props) {
@@ -209,14 +205,6 @@ export default class Index extends Component{
         window.localStorage.setItem('bgColor',color);
     };
 
-    toggleGroups =()=>{
-        const  {groupPagesObject,selectedGroupsKey} = this.state;
-        const result = Object.keys(groupPagesObject).length === selectedGroupsKey.size ? [] : Object.keys(groupPagesObject);
-
-        this.setState({
-            selectedGroupsKey: new Set(result)
-        })
-    };
 
     onKeyUP = (e)=>{
         switch (e.keyCode) {
@@ -236,7 +224,7 @@ export default class Index extends Component{
         document.onmousemove = throttle((e)=>{
             const a = (window.innerWidth-this.myRef.current.clientWidth);
             let offset = e.clientX -  a/2;
-            offset = Math.min(Math.max(offset, 300), 1396);
+            offset = Math.min(Math.max(offset, 300), pageSize);
             const size = offset;
             this.setState({
                 size: size,
@@ -340,7 +328,7 @@ export default class Index extends Component{
         ];
 
         const barSize = Number.isInteger(+size) ? size + 'px' : '';
-        const bookWidth = this.myRef.current ? this.myRef.current.clientWidth : 1200;
+        const bookWidth = this.myRef.current ? this.myRef.current.clientWidth : pageSize;
         const expand = size / bookWidth > 0.9;
 
         const grid = size / bookWidth > 0.58;
@@ -375,10 +363,6 @@ export default class Index extends Component{
                                                    className={`search ${searchString ? 'active' : ''}`} type="text"
                                                    placeholder='🔍'/>
                                             <Close className='clean-search' onClick={this.cleanSearch} />
-                                            {/*<div className='align-icons'>*/}
-                                            {/*    <Grid fill={grid?'#1296db':'#666'} className='icon sort-icon' onClick={()=>this.setSize(bookWidth-4)}/>*/}
-                                            {/*    <List fill={!grid?'#1296db':'#666'} className='icon sort-icon' onClick={()=>this.setSize(350)}/>*/}
-                                            {/*</div>*/}
                                         </div>
                                         <div className='content'>
                                             <div className={`page-group active`}>

@@ -28,24 +28,44 @@ export default class PageDetail extends Component{
         // this.renderBlocks();
     }
 
+    saveEditorPage =(data)=>{
+        const blocks = data.blocks || [];
+        const steps = [];
+        let tempStep = {};
+        blocks.forEach((block)=>{
+            if(block.type==='lightheader'){
+                tempStep = block.data.light;
+                steps.push(tempStep);
+            } else {
+                tempStep[4] = block.data.text;
+                // if(tempStep.anotations){
+                //     tempStep.anotations.push(block);
+                // }else{
+                //     tempStep.anotations = [block];
+                // }
+            }
+        });
+        const page = this.props.selectedPage;
+        page.steps = steps;
+        this.savePage(page);
+    };
+
     renderBlocks=()=>{
         const {steps,images} = this.props.selectedPage;
-        const stepBlocks = [{
-            "type" : "warning",
-            "data" : {
-                "title" : "Note:",
-                "message" : "只读模式下暂时不可编辑"
-            }
-        }];
+        const stepBlocks = [];
         steps.forEach((step)=>{
-            const text = `${step[11]||''}<light style="border-bottom: 1px solid ${step[5]||''}">${step[3]}</light>${step[12]||''}`;
-
+            const pre = typeof step[11] === 'string' ? step[11] : '';
+            const suff = typeof step[12] === 'string' ? step[12] : '';
+            const text = `${pre}<light style="border-bottom: 1px solid ${step[5]||''}">${step[3]}</light>${suff}`;
             stepBlocks.push({
-                  "type" : "header",
-                  "data" : {
-                      "text" : text,
-                      "level" : 3
-                  }
+                "type" : "lightheader",
+                "data" : {
+                    "text" : text,
+                    "level" : 4,
+                    "color": step[5],
+                    "light": step,
+                },
+                "readonly": true,
               }
             );
             if(step[4]){
@@ -57,21 +77,21 @@ export default class PageDetail extends Component{
                 },)
             }
         });
-        images.forEach((snapshot)=>{
-            stepBlocks.push({
-                "type" : "image",
-                "data" : {
-                    // "file" : {
-                    //     "url" : snapshot,
-                    // },
-                    "url" : snapshot,
-                    // "caption" : "",
-                    "withBorder" : true,
-                    "stretched" : false,
-                    "withBackground" : true
-                }
-            })
-        });
+        // images.forEach((snapshot)=>{
+        //     stepBlocks.push({
+        //         "type" : "image",
+        //         "data" : {
+        //             // "file" : {
+        //             //     "url" : snapshot,
+        //             // },
+        //             "url" : snapshot,
+        //             // "caption" : "",
+        //             "withBorder" : true,
+        //             "stretched" : false,
+        //             "withBackground" : true
+        //         }
+        //     })
+        // });
 
         return stepBlocks;
     };
@@ -160,6 +180,8 @@ export default class PageDetail extends Component{
     pushPage = (page)=>{
         this.props.onSelectPage(page);
     };
+
+
 
     render() {
         const { selectedPage,categories } = this.props;
@@ -254,13 +276,13 @@ export default class PageDetail extends Component{
                                 </div>
                             </div>
                             <div className="right-content">
-                                <Editor key={selectedPage.url} data={{blocks:blocks}} />
+                                <Editor tools={['marker','paragraph','lightheader']} key={selectedPage.url} data={{blocks:blocks}} onSave={this.saveEditorPage} />
                             </div>
                         </div>
 
                         <div className='summary' >
                             <textarea  placeholder='为该网页添加一段总结、笔记、评价...'
-                                       defaultValue={selectedPage.note||'创建于2020年11月11日，共2条批注信息。文件大小2mb，'}
+                                       defaultValue={selectedPage.note}
                                        onChange={this.modifyNote}>
                                 {/*{selectedPage.note}*/}
                             </textarea>

@@ -15,9 +15,9 @@ class MyTool {
     h4.contentEditable = false;
     return h4;
   }
-  save(textarea) {
+  save() {
     return {
-      text: textarea.value
+      light: this.data.light
     }
   }
 }

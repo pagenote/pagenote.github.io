@@ -7,13 +7,7 @@ export default class Release extends Component{
 
     constructor(props) {
         super(props);
-        this.state={
-        }
     }
-
-    componentDidMount() {
-    }
-
 
     render() {
         return (
@@ -22,9 +16,9 @@ export default class Release extends Component{
                     <InstallBar className='install-btns' />
                     <strong className='slogan'>PAGENNOTE 小而美的笔记工具</strong>
                 </section>
-                {/*<section className='row version-tip'>*/}
-                {/*    了解最新动态、获取VIP抢先版本，请加入QQ群：769094377。或<a target='_blank' href="https://www.wjx.top/m/89079908.aspx">填写你的邮箱地址</a>，订阅最新活动。<a href="https://pagenote.logike.cn/hello">还未安装？前往试用</a>*/}
-                {/*</section>*/}
+                <section className='row version-tip'>
+                    了解最新动态、获取VIP抢先版本，请加入QQ群：769094377。或<a target='_blank' href="https://www.wjx.top/m/89079908.aspx">填写你的邮箱地址</a>，订阅最新活动。<a href="https://pagenote.logike.cn/hello">还未安装？前往试用</a>
+                </section>
                 <div className='row version latest' id='version12'>
                     <div className="left col-3">
                         <div className="version-number">
@@ -34,7 +28,14 @@ export default class Release extends Component{
                     </div>
                     <div className="right col-9">
                         <div className="brief">
-                            <h3>支持自定义扩展功能，开放插件</h3>
+                            <h3>0.12.0 自定义扩展功能</h3>
+                            <p>
+                                预设了搜索、翻译、复制、邮件等各类功能，你还可以自定义脚本实现「一切功能」。
+                                <a href="/page?id=0.12.0">查看使用教程</a>
+                            </p>
+                            <div>
+                                <img src="/release/0.12.0.png" alt="自定义插件"/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -397,4 +398,5 @@ export default class Release extends Component{
         )
     }
 }
-CommonPage(Release)
+CommonPage(Release);
+

@@ -6,7 +6,7 @@ export default function InstallBar() {
   const offlineInstall = function () {
     console.log('不推荐');
       Modal.info({
-          content: '离线安装包将无法获取升级更新，可能存在数据无法向上兼容等问题。0.11.4版本后将不再对外提供安装包。如果你确实有需要，请订阅https://www.wjx.top/m/89079908.aspx，我们将以邮件方式推送到你的邮箱。'
+          content: '离线安装包将无法获取升级更新，可能存在数据无法向上兼容等问题。0.12.0版本后将不再对外提供安装包。如果你确实有需要，请订阅https://www.wjx.top/m/89079908.aspx，我们将以邮件方式推送到你的邮箱。'
       });
   };
   return(

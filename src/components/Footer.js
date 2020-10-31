@@ -45,7 +45,7 @@ export default function Footer() {
                                 <a  href="/hello.html">产品介绍</a>
                             </p>
                             <p>
-                                <a href="/why">常见问题</a>
+                                <a href="/page?id=why">常见问题</a>
                             </p>
                             <p>
                                 <a href="/release">更新日志</a>
@@ -53,12 +53,12 @@ export default function Footer() {
                         </li>
                         <li className="mr-3 mr-lg-0">
                             <p>
-                                <a href="/privacy">隐私协议</a>
+                                <a href="/page?id=privacy">隐私协议</a>
                             </p>
                         </li>
                         <li>
                             <p>
-                                <a href="/donation">支持/贡献</a>
+                                <a href="/page?id=donation">支持/贡献</a>
                             </p>
                             {/*<p>*/}
                             {/*    <a href="/pricing">高级定制</a>*/}
@@ -66,7 +66,7 @@ export default function Footer() {
                         </li>
                         <li>
                             <p>
-                                <a href="/developer">开发者</a>
+                                <a href="/page?id=developer">开发者</a>
                             </p>
                             <p>
                                 用户群：769094377
@@ -75,8 +75,6 @@ export default function Footer() {
                     </ul>
                 </div>
             </footer>
-            {/*<div>copyright@2020 rowthan</div>*/}
-
         </footer>
     )
 }

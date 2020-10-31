@@ -12,13 +12,13 @@
   .version{
     border-top: 1px solid #e1e4e8;
     margin-top: 12px;
+    img{
+      max-width: 400px;
+    }
     &.latest{
       animation: shine 3s ease-in-out infinite;
       .brief{
         border: 1px solid #8BC34A;
-        img{
-          max-width: 400px;
-        }
       }
     }
   }
