@@ -22,7 +22,10 @@
 <body>
 <div id="app"></div>
 <div id="messenger" style="display: none;"></div>
-<script src="../runtime.f06d18ddff608fcb1f05.js"></script><script src="../vendors.9b065d7e2dab3a48315c.js"></script><script src="../setting/setting.8cf6c4b2ec2a547d8939.js"></script>
+<script crossorigin src="/lib/react.js"></script>
+<script crossorigin src="/lib/react-dom.js"></script>
+<script src="/lib/editor.js"></script>
+<script src="../runtime.f06d18ddff608fcb1f05.js"></script><script src="../vendors.93eeff322447c75aee43.js"></script><script src="../setting/setting.6126c34b4ee8d4bd1514.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LBE869KVBS"></script>
 <script>
@@ -31,16 +34,15 @@ if(window.location.protocol.indexOf('https')>-1){
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-LBE869KVBS');
+
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(function (registration) {
+              console.log('Service Worker 注册成功!');
+            }).catch(function (err) {
+              console.log(err);
+            });
+          }
         }
 </script>
-<script>
-if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/sw.js').then(function (registration) {
-            console.log('Service Worker 注册成功!');
-          }).catch(function (err) {
-            console.log(err);
-          });
-        }
-</script>
-<script src="../runtime.f06d18ddff608fcb1f05.js"></script><script src="../vendors.9b065d7e2dab3a48315c.js"></script><script src="../setting/setting.8cf6c4b2ec2a547d8939.js"></script></body>
+<script src="../runtime.f06d18ddff608fcb1f05.js"></script><script src="../vendors.93eeff322447c75aee43.js"></script><script src="../setting/setting.6126c34b4ee8d4bd1514.js"></script></body>
 </html>
