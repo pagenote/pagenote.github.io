@@ -5,6 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const createHtml =require("./config/create-html");// html配置
 const getEntry = require("./config/get-entry");
 const entry = getEntry("./src/pages");
@@ -68,6 +69,12 @@ const config = {
   devServer: {
     contentBase: './dist',
   },
+  // TODO 区分dev prd
+  externals: {
+    '@editorjs/editorjs': 'EditorJS',
+    'react':'React',
+    'react-dom': 'ReactDOM',
+  },
   plugins: [
     new CopyPlugin({
       patterns: [{ from: 'public' }],
@@ -83,7 +90,11 @@ const config = {
     //   },
     // }),
     new MiniCssExtractPlugin(),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      openAnalyzer: false,
+    })
   ],
   optimization: {
     runtimeChunk: 'single',

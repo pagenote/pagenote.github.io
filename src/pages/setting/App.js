@@ -3,7 +3,6 @@ import { CompactPicker, SliderPicker  } from 'react-color'
 import Bridge from "../../utils/extensionBridge";
 import {convertColor, computePosition} from "../../utils/document";
 import AddIcon from '../../assets/icon/add.svg'
-import { Modal } from 'antd';
 import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import './setting.scss';
 import { Collapse } from 'antd';

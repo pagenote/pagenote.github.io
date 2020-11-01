@@ -25,14 +25,26 @@
   <body>
       <div id="app"></div>
       <div id="messenger" style="display: none;"></div>
+      <script crossorigin src="/lib/react.js"></script>
+      <script crossorigin src="/lib/react-dom.js"></script>
+      <script src="/lib/editor.js"></script>
       <%= htmlWebpackPlugin.tags.bodyTags %>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-LBE869KVBS"></script>
       <script>
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/sw.js').then(function (registration) {
-            console.log('Service Worker 注册成功!');
-          }).catch(function (err) {
-            console.log(err);
-          });
+        if(window.location.protocol.indexOf('https')>-1){
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-LBE869KVBS');
+
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(function (registration) {
+              console.log('Service Worker 注册成功!');
+            }).catch(function (err) {
+              console.log(err);
+            });
+          }
         }
       </script>
   </body>

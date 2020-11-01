@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, Space } from 'antd';
+import { Modal } from 'antd';
 import 'antd/dist/antd.css';
 
 export default function InstallBar() {
