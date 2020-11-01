@@ -36,6 +36,9 @@ export default class Release extends Component{
                             <div>
                                 <img src="/release/0.12.0.png" alt="自定义插件"/>
                             </div>
+                            <p>
+                                从 0.12.0 版本开始，将不再官网提供离线版本，如果你有需要可以通过订阅获取。
+                            </p>
                         </div>
                     </div>
                 </div>
