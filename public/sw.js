@@ -1,4 +1,4 @@
-var version = '0.12.2';
+var version = '0.12.5';
 var cacheName = 'app_package_'+version;
 var apiCacheName = 'api_'+version;
 var cacheFiles = [
@@ -41,7 +41,7 @@ self.addEventListener('fetch', function (e) {
     // console.log('正在请求：' + e.request.url);
 
     // 判断当前请求是否需要缓存
-    var needCache = e.request.url.match(/http.*(lib\/|img|icons|css$|\.js$|html|)/);
+    var needCache = e.request.url.match(/https:\/\/pagenote\.cn.*(lib\/|img|icons|css$|\.js$|html|)/);
 
     if (needCache) {
         // 需要缓存

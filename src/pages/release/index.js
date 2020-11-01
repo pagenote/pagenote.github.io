@@ -17,7 +17,7 @@ export default class Release extends Component{
                     <strong className='slogan'>PAGENNOTE 小而美的笔记工具</strong>
                 </section>
                 <section className='row version-tip'>
-                    了解最新动态、获取VIP抢先版本，请加入QQ群：769094377。或<a target='_blank' href="https://www.wjx.top/m/89079908.aspx">填写你的邮箱地址</a>，订阅最新活动。<a href="https://pagenote.logike.cn/hello">还未安装？前往试用</a>
+                    <a href="/page/?id=future">了解最新动态</a>、获取VIP抢先版本，请加入QQ群：769094377。或<a target='_blank' href="https://www.wjx.top/m/89079908.aspx">填写你的邮箱地址</a>，订阅最新活动。<a href="https://pagenote.logike.cn/hello">还未安装？前往试用</a>
                 </section>
                 <div className='row version latest' id='version12'>
                     <div className="left col-3">
@@ -28,7 +28,7 @@ export default class Release extends Component{
                     </div>
                     <div className="right col-9">
                         <div className="brief">
-                            <h3>0.12.0 自定义扩展功能</h3>
+                            <h3>自定义扩展功能</h3>
                             <p>
                                 预设了搜索、翻译、复制、邮件等各类功能，你还可以自定义脚本实现「一切功能」。
                                 <a href="/page?id=0.12.0">查看使用教程</a>
@@ -36,9 +36,26 @@ export default class Release extends Component{
                             <div>
                                 <img src="/release/0.12.0.png" alt="自定义插件"/>
                             </div>
-                            <p>
-                                从 0.12.0 版本开始，将不再官网提供离线版本，如果你有需要可以通过订阅获取。
-                            </p>
+                            <section>
+                                <h3>可安装的管理平台</h3>
+                                点击安装后，可作为独立APP使用，即便断网也能用。
+                                <div>
+                                    <img src="/release/install.png" alt="安装"/>
+                                </div>
+                            </section>
+                            <h3>TIP</h3>
+                            <ul>
+                                <li>
+                                    从 0.12.0 版本开始，将不再官网提供离线版本，如果你有需要可以通过<a target='_blank' href="https://www.wjx.top/m/89079908.aspx">填写你的邮箱地址</a>获取。
+                                </li>
+                                <li>
+                                    启用新域名 pagenote.cn 作为管理平台
+                                </li>
+                            </ul>
+                            <h3>bugfix</h3>
+                            <ul>
+                                修复设置保存不成功
+                            </ul>
                         </div>
                     </div>
                 </div>
