@@ -1,5 +1,5 @@
 import React from "react";
 import App from "./App";
 import CommonPage from "../CommonPage";
-CommonPage(App,false,false);
+CommonPage(App,true,false);
 

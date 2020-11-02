@@ -16,7 +16,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    // publicPath: './public'
+    publicPath: './'
   },
   module: {
     rules: [
@@ -68,6 +68,19 @@ const config = {
   },
   devServer: {
     contentBase: './dist',
+    serveIndex: true,
+    index: 'index.html',
+    historyApiFallback: {
+      // 使用正则匹配命中路由
+      rewrites: [
+        {
+          from: /^\/me|new|page|release|setting|donation\/.*$/,
+          to: function(context) {
+            return   context.parsedUrl.pathname+'.html';
+          }
+        }
+      ]
+    }
   },
   // TODO 区分dev prd
   externals: {

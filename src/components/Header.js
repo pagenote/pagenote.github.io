@@ -91,7 +91,7 @@ export default class Header extends Component{
                     padding: 0 24px;
                     padding: 10px 24px;
                     margin: 0 auto;
-                    max-width: 1000px;
+                    max-width: 1200px;
                     justify-content: space-between;
                     box-sizing: border-box;
                 }

@@ -58,7 +58,7 @@ export default function Footer() {
                         </li>
                         <li>
                             <p>
-                                <a href="/page?id=donation">支持/贡献</a>
+                                <a href="/donation">支持/贡献</a>
                             </p>
                             {/*<p>*/}
                             {/*    <a href="/pricing">高级定制</a>*/}

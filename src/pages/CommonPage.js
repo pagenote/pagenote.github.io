@@ -20,3 +20,18 @@ export default function CommonPage(Component,useHead=true,useFooter=true) {
     , mountNode);
 }
 
+if(window.location.protocol.indexOf('https')>-1){
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LBE869KVBS');
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then(function (registration) {
+      console.log('Service Worker 注册成功!');
+    }).catch(function (err) {
+      console.log(err);
+    });
+  }
+}
+
