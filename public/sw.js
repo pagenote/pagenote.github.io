@@ -1,4 +1,4 @@
-var version = '0.12.10';
+var version = '0.12.13';
 var cacheName = 'pre_cache_'+version;
 var apiCacheName = 'runtime_cache'+version;
 var cacheFiles = [
@@ -6,8 +6,8 @@ var cacheFiles = [
     '/new',
     '/setting',
     '/me',
-    '/release',
     '/pagenote.js',
+    '/donation',
     '/favicon.ico',
     'https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js',
     'https://unpkg.com/react@16.13.1/umd/react.production.min.js'
