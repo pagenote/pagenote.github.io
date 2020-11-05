@@ -1,7 +1,6 @@
 
 .cache/
 coverage/
-dist/*
 !dist/index.html
 node_modules/
 *.log
@@ -16,4 +15,5 @@ ehthumbs.db
 Thumbs.db
 
 .idea
-package-lock.json
+package-lock.jso
+
