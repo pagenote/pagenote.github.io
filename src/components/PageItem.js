@@ -1,7 +1,7 @@
 import React from 'react'
 import './pageitem.scss'
 export default function PageItem({page,onSelect,group,active}) {
-    const steps = page.steps || [];
+    const steps = page.steps || {};
     const images = page.images || [];
     return(
         <div key={page.url} title={page.url} className={`page-item ${active?'active':''}`} onClick={()=>onSelect(page,group)} style={{backgroundImage:`url(${images[0]})`}}>
@@ -38,8 +38,8 @@ export default function PageItem({page,onSelect,group,active}) {
             <div className='page-lights'>
                 {
                     steps.slice(0,3).map((step,index)=>(
-                        <div key={step[6]+index} title={(step[3]||step[4]||'')} className='page-light' style={{borderColor: step[5]}}>
-                            {(step[3]||step[4]||'').substr(0,50)}
+                        <div key={step.id} title={(step.text||step.tip||'')} className='page-light' style={{borderColor: step.bg}}>
+                            {(step.text||step.tip||'').substr(0,50)}
                         </div>
                     ))
                 }

@@ -24,6 +24,7 @@ export default class PageDetail extends Component{
     }
 
     componentDidMount() {
+        console.log(this.props.selectedPage)
         this.computeAlikePage();
         // this.renderBlocks();
     }
@@ -32,17 +33,14 @@ export default class PageDetail extends Component{
         const blocks = data.blocks || [];
         const steps = [];
         let tempStep = {};
+        let tempTip = '';
         blocks.forEach((block)=>{
             if(block.type==='lightheader'){
                 tempStep = block.data.light;
+                tempStep.tip = ''; // 清空批注
                 steps.push(tempStep);
             } else {
-                tempStep[4] = block.data.text;
-                // if(tempStep.anotations){
-                //     tempStep.anotations.push(block);
-                // }else{
-                //     tempStep.anotations = [block];
-                // }
+                tempStep.tip = tempStep.tip + block.data.text + '</br>'; // 否则为批注
             }
         });
         const page = this.props.selectedPage;
@@ -54,25 +52,25 @@ export default class PageDetail extends Component{
         const {steps,images} = this.props.selectedPage;
         const stepBlocks = [];
         steps.forEach((step)=>{
-            const pre = typeof step[11] === 'string' ? step[11] : '';
-            const suff = typeof step[12] === 'string' ? step[12] : '';
-            const text = `${pre}<light style="border-bottom: 1px solid ${step[5]||''}">${step[3]}</light>${suff}`;
+            const pre = typeof step.pre === 'string' ? step.pre : '';
+            const suff = typeof step.suffix === 'string' ? step.suffix : '';
+            const text = `${pre}<light style="border-bottom: 1px solid ${step.bg||''}">${step.text}</light>${suff}`;
             stepBlocks.push({
                 "type" : "lightheader",
                 "data" : {
                     "text" : text,
                     "level" : 4,
-                    "color": step[5],
+                    "color": step.bg,
                     "light": step,
                 },
                 "readonly": true,
               }
             );
-            if(step[4]){
+            if(step.tip){
                 stepBlocks.push({
                     "type" : "paragraph",
                     "data" : {
-                        "text" : step[4]
+                        "text" : step.tip
                     }
                 },)
             }
@@ -125,6 +123,8 @@ export default class PageDetail extends Component{
     }
 
     doShowCategory=()=>{
+        alert('暂时不可在此处修改,功能马上就好');
+        return;
         this.setState({
             showCategory: !this.state.showCategory,
         })
@@ -162,6 +162,8 @@ export default class PageDetail extends Component{
         if(plainData===undefined){
             plainData = this.props.selectedPage;
         }
+        // TODO 删除版本控制
+        plainData.version = 2;
         const page = this.props.selectedPage;
         this.props.onSavePage({
             url: page.url,
@@ -213,8 +215,21 @@ export default class PageDetail extends Component{
                                         <a className='setting-icon icon' onClick={this.doShowCategory}>
                                             <Tag/>
                                         </a>
-                                        <span onClick={this.doShowCategory} className='category-name'>{selectedPage.category||'请选择一个标签'}</span>
-                                        <DropLabel show={showCategory} onSelected={this.setCategory} categories={categories} currentLabel={selectedPage.category} />
+                                        {/*<span onClick={this.doShowCategory} className='category-name'>{selectedPage.category||'请选择一个标签'}</span>*/}
+                                        {/*<DropLabel*/}
+                                        {/*  onSet={this.setCategory}*/}
+                                        {/*  currentCategories={new Set(selectedPage.categories)}*/}
+                                        {/*  categories={categories}/>*/}
+                                        {
+                                            selectedPage.categories ?
+                                              selectedPage.categories.map((item)=>(
+                                                <span style={{marginRight:'10px'}}>{item}</span>
+                                              )):
+                                          <span>{selectedPage.category||'-'}</span>
+                                        }
+                                    </div>
+                                    <div>
+                                        数据版本：{selectedPage.version}
                                     </div>
                                 </div>
                             </div>
