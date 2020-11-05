@@ -1,18 +1,32 @@
 import React, {Component} from 'react'
-import { CompactPicker, SliderPicker  } from 'react-color'
+import Loadable from 'react-loadable';
+import Loading from '../../components/Loading';
+
 import Bridge from "../../utils/extensionBridge";
 import {convertColor, computePosition} from "../../utils/document";
 import AddIcon from '../../assets/icon/add.svg'
 import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import './setting.scss';
 import { Collapse } from 'antd';
+import 'antd/es/collapse/style/index.css'
 import { CaretRightOutlined } from '@ant-design/icons';
 const { Panel } = Collapse;
+
+
+const CompactPicker = Loadable({
+  loader: () => import('react-color/es/components/compact/Compact'),
+  loading: Loading,
+});
+
+const SliderPicker = Loadable({
+  loader: () => import('react-color/es/components/slider/Slider'),
+  loading: Loading,
+});
 
 let bridge = null;
 String.prototype.replaceCharAt = function(n,c){
   return this.substr(0, n)+ c + this.substr(n+1,this.length-1-n);
-}
+};
 const predefineTheme = [
   {
     id:'theme-simple',
