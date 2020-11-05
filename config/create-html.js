@@ -22,8 +22,8 @@ function createHtml(page_path){
 				keywords: infoData.keywords ? infoData.keywords : "PAGENOTE,笔记,标记,高亮关键字",
 				description:infoData.description ? infoData.description : "在任意网站上标记关键词，批注笔记"
 			},
-			chunks:[`${item}/${item}`], //引入的js
-			template: "./src/template.html",
+			chunks:[`chunk/${item}`], //引入的js
+			template: `${page_path}/${item}/template.html`,
 			filename : item === "index" ? "index.html" : `${item}.html`, //html位置
 			minify:{//压缩html
 				collapseWhitespace: true,
