@@ -44,17 +44,20 @@ export const groupPagesNew = function (groupType,pages) {
                 label:page.category||'default',
                 desc:'',
             });
-            const groupKey = fn(page);
-            const tempPages = groupPagesObject[groupKey]?groupPagesObject[groupKey].pages : [];
+            const groupKeyArray = fn(page);
 
-            groupPagesObject[groupKey] = {
-                name: groupKey,
-                pages: tempPages,
-                matched: tempPages.length,
-            };
-            groupPagesObject[groupKey].pages.push(page);
-            groupPagesObject[groupKey].matched = groupPagesObject[groupKey].pages.length;
-            selectedGroupsKey.add(groupKey);
+            groupKeyArray.forEach((groupKey)=>{
+                const tempPages = groupPagesObject[groupKey]?groupPagesObject[groupKey].pages : [];
+
+                groupPagesObject[groupKey] = {
+                    name: groupKey,
+                    pages: tempPages,
+                    matched: tempPages.length,
+                };
+                groupPagesObject[groupKey].pages.push(page);
+                groupPagesObject[groupKey].matched = groupPagesObject[groupKey].pages.length;
+                selectedGroupsKey.add(groupKey);
+            })
         });
         const arr = [...categories.values()];
         return {
@@ -69,7 +72,7 @@ export const groupPagesNew = function (groupType,pages) {
     switch (groupType) {
         case 0:
             result = groupBy(function (page) {
-                return page.keys[0]||'default';
+                return [page.keys[0]||'default'];
             });
             break;
         case 1:
@@ -80,17 +83,17 @@ export const groupPagesNew = function (groupType,pages) {
                 }catch (e) {
 
                 }
-                return groupKey;
+                return [groupKey];
             });
             break;
         case 2:
             result = groupBy(function (page) {
-                return page.category || 'default';
+                return page.categories || [page.category || 'default' ];
             });
             break;
         default:
             result = groupBy(function (page) {
-                return page.keys[0]||'default';
+                return [page.keys[0]||'default'];
             });
     }
     return result;
