@@ -1,13 +1,16 @@
 import React from 'react';
-import { Modal } from 'antd';
-import 'antd/dist/antd.css';
+// import { Modal } from 'antd';
+// import 'antd/es/modal/style/index.less'
+// import 'antd/es/modal/style/modal.less'
+// import 'antd/lib/modal/style/index.css';
 
 export default function InstallBar() {
   const offlineInstall = function () {
     console.log('不推荐');
-      Modal.info({
-          content: '离线安装包将无法获取升级更新，可能存在数据无法向上兼容等问题。0.12.0版本后将不再对外提供安装包。如果你确实有需要，请订阅https://www.wjx.top/m/89079908.aspx，我们将以邮件方式推送到你的邮箱。'
-      });
+      // Modal.info({
+      //     content: ''
+      // });
+    alert('离线安装包将无法获取升级更新，可能存在数据无法向上兼容等问题。0.12.0版本后将不再对外提供安装包。如果你确实有需要，请订阅https://www.wjx.top/m/89079908.aspx，我们将以邮件方式推送到你的邮箱。')
   };
   return(
     <span>
