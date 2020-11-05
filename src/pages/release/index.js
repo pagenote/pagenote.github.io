@@ -17,7 +17,7 @@ export default class Release extends Component{
                     <strong className='slogan'>PAGENNOTE 小而美的笔记工具</strong>
                 </section>
                 <section className='row version-tip'>
-                    <a href="/page/?id=future">了解最新动态</a>、获取VIP抢先版本，请加入QQ群：769094377。或<a target='_blank' href="https://www.wjx.top/m/89079908.aspx">填写你的邮箱地址</a>，订阅最新活动。<a href="https://pagenote.logike.cn/hello">还未安装？前往试用</a>
+                    <a href="/page?id=future">了解最新动态</a>、获取VIP抢先版本，请加入QQ群：769094377。或<a target='_blank' href="https://www.wjx.top/m/89079908.aspx">填写你的邮箱地址</a>，订阅最新活动。<a href="https://pagenote.logike.cn/hello">还未安装？前往试用</a>
                 </section>
                 <div className='row version latest' id='version12'>
                     <div className="left col-3">
@@ -34,13 +34,13 @@ export default class Release extends Component{
                                 <a href="/page?id=0.12.0">查看使用教程</a>
                             </p>
                             <div>
-                                <img src="/release/0.12.0.png" alt="自定义插件"/>
+                                <img src="/release_asset/0.12.0.png" alt="自定义插件"/>
                             </div>
                             <section>
                                 <h3>可安装的管理平台</h3>
                                 点击安装后，可作为独立APP使用，即便断网也能用。
                                 <div>
-                                    <img src="/release/install.png" alt="安装"/>
+                                    <img src="/release_asset/install.png" alt="安装"/>
                                 </div>
                             </section>
                             <h3>TIP</h3>
@@ -111,7 +111,7 @@ export default class Release extends Component{
                                         </div>
                                         从此刻起，你可以有更多个性化的选择。前往<a href="/setting">设置</a>页面，定制个人专属 PAGENOTE。
                                         目前支持：色盘颜色、快捷键、最大标记数、新开tab设置。支持全局禁用 PAGENOTE。
-                                        <img src="/release/page_setting.png" alt=""/>
+                                        <img src="/release_asset/page_setting.png" alt=""/>
                                     </li>
                                     <li>
                                         <div>
@@ -175,25 +175,25 @@ export default class Release extends Component{
                                     <li>
                                         增加一键复制功能、操作提示功能。趣味动画
                                         <div>
-                                            <img src="/release/light-show.gif" alt=""/>
+                                            <img src="/release_asset/light-show.gif" alt=""/>
                                         </div>
                                     </li>
                                     <li>
                                         根据标记创建、删除自动关联管理书签至文件夹[pagenote]中
                                         <div>
-                                            <img src="/release/bookmark_auto.png" alt=""/>
+                                            <img src="/release_asset/bookmark_auto.png" alt=""/>
                                         </div>
                                     </li>
                                     <li>
                                         不高亮关键字也可以在网页里留笔记。点击右上角插件图标，弹窗中填写笔记即可。
                                         {/*<div>*/}
-                                        {/*    <img src="/release/popup.png" alt=""/>*/}
+                                        {/*    <img src="/release_asset/popup.png" alt=""/>*/}
                                         {/*</div>*/}
                                     </li>
                                     <li>
                                         侧边栏操作icon简化，支持自定义分组标签。
                                         {/*<div>*/}
-                                        {/*    <img src="/release/category.png" alt=""/>*/}
+                                        {/*    <img src="/release_asset/category.png" alt=""/>*/}
                                         {/*</div>*/}
                                     </li>
                                     <li>更精准的滚动标记定位</li>
