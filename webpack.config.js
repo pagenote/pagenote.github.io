@@ -16,7 +16,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    publicPath: './'
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -39,6 +39,17 @@ const config = {
           'css-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.less$/,
+        use: [MiniCssExtractPlugin.loader, {
+          loader: "css-loader"
+        }, {
+          loader: "less-loader", options: {
+            strictMath: true,
+            noIeCompat: true
+          }
+        }]
       },
       {
         test: /\.svg$/,
@@ -74,7 +85,7 @@ const config = {
       // 使用正则匹配命中路由
       rewrites: [
         {
-          from: /^\/me|new|page|release|setting|donation\/.*$/,
+          from: /^\/me|new|page|release|setting|donation$/,
           to: function(context) {
             return   context.parsedUrl.pathname+'.html';
           }
@@ -87,6 +98,7 @@ const config = {
     '@editorjs/editorjs': 'EditorJS',
     'react':'React',
     'react-dom': 'ReactDOM',
+    // 'react-color': 'ReactColor'
   },
   plugins: [
     new CopyPlugin({
@@ -113,11 +125,20 @@ const config = {
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
+        editor: {
+          name:'editors',
+          test: /@editorjs/,
+          chunks: 'all',
+          minChunks: 1,
+          priority: 0,
+          reuseExistingChunk: true
+        },
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all'
-        }
+          chunks: 'all',
+          priority: -10
+        },
       }
     }
   }
