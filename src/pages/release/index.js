@@ -16,9 +16,6 @@ export default class Release extends Component{
                     <InstallBar className='install-btns' />
                     <strong className='slogan'>PAGENNOTE 小而美的笔记工具</strong>
                 </section>
-                {/*<section className='row version-tip'>*/}
-                {/*    <a href="/page?id=future">了解最新动态</a>、获取VIP抢先版本，请加入QQ群：769094377。或<a target='_blank' href="https://www.wjx.top/m/89079908.aspx">填写你的邮箱地址</a>，订阅最新活动。<a href="https://pagenote.logike.cn/hello">还未安装？前往试用</a>*/}
-                {/*</section>*/}
                 <div className='row version latest' id='version12'>
                     <div className="left col-3">
                         <div className="version-number">
@@ -36,6 +33,23 @@ export default class Release extends Component{
                         </div>
                     </div>
                     <div className="right col-9">
+                        <div className="brief">
+                            <h3>0.12.2 样式大重构</h3>
+                            查看更多图文详情
+                            <ul>
+                                <li>再次解决插件冲突问题，提升优先级同时不影响其他插件</li>
+                                <li>根据用户反馈，标记色盘半径增大</li>
+                                <li>增加tooltip提示说明，一眼了解有什么功能</li>
+                                <li>增加了一个实验性功能：阅读进度条</li>
+                                <li>侧边栏样式大改版</li>
+                                <li>升级whats-element 依赖包</li>
+                                <li>解决拖拽无法释放的bug</li>
+                            </ul>
+                            <div>
+                                <img width={200} src="/release_asset/0.12.2_newaside.png" alt=""/>
+                                <img width={200} src="/release_asset/0.12.2_simple_aside.png" alt=""/>
+                            </div>
+                        </div>
                         <div className="brief">
                             <h3>0.12.1</h3>
                             <p>
@@ -426,7 +440,7 @@ export default class Release extends Component{
                     <div className="right col-9">
                         了解更多内容，可以关注我们在<a
                         href="https://chrome.google.com/webstore/detail/dohbgjmflacneejmpdieincbbokoflgm">Firefox</a> 、
-                        <a href="https://chrome.google.com/webstore/detail/dohbgjmflacneejmpdieincbbokoflgm">Chrome商城</a>最近动态，或<a href="https://www.wjx.cn/jq/69876579.aspx">参与问卷</a>。觉得好用，请不要吝啬为pagenote评分呀！
+                        <a href="https://chrome.google.com/webstore/detail/dohbgjmflacneejmpdieincbbokoflgm">Chrome商城</a>最近动态，或关注微信号【pagenote】。记得去商城为 PAGENOTE 评分呀！
                         也可以加入我们用户群 QQ：769094377。
                     </div>
                 </section>
