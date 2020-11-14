@@ -1,0 +1,25 @@
+.action-tips{
+  line-height: 1.8em;
+  margin: 12px 0;
+  padding-left: 4px;
+  font-size: 12px;
+  border-radius: 4px;
+  .action-button{
+    cursor: pointer;
+    margin-right: 12px;
+    &:hover{
+      border: 1px solid #666;
+    }
+  }
+}
+
+.aside-bar{
+  width: 200px;
+  min-height: 100vh;
+  border-radius: 12px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0px;
+  background: #f3f3f3;
+  padding: 12px;
+}

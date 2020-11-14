@@ -3,7 +3,8 @@ import axios from "axios";
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 const host = 'https://pagenote.logike.cn';
 const loginUrl = `https://github.com/login/oauth/authorize?scope=user%20public_repo&client_id=c4aae381097464aa1024&redirect_uri=${host}`
-
+import MeIcon from '../assets/icon/me.svg'
+import SettingIcon from '../assets/icon/setting.svg'
 export default class Header extends Component{
     constructor(props) {
         super(props);
@@ -13,8 +14,8 @@ export default class Header extends Component{
     }
 
     componentDidMount() {
-        this.codeToToken();
-        this.checkLogin();
+        // this.codeToToken();
+        // this.checkLogin();
     }
 
     codeToToken=()=> {
@@ -75,8 +76,6 @@ export default class Header extends Component{
         return <nav>
             <style jsx='true'>{`
                 nav{
-                    // height: 40px;
-                    // line-height: 40px;
                     font-size:14px;
                     border-bottom: 1px solid rgba(30,35,42,.06);
                     box-shadow: 0 1px 3px 0 rgba(0,34,77,.05);
@@ -88,8 +87,6 @@ export default class Header extends Component{
                 }
                 .header{
                     display: flex;
-                    padding: 0 24px;
-                    padding: 10px 24px;
                     margin: 0 auto;
                     max-width: 1200px;
                     justify-content: space-between;
@@ -116,20 +113,27 @@ export default class Header extends Component{
             </style>
             <section className="header">
                 <div>
-                    <a href="/">PAGENOTE 一页一记</a>
+                    <a href="/">
+                        <img height={32} src="/img/pagenote.png" alt="pagenote"/>
+                    </a>
                 </div>
                 <div>
                     <span className='me-link'>
-                        {
-                            userInfo.name ?
-                                <a className='user-avatar' href='/me'>
-                                    <img width={20} height={20} src={`${userInfo.avatar_url}&s=30`} alt={`${userInfo.name}`}/>
-                                </a> :
-                                <a id="login"
-                                   href='/me'>我的</a>
-                        }
+                        {/*{*/}
+                        {/*    userInfo.name ?*/}
+                        {/*        <a className='user-avatar' href='/me'>*/}
+                        {/*            <img width={20} height={20} src={`${userInfo.avatar_url}&s=30`} alt={`${userInfo.name}`}/>*/}
+                        {/*        </a> :*/}
+                        {/*        <a id="login"*/}
+                        {/*           href='/me'>我的</a>*/}
+                        {/*}*/}
+                        <a href="/me">
+                            我的
+                        </a>
                     </span>
-                    <a href="/setting">设置</a>
+                    <a href="/setting">
+                       设置
+                    </a>
                     {/*<a href="/new">新建</a>*/}
                 </div>
             </section>

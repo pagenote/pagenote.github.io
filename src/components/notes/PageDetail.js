@@ -12,21 +12,21 @@ import CameraIcon from "../../assets/icon/camera.svg";
 // import LightHeader from '../../lib/light-header';
 // import loadscript from "../../utils/loadscript";
 import Editor from "../editor/Editor";
+import DropLabels from "../droplabel/DropLabel";
 
 // TODO 支持设置字号
 export default class PageDetail extends Component{
     constructor(props) {
         super(props);
+        const selectedPage = this.props.selectedPage||{};
         this.state={
-            showCategory:false,
             alikePages:[],
+            pageCategorySet: new Set(selectedPage.categories||[selectedPage.category||'default'])
         }
     }
 
     componentDidMount() {
-        console.log(this.props.selectedPage)
         this.computeAlikePage();
-        // this.renderBlocks();
     }
 
     saveEditorPage =(data)=>{
@@ -54,7 +54,10 @@ export default class PageDetail extends Component{
         steps.forEach((step)=>{
             const pre = typeof step.pre === 'string' ? step.pre : '';
             const suff = typeof step.suffix === 'string' ? step.suffix : '';
-            const text = `${pre}<light style="border-bottom: 1px solid ${step.bg||''}">${step.text}</light>${suff}`;
+            const middle = document.createElement('light');
+            middle.style = `border-bottom: 1px solid ${step.bg||''}`;
+            middle.innerText = step.text;
+            const text = `${pre}<light style="border-bottom: 1px solid ${step.bg||''}">${middle.outerHTML}</light>${suff}`;
             stepBlocks.push({
                 "type" : "lightheader",
                 "data" : {
@@ -122,26 +125,6 @@ export default class PageDetail extends Component{
         });
     }
 
-    doShowCategory=()=>{
-        alert('暂时不可在此处修改,功能马上就好');
-        return;
-        this.setState({
-            showCategory: !this.state.showCategory,
-        })
-    };
-
-    setCategory=(category)=>{
-        this.setState({
-            showCategory: false,
-        });
-        if(category===undefined){
-            return;
-        }
-        const newPage = this.props.selectedPage;
-        newPage.category = category;
-        this.savePage(newPage);
-    };
-
     deleteLight=(index)=>{
         const newPage = this.props.selectedPage;
         newPage.steps.splice(index,1);
@@ -162,8 +145,6 @@ export default class PageDetail extends Component{
         if(plainData===undefined){
             plainData = this.props.selectedPage;
         }
-        // TODO 删除版本控制
-        plainData.version = 2;
         const page = this.props.selectedPage;
         this.props.onSavePage({
             url: page.url,
@@ -183,11 +164,29 @@ export default class PageDetail extends Component{
         this.props.onSelectPage(page);
     };
 
+    setCategories = (category,method='add')=>{
+        if(!category){
+            return;
+        }
+        const { selectedPage } = this.props;
+        const categoriesSet = this.state.pageCategorySet;
+        if(method==='add'){
+            categoriesSet.add(category);
+        } else if(method==='delete') {
+            categoriesSet.delete(category);
+        }
+        this.setState({
+            pageCategorySet: categoriesSet
+        });
+        selectedPage.categories = Array.from(categoriesSet);
+        this.savePage(selectedPage);
+    };
+
 
 
     render() {
         const { selectedPage,categories } = this.props;
-        const { showCategory,alikePages } = this.state;
+        const { alikePages,pageCategorySet } = this.state;
         const snapshots = selectedPage ? (selectedPage.snapshots||[]) : [];
         const images = selectedPage ? (selectedPage.images || []) : [];
         const steps = selectedPage.steps || [];
@@ -212,24 +211,12 @@ export default class PageDetail extends Component{
                                          <span>{new Date(selectedPage.lastModified).toLocaleDateString()}</span>
                                     </div>
                                     <div className='category'>
-                                        <a className='setting-icon icon' onClick={this.doShowCategory}>
-                                            <Tag/>
-                                        </a>
-                                        {/*<span onClick={this.doShowCategory} className='category-name'>{selectedPage.category||'请选择一个标签'}</span>*/}
-                                        {/*<DropLabel*/}
-                                        {/*  onSet={this.setCategory}*/}
-                                        {/*  currentCategories={new Set(selectedPage.categories)}*/}
-                                        {/*  categories={categories}/>*/}
-                                        {
-                                            selectedPage.categories ?
-                                              selectedPage.categories.map((item)=>(
-                                                <span style={{marginRight:'10px'}}>{item}</span>
-                                              )):
-                                          <span>{selectedPage.category||'-'}</span>
-                                        }
-                                    </div>
-                                    <div>
-                                        数据版本：{selectedPage.version}
+                                        <Tag/>
+                                        <DropLabels
+                                          onSet={this.setCategories}
+                                          categories={categories}
+                                          currentCategories={pageCategorySet}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -267,18 +254,6 @@ export default class PageDetail extends Component{
                                                   {/*<span>{step[12]}</span>*/}
                                               </p>
                                               <div className='note'>
-                                                  {/*<div onClick={(e)=>this.startEdit(e,step[4],(html)=>{*/}
-                                                  {/*    step[4] = html;*/}
-                                                  {/*    this.savePage(selectedPage);*/}
-                                                  {/*})}>*/}
-                                                  {/*    <NoteIcon className='note-icon' />*/}
-                                                  {/*    <div className='note-content'  dangerouslySetInnerHTML={{__html:step[4]}}></div>*/}
-                                                  {/*</div>*/}
-
-                                                  {/*<NoteIcon onClick={(e)=>this.startEdit(e,step[4],(html)=>{*/}
-                                                  {/*    step[4] = html;*/}
-                                                  {/*    this.savePage(selectedPage);*/}
-                                                  {/*})} />*/}
                                                   <div className='editor-text-target'>
                                                   </div>
                                                   <div className='editor-bar-target'>

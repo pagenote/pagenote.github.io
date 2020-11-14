@@ -1,20 +1,100 @@
 import React, {Component} from 'react'
-import Editor from '../../components/editor/Editor'
 import CommonPage from "../CommonPage";
+import './donation.scss'
 
+const users = [
+  {
+    name:'**涛',
+    amount: 10,
+    type: 1,
+    time:'2020-03-26'
+  },
+  {
+    name:'**杰',
+    amount: 6.6,
+    type: 1,
+    time:'2020-11-05'
+  },
+  {
+    name:'Liu*un',
+    amount: 5,
+    type: 2,
+    time:'2020-10-13'
+  },
+  {
+    name:'a*e',
+    amount: 10,
+    type: 2,
+    time:'2020-10-21'
+  },
+  {
+    name:'-',
+    amount: 15,
+    type: 2,
+    time:'2020-11-2'
+  },
+  {
+    name:'顾*',
+    amount: 15,
+    type: 2,
+    time:'2020-11-12'
+  }
+];
 
-const datas = {
-  donation:{"time":1604322221558,"blocks":[{"type":"paragraph","data":{"text":"PAGENOTE 不以盈利为目的，只为热爱：热爱产品，热爱技术。"}},{"type":"paragraph","data":{"text":"如果觉得 PAGENOTE 对你产生了一点点帮助。打赏让我们知道「自己的努力有了一些价值」。任意金额都是对我们的一种鼓励。"}},{"type":"image","data":{"url":"/dashang.jpg","caption":"微信扫码打赏。如果愿意，支付时可以留下你的邮箱或QQ信息呀，方便我们回访。","withBorder":false,"withBackground":true,"stretched":false}},{"type":"header","data":{"text":"感谢以下用户的支持","level":4}},{"type":"paragraph","data":{"text":"<mark class=\"cdx-marker\">Liu*un</mark>、 <mark class=\"cdx-marker\">a*e</mark>、"}},{"type":"paragraph","data":{"text":"无名的用户，单号："}},{"type":"paragraph","data":{"text":"<mark class=\"cdx-marker\">512102</mark>"}},{"type":"paragraph","data":{"text":"除了打赏外，你还可以参与产品的推广和改进。"}},{"type":"list","data":{"style":"ordered","items":["绘制 PAGENOTE 宣传插画、海报图片、视频， PAGENOTE icon等各类UI稿。","加入QQ用户群&nbsp;<b>769094377</b>&nbsp;提供你的反馈和idea。","参与代码维护、功能开发。<a href=\"https://github.com/rowthan/pagenote\">GitHub</a>。","把 PAGENOTE 推荐给你的好友、在论坛内发帖推广。"]}}],"version":"2.19.0"},
-};
+const payType={
+  1:'支付宝',
+  2:'微信',
+}
 
 export default class CreatePage extends Component{
 
   render() {
-    let data = datas.donation;
     return (
       <div className='donation'>
-        <div className='editor_container'>
-          <Editor data={data} readonly={true}></Editor>
+        <p>
+          <p>目前 PAGENOTE 完全免费，没有广告，打赏是唯一的经济来源。</p>
+          <p>
+            打赏<span className='light-me'>不会给你带来格外的功能</span>，所以你不必为了获得某些高级功能而打赏。
+          </p>
+          <p>
+            <span className='light-me green'>打赏是让我们知道「PAGENOTE 的努力有了一些价值」，任意金额都是鼓励。</span>
+            如果你觉得给你带来了一点帮助，小小支持一下吧。金额随意。
+          </p>
+          <p>
+            <img src="/dashang.jpg" alt="支持pagenote"/>
+          </p>
+          <p>
+            如果未来 PAGENOTE 提供部分付费高级功能、版本，打赏用户将得到最大程度的优惠。
+            <br/>
+            当然，PAGENOTE 承诺 <span className='light-me'>「你现在能使用的功能，在未来也将继续可以使用，不会因为没有付费而针对你停止服务」</span>
+          </p>
+          <p>
+            PAGENOTE 需要你的支持和鼓励，但同时希望营造一个良好的用户、产品关系--PAGENOTE 能够很好的发展，PAGENOTE 值的用户自发地为之付费。
+          </p>
+        </p>
+        <div className='donation-users'>
+            <h4>感谢以下用户的打赏支持：</h4>
+            <div>
+              <table>
+                <thead>
+                  <th>
+                    用户
+                  </th>
+                  <th>支付方式</th>
+                  <th>金额</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  {users.map((user)=>(
+                    <tr key={user.name}>
+                      <td>{user.name}</td>
+                      <td>{payType[user.type]}</td>
+                      <td>{user.amount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
         </div>
       </div>
     )

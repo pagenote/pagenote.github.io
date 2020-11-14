@@ -2,7 +2,7 @@ import Bridge from "./extensionBridge";
 
 let bridgeCli = null;
 
-export const connectServerNew = function(callback){
+export const connectServer = function(callback){
     bridgeCli = new Bridge(document.getElementById('messenger'),'page','extension');
 
     bridgeCli.addListener('get_data',function ({type,data}) {
@@ -34,7 +34,7 @@ export const connectServerNew = function(callback){
     });
 };
 
-export const groupPagesNew = function (groupType,pages) {
+export const groupPages = function (groupType,pages) {
     const categories = new Map();
     const groupBy = (fn)=>{
         const groupPagesObject = {};
@@ -99,7 +99,7 @@ export const groupPagesNew = function (groupType,pages) {
     return result;
 };
 
-export const savePageNew = function (page) {
+export const savePage = function (page) {
     const saveData = {
         key: page.url||page.key,
         keys: page.keys,

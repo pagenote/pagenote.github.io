@@ -18,19 +18,22 @@ export default class Index extends Component{
     script.onload = function () {
       const pagenote = new PageNote('pagenote-home',{
         functionColors:[
-          {
-            icon:'/icons/search.png',
-            name:'search',
-            shortcut:'s',
-            onclick: function (e) {
-              const text = pagenote.target ? pagenote.target.text : '';
-              if(text){
-                window.getSelection().removeAllRanges();
-                window.open(`https://www.baidu.com/s?wd=${text}`);
-              }
-            },
-          }
-        ]
+          [
+            {
+              icon:'/icons/search.png',
+              name:'search',
+              shortcut:'s',
+              onclick: function (e) {
+                const text = pagenote.target ? pagenote.target.text : '';
+                if(text){
+                  window.getSelection().removeAllRanges();
+                  window.open(`https://www.baidu.com/s?wd=${text}`);
+                }
+              },
+            }
+          ]
+        ],
+        sideBarActions:[],
       });
       pagenote.init(initData);
       setTimeout(function () {

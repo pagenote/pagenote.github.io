@@ -51,8 +51,48 @@ var funDownload = function (content, filename) {
   document.body.removeChild(eleLink);
 };
 
+function getBrowserTypeAndVersion() {
+  const  userAgent = window.navigator.userAgent;
+  let type = '';
+  let version = '';
+  const matchEdge = userAgent.match(/(Edg|Edge)\/((\d{1,}.)+)/);
+  const matchChrome= userAgent.match(/(Chrome)\/((\d{1,}.)+)/);
+  const matchOPR= userAgent.match(/(OPR)\/((\d{1,}.)+)/);
+  const matchFirefox= userAgent.match(/(Firefox)\/((\d{1,}.*)+)/);
+  const matchIE= userAgent.match(/(MSIE)\s(\d{1,}\.\d)/);
+  const matchIE11= userAgent.match(/(rv):(\d{1,}\.\d)/);
+  const matchSafari = userAgent.match(/(Safari)\/(\d{1,}.*)/);
+  if (matchEdge) {
+    type = 'Edge';
+    version = matchEdge[2];
+  } else if (matchFirefox) {
+    type = matchFirefox[1];
+    version = matchFirefox[2];
+  } else if (matchOPR) {
+    type = matchOPR[1];
+    version = matchOPR[2];
+  }  else if (matchIE) {
+    type = 'IE';
+    version = matchIE[2];
+  } else if (matchIE11) {
+    type = 'IE';
+    version = matchIE11[2];
+  } else if (matchChrome) {
+    type = matchChrome[1];
+    version = matchChrome[2];
+  } else if(matchSafari){
+    type = 'Safari';
+    version = matchSafari[2];
+  }
+  return {
+    type,
+    version
+  };
+}
+
 export {
   convertColor,
   computePosition,
   funDownload,
+  getBrowserTypeAndVersion,
 }

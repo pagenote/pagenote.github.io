@@ -11,6 +11,8 @@
     margin-top: 12px;
     &.fl{
       background: #fff;
+      //display: grid;
+      //grid-template-columns: repeat(auto-fill, 50%);
     }
     &.sl{
       background: #f6f8fa;

@@ -7,10 +7,15 @@ export default function Footer() {
                   // display:flex;
                   // justify-content: space-around;
                   max-width: 800px;
-                  margin:24px auto;
+                  margin: 0px auto 24px;
                   
                   font-size:12px;
                 }
+                
+                .footer-links li p{
+                   margin: 0.4em 0;
+                }
+               
                 
                   .footer-links a{
                     margin-right:12px;
@@ -31,15 +36,32 @@ export default function Footer() {
                     width: 100%;
                     margin: 0;
                     padding: 18px 0 12px 0;
-                    border-top: 1px solid #ececec;
+                    // border-top: 1px solid #ececec;
+                  }
+                  .wechat-finder{
+                    position:relative;
+                  }
+                  .wechat-finder .wechat-qrcode{
+                    display:none;
+                    width: 100px;
+                    height: 100px;
+                    position: absolute;
+                    top: -30px;
+                    left: 100%;
+                  }
+                  .wechat-finder:hover .wechat-qrcode{
+                    display: block;
                   }
               `}</style>
             <footer>
                 <div
                   className="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-                    <ul
-                      className="list-style-none d-flex footer-links">
-                        <li className="mr-3 mr-lg-0">© 2020 <a href="/">PAGENOTE</a></li>
+                    <ul className="list-style-none d-flex footer-links">
+                        <li className="mr-3 mr-lg-0">
+                            <p>
+                                © 2020 <a href="/">PAGENOTE</a>
+                            </p>
+                        </li>
                         <li className="mr-3 mr-lg-0">
                             <p>
                                 <a  href="/hello.html">产品介绍</a>
@@ -53,12 +75,12 @@ export default function Footer() {
                         </li>
                         <li className="mr-3 mr-lg-0">
                             <p>
-                                <a href="/page?id=privacy">隐私协议</a>
+                                <a href="/privacy">隐私协议</a>
                             </p>
                         </li>
                         <li>
                             <p>
-                                <a href="/donation">支持/贡献</a>
+                                <a href="/donation">支持/捐赠</a>
                             </p>
                             {/*<p>*/}
                             {/*    <a href="/pricing">高级定制</a>*/}
@@ -68,8 +90,9 @@ export default function Footer() {
                             <p>
                                 <a href="/page?id=developer">开发者</a>
                             </p>
-                            <p>
-                                用户群：769094377
+                            <p className='wechat-finder'>
+                                微信公众号：pagenote
+                                <img className='wechat-qrcode' src="/img/wechat.jpg" alt="微信公众号"/>
                             </p>
                         </li>
                     </ul>

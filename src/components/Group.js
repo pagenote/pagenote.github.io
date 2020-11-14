@@ -17,12 +17,15 @@ export default function Group({group,toggleExpandGroup,groupPagesObject,selected
              onClick={() => toggleExpandGroup(group)}>
               <span className='group-title-name' style={{borderColor:color}}>
                   {group}
-                <Expand
-                  width={12} height={12}
-                  className={`group-icon ${expand ? 'expand' : 'collapse'}`}
-                  onClick={() => toggleExpandGroup(group)}/>
+                  <span className='group-breif'>
+                    <span className='group-info'>{groupPagesObject[group] ? groupPagesObject[group].pages.length : 0}</span>
+                    <Expand
+                      width={12} height={12}
+                      className={`group-icon ${expand ? 'expand' : 'collapse'}`}
+                      onClick={() => toggleExpandGroup(group)}/>
+                  </span>
               </span>
-            <span className='group-info'>{groupPagesObject[group] ? groupPagesObject[group].pages.length : 0}</span>
+
           </div>
           <div
             className={`group-items ${expand ? 'expand' : 'collapse'}`}>

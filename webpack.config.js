@@ -14,7 +14,7 @@ const htmlArr = createHtml("./src/pages");
 const config = {
   entry: entry,
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
     filename: '[name].[contenthash].js',
     publicPath: '/'
   },
@@ -85,7 +85,7 @@ const config = {
       // 使用正则匹配命中路由
       rewrites: [
         {
-          from: /^\/me|new|page|release|setting|donation$/,
+          from: /^\/me|new|page|release|setting|donation|rate|privacy$/,
           to: function(context) {
             return   context.parsedUrl.pathname+'.html';
           }

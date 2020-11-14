@@ -17,3 +17,5 @@ Thumbs.db
 .idea
 package-lock.jso
 
+yarn.lock
+dist/report.html

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const colors = ['#c4e3cb','#fff4e1','#e7e6e1','#aacfd0','#a9d2ff']//['rgb(243, 241, 239)','#aacfd0','rgb(51, 81, 82)'];
+const colors = ['#426666','#fff4e1','#e7e6e1','#aacfd0','#a9d2ff']//['rgb(243, 241, 239)','#aacfd0','rgb(51, 81, 82)'];
 export default function Colors({onChoose}) {
     return(
         <div>

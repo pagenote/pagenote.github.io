@@ -1,4 +1,4 @@
-var version = '0.12.13';
+var version = '0.12.1.5';
 var cacheName = 'pre_cache_'+version;
 var apiCacheName = 'runtime_cache'+version;
 var cacheFiles = [
@@ -6,9 +6,7 @@ var cacheFiles = [
     '/new',
     '/setting',
     '/me',
-    '/pagenote.js',
     '/donation',
-    '/favicon.ico',
     'https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js',
     'https://unpkg.com/react@16.13.1/umd/react.production.min.js'
 ];
@@ -20,7 +18,7 @@ self.addEventListener('install', function (e) {
         return cache.addAll(cacheFiles);
     });
     e.waitUntil(cacheOpenPromise);
-    self.skipWaiting();
+    // self.skipWaiting();
 });
 
 // 监听activate事件，激活后通过cache的key来判断是否更新cache中的静态资源

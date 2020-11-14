@@ -4,25 +4,37 @@ import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 import Notes from "../../components/notes/Notes"
 import DropMenu from "../../components/DropMenu";
-import Colors from "../../components/Colors";
 import LoadPage from "../../components/tips/LoadPage";
 import PagesIcon from "../../assets/icon/pages.svg";
 import Group from "../../components/Group";
 import Undraw from "../../assets/draw/undraw_text_files_au1q.svg";
 import Empty from "../../assets/draw/empty.svg";
-import Safe from "../../assets/icon/safe.svg"
-import ImportIcon from "../../assets/icon/import.svg";
-import ExportIcon from "../../assets/icon/export.svg";
 import Close from "../../assets/icon/close.svg";
 import Setting from "../../assets/icon/setting.svg";
-import {connectServer, groupPages, savePage} from "../../utils/index";
+import {connectServer, groupPages, savePage} from "../../utils/index_new";
 import {importData} from "../../utils/index_new";
 import {funDownload} from "../../utils/document";
+import Aside from "./Aside";
 import './me.scss'
+import AsideMore from "../../assets/icon/aside-more.svg";
 
-const pageSize = 1200;
+const groupTypes =[
+    {
+        value:2,
+        label:'按标签分组'
+    },
+    {
+        value:0,
+        label:'按域名分组'
+    },
+    {
+        value:1,
+        label:'按日期分组'
+    },
+];
+const predefineSize =  window.innerWidth - 100;
 
-export default class Index extends Component{
+export default class Me extends Component{
     constructor(props) {
         super(props);
         let defaultGroup = 0;
@@ -52,10 +64,11 @@ export default class Index extends Component{
             size: '45%',
             windowWidth:1440,
             expandGroups: [],
+
+            pageMeOffset: 0,
+            pageSize: predefineSize
         };
         this.search = this.search.bind(this);
-        this.useHeader = false;
-        this.myRef = React.createRef();
     }
 
     componentDidMount() {
@@ -73,9 +86,17 @@ export default class Index extends Component{
             currentVersion: document.documentElement.dataset.version
         });
         this.doConnect();
+        window.onresize =  ()=> {
+            this.setState({
+                pageSize: window.innerWidth - 100
+            })
+        }
     }
 
     doConnect=()=>{
+        if(this.state.connected){
+            return;
+        }
         connectServer((result)=>{
             this.setState({
                 connected: true,
@@ -138,12 +159,6 @@ export default class Index extends Component{
         });
     };
 
-    toggleExpand(){
-        this.setState({
-            expand: !this.state.expand
-        })
-    }
-
     search=(e={})=> {
         const searchString = e.target ? e.target.value.trim() : this.state.searchString;
         this.setState({
@@ -205,7 +220,6 @@ export default class Index extends Component{
         window.localStorage.setItem('bgColor',color);
     };
 
-
     onKeyUP = (e)=>{
         switch (e.keyCode) {
             case 40:// down
@@ -219,19 +233,21 @@ export default class Index extends Component{
     };
 
     dragSize =(event)=>{
-        const target = event.currentTarget;
         document.body.style.userSelect = 'none';
+        const pageSize = this.state.pageSize;
+        const offset = this.state.pageMeOffset;
+        let minLeftSize = 300;
+        let maxLeftSize = pageSize - 4 - offset;
         document.onmousemove = throttle((e)=>{
-            const a = (window.innerWidth-this.myRef.current.clientWidth);
-            let offset = e.clientX -  a/2;
-            offset = Math.min(Math.max(offset, 300), pageSize);
-            const size = offset;
+            const a = window.innerWidth-pageSize;
+            let offset = e.clientX -  a/2 - this.state.pageMeOffset;
+            offset = Math.min(Math.max(offset, minLeftSize), maxLeftSize);
             this.setState({
-                size: size,
+                size: offset,
             },()=>{
-                window.localStorage.setItem('size',size)
+                window.localStorage.setItem('size',offset)
             })
-        },100);
+        },60/1000);
         document.onmouseup = (e) =>{
             document.body.style.userSelect = 'unset';
             document.onmouseup = null;
@@ -257,6 +273,15 @@ export default class Index extends Component{
     setSize =(size)=>{
         this.setState({
             size: size
+        })
+    };
+
+    toggleAside=()=>{
+        const current = this.state.pageMeOffset;
+        const nextOffset = current===200? 0 :200;
+        this.setState({
+            pageMeOffset: nextOffset,
+            // pageSize:  window.innerWidth - 100 - nextOffset,
         })
     };
 
@@ -302,8 +327,8 @@ export default class Index extends Component{
 
     render() {
         const {
-            data, groupPagesObject, selectedPagesKey, selectedGroupsKey,pages,
-            searchString, connected, groupType, categories, bgColor, size, windowWidth,expandGroups
+            data, groupPagesObject, selectedPagesKey, selectedGroupsKey,pages,pageMeOffset,
+            searchString, connected, groupType, categories, bgColor, size,expandGroups
         } = this.state;
 
         const groupKeys = Object.keys(groupPagesObject).sort(function (pre,next) {
@@ -312,161 +337,135 @@ export default class Index extends Component{
               (pre > next ? -1 :1)
         });
 
-        const groupTypes =[
-            {
-                value:2,
-                label:'按标签分组'
-            },
-            {
-                value:0,
-                label:'按域名分组'
-            },
-            {
-                value:1,
-                label:'按日期分组'
-            },
-        ];
-
         const barSize = Number.isInteger(+size) ? size + 'px' : '';
-        const bookWidth = this.myRef.current ? this.myRef.current.clientWidth : pageSize;
+        const bookWidth =  this.state.pageSize;
         const expand = size / bookWidth > 0.9;
 
         const grid = size / bookWidth > 0.58;
 
-        let cols = size>900?[1,2,3]:[1,2];
-        if(size>1100){
-            cols=[1,2,3,4]
+        const colsCtn = Math.floor(size/298);
+
+        let cols = [];
+        for (let i=0; i<colsCtn; i++){
+            cols.push('col-'+i);
         }
         return (
-            <div className='me'>
-                <div className='pagenote-me'>
-                    {/*backgroundColor: bgColor,*/}
-                    {/*<Tabs toggleGroups={this.toggleGroups} selectGroup={this.selectGroup} groupKeys={groupKeys} selectedGroupsKey={selectedGroupsKey} expand={expand} groupPagesObject={groupPagesObject} left={(windowWidth - bookWidth) / 2 - 60}  />*/}
-                    <div ref={this.myRef} className='me' data-pagenote='1'>
-                        <div className={`pages-and-detail ${expand ? 'expand' : 'fold'}`}
-                             style={{ border: `1px solid ${bgColor}`,backgroundColor: bgColor  }}>
-                            <LoadPage connected={connected} doConnect={this.doConnect} emptyGroup={groupKeys.length === 0}/>
-                            {
-                                groupKeys.length > 0 &&
-                                <Fragment>
-                                    {/* 分组详情 单页打开*/}
-                                    <section className={`pages`} style={{width: barSize,background: bgColor}}>
-                                        <div className='title' style={{backgroundColor: bgColor}}>
-                                            <a className='logo-title' href='/'>
-                                                PAGES<PagesIcon width={20} height={20} className='icon'/>
-                                            </a>
-                                            <div className='group-type'>
-                                                <DropMenu list={groupTypes} selected={groupType}
-                                                          onSelect={this.selectGroupType}/>
-                                            </div>
-                                            <input onChange={this.search} value={searchString}
-                                                   className={`search ${searchString ? 'active' : ''}`} type="text"
-                                                   placeholder='🔍'/>
-                                            <Close className='clean-search' onClick={this.cleanSearch} />
-                                        </div>
-                                        <div className='content'>
-                                            <div className={`page-group active`}>
-                                                <div className={`page-container ${grid ? 'grid' : 'list'}`}
-                                                     onKeyUp={this.onKeyUP}>
-                                                    {
-                                                        !grid ?
-                                                        Array.from(selectedGroupsKey).map((group) => (
-                                                          <Group key={group} groupPagesObject={groupPagesObject}
-                                                                 group={group} selectedPagesKey={selectedPagesKey}
-                                                                 expand={expandGroups.has(group)}
-                                                                 selectPage={this.selectPage}
-                                                                 toggleExpandGroup={this.toggleExpandGroup}/>
-                                                        )):
-                                                      <div className='grid-group'>
-                                                          {
-                                                              cols.map((value,colIndex)=>(
-                                                                <div key={value} className='grid-group-col' style={{width:100/cols.length+"%"}}>
-                                                                    {
-                                                                        Array.from(selectedGroupsKey).map((group,index) => (
-                                                                          <Fragment key={group}>
-                                                                              {
-                                                                                  index % cols.length === colIndex &&
-                                                                                  <Group key={group} groupPagesObject={groupPagesObject}
-                                                                                         expand={expandGroups.has(group)}
-                                                                                         group={group} selectedPagesKey={selectedPagesKey}
-                                                                                         selectPage={this.selectPage}
-                                                                                         toggleExpandGroup={this.toggleExpandGroup}/>
-                                                                              }
-                                                                          </Fragment>
+          <div className='me' data-pagenote='1' style={{width: bookWidth+'px'}}>
+              <div className='more-icon'>
+                  <p>
+                      <AsideMore onClick={this.toggleAside}  />
+                  </p>
+                 <p>
+                     <a href="/setting"><Setting /></a>
+                 </p>
+              </div>
+              {
+                connected &&
+                <Aside onImportData={this.onImportData}
+                       exportData={this.exportData}
+                       pageSize={pages.length}
+                       setColor={this.setColor}>
 
-                                                                        ))
-                                                                    }
-                                                                </div>
-                                                              ))
-                                                          }
-                                                      </div>
-                                                    }
+                </Aside>
+              }
+              <div className={`pages-and-detail ${expand ? 'expand' : 'fold'}`}
+                   style={{ border: `1px solid ${bgColor}`,backgroundColor: bgColor,left: pageMeOffset+'px',width: bookWidth-pageMeOffset+'px'  }}>
+                  <LoadPage connected={connected} doConnect={this.doConnect} emptyGroup={groupKeys.length === 0}/>
+
+                  {
+                      groupKeys.length > 0 &&
+                      <Fragment>
+                          {/* 分组详情 单页打开*/}
+                          <section className={`pages`} style={{width: barSize,background: bgColor}}>
+                              <div className='title' style={{backgroundColor: bgColor}}>
+                                  <a className='logo-title' href='/'>
+                                      PAGES<PagesIcon width={20} height={20} className='icon'/>
+                                  </a>
+                                  <div className='group-type'>
+                                      <DropMenu list={groupTypes} selected={groupType}
+                                                onSelect={this.selectGroupType}/>
+                                  </div>
+                                  <input onChange={this.search} value={searchString}
+                                         className={`search ${searchString ? 'active' : ''}`} type="text"
+                                         placeholder='🔍'/>
+                                  <Close className='clean-search' onClick={this.cleanSearch} />
+                              </div>
+                              <div className='content'>
+                                  <div className={`page-group active`}>
+                                      <div className={`page-container ${grid ? 'grid' : 'list'}`}
+                                           onKeyUp={this.onKeyUP}>
+                                          {
+                                              !grid ?
+                                                Array.from(selectedGroupsKey).map((group) => (
+                                                  <Group key={group} groupPagesObject={groupPagesObject}
+                                                         group={group} selectedPagesKey={selectedPagesKey}
+                                                         expand={expandGroups.has(group)}
+                                                         selectPage={this.selectPage}
+                                                         toggleExpandGroup={this.toggleExpandGroup}/>
+                                                )):
+                                                <div className='grid-group'>
                                                     {
-                                                        selectedGroupsKey.size === 0 &&
-                                                        <div className='empty-tip'>
-                                                            {searchString ?
-                                                              <div>
-                                                                  <div>没有找到<span
-                                                                    className='search-keyword'>{searchString}</span>相关的PAGE、NOTE
-                                                                  </div>
-                                                                  <Empty width={100} height={45}/>
-                                                              </div>
-                                                              :
-                                                              <div>
-                                                                  <div>选择一个分组，查看分组下的PAGE</div>
-                                                                  <Undraw width={200} height={120}></Undraw>
-                                                              </div>
-                                                            }
-                                                        </div>
+                                                        cols.map((value,colIndex)=>(
+                                                          <div key={value} className='grid-group-col' style={{width:100/cols.length+"%"}}>
+                                                              {
+                                                                  Array.from(selectedGroupsKey).map((group,index) => (
+                                                                    <Fragment key={group}>
+                                                                        {
+                                                                            index % cols.length === colIndex &&
+                                                                            <Group key={group} groupPagesObject={groupPagesObject}
+                                                                                   expand={expandGroups.has(group)}
+                                                                                   group={group} selectedPagesKey={selectedPagesKey}
+                                                                                   selectPage={this.selectPage}
+                                                                                   toggleExpandGroup={this.toggleExpandGroup}/>
+                                                                        }
+                                                                    </Fragment>
+
+                                                                  ))
+                                                              }
+                                                          </div>
+                                                        ))
                                                     }
                                                 </div>
-                                            </div>
-
-                                            <div className='action-tips'>
-                                                <label className='action-button'>
-                                                    <ImportIcon />导入<input id="import-data" type="file" style={{display: "none"}} onChange={this.onImportData} />
-                                                </label>
-                                                <span onClick={this.exportData} className='action-button'>
-                                                    <ExportIcon />备份
-                                                </span>
-                                                <span>
-                                                    共计 {pages.length} 个 page。注意定时备份，以免数据丢失。
-                                                </span>
-                                                {/*<span className="keyboard">↑</span > <span className="keyboard">↓</span>  to select pre/next item.*/}
-                                            </div>
-                                            <Colors onChoose={this.setColor}/>
-                                        </div>
-                                    </section>
-                                    <aside className='split-line' onMouseDown={this.dragSize} style={{color: '#fff',backgroundColor: bgColor,}}>
-                                        <div className='left'  onClick={()=>this.setSize(350)}>left&lt;</div>
-                                        <div className='right' onClick={()=>this.setSize(bookWidth-4)}>&gt;right</div>
-                                    </aside>
-                                    {/*一些笔记tip*/}
-                                    <Notes selectedPagesKey={selectedPagesKey}
-                                           isPopUp={cols.length>3}
-                                           size={barSize}
-                                           categories={categories}
-                                           onSavePage={this.savePageData}
-                                           selectPage={this.selectPage}
-                                           data={data}
-                                    >
-                                    </Notes>
-                                </Fragment>
-                            }
-                        </div>
-                        <div className='me-footer'>
-                            <div className='footer-tips'>
-                                <Safe/> 仅当前浏览器可访问PAGENOTE数据(未上传服务器，请放心使用)。
-                                <a href="https://www.wjx.cn/jq/69876579.aspx">问卷反馈</a>
-                            </div>
-                        </div>
-                        <div className='aside-menu'>
-                            <a href="/setting"><Setting /></a>
-                        </div>
-                    </div>
-                </div>
-                {/*<div>setting 同步浏览器书签管理器</div>*/}
-            </div>
+                                          }
+                                          {
+                                              selectedGroupsKey.size === 0 &&
+                                              <div className='empty-tip'>
+                                                  {searchString ?
+                                                    <div>
+                                                        <div>没有找到<span
+                                                          className='search-keyword'>{searchString}</span>相关的PAGE、NOTE
+                                                        </div>
+                                                        <Empty width={100} height={45}/>
+                                                    </div>
+                                                    :
+                                                    <div>
+                                                        <div>选择一个分组，查看分组下的PAGE</div>
+                                                        <Undraw width={200} height={120}></Undraw>
+                                                    </div>
+                                                  }
+                                              </div>
+                                          }
+                                      </div>
+                                  </div>
+                              </div>
+                          </section>
+                          <aside className='split-line' onMouseDown={this.dragSize} style={{color: '#fff'}}>
+                              <div className='left'  onClick={()=>this.setSize(350)}>left&lt;</div>
+                              <div className='right' onClick={()=>this.setSize(bookWidth-4)}>&gt;right</div>
+                          </aside>
+                          <Notes selectedPagesKey={selectedPagesKey}
+                                 isPopUp={cols.length>3}
+                                 size={barSize}
+                                 categories={categories}
+                                 onSavePage={this.savePageData}
+                                 selectPage={this.selectPage}
+                                 data={data}
+                          >
+                          </Notes>
+                      </Fragment>
+                  }
+              </div>
+          </div>
         )
     }
 }
