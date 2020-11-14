@@ -1,4 +1,4 @@
-var version = '0.12.1.5';
+var version = '0.12.2';
 var cacheName = 'pre_cache_'+version;
 var apiCacheName = 'runtime_cache'+version;
 var cacheFiles = [
