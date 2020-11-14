@@ -2,6 +2,9 @@ import InstallBar from "../components/InstallBar";
 
 
 function isOldVersion(current,compareVersion) {
+  if(!current){
+    return true;
+  }
   if(current===compareVersion){
     return false;
   }
@@ -20,7 +23,6 @@ function isOldVersion(current,compareVersion) {
 }
 
 function NeedUpload(current,need) {
-  current = current || '未检测到安装';
   return function(){
     return(
       <div className='need_upload'>
@@ -35,13 +37,14 @@ function NeedUpload(current,need) {
           `
           }
         </style>
-        <p>
-          为了你更好的体验，
-          需要升级安装 PAGENOTE  之后才可继续使用本服务
-        </p>
         <InstallBar></InstallBar>
         <p>
-          当前版本 <b>{current}</b>, 至少需要升级到 <b>{need}</b>
+          {
+            current ?
+              <span>当前版本<b>{current}</b>, 至少需要升级到 <b>{need}</b>才可继续使用</span>
+              :
+            <span>你还没有安装 PAGENOTE，安装后再来使用吧 </span>
+          }
         </p>
         <p>
           <h3>反馈</h3>
@@ -54,7 +57,7 @@ function NeedUpload(current,need) {
 
 
 export default function CheckVersion(Com,version) {
-  const currentVersion = document.documentElement.dataset.version || '0.0.0';
+  const currentVersion = document.documentElement.dataset.version || '';
   const needUpload = isOldVersion(currentVersion,version);
   if(needUpload){
     console.log('需要升级后才可使用',currentVersion)
