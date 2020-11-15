@@ -1,4 +1,12 @@
 {
+  "versions": [
+    {
+      "version": "0.12.2",
+      "content": {
+        "zh_cn": "<h3>\n                            <a href=\"https://pagenote.cn/release\">0.12.2 样式大重构</a>\n                        </h3>\n                        <ul>\n                            <li>操作界面更简洁</li>\n                            <li>增加了提示信息</li>\n                            <li>增加了一个实验性功能：「阅读进度条」</li>\n                            <li>制作了一个简单的 <a href=\"https://pagenote.cn\">视频</a>，让你更快的了解各类操作</li>\n                        </ul>"
+      }
+    }
+  ],
   "latest": {
     "version": "0.12.1",
     "support": ["chrome","firefox"]
