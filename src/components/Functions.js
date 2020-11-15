@@ -6,10 +6,10 @@ export default  function Functions() {
       <style jsx='true'>{
         `
          .glances{
-          width: 960px;
+          width: 600px;
           margin:0 auto;
           display: grid;
-          grid-template-columns: repeat(auto-fill, 240px);
+          grid-template-columns: repeat(auto-fill, 150px);
         }
         .glance-item{
           padding: 12px;

@@ -64,27 +64,27 @@ export default function Footer() {
                         </li>
                         <li className="mr-3 mr-lg-0">
                             <p>
-                                <a  href="/hello.html">产品介绍</a>
+                                <a  href="/">产品介绍</a>
                             </p>
                             <p>
                                 <a href="/page?id=why">常见问题</a>
-                            </p>
-                            <p>
-                                <a href="/release">更新日志</a>
                             </p>
                         </li>
                         <li className="mr-3 mr-lg-0">
                             <p>
                                 <a href="/privacy">隐私协议</a>
                             </p>
+                            <p>
+                                <a href="/release">更新日志</a>
+                            </p>
                         </li>
                         <li>
                             <p>
                                 <a href="/donation">支持/捐赠</a>
                             </p>
-                            {/*<p>*/}
-                            {/*    <a href="/pricing">高级定制</a>*/}
-                            {/*</p>*/}
+                            <p>
+                                <a href="/page?id=future">功能规划</a>
+                            </p>
                         </li>
                         <li>
                             <p>

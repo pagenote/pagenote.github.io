@@ -88,6 +88,7 @@ export default class Header extends Component{
                 .header{
                     display: flex;
                     margin: 0 auto;
+                    padding: 12px;
                     max-width: 1200px;
                     justify-content: space-between;
                     box-sizing: border-box;
@@ -114,7 +115,7 @@ export default class Header extends Component{
             <section className="header">
                 <div>
                     <a href="/">
-                        <img height={32} src="/img/pagenote.png" alt="pagenote"/>
+                       PAGENOTE
                     </a>
                 </div>
                 <div>
@@ -128,7 +129,7 @@ export default class Header extends Component{
                         {/*           href='/me'>我的</a>*/}
                         {/*}*/}
                         <a href="/me">
-                            我的
+                            笔记管理
                         </a>
                     </span>
                     <a href="/setting">

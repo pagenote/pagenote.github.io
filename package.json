@@ -13,11 +13,6 @@
     "start": "webpack serve --hot --mode development"
   },
   "dependencies": {
-    "@editorjs/delimiter": "^1.2.0",
-    "@editorjs/editorjs": "^2.19.0",
-    "@editorjs/header": "^2.6.0",
-    "@editorjs/marker": "^1.2.2",
-    "@editorjs/warning": "^1.2.0",
     "antd": "^4.7.3",
     "axios": "^0.21.0",
     "bigpicture": "^2.5.3",
@@ -30,6 +25,11 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
+    "@editorjs/delimiter": "^1.2.0",
+    "@editorjs/header": "^2.6.0",
+    "@editorjs/marker": "^1.2.2",
+    "@editorjs/warning": "^1.2.0",
+    "@editorjs/editorjs": "^2.19.0",
     "@editorjs/list": "^1.6.0",
     "@editorjs/quote": "^2.4.0",
     "@editorjs/simple-image": "^1.4.0",

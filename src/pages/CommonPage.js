@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import ReactDOM from "react-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import '../styles/common.scss'
 
 // 设置滚动title
 export default function CommonPage(Component,useHead=true,useFooter=true) {
