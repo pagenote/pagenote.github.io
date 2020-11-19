@@ -5,6 +5,7 @@ import Loading from '../../components/Loading';
 import Bridge from "../../utils/extensionBridge";
 import {convertColor, computePosition} from "../../utils/document";
 import AddIcon from '../../assets/icon/add.svg'
+import CopyIcon from '../../assets/icon/copy.svg';
 import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import './setting.scss';
 import { Collapse } from 'antd';
@@ -260,25 +261,27 @@ export default class SettingRender extends Component{
     })
   };
 
-  addItem=(type='item',index)=>{
-    const actionGroup = this.state.actionGroup;
+  addItem=(type='item',groupIndex,itemIndex)=>{
+    let {actionGroup} = this.state;
+
     switch (type) {
       case 'item':
-        if(actionGroup[index].length>4){
+        if(actionGroup[groupIndex].length>3){
           alert('最多设置4个子按钮');
           return;
         }
-        actionGroup[index].push({
+        actionGroup[groupIndex].push({
           name: '定义一个名称吧：'+new Date().toLocaleTimeString(),
           shortcut: '',
           clickScript: '',
           clickUrl: '',
           icon: '',
         });
+        itemIndex++;
         break;
       case 'group':
-        if(actionGroup.length>5){
-          alert('最多设置5组');
+        if(actionGroup.length>4){
+          alert('最多设置4组');
           return;
         }
         actionGroup.push([{
@@ -288,10 +291,17 @@ export default class SettingRender extends Component{
           clickUrl: '',
           icon: '',
         }]);
+        groupIndex = actionGroup.length - 1;
+        itemIndex=0;
         break;
     }
+    const newSettingIndex = {
+      groupIndex: groupIndex,
+      itemIndex:itemIndex,
+    };
     this.setState({
-      actionGroup: actionGroup
+      actionGroup: actionGroup,
+      settingIndex: newSettingIndex
     })
   };
 
@@ -318,10 +328,10 @@ export default class SettingRender extends Component{
             </div>
             <div className='function-container'>
               <div className='function-area'>
-                <div className='function-colors' ref={this.colorPart}>
+                <div className='function-colors' ref={this.colorPart} data-tip='点击设置'>
                   {
                     colors.map((color,index)=>{
-                      const {x:offsetX,y:offsetY} = computePosition(index-1,35);
+                      const {x:offsetX,y:offsetY} = computePosition(index-1,40);
                       return(
                         <div
                           key={color+index}
@@ -352,7 +362,6 @@ export default class SettingRender extends Component{
                                              colors={[...predefineTheme[0].colors,...predefineTheme[1].colors,...predefineTheme[2].colors]}
                                              color={colors[colorIndex]} />
                         }
-
                       </div>
                       {/*<div className='setting-item'>*/}
                       {/*    <span className='setting-label'>字体色：</span>*/}
@@ -387,9 +396,9 @@ export default class SettingRender extends Component{
                   </div>
                 </div>
                 <div className='function-custom'>
-                  {/*<div className='action-group'>*/}
-                  {/*    <CopyIcon className='function-item'/>*/}
-                  {/*</div>*/}
+                  <div className='action-group' data-tip='单击仅复制，双击复制且保存到下方的历史面板中。暂不可自定义'>
+                      <CopyIcon className='function-item'/>
+                  </div>
                   {
                     actionGroup.map((group,index)=>(
                       <div key={index} className='action-group'>
@@ -397,6 +406,7 @@ export default class SettingRender extends Component{
                           const image = /^<svg/.test(action.icon) ?  `data:image/svg+xml;base64,${window.btoa(action.icon)}` : action.icon;
                           return(
                             <div onClick={()=>{this.setIconFun(index,i)}} key={action.name+action.icon+i}
+                                 data-tip={`${action.name}${action.shortcut?' 快捷键：'+action.shortcut:''}`}
                                  className={`function-item ${(settingIndex.groupIndex===index && settingIndex.itemIndex===i)?'active':''}`}
                                  style={{ backgroundImage: `url(${image})`}}>
                               <svg onClick={()=>this.deleteFun(index,i)} t="1603522183404" className="delete" viewBox="0 0 1024 1024"
@@ -412,13 +422,13 @@ export default class SettingRender extends Component{
                             </div>
                           )
                         })}
-                        <div className='function-item'>
-                          <AddIcon onClick={()=>this.addItem('item',index)}/>
+                        <div className='function-item' data-tip='点击添加一个按钮'>
+                          <AddIcon  onClick={()=>this.addItem('item',index,group.length-1)}/>
                         </div>
                       </div>
                     ))
                   }
-                  <div className='action-group'>
+                  <div className='action-group' data-tip='点击添加一个按钮分组'>
                     <AddIcon className='function-item' onClick={()=>{this.addItem('group')}} />
                     {/*<ResetIcon onClick={this.resetFuns} className='function-item'  />*/}
                   </div>

@@ -34,6 +34,9 @@
         display: flex;
         .action-group{
           margin-right: 12px;
+          &:hover{
+            z-index: 1;
+          }
           .function-item{
             position: relative;
             margin-bottom: 8px;
