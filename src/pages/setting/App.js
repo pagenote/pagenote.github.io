@@ -82,7 +82,9 @@ export default class SettingRender extends Component{
       settingIndex:{
         groupIndex:-1,
         itemIndex: -1,
-      }
+      },
+
+      userInfo:{},
     }
   }
 
@@ -93,7 +95,18 @@ export default class SettingRender extends Component{
     bridge = new Bridge(document.getElementById('messenger'),'page','extension');
     this.getSetting();
     this.addClickListener();
+    this.getUserInfo();
   }
+
+  getUserInfo=()=>{
+    bridge.sendMessage('get_user_info',{},({data={},type})=>{
+      if(data){
+        this.setState({
+          userInfo: data,
+        })
+      }
+    })
+  };
 
   addClickListener=()=>{
     document.addEventListener('click',(e)=>{
@@ -311,7 +324,7 @@ export default class SettingRender extends Component{
 
 
   render() {
-    const {colors=[],shortCuts=[],colorIndex,modalPosition,openInTab,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex} = this.state;
+    const {colors=[],shortCuts=[],colorIndex,modalPosition,openInTab,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo} = this.state;
     let funItem = {};
     try{
       funItem = actionGroup[settingIndex.groupIndex][settingIndex.itemIndex]
@@ -483,6 +496,12 @@ export default class SettingRender extends Component{
               开发中：支持webdav协议。
             </Panel>
           </Collapse>
+          <div className='userinfo setting-part'>
+            <label>
+              用户信息
+              <p>{userInfo.uid}</p>
+            </label>
+          </div>
 
           {/*<div className='images setting-part'>*/}
           {/*    <label>*/}

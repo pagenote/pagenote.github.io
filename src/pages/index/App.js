@@ -109,7 +109,7 @@ export default class Index extends Component{
 
   setActive =(item)=>{
     if(item==='install'){
-      window.open('/me');
+      window.location.href = '/me';
       return;
     }
     let {lightItems} = this.state;

@@ -71,6 +71,7 @@ export default class Editor extends Component{
     },this.props.data || {});
     const editor = new EditorJS({
       holder : 'pagenote-editor',
+      placeholder: this.props.placeholder||'',
       readOnly: this.props.readonly,
       tools: tools,
       data: data,
@@ -84,6 +85,14 @@ export default class Editor extends Component{
         });
       }
     });
+  }
+
+  componentWillUnmount() {
+    // TODO
+    // console.log('销毁',this.editor);
+    // if(this.editor && this.editor.destroy){
+    //   this.editor.destroy();
+    // }
   }
 
   renderBlocks =(blocks=[])=>{
@@ -101,7 +110,7 @@ export default class Editor extends Component{
   render() {
     return (
       <div className='editor'>
-        <div  id="pagenote-editor"></div>
+        <div id="pagenote-editor"></div>
       </div>
     )
   }

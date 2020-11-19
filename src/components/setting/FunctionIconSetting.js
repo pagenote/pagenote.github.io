@@ -47,7 +47,7 @@ export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickS
   const shortcutInput = useRef(null);
   const urlInput = useRef(null);
   const scriptInput = useRef(null);
-  const dbInput = useRef(null);
+  // const dbInput = useRef(null);
 
 
   const save = function () {
@@ -57,7 +57,7 @@ export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickS
       clickScript: scriptInput.current.value || '',
       clickUrl: urlInput.current.value || '',
       icon: iconInput.current.value || '',
-      dbClickScript: dbInput.current.value || '',
+      // dbClickScript: dbInput.current.value || '',
     };
     if(!fun.icon){
       alert('图标必填')
@@ -138,7 +138,10 @@ export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickS
               保存
             </button>
           </div>
-          <div><a target='_blank' href="/study_setting">了解如何配置</a></div>
+          <div>
+            <span>单击执行函数，仅支持0.12.3以上版本</span>
+            {/*<a target='_blank' href="/study_setting">了解如何配置</a>*/}
+          </div>
         </div>
       }
     </div>

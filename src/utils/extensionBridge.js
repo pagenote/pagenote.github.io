@@ -32,8 +32,11 @@ function Bridge(element,clientId='page',targetId='extension') {
 
         }
         const listener = listeners[requestData.type];
+        const sendResponse =  (data)=> {
+            this.sendMessage(requestData.type,data);
+        };
         if(listener){
-            listener(requestData);
+            listener(requestData,clientId,sendResponse);
         }
     })
 }

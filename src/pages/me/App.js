@@ -65,7 +65,7 @@ export default class Me extends Component{
             windowWidth:1440,
             expandGroups: [],
 
-            pageMeOffset: 0,
+            pageMeOffset: 200,
             pageSize: predefineSize
         };
         this.search = this.search.bind(this);
@@ -351,14 +351,14 @@ export default class Me extends Component{
         }
         return (
           <div className='me' data-pagenote='1' style={{width: bookWidth+'px'}}>
-              <div className='more-icon'>
-                  <p>
-                      <AsideMore onClick={this.toggleAside}  />
-                  </p>
-                 <p>
-                     <a href="/setting"><Setting /></a>
-                 </p>
-              </div>
+              {/*<div className='more-icon'>*/}
+              {/*    <p>*/}
+              {/*        <AsideMore onClick={this.toggleAside}  />*/}
+              {/*    </p>*/}
+              {/*   <p>*/}
+              {/*       <a href="/setting"><Setting /></a>*/}
+              {/*   </p>*/}
+              {/*</div>*/}
               {
                 connected &&
                 <Aside onImportData={this.onImportData}

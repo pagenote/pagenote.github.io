@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Editor from '../../components/editor/Editor'
 import '../page/page.scss'
 import CommonPage from "../CommonPage";
+import './new.scss'
 
 
 export default class CreatePage extends Component{
@@ -22,7 +23,7 @@ export default class CreatePage extends Component{
     return (
       <div className='page' data-pagenote='new'>
         <div className='editor_container'>
-          <Editor data={data} onSave={this.saveData}></Editor>
+          <Editor placeholder='在这里记录写什么吧，数据存储在你浏览器本地，你可以把这里当做一个草稿记事本' data={data} onSave={this.saveData}></Editor>
         </div>
       </div>
     )

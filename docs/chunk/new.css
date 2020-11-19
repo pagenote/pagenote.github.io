@@ -1,6 +1,0 @@
-.editor .ce-block__content{max-width:800px}.editor .codex-editor__redactor{padding-bottom:30px !important}
-
-.page{background:#f3f3f3;padding:24px}.page .editor_container{position:relative;box-shadow:0px 0px 3px 1px #eae6e6;border-radius:2px;color:#333;background:rgba(255,255,255,0.9);padding:32px;max-width:900px;margin:0 auto}
-
-.light-me{position:relative}.light-me:after{content:"";position:absolute;z-index:-1;top:60%;left:-0.1em;right:-0.1em;bottom:0;transition:top 200ms cubic-bezier(0, 0.8, 0.13, 1);background-color:#ffdd2e}.light-me.green:after{background-color:rgba(79,192,141,0.5)}
-
