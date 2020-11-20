@@ -7,6 +7,7 @@ import {convertColor, computePosition} from "../../utils/document";
 import AddIcon from '../../assets/icon/add.svg'
 import CopyIcon from '../../assets/icon/copy.svg';
 import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
+import CheckVersionPart from "../CheckVersionPart";
 import './setting.scss';
 import { Collapse } from 'antd';
 import 'antd/es/collapse/style/index.css'
@@ -71,6 +72,7 @@ export default class SettingRender extends Component{
       enableBookmark: true,
       enableCollectImage: false,
       actionGroup: [],
+      track:'enable',
 
       colorPickerPro: false,
       colorIndex: -1,
@@ -131,6 +133,7 @@ export default class SettingRender extends Component{
         enableBookmark: setting.enableBookmark || false,
         enableCollectImage: setting.enableCollectImage || false,
         openInTab: setting.openInTab,
+        track: setting.track || 'enable',
         shortCuts: setting.shortCuts || [],
         actionGroup: setting.actionGroup || [],
         // colorIndex: -1,
@@ -186,10 +189,10 @@ export default class SettingRender extends Component{
     })
   };
 
-  toggleTabShow =(e)=>{
-    const value = e.target.checked;
+  toggleSwitch =(value,key)=>{
+    // const value = e.target.checked;
     this.setState({
-      openInTab: value,
+      [key]: value,
     },()=>{
       setTimeout(()=>{
         this.saveSetting();
@@ -218,7 +221,7 @@ export default class SettingRender extends Component{
   };
 
   saveSetting= ()=>{
-    const {colors,maxRecord,openInTab,shortCuts,enableBookmark,enableCollectImage,actionGroup} = this.state;
+    const {colors,maxRecord,track,openInTab,shortCuts,enableBookmark,enableCollectImage,actionGroup} = this.state;
     const settings = {
       colors: colors || [],
       maxRecord: maxRecord,
@@ -227,6 +230,7 @@ export default class SettingRender extends Component{
       openInTab: openInTab,
       shortCuts: shortCuts || [],
       actionGroup: actionGroup,
+      track:track,
     };
     bridge.sendMessage('save_setting',{
       ...settings,
@@ -324,7 +328,7 @@ export default class SettingRender extends Component{
 
 
   render() {
-    const {colors=[],shortCuts=[],colorIndex,modalPosition,openInTab,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo} = this.state;
+    const {colors=[],shortCuts=[],colorIndex,modalPosition,track,openInTab,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo} = this.state;
     let funItem = {};
     try{
       funItem = actionGroup[settingIndex.groupIndex][settingIndex.itemIndex]
@@ -467,11 +471,22 @@ export default class SettingRender extends Component{
               </div>
             </label>
           </div>
+
           <div className='tab setting-part'>
             <label>
-              <input type="checkbox" checked={openInTab} onChange={this.toggleTabShow}/>
+              <input type="checkbox" checked={openInTab} onChange={(e)=>{this.toggleSwitch(e.target.checked,'openInTab')}}/>
               新开页面打开 <a href="/me">PAGENOTE/ME</a>
             </label>
+          </div>
+
+          <div className='tab setting-part'>
+            <CheckVersionPart version='0.12.3'>
+              <label>
+                <input type="checkbox" checked={track!=='disable'} onChange={(e)=>{this.toggleSwitch(e.target.checked?'enable':'disable','track')}}/>
+                开启用户体验收集计划 <a href="/page?id=why_track">了解详情</a>
+              </label>
+            </CheckVersionPart>
+
           </div>
 
           <div className='bookmark setting-part'>
@@ -497,10 +512,12 @@ export default class SettingRender extends Component{
             </Panel>
           </Collapse>
           <div className='userinfo setting-part'>
-            <label>
-              用户信息
-              <p>{userInfo.uid}</p>
-            </label>
+            <CheckVersionPart version='0.12.3'>
+              <label>
+                用户信息
+                <p>{userInfo.uid}</p>
+              </label>
+            </CheckVersionPart>
           </div>
 
           {/*<div className='images setting-part'>*/}
