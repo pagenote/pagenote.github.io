@@ -17,7 +17,7 @@
     border-radius: 6px;
     background-color: #f7f48b !important;
     .page-cliper{
-      color: #faad14;
+      background: #faad14;
     }
     .page-header{
       text-shadow: 1px 0px 1px #fff;
@@ -44,18 +44,12 @@
     top: 0;
   }
   .page-cliper{
-    width: 24px;
-    height: 12px;
-    cursor: pointer;
+    width: 8px;
     border-radius: 50%;
-    border-top: solid 0px transparent;
-    border-bottom: solid 4px currentColor;
-    border-left: solid 1px transparent;
-    border-right: solid 1px transparent;
     position: absolute;
-    right: -36px;
+    right: -18px;
     top: 12px;
-    color: rgba(247, 247, 247, 0.85)
+    height: 8px;
   }
   .page-header{
     //display: flex;

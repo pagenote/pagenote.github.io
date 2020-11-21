@@ -9,6 +9,8 @@ import Quote from "@editorjs/quote";
 import Warning from "@editorjs/warning";
 import Marker from "@editorjs/marker";
 import Table from "@editorjs/table";
+import Checklist from "@editorjs/checklist";
+
 import './editor.scss'
 
 
@@ -44,6 +46,10 @@ const getAllTools = function () {
     },
     lightheader:{
       class: LightHeader
+    },
+    checklist:{
+      class: Checklist,
+      inlineToolbar: true,
     }
   }
 

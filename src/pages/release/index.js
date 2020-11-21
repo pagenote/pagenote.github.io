@@ -34,6 +34,19 @@ export default class Release extends Component{
                     </div>
                     <div className="right col-9">
                         <div className="brief">
+                            <h3>0.12.3 插件更开放</h3>
+                            <ul>
+                                <li>plugin 支持 双击事件和鼠标经过事件</li>
+                                <li>修改了默认 plugin 配置方案</li>
+                                <li>重新定义了API说明，将提供 .methods .data 供开发者使用</li>
+                                <li>增加了对页面的编码处理，支持以单文件的形式保存数据</li>
+                                <li>将配置项迁移至 setting 完成</li>
+                                <li>修复Firefox新打开标签页后台运行时，插件植入失败的情况</li>
+                                <li>开放新的draft页面，支持编写草稿</li>
+                            </ul>
+                            <a href="https://mp.weixin.qq.com/s/I_rUuKVRjVfzpwEWKqIxCA">了解更多详情</a>
+                        </div>
+                        <div className="brief">
                             <h3>0.12.2 样式大重构</h3>
                             查看更多图文详情
                             <ul>
@@ -440,7 +453,9 @@ export default class Release extends Component{
                     <div className="right col-9">
                         了解更多内容，可以关注我们在<a
                         href="https://chrome.google.com/webstore/detail/dohbgjmflacneejmpdieincbbokoflgm">Firefox</a> 、
-                        <a href="https://chrome.google.com/webstore/detail/dohbgjmflacneejmpdieincbbokoflgm">Chrome商城</a>最近动态，或关注微信号【pagenote】。记得去商城为 PAGENOTE 评分呀！
+                        <a href="https://chrome.google.com/webstore/detail/dohbgjmflacneejmpdieincbbokoflgm">Chrome</a>、
+                        <a href="https://microsoftedge.microsoft.com/addons/detail/ablhdlecfphodoohfacojdngdfkgneaa">Edge</a>、
+                        最近动态，或关注微信公众号 pagenote。记得去商城为 PAGENOTE 评分呀！
                         也可以加入我们用户群 QQ：769094377。
                     </div>
                 </section>

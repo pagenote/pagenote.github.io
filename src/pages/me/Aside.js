@@ -30,7 +30,7 @@ export default  function Aside({onImportData,exportData,pageSize,setColor}) {
           <p>
             关注公众号
             <div>
-              <img width={80} src="/img/wechat.jpg" alt=""/>
+              <img width={120} src="/img/wechat.jpg" alt=""/>
             </div>
           </p>
         </div>

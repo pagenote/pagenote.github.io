@@ -87,12 +87,12 @@ export default function Footer() {
                             </p>
                         </li>
                         <li>
-                            <p>
-                                <a href="/page?id=developer">开发者</a>
-                            </p>
                             <p className='wechat-finder'>
                                 微信公众号：pagenote
                                 <img className='wechat-qrcode' src="/img/wechat.jpg" alt="微信公众号"/>
+                            </p>
+                            <p>
+                                <a href="/page?id=developer">开发者</a>
                             </p>
                         </li>
                     </ul>

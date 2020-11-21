@@ -359,15 +359,12 @@ export default class Me extends Component{
               {/*       <a href="/setting"><Setting /></a>*/}
               {/*   </p>*/}
               {/*</div>*/}
-              {
-                connected &&
-                <Aside onImportData={this.onImportData}
-                       exportData={this.exportData}
-                       pageSize={pages.length}
-                       setColor={this.setColor}>
+              <Aside onImportData={this.onImportData}
+                     exportData={this.exportData}
+                     pageSize={pages.length}
+                     setColor={this.setColor}>
 
-                </Aside>
-              }
+              </Aside>
               <div className={`pages-and-detail ${expand ? 'expand' : 'fold'}`}
                    style={{ border: `1px solid ${bgColor}`,backgroundColor: bgColor,left: pageMeOffset+'px',width: bookWidth-pageMeOffset+'px'  }}>
                   <LoadPage connected={connected} doConnect={this.doConnect} emptyGroup={groupKeys.length === 0}/>
