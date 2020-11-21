@@ -49,16 +49,27 @@ const defaultFuns = {
           a.href=mailTo;
           a.click();
       })()`
+    },
+    dbClickDemo:{
+      name:'双击demo',
+      icon:'<svg t="1605927220907" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2748" width="24" height="24"><path d="M478 176c91.127 0 165 74.283 165 165.915 0 7.78-6.271 14.085-14.007 14.085s-14.007-6.306-14.007-14.085c0-76.075-61.33-137.746-136.986-137.746-75.655 0-136.986 61.671-136.986 137.746 0 7.78-6.271 14.085-14.007 14.085S313 349.694 313 341.915C313 250.283 386.873 176 478 176z m-0.5-68C606.459 108 711 212.743 711 341.95c0 7.76-6.278 14.05-14.022 14.05-7.744 0-14.022-6.29-14.022-14.05 0-113.688-91.986-205.852-205.456-205.852-113.47 0-205.456 92.164-205.456 205.853 0 7.759-6.278 14.049-14.022 14.049-7.744 0-14.022-6.29-14.022-14.05C244 212.744 348.541 108 477.5 108z" fill="#7E41DF" p-id="2749"></path><path d="M396 719a192.5 193 0 1 0 385 0 192.5 193 0 1 0-385 0Z" fill="#F4EDFF" p-id="2750"></path><path d="M538.15 274.873c32.414 4.83 43.706 25.732 44.975 60.844l0.125 5.568 0.04 16.577 0.063 2.81 4.331 111.183c7.77-1.773 16.494-2.35 26.126-1.403 31.449 3.092 46.18 22.777 49.466 57.72 43.119-2.522 64.156 23.264 67.226 70.888l0.986 15.881c1.97 33.294 2.512 54.806 2.512 95.4 0 54.755-13.176 103.505-35.151 145.61-7.719 14.789-16.009 27.715-24.335 38.717-5.093 6.73-9.154 11.406-11.655 13.967-5.509 5.642-14.644 5.84-20.403 0.445-5.4-5.059-5.915-13.239-1.42-18.89l3.288-3.67c2.09-2.407 4.446-5.305 7.004-8.686 7.41-9.79 14.855-21.4 21.823-34.75 19.987-38.296 31.988-82.699 31.988-132.742l-0.07-22c-0.234-31.989-1.104-52.336-3.37-87.5l-0.371-4.77c-2.76-29.959-12.577-41.474-37.326-39.638l-0.002 84.22c0 7.923-6.202 14.346-13.853 14.346-7.2 0-13.118-5.69-13.79-12.965l-0.063-1.381v-95.888c0-32.337-6.398-43.911-25.103-45.75-9.072-0.892-16.477 0.11-22.36 2.28L592.99 608c0.305 7.835-5.914 14.43-13.89 14.73-7.509 0.282-13.898-5.113-14.878-12.28l-0.12-1.364-9.64-247.441c-0.068-2.205-0.097-4.12-0.104-6.975l-0.008-12.47-0.05-3.219c-0.532-24.582-5.165-33.752-20.485-36.035-22.175-3.303-34.184 9.314-35.666 33.52l-0.126 3.121c-0.423 15.502 0.29 64.418 1.828 135.125l1.844 79.167 1.595 62.552a13.93 13.93 0 0 1-0.878 5.272l0.553 7.845c0.556 7.864-5.466 14.681-13.45 15.228-7.513 0.515-14.087-4.709-15.297-11.88l-0.163-1.367-18.105-256.59c-0.62-23.228-7.322-34.033-25.69-34.385-18.674-0.358-27.688 12.748-28.254 36.105l-0.029 2.37 7.887 331.362c0.188 7.88-6.146 14.417-14.147 14.606-7.53 0.17-13.852-5.346-14.726-12.565l-0.1-1.372-3.088-129.857c-4.393-0.396-9.35-0.677-13.45-0.677-14.294 0-24.932 11.663-28.027 34.914l-0.75 6.205-0.324 2.876a665.2 665.2 0 0 0-1.745 18.38 767.928 767.928 0 0 0-2.457 49.986c-0.792 49.434 5.95 72.38 28.487 105.55 2.982 4.39 6.409 8.994 10.247 13.785 7.535 9.407 16.53 19.38 26.67 29.71 11.643 11.858 24.156 23.549 36.673 34.54l5.1 4.436 10.441 8.812c0.424 0.348 0.769 0.629 1.031 0.84 6.057 4.894 7.075 13.865 2.274 20.038-4.802 6.173-13.605 7.21-19.662 2.317l-3.777-3.114-5.857-4.944a757.665 757.665 0 0 1-7.82-6.776c-13.005-11.418-26.012-23.57-38.189-35.974-10.764-10.963-20.38-21.626-28.566-31.845-4.285-5.348-8.154-10.546-11.577-15.585-25.89-38.103-34.349-66.898-33.462-122.256a796.792 796.792 0 0 1 2.55-51.886l0.712-8.185c0.243-2.618 0.49-5.125 0.737-7.513l1.178-10.303C312.243 576.671 333.705 552 364.352 552c3.976 0 8.416 0.188 12.768 0.519L373 379.362c0-39.107 18.592-68.1 57.822-67.348 17.689 0.34 30.48 6.017 39.17 15.663 4.877-35.399 29.608-58.547 68.158-52.804z" fill="#1C0E50" p-id="2751"></path></svg>',
+      dbClickScript:`(function(){API.methods.notification('hi,双击我了');})();`
+    },
+    hoverDemo:{
+      name:'鼠标经过demo',
+      icon:'<svg t="1605927293996" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5053" width="24" height="24"><path d="M988.339028 711.163786L515.769231 466.303c-17.023777-9.215879-27.967633-2.30397-24.44768 14.975803l100.478682 473.593784c3.455955 17.279773 16.127788 19.519744 27.519638 5.37593a1527.147956 1527.147956 0 0 1 118.718442-129.342303l101.37467 131.198278a34.239551 34.239551 0 0 0 43.647427 7.295905l33.663558-20.671729a27.327641 27.327641 0 0 0 13.375824-17.663768 24.639677 24.639677 0 0 0-5.119932-20.735728l-100.862677-130.878282c53.119303-17.919765 107.518589-32.959567 162.877863-44.863411 19.199748-4.223945 20.991724-14.975803 3.967948-23.807688l-2.623966 0.383995z" fill="#666666" p-id="5054"></path><path d="M490.873557 1023.99168H205.053309A203.261332 203.261332 0 0 1 0 822.650323V201.346477A203.645327 203.645327 0 0 1 205.053309 0.00512h613.879943A203.645327 203.645327 0 0 1 1023.98656 201.346477v361.787252a42.68744 42.68744 0 0 1-85.438878 0V201.346477a118.270448 118.270448 0 0 0-119.67843-115.902478h-613.751944a118.270448 118.270448 0 0 0-119.678429 115.838479v621.431844a118.270448 118.270448 0 0 0 119.678429 115.838479H490.873557a42.68744 42.68744 0 1 1 0 85.438879z" fill="#666666" p-id="5055"></path></svg>',
+      mouseoverScript:`(function(){API.methods.notification('hi,你经过我了');})();`
     }
 };
 
-export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickScript:'',clickUrl:'',icon:''},groupIndex,itemIndex,onSave}) {
+export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickScript:'',clickUrl:'',icon:'',dbClickScript:'',mouseoverScript:''},groupIndex,itemIndex,onSave}) {
   const nameInput = useRef(null);
   const iconInput = useRef(null);
   const shortcutInput = useRef(null);
   const urlInput = useRef(null);
   const scriptInput = useRef(null);
-  // const dbInput = useRef(null);
+  const dbInput = useRef(null);
+  const hoverInput = useRef(null);
 
 
   const save = function () {
@@ -68,7 +79,8 @@ export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickS
       clickScript: scriptInput.current.value || '',
       clickUrl: urlInput.current.value || '',
       icon: iconInput.current.value || '',
-      // dbClickScript: dbInput.current.value || '',
+      dbClickScript: dbInput.current.value || '',
+      mouseoverScript: hoverInput.current.value || '',
     };
     if(!fun.icon){
       alert('图标必填')
@@ -78,8 +90,8 @@ export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickS
       alert('按钮名称必填')
       return;
     }
-    if(!fun.clickScript && !fun.clickUrl){
-      alert('执行函数与跳转链接至少填写一个')
+    if(!fun.clickScript && !fun.clickUrl && !fun.mouseoverScript && !fun.dbClickScript){
+      alert('执行函数与跳转链接至少填写一个');
       return;
     }
     onSave(fun,groupIndex,itemIndex)
@@ -97,6 +109,8 @@ export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickS
      scriptInput.current.value = values.clickScript || '';
      urlInput.current.value = values.clickUrl || '';
      iconInput.current.value = values.icon || '';
+     dbInput.current.value = values.dbClickScript || '';
+     hoverInput.current.value = values.mouseoverScript || ''
   };
 
   const show = groupIndex>-1 && itemIndex>-1;
@@ -131,7 +145,8 @@ export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickS
             <div className="label">按钮名称：</div><input placeholder='取一个名字吧，不要重复' ref={nameInput} type="text" defaultValue={funItem.name}/>
           </div>
           <div>
-            <div className="label">按钮图标 <a target='_blank' href="https://www.iconfont.cn/">找图</a></div><input placeholder='svg图片或者网络https链接图片' ref={iconInput} type="text" defaultValue={funItem.icon}/>
+            <div className="label">按钮图标 <a target='_blank' href="https://www.iconfont.cn/">找图</a></div>
+            <input placeholder='svg图片或者网络https链接图片' ref={iconInput} type="text" defaultValue={funItem.icon}/>
           </div>
           <div>
             <div className="label">快捷键</div><input placeholder='一个字母或数字,可选' maxLength={1} ref={shortcutInput} type="text" defaultValue={funItem.shortcut} />
@@ -142,14 +157,17 @@ export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickS
           <CheckVersionPart version='0.12.3'>
             <div className="label">单击执行函数</div><textarea placeholder='高级功能，可选，与跳转链接互斥。确保安全的一段执行脚本：(function(){})();' ref={scriptInput} type="text" defaultValue={funItem.clickScript}/>
           </CheckVersionPart>
-          {/*<div>*/}
-          {/*  <div className="label">双击执行函数</div><textarea placeholder='高级功能，可选' ref={dbInput} type="text" defaultValue={funItem.dbClickScript}/>*/}
-          {/*</div>*/}
-          <div>
-            <button onClick={save}>
-              保存
-            </button>
-          </div>
+          <CheckVersionPart version='0.12.3'>
+            <div className="label">双击执行函数</div>
+            <textarea placeholder='双击执行函数' ref={dbInput} type="text" defaultValue={funItem.dbClickScript}/>
+          </CheckVersionPart>
+          <CheckVersionPart version='0.12.3'>
+            <div className="label">鼠标经过函数</div>
+            <textarea placeholder='鼠标经过执行函数' ref={hoverInput} type="text" defaultValue={funItem.mouseoverScript}/>
+          </CheckVersionPart>
+          <button onClick={save}>
+            保存
+          </button>
         </div>
       }
     </div>

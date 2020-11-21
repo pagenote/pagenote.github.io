@@ -5,7 +5,7 @@ import Loading from '../../components/Loading';
 import Bridge from "../../utils/extensionBridge";
 import {convertColor, computePosition} from "../../utils/document";
 import AddIcon from '../../assets/icon/add.svg'
-import CopyIcon from '../../assets/icon/copy.svg';
+import CopyIcon from '../../assets/icon/default_copy.svg';
 import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import CheckVersionPart from "../CheckVersionPart";
 import './setting.scss';
@@ -283,7 +283,7 @@ export default class SettingRender extends Component{
 
     switch (type) {
       case 'item':
-        if(actionGroup[groupIndex].length>3){
+        if(actionGroup[groupIndex].length>=4){
           alert('最多设置4个子按钮');
           return;
         }
@@ -297,8 +297,8 @@ export default class SettingRender extends Component{
         itemIndex++;
         break;
       case 'group':
-        if(actionGroup.length>4){
-          alert('最多设置4组');
+        if(actionGroup.length>=3){
+          alert('最多设置3组');
           return;
         }
         actionGroup.push([{
@@ -508,7 +508,9 @@ export default class SettingRender extends Component{
             className="site-collapse-custom-collapse"
           >
             <Panel header="高级设置" key="1" className="site-collapse-custom-panel">
-              开发中：支持webdav协议。
+              <CheckVersionPart version='0.12.4'>
+                云端存储-webdav协议
+              </CheckVersionPart>
             </Panel>
           </Collapse>
           <div className='userinfo setting-part'>
