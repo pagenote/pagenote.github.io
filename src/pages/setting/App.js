@@ -10,8 +10,10 @@ import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import CheckVersionPart from "../CheckVersionPart";
 import './setting.scss';
 import { Collapse } from 'antd';
-import 'antd/es/collapse/style/index.css'
+import 'antd/dist/antd.css';
+// import 'antd/es/collapse/style/index.css'
 import { CaretRightOutlined } from '@ant-design/icons';
+import UserForm from "../../components/setting/UserForm";
 const { Panel } = Collapse;
 
 
@@ -86,7 +88,15 @@ export default class SettingRender extends Component{
         itemIndex: -1,
       },
 
-      userInfo:{},
+      userInfo:{
+        avatar: "",
+        contact: "",
+        email: "",
+        functions: [],
+        name: "",
+        uid: "",
+        cloud: {password: "", username: ""},
+      },
     }
   }
 
@@ -517,7 +527,10 @@ export default class SettingRender extends Component{
             <CheckVersionPart version='0.12.3'>
               <label>
                 用户信息
-                <p>{userInfo.uid}</p>
+                {
+                  userInfo.uid &&
+                  <UserForm defaultData={userInfo}></UserForm>
+                }
               </label>
             </CheckVersionPart>
           </div>
