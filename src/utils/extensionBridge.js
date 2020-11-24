@@ -1,4 +1,4 @@
-function Bridge(element,clientId='page',targetId='extension') {
+var Bridge = function (element,clientId='page',targetId='extension') {
     if(!element){
         return;
     }

@@ -88,7 +88,7 @@ export default function Footer() {
                         </li>
                         <li>
                             <p className='wechat-finder'>
-                                微信公众号：pagenote
+                                公众号[pagenote]
                                 <img className='wechat-qrcode' src="/img/wechat.jpg" alt="微信公众号"/>
                             </p>
                             <p>
