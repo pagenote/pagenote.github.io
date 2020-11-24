@@ -54,9 +54,6 @@ export default class CreatePage extends Component{
         <p>
           <p>目前 PAGENOTE 完全免费，没有广告，打赏是唯一的经济来源。</p>
           <p>
-            打赏<span className='light-me'>不会给你带来格外的功能</span>，所以你不必为了获得某些高级功能而打赏。
-          </p>
-          <p>
             <span className='light-me green'>打赏是让我们知道「PAGENOTE 的努力有了一些价值」，任意金额都是鼓励。</span>
             如果你觉得给你带来了一点帮助，小小支持一下吧。金额随意。
           </p>
