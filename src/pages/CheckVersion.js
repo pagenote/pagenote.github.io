@@ -1,26 +1,6 @@
 import InstallBar from "../components/InstallBar";
+import { isLow } from "../utils";
 
-
-function isOldVersion(current,compareVersion) {
-  if(!current){
-    return true;
-  }
-  if(current===compareVersion){
-    return false;
-  }
-  const firstVersion = current.split('.');
-  const secondVersion = compareVersion.split('.');
-  let isOld = false;
-  for(let i=0; i<secondVersion.length; i++) {
-    const preVersion = parseInt(firstVersion[i]);
-    const nexVersion = parseInt(secondVersion[i]);
-    if(preVersion<nexVersion){
-      isOld = true;
-      break;
-    }
-  }
-  return isOld;
-}
 
 function NeedUpload(current,need) {
   return function(){
@@ -58,7 +38,7 @@ function NeedUpload(current,need) {
 
 export default function CheckVersion(Com,version) {
   const currentVersion = document.documentElement.dataset.version || '';
-  const needUpload = isOldVersion(currentVersion,version);
+  const needUpload = isLow(currentVersion,version);
   if(needUpload){
     console.log('需要升级后才可使用',currentVersion)
   }

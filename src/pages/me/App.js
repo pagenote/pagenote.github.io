@@ -11,8 +11,8 @@ import Undraw from "../../assets/draw/undraw_text_files_au1q.svg";
 import Empty from "../../assets/draw/empty.svg";
 import Close from "../../assets/icon/close.svg";
 import Setting from "../../assets/icon/setting.svg";
-import {connectServer, groupPages, savePage} from "../../utils/index_new";
-import {importData} from "../../utils/index_new";
+import {connectServer, groupPages, savePage, importData} from "../../utils/index_new";
+import { isLow } from "../../utils";
 import {funDownload} from "../../utils/document";
 import Aside from "./Aside";
 import './me.scss'
@@ -334,7 +334,7 @@ export default class Me extends Component{
         const groupKeys = Object.keys(groupPagesObject).sort(function (pre,next) {
             return searchString ?
               (groupPagesObject[pre].matched > groupPagesObject[next].matched ? -1 : 1):
-              (pre > next ? -1 :1)
+              (isLow(next,pre) ? -1 :1)
         });
 
         const barSize = Number.isInteger(+size) ? size + 'px' : '';
