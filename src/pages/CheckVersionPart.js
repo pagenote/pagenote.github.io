@@ -26,7 +26,7 @@ export default function CheckVersionPart({children,version}) {
               color:#fff;
             }
             .version_check .mask::after{
-              filter: blur(6px);
+              filter: blur(4px);
               content: '';
               /* width: 100%; */
               /* height: 100%; */

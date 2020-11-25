@@ -52,10 +52,9 @@ export default class CreatePage extends Component{
     return (
       <div className='donation'>
         <p>
-          <p>目前 PAGENOTE 完全免费，没有广告，打赏是唯一的经济来源。</p>
           <p>
-            <span className='light-me green'>打赏是让我们知道「PAGENOTE 的努力有了一些价值」，任意金额都是鼓励。</span>
-            如果你觉得给你带来了一点帮助，小小支持一下吧。金额随意。
+            <span className='light-me green'>打赏是让我们知道「PAGENOTE 的努力有了一些价值，帮助我们发展得更好」，任意金额都是鼓励。</span>
+            如果觉得给你带来了一点帮助，支持一下吧。金额随意。
           </p>
           <p>
             <img src="/dashang.jpg" alt="支持pagenote"/>

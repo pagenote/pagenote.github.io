@@ -15,15 +15,9 @@ const validateMessages = {
   },
 };
 
-export default function UserForm({defaultData={}}) {
-  const onFinish = values => {
-    console.log(values,'tijiao');
-  };
-  // const [form] = Form.useForm(defaultData);
-  console.log(defaultData)
-
+export default function UserForm({defaultData={},onSubmit}) {
   return (
-    <Form {...layout}  initialValues={defaultData} name="control-hooks" onFinish={onFinish} validateMessages={validateMessages}>
+    <Form {...layout}  initialValues={defaultData} name="control-hooks" onFinish={onSubmit} validateMessages={validateMessages}>
       <Form.Item name={'uid'} label="用户ID" rules={[{ required: true }]}>
         <Input disabled />
       </Form.Item>
@@ -33,18 +27,12 @@ export default function UserForm({defaultData={}}) {
       <Form.Item name={['email']} label="邮箱" rules={[{ type: 'email' }]}>
         <Input />
       </Form.Item>
-      <Form.Item
-        name={['cloud','username']}
-                 label="webdav云盘用户名">
-        <Input.Input />
-      </Form.Item>
-      <Form.Item name={['cloud','password']}
-                 label="webdav云盘密码">
-        <Input.Password />
+      <Form.Item name={['doId']} label={<div><a target='_blank' href="/donation">打赏</a>交易号</div>}>
+        <Input placeholder='如果你曾打赏过，请输入你的转账单号（微信）、交易订单号（支付宝）' />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          保存
         </Button>
       </Form.Item>
     </Form>

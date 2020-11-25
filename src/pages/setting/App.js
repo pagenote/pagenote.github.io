@@ -9,7 +9,7 @@ import CopyIcon from '../../assets/icon/default_copy.svg';
 import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import CheckVersionPart from "../CheckVersionPart";
 import './setting.scss';
-import { Collapse } from 'antd';
+import { Collapse, message,Switch } from 'antd';
 import 'antd/dist/antd.css';
 // import 'antd/es/collapse/style/index.css'
 import { CaretRightOutlined } from '@ant-design/icons';
@@ -89,13 +89,13 @@ export default class SettingRender extends Component{
       },
 
       userInfo:{
-        avatar: "",
-        contact: "",
+        // avatar: "",
+        // contact: "",
         email: "",
         functions: [],
         name: "",
         uid: "",
-        cloud: {password: "", username: ""},
+        doId:''
       },
     }
   }
@@ -132,8 +132,7 @@ export default class SettingRender extends Component{
 
   getSetting=()=>{
     bridge.sendMessage('get_setting',{},({data,type})=>{
-      const setting = data.data || {};
-      // this.modal.destroy();
+      const setting = data || {};
       this.setState({
         colors: setting.colors || [],
         themeId: setting.themeId || '',
@@ -204,20 +203,7 @@ export default class SettingRender extends Component{
     this.setState({
       [key]: value,
     },()=>{
-      setTimeout(()=>{
-        this.saveSetting();
-      },100)
-    })
-  };
-
-  toggleBookmark =(e,key='enableCollectImage')=>{
-    const value = e.target.checked;
-    this.setState({
-      [key]: value,
-    },()=>{
-      setTimeout(()=>{
-        this.saveSetting();
-      },100)
+      this.saveSetting();
     })
   };
 
@@ -244,10 +230,9 @@ export default class SettingRender extends Component{
     };
     bridge.sendMessage('save_setting',{
       ...settings,
-    });
-    setTimeout(()=>{
+    },()=>{
       this.getSetting();
-    },3000)
+    });
   };
 
   setIconFun =(groupIndex,itemIndex)=>{
@@ -332,8 +317,10 @@ export default class SettingRender extends Component{
     })
   };
 
-  resetFuns =()=>{
-
+  saveUserInfo =(values)=>{
+    bridge.sendMessage('set_user_info',values,(result)=>{
+      message.success('保存成功');
+    });
   };
 
 
@@ -484,25 +471,27 @@ export default class SettingRender extends Component{
 
           <div className='tab setting-part'>
             <label>
-              <input type="checkbox" checked={openInTab} onChange={(e)=>{this.toggleSwitch(e.target.checked,'openInTab')}}/>
-              新开页面打开 <a href="/me">PAGENOTE/ME</a>
+              <Switch checked={openInTab} onChange={(checked)=>{this.toggleSwitch(checked,'openInTab')}}>
+              </Switch>
+              <span>新开页面打开 <a href="/me">PAGENOTE/ME</a></span>
             </label>
           </div>
 
           <div className='tab setting-part'>
             <CheckVersionPart version='0.12.3'>
               <label>
-                <input type="checkbox" checked={track!=='disable'} onChange={(e)=>{this.toggleSwitch(e.target.checked?'enable':'disable','track')}}/>
-                开启用户体验收集计划 <a href="/page?id=why_track">了解详情</a>
+                <Switch checked={track!=='disable'} onChange={(checked)=>{this.toggleSwitch(checked?'enable':'disable','track')}}>
+                </Switch>
+                <span>开启用户体验收集计划 <a href="/page?id=why_track">了解详情</a></span>
               </label>
             </CheckVersionPart>
-
           </div>
 
           <div className='bookmark setting-part'>
             <label>
-              <input id='enable-bookmarks' type="checkbox" checked={enableBookmark} onChange={(e)=>this.toggleBookmark(e,'enableBookmark')}/>
-              启用智能书签
+              <Switch checked={enableBookmark} onChange={(checked)=>{this.toggleSwitch(checked,'enableBookmark')}}>
+              </Switch>
+              <span>启用智能书签</span>
               <span className='tip'><a href="/auto_bookmark">了解什么是「智能书签」</a></span>
             </label>
             <div className='tip'>
@@ -515,7 +504,7 @@ export default class SettingRender extends Component{
             bordered={false}
             defaultActiveKey={['1']}
             expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-            className="site-collapse-custom-collapse"
+            className="site-collapse-custom-collapse setting-part advance"
           >
             <Panel header="高级设置" key="1" className="site-collapse-custom-panel">
               <CheckVersionPart version='0.12.4'>
@@ -524,15 +513,24 @@ export default class SettingRender extends Component{
             </Panel>
           </Collapse>
           <div className='userinfo setting-part'>
-            <CheckVersionPart version='0.12.3'>
-              <label>
-                用户信息
-                {
-                  userInfo.uid &&
-                  <UserForm defaultData={userInfo}></UserForm>
-                }
-              </label>
-            </CheckVersionPart>
+            <Collapse
+              bordered={false}
+              defaultActiveKey={['']}
+              expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+              className="site-collapse-custom-collapse"
+            >
+              <Panel header='账户信息' key='account'>
+                <CheckVersionPart version='0.12.4'>
+                  <label>
+                    {
+                      userInfo.uid &&
+                      <UserForm defaultData={userInfo} onSubmit={this.saveUserInfo}></UserForm>
+                    }
+                  </label>
+                </CheckVersionPart>
+              </Panel>
+            </Collapse>
+
           </div>
 
           {/*<div className='images setting-part'>*/}
