@@ -2,7 +2,6 @@ import React, {Component,Fragment} from 'react';
 import debounce from 'lodash/debounce'
 import './PageDetail.scss';
 import BigPicture from "bigpicture";
-// import EditorJS from '@editorjs/editorjs';
 import DropLabel from "../DropLabel";
 import DateIcon from "../../assets/icon/date.svg";
 import Tag from "../../assets/icon/tag.svg";

@@ -10,13 +10,11 @@ import Group from "../../components/Group";
 import Undraw from "../../assets/draw/undraw_text_files_au1q.svg";
 import Empty from "../../assets/draw/empty.svg";
 import Close from "../../assets/icon/close.svg";
-import Setting from "../../assets/icon/setting.svg";
 import {connectServer, groupPages, savePage, importData} from "../../utils/index_new";
 import { isLow } from "../../utils";
 import {funDownload} from "../../utils/document";
 import Aside from "./Aside";
 import './me.scss'
-import AsideMore from "../../assets/icon/aside-more.svg";
 
 const groupTypes =[
     {

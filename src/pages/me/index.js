@@ -8,8 +8,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Page from '../draft/index'
-import SettingPage from '../setting/index'
+// import Page from '../draft/index'
+// import SettingPage from '../setting/index'
 import AsideMore from "../../assets/icon/aside-more.svg";
 import Setting from "../../assets/icon/setting.svg";
 import Doc from '../../assets/icon/doc.svg'

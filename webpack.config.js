@@ -95,7 +95,7 @@ const config = {
   },
   // TODO 区分dev prd
   externals: {
-    '@editorjs/editorjs': 'EditorJS',
+    // '@editorjs/editorjs': 'EditorJS',
     'react':'React',
     'react-dom': 'ReactDOM',
     // 'react-color': 'ReactColor'
