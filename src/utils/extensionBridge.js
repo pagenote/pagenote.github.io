@@ -38,6 +38,7 @@ var Bridge = function (element,clientId='page',targetId='extension') {
         if(listener){
             listener(requestData,clientId,sendResponse);
         }
+        element.innerText = '';
     })
 }
 

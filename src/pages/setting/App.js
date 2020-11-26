@@ -14,6 +14,7 @@ import 'antd/dist/antd.css';
 // import 'antd/es/collapse/style/index.css'
 import { CaretRightOutlined } from '@ant-design/icons';
 import UserForm from "../../components/setting/UserForm";
+import CloudForm from "../../components/setting/WebDavForm";
 const { Panel } = Collapse;
 
 
@@ -97,6 +98,14 @@ export default class SettingRender extends Component{
         uid: "",
         doId:''
       },
+
+      cloud:{
+        server:'',
+        username:'',
+        password:'',
+        secret: '',
+        path:'',
+      }
     }
   }
 
@@ -108,6 +117,7 @@ export default class SettingRender extends Component{
     this.getSetting();
     this.addClickListener();
     this.getUserInfo();
+    this.getCloudAccount();
   }
 
   getUserInfo=()=>{
@@ -117,6 +127,23 @@ export default class SettingRender extends Component{
           userInfo: data,
         })
       }
+    })
+  };
+
+  getCloudAccount=()=>{
+    bridge.sendMessage('get_cloud_account',{},({data={},type})=>{
+      if(data){
+        this.setState({
+          cloud: data,
+        })
+      }
+    })
+  };
+
+
+  saveCloudInfo=(values)=>{
+    bridge.sendMessage('set_cloud_account',values,()=>{
+      message.success('保存成功');
     })
   };
 
@@ -324,8 +351,9 @@ export default class SettingRender extends Component{
   };
 
 
+
   render() {
-    const {colors=[],shortCuts=[],colorIndex,modalPosition,track,openInTab,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo} = this.state;
+    const {colors=[],shortCuts=[],colorIndex,modalPosition,track,openInTab,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo,cloud} = this.state;
     let funItem = {};
     try{
       funItem = actionGroup[settingIndex.groupIndex][settingIndex.itemIndex]
@@ -506,9 +534,11 @@ export default class SettingRender extends Component{
             expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
             className="site-collapse-custom-collapse setting-part advance"
           >
-            <Panel header="高级设置" key="1" className="site-collapse-custom-panel">
+            <Panel header="数据存储" key="1" className="site-collapse-custom-panel">
               <CheckVersionPart version='0.12.4'>
-                云端存储-webdav协议
+                {
+                  cloud.server && <CloudForm defaultData={cloud} onSubmit={this.saveCloudInfo} />
+                }
               </CheckVersionPart>
             </Panel>
           </Collapse>
