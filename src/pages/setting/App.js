@@ -138,6 +138,10 @@ export default class SettingRender extends Component{
 
 
   saveCloudInfo=(values)=>{
+    if(!values.invite_code || values.invite_code.trim().toUpperCase()!=='PAGENOTE-CSN'){
+      message.error('邀请码不正确，公众号 pagenote 获取');
+      return;
+    }
     bridge.sendMessage('set_cloud_account',values,()=>{
       message.success('保存成功');
     })
@@ -560,9 +564,8 @@ export default class SettingRender extends Component{
             <TabPane tab="云盘设置" key="2">
               <div className="setting-part">
                 <CheckVersionPart version='0.12.4'>
-                  {
-                    cloud.server && <CloudForm defaultData={cloud} onSubmit={this.saveCloudInfo} />
-                  }
+                  <h2>内测功能，阅读公众号了解详情</h2>
+                  <CloudForm defaultData={cloud} onSubmit={this.saveCloudInfo} />
                 </CheckVersionPart>
               </div>
             </TabPane>

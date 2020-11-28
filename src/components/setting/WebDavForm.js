@@ -18,6 +18,9 @@ const validateMessages = {
 export default function UserForm({defaultData={},onSubmit}) {
   return (
     <Form {...layout}  initialValues={defaultData} name="control-hooks" onFinish={onSubmit} validateMessages={validateMessages}>
+      <Form.Item name={['invite_code']} label="邀请码" rules={[{ required: true }]}>
+        <Input placeholder='关注公众号，获取邀请码' />
+      </Form.Item>
       <Form.Item name={['server']} label="云盘服务商地址" rules={[{ required: true }]}>
         <Input placeholder='你的云盘所支持webdav的服务地址，如：https://dav.jianguoyun.com/dav/' />
       </Form.Item>
@@ -27,8 +30,8 @@ export default function UserForm({defaultData={},onSubmit}) {
       <Form.Item name={['password']} label="账户密码" rules={[{ required: true }]}>
         <Input.Password placeholder='云盘提供的身份密钥' />
       </Form.Item>
-      <Form.Item name={['secret']} label="数据加密密码" rules={[{ required: true }]}>
-        <Input.Password disabled={!!defaultData.secret} placeholder='我们将使用此密码加密后上传到你的云盘空间，注意：保存后将不支持修改。' />
+      <Form.Item name={['secret']} label="数据加密存储密码" rules={[{ required: true }]}>
+        <Input.Password placeholder='将使用此密码进行加密后存储。注意：修改后无法解密历史数据' />
       </Form.Item>
       <Form.Item name={['path']} label="云盘存储路径" rules={[{ required: true }]}>
         <Input placeholder='PAGENOTE数据的存储路径，如 /pagenote' />
