@@ -498,7 +498,7 @@ export default class SettingRender extends Component{
                       width={500}
                       onClose={this.onCloseDrawer}
                       visible={settingIndex.groupIndex>-1 && settingIndex.itemIndex>-1}
-                      bodyStyle={{ paddingBottom: 80 }}
+                      bodyStyle={{ paddingBottom: 10 }}
                     >
                       <FunctionIconSetting key={settingIndex.groupIndex+'-'+settingIndex.itemIndex} onSave={this.saveFun} initFunItem={funItem} groupIndex={settingIndex.groupIndex} itemIndex={settingIndex.itemIndex} />
                     </Drawer>

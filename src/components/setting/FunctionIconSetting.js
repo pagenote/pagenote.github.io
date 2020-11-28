@@ -129,17 +129,14 @@ export default function FunctionIconSetting({groupIndex,itemIndex,onSave,initFun
               <Select
                 showSearch
                 style={{ width: 200 }}
-                placeholder="Select a person"
+                placeholder="选择一个预设方案"
                 optionFilterProp="children"
                 onChange={setTheme}
-                // onFocus={onFocus}
-                // onBlur={onBlur}
-                // onSearch={onSearch}
                 filterOption={(input, option) =>
                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="-"></Option>
+                <Option value="-">-</Option>
                 {
                   Object.keys(defaultFuns).map((key)=>(
                     <Option key={key} value={key}>{defaultFuns[key].name}</Option>
