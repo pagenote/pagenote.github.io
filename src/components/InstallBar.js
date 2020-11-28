@@ -79,20 +79,27 @@ export default function InstallBar() {
               `}</style>
                     <span className="install-btns">
                         <a href="https://addons.mozilla.org/addon/page-note?src=external-release"
+                           data-tip='最新版本：0.12.3'
                            className={`browser-install-btn firefox ${chromeType==='Firefox'?'active':''}`}>
                             FireFox
                         </a>
-                        <a href="https://chrome.google.com/webstore/detail/pagenotehighlight-and-tak/hpekbddiphlmlfjebppjhemobaopekmp?utm_source=blog"
+                        <a
+                          data-tip='最新版本：0.12.3'
+                          href="https://chrome.google.com/webstore/detail/pagenotehighlight-and-tak/hpekbddiphlmlfjebppjhemobaopekmp?utm_source=blog"
                            className={`browser-install-btn chrome ${chromeType==='Chrome'?'active':''}`}>
                             Chrome
                         </a>
-                        <a href="https://microsoftedge.microsoft.com/addons/detail/ablhdlecfphodoohfacojdngdfkgneaa"
+                        <a
+                          data-tip='最新版本：0.12.3'
+                          href="https://microsoftedge.microsoft.com/addons/detail/ablhdlecfphodoohfacojdngdfkgneaa"
                            className={`browser-install-btn edge ${chromeType==='Edge'?'active':''}`}>
                             Edge
                         </a>
-                        <a className={`browser-install-btn ee ${chromeType==='ee'?'active':''}`}
+                        <a
+                          data-tip='最新版本：0.12.1'
+                          className={`browser-install-btn ee ${chromeType==='ee'?'active':''}`}
                            href="https://ext.chrome.360.cn/webstore/detail/gielpddfollkffnbiegekliodnahhpfa">360</a>
-                        <a className="browser-install-btn offline wechat-finder">
+                        <a className="browser-install-btn offline wechat-finder" data-tip='最新版本：0.12.0'>
                             <span>
                                 离线安装
                             </span>
