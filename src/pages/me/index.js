@@ -1,4 +1,5 @@
 import React from "react";
+import { notification } from "antd";
 import App from "./App";
 import CommonPage from "../CommonPage";
 import CheckVersion from "../CheckVersion";

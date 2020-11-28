@@ -1,0 +1,33 @@
+{
+  "versions": [
+    {
+      "version": "0.12.3",
+      "for_max_version": "",
+      "for_min_version":"",
+      "content": {
+        "zh_cn": "<h3>\n <a href=\"https://pagenote.cn/release\">0.12.3 插件更开放</a>\n</h3>\n  <ul>\n <li>新的默认插件配置方案</li>\n                       <li>所有配置内容迁移至setting平台</li>\n<li>开放新的draft页面，支持编写草稿</li>\n<li>修复Firefox新打开标签页后台运行时，插件植入失败的情况</li>\n </ul>"
+      },
+      "tooltip": {
+        "zh_cn": "扩展有一些调整，DIY需要注意一下。"
+      }
+    },
+    {
+      "version": "0.12.2",
+      "for_max_version": "",
+      "for_min_version":"",
+      "content": {
+        "zh_cn": "<h3>\n                            <a href=\"https://pagenote.cn/release\">0.12.2 样式大重构</a>\n                        </h3>\n                        <ul>\n                            <li>操作界面更简洁</li>\n                            <li>增加了提示信息</li>\n                            <li>增加了一个实验性功能：「阅读进度条」</li>\n                            <li>制作了一个简单的 <a href=\"https://pagenote.cn\">视频</a>，让你更快的了解各类操作</li>\n                        </ul>"
+      },
+      "tooltip": {
+        "zh_cn": "欢迎来到新的世界"
+      }
+    }
+  ],
+  "latest": {
+    "version": "0.12.3",
+    "support": ["chrome","firefox"]
+  },
+  "chrome": "0.12.3",
+  "firefox": "0.12.3",
+  "edge": "0.12.3"
+}

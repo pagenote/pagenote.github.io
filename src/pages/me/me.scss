@@ -365,6 +365,8 @@ svg{
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
+  position: absolute;
+  bottom: 12px;
   .footer-tips{
     font-size: 12px;
     color: #999;
