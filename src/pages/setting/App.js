@@ -1,22 +1,21 @@
 import React, {Component} from 'react'
 import Loadable from 'react-loadable';
 import Loading from '../../components/Loading';
-
 import Bridge from "../../utils/extensionBridge";
 import {convertColor, computePosition} from "../../utils/document";
 import AddIcon from '../../assets/icon/add.svg'
 import CopyIcon from '../../assets/icon/default_copy.svg';
 import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import CheckVersionPart from "../CheckVersionPart";
+import throttle from 'lodash/throttle';
 import './setting.scss';
-import { Collapse, message,Switch } from 'antd';
+import { Collapse, message,Switch, Button, Slider,Popconfirm,Tabs,Drawer } from 'antd';
 import 'antd/dist/antd.css';
 // import 'antd/es/collapse/style/index.css'
-import { CaretRightOutlined } from '@ant-design/icons';
 import UserForm from "../../components/setting/UserForm";
 import CloudForm from "../../components/setting/WebDavForm";
 const { Panel } = Collapse;
-
+const { TabPane } = Tabs;
 
 const CompactPicker = Loadable({
   loader: () => import('react-color/es/components/compact/Compact'),
@@ -57,10 +56,7 @@ const predefineTheme = [
     colors:['#00bcd4','#e0f7fa','#80deea','#26c6da','#00acc1','#00838f','#006064'],
   }];
 
-
-
 export default class SettingRender extends Component{
-
   constructor(props) {
     super(props);
     this.colorPart = React.createRef();
@@ -157,7 +153,7 @@ export default class SettingRender extends Component{
     })
   };
 
-  getSetting=()=>{
+  getSetting= throttle(()=>{
     bridge.sendMessage('get_setting',{},({data,type})=>{
       const setting = data || {};
       this.setState({
@@ -170,12 +166,12 @@ export default class SettingRender extends Component{
         enableCollectImage: setting.enableCollectImage || false,
         openInTab: setting.openInTab,
         track: setting.track || 'enable',
-        shortCuts: setting.shortCuts || [],
+        shortCuts: setting.shortCuts || '',
         actionGroup: setting.actionGroup || [],
         // colorIndex: -1,
       })
     })
-  };
+  },200);
 
   setIndex=(index,e)=>{
     this.setState({
@@ -234,16 +230,15 @@ export default class SettingRender extends Component{
     })
   };
 
-  changeLimit =(e)=>{
-    const value = e.target.value;
+  changeLimit = throttle((value)=>{
     this.setState({
       maxRecord: value,
     },()=>{
       this.saveSetting();
     })
-  };
+  },20);
 
-  saveSetting= ()=>{
+  saveSetting= throttle(()=>{
     const {colors,maxRecord,track,openInTab,shortCuts,enableBookmark,enableCollectImage,actionGroup} = this.state;
     const settings = {
       colors: colors || [],
@@ -258,9 +253,28 @@ export default class SettingRender extends Component{
     bridge.sendMessage('save_setting',{
       ...settings,
     },()=>{
+      message.destroy();
+      message.success('修改成功。已打开的网页刷新后生效');
       this.getSetting();
     });
-  };
+  },1000);
+
+  resetAll = ()=>{
+    bridge.sendMessage('reset_setting',{
+    },()=>{
+      message.success('重置成功');
+      this.getSetting();
+    });
+  }
+
+  onCloseDrawer=()=>{
+    this.setState({
+      settingIndex:{
+        groupIndex:-1,
+        itemIndex:-1,
+      }
+    })
+  }
 
   setIconFun =(groupIndex,itemIndex)=>{
     this.setState({
@@ -294,9 +308,10 @@ export default class SettingRender extends Component{
     const actionGroup = this.state.actionGroup;
     actionGroup[groupIndex][itemIndex] = funItem;
     this.setState({
-      actionGroup: actionGroup
+      actionGroup: actionGroup,
     },()=>{
       this.saveSetting();
+      this.onCloseDrawer();
     })
   };
 
@@ -364,221 +379,204 @@ export default class SettingRender extends Component{
     return (
       <div className='setting-page'>
         <div className='pagenote-bar'>
-          <div className='pagenote setting-part'>
-            <div className='tip'>
-              点击下方你想要个性化的模块进行设置。
-            </div>
-            <div className='function-container'>
-              <div className='function-area'>
-                <div className='function-colors' ref={this.colorPart} data-tip='点击设置'>
-                  {
-                    colors.map((color,index)=>{
-                      const {x:offsetX,y:offsetY} = computePosition(index-1,40);
-                      return(
-                        <div
-                          key={color+index}
-                          onClick={(e)=>{this.setIndex(index,e)}}
-                          className={`color-item ${index===colorIndex?'active':''}`}  style={{
-                          top: (offsetY / -1) + 'px',
-                          left: (offsetX / -1) + 'px',
-                          background: color,
-                          color: convertColor(color).textColor
-                        }}>{shortCuts[index]}</div>
-                      )
-                    })
-                  }
-                  <div
-                    className={`color-modal ${colorIndex>=0?'show':''}`}
-                    style={{left: modalPosition.left,top: modalPosition.top}}
-                  >
-                    <div>
-                      <div className='setting-title'>
-                        色块修改
-                      </div>
-                      <div className='setting-item'>
-                        <div className='setting-label'>选取高亮背景色：</div>
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="基础配置" key="1">
+              <section>
+                <div className='pagenote setting-part'>
+                  <div className='tip'>
+                    点击下方你想要个性化的模块进行设置。
+                  </div>
+                  <div className='function-container'>
+                    <div className='function-area'>
+                      <div className='function-colors' ref={this.colorPart} data-tip='点击设置'>
                         {
-                          colorPickerPro ?
-                            <SliderPicker onChangeComplete={(color)=>{this.setColor(color,colorIndex)}} color={colors[colorIndex]}/>
-                            : <CompactPicker onChangeComplete={(color)=>{this.setColor(color,colorIndex)}}
-                                             colors={[...predefineTheme[0].colors,...predefineTheme[1].colors,...predefineTheme[2].colors]}
-                                             color={colors[colorIndex]} />
+                          colors.map((color,index)=>{
+                            const {x:offsetX,y:offsetY} = computePosition(index-1,40);
+                            return(
+                              <div
+                                key={color+index}
+                                onClick={(e)=>{this.setIndex(index,e)}}
+                                className={`color-item ${index===colorIndex?'active':''}`}  style={{
+                                top: (offsetY / -1) + 'px',
+                                left: (offsetX / -1) + 'px',
+                                background: color,
+                                color: convertColor(color).textColor
+                              }}>{shortCuts[index]}</div>
+                            )
+                          })
                         }
-                      </div>
-                      {/*<div className='setting-item'>*/}
-                      {/*    <span className='setting-label'>字体色：</span>*/}
-                      {/*    <span className='color-show' style={{background: convertColor(colors[colorIndex]).textColor}}></span>*/}
-                      {/*    <span className='tip'>根据背景色自动计算</span>*/}
-                      {/*</div>*/}
-                      <div className='setting-item'>
+                        <div
+                          className={`color-modal ${colorIndex>=0?'show':''}`}
+                          style={{left: modalPosition.left,top: modalPosition.top}}
+                        >
+                          <div>
+                            <div className='setting-title'>
+                              色块修改
+                            </div>
+                            <div className='setting-item'>
+                              <div className='setting-label'>选取高亮背景色：</div>
+                              {
+                                colorPickerPro ?
+                                  <SliderPicker onChangeComplete={(color)=>{this.setColor(color,colorIndex)}} color={colors[colorIndex]}/>
+                                  : <CompactPicker onChangeComplete={(color)=>{this.setColor(color,colorIndex)}}
+                                                   colors={[...predefineTheme[0].colors,...predefineTheme[1].colors,...predefineTheme[2].colors]}
+                                                   color={colors[colorIndex]} />
+                              }
+                            </div>
+                            {/*<div className='setting-item'>*/}
+                            {/*    <span className='setting-label'>字体色：</span>*/}
+                            {/*    <span className='color-show' style={{background: convertColor(colors[colorIndex]).textColor}}></span>*/}
+                            {/*    <span className='tip'>根据背景色自动计算</span>*/}
+                            {/*</div>*/}
+                            <div className='setting-item'>
                                     <span className='setting-label'>
                                         快捷键：
                                     </span>
-                        <input readOnly onKeyUp={this.setShortKey} value={shortCuts[colorIndex]}/>
-                      </div>
-                    </div>
+                              <input readOnly onKeyUp={this.setShortKey} value={shortCuts[colorIndex]}/>
+                            </div>
+                          </div>
 
-                    <div className='predefine-theme'>
-                      <div className='setting-title'>一键设置</div>
-                      <div>
-                        {
-                          predefineTheme.map((item)=>(
-                            <div key={item.label}>
-                              <button onClick={()=>this.setColors(item.colors)}>{item.label}</button>
+                          <div className='predefine-theme'>
+                            <div className='setting-title'>一键设置</div>
+                            <div>
                               {
-                                item.colors.map((color)=>(
-                                  <span key={color} className='set-color-item' style={{background:color}}></span>
+                                predefineTheme.map((item)=>(
+                                  <div key={item.label}>
+                                    <button onClick={()=>this.setColors(item.colors)}>{item.label}</button>
+                                    {
+                                      item.colors.map((color)=>(
+                                        <span key={color} className='set-color-item' style={{background:color}}></span>
+                                      ))
+                                    }
+                                  </div>
                                 ))
                               }
                             </div>
-                          ))
-                        }
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='function-custom'>
-                  <div className='action-group' data-tip='单击仅复制，双击复制且保存到下方的历史面板中。暂不可自定义'>
-                      <CopyIcon className='function-item'/>
-                  </div>
-                  {
-                    actionGroup.map((group,index)=>(
-                      <div key={index} className='action-group'>
-                        {group.map((action,i)=>{
-                          const image = /^<svg/.test(action.icon) ?  `data:image/svg+xml;base64,${window.btoa(action.icon)}` : action.icon;
-                          return(
-                            <div onClick={()=>{this.setIconFun(index,i)}} key={action.name+action.icon+i}
-                                 data-tip={`${action.name}${action.shortcut?' 快捷键：'+action.shortcut:''}`}
-                                 className={`function-item ${(settingIndex.groupIndex===index && settingIndex.itemIndex===i)?'active':''}`}
-                                 style={{ backgroundImage: `url(${image})`}}>
-                              <svg onClick={()=>this.deleteFun(index,i)} t="1603522183404" className="delete" viewBox="0 0 1024 1024"
-                                   version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3421"
-                                   width="12" height="12">
-                                <path
-                                  d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z"
-                                  fill="#CCCCCC" p-id="3422"></path>
-                                <path
-                                  d="M484.844 511.908L318.91 345.974c-8.331-8.331-8.331-21.839 0-30.17 8.331-8.331 21.839-8.331 30.17 0l165.934 165.934L680.95 315.804c8.33-8.331 21.838-8.331 30.17 0 8.33 8.331 8.33 21.839 0 30.17L545.184 511.908 711.12 677.843c8.33 8.33 8.33 21.838 0 30.17-8.332 8.33-21.84 8.33-30.17 0L515.014 542.078 349.08 708.013c-8.331 8.33-21.839 8.33-30.17 0-8.331-8.332-8.331-21.84 0-30.17l165.934-165.935z"
-                                  fill="#FFFFFF" p-id="3423"></path>
-                              </svg>
-                            </div>
-                          )
-                        })}
-                        <div className='function-item' data-tip='点击添加一个按钮'>
-                          <AddIcon  onClick={()=>this.addItem('item',index,group.length-1)}/>
+                          </div>
                         </div>
                       </div>
-                    ))
-                  }
-                  <div className='action-group' data-tip='点击添加一个按钮分组'>
-                    <AddIcon className='function-item' onClick={()=>{this.addItem('group')}} />
-                    {/*<ResetIcon onClick={this.resetFuns} className='function-item'  />*/}
+                      <div className='function-custom'>
+                        <div className='action-group' data-tip='单击仅复制，双击复制且保存到下方的历史面板中。暂不可自定义'>
+                          <CopyIcon className='function-item'/>
+                        </div>
+                        {
+                          actionGroup.map((group,index)=>(
+                            <div key={index} className='action-group'>
+                              {group.map((action,i)=>{
+                                const image = /^<svg/.test(action.icon) ?  `data:image/svg+xml;base64,${window.btoa(action.icon)}` : action.icon;
+                                return(
+                                  <div onClick={()=>{this.setIconFun(index,i)}} key={action.name+action.icon+i}
+                                       data-tip={`${action.name}${action.shortcut?' 快捷键：'+action.shortcut:''}`}
+                                       className={`function-item ${(settingIndex.groupIndex===index && settingIndex.itemIndex===i)?'active':''}`}
+                                       style={{ backgroundImage: `url(${image})`}}>
+                                    <svg onClick={(e)=>{this.deleteFun(index,i);e.stopPropagation()}} t="1603522183404" className="delete" viewBox="0 0 1024 1024"
+                                         version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3421"
+                                         width="12" height="12">
+                                      <path
+                                        d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z"
+                                        fill="#CCCCCC" p-id="3422"></path>
+                                      <path
+                                        d="M484.844 511.908L318.91 345.974c-8.331-8.331-8.331-21.839 0-30.17 8.331-8.331 21.839-8.331 30.17 0l165.934 165.934L680.95 315.804c8.33-8.331 21.838-8.331 30.17 0 8.33 8.331 8.33 21.839 0 30.17L545.184 511.908 711.12 677.843c8.33 8.33 8.33 21.838 0 30.17-8.332 8.33-21.84 8.33-30.17 0L515.014 542.078 349.08 708.013c-8.331 8.33-21.839 8.33-30.17 0-8.331-8.332-8.331-21.84 0-30.17l165.934-165.935z"
+                                        fill="#FFFFFF" p-id="3423"></path>
+                                    </svg>
+                                  </div>
+                                )
+                              })}
+                              <div className='function-item' data-tip='点击添加一个按钮'>
+                                <AddIcon  onClick={()=>this.addItem('item',index,group.length-1)}/>
+                              </div>
+                            </div>
+                          ))
+                        }
+                        <div className='action-group' data-tip='点击添加一个按钮分组'>
+                          <AddIcon className='function-item' onClick={()=>{this.addItem('group')}} />
+                        </div>
+                      </div>
+                    </div>
+                    <Drawer
+                      title={`自定义我的 PAGENOTE 按钮`}
+                      width={500}
+                      onClose={this.onCloseDrawer}
+                      visible={settingIndex.groupIndex>-1 && settingIndex.itemIndex>-1}
+                      bodyStyle={{ paddingBottom: 80 }}
+                    >
+                      <FunctionIconSetting key={settingIndex.groupIndex+'-'+settingIndex.itemIndex} onSave={this.saveFun} initFunItem={funItem} groupIndex={settingIndex.groupIndex} itemIndex={settingIndex.itemIndex} />
+                    </Drawer>
                   </div>
                 </div>
-              </div>
-              <FunctionIconSetting key={settingIndex.groupIndex+'-'+settingIndex.itemIndex} onSave={this.saveFun} funItem={funItem} groupIndex={settingIndex.groupIndex} itemIndex={settingIndex.itemIndex} />
-            </div>
-          </div>
-          <div className='limit setting-part'>
-            <label>
-              单页面最大标记数 <b>{maxRecord}</b>
-              <input type="range" value={maxRecord} max={50} min={0} onChange={this.changeLimit}/>
-              <div className='tip'>
-                {
-                  maxRecord == 0 &&
-                  <div>
-                    当设置为0，等同于<b>关闭 PAGENOTE</b> ：不可进行标记、已有标记的页面也将无法使用 PAGENOTE 功能。
-                    <br/>
-                    你可以设置为0来关闭 PAGENOTE
-                    <br/>
+
+                <div className='limit setting-part'>
+                  <div className='mark-count'>
+                    <Slider value={maxRecord} tipFormatter={(value)=>{return '单页面最多标记'+value+'个'}} max={50} min={0}  onChange={this.changeLimit} />
                   </div>
-                }
-              </div>
-            </label>
-          </div>
-
-          <div className='tab setting-part'>
-            <label>
-              <Switch checked={openInTab} onChange={(checked)=>{this.toggleSwitch(checked,'openInTab')}}>
-              </Switch>
-              <span>新开页面打开 <a href="/me">PAGENOTE/ME</a></span>
-            </label>
-          </div>
-
-          <div className='tab setting-part'>
-            <CheckVersionPart version='0.12.3'>
-              <label>
-                <Switch checked={track!=='disable'} onChange={(checked)=>{this.toggleSwitch(checked?'enable':'disable','track')}}>
-                </Switch>
-                <span>开启用户体验收集计划 <a href="/page?id=why_track">了解详情</a></span>
-              </label>
-            </CheckVersionPart>
-          </div>
-
-          <div className='bookmark setting-part'>
-            <label>
-              <Switch checked={enableBookmark} onChange={(checked)=>{this.toggleSwitch(checked,'enableBookmark')}}>
-              </Switch>
-              <span>启用智能书签</span>
-              <span className='tip'><a href="/auto_bookmark">了解什么是「智能书签」</a></span>
-            </label>
-            <div className='tip'>
-              {
-                enableBookmark? '开启后请不要（也无法）手动操作 pagenote 书签文件夹（pagenote将根据标记自动重置）':''
-              }
-            </div>
-          </div>
-          <Collapse
-            bordered={false}
-            defaultActiveKey={['1']}
-            expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-            className="site-collapse-custom-collapse setting-part advance"
-          >
-            <Panel header="数据存储" key="1" className="site-collapse-custom-panel">
-              <CheckVersionPart version='0.12.4'>
-                {
-                  cloud.server && <CloudForm defaultData={cloud} onSubmit={this.saveCloudInfo} />
-                }
-              </CheckVersionPart>
-            </Panel>
-          </Collapse>
-          <div className='userinfo setting-part'>
-            <Collapse
-              bordered={false}
-              defaultActiveKey={['']}
-              expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-              className="site-collapse-custom-collapse"
-            >
-              <Panel header='账户信息' key='account'>
-                <CheckVersionPart version='0.12.4'>
-                  <label>
+                  <div className='tip'>
                     {
-                      userInfo.uid &&
-                      <UserForm defaultData={userInfo} onSubmit={this.saveUserInfo}></UserForm>
+                      maxRecord == 0 &&
+                      <div>
+                        当设置为0，等同于<b>关闭 PAGENOTE</b> ：不可进行标记、已有标记的页面也将无法使用 PAGENOTE 功能。
+                        <br/>
+                        你可以设置为0来关闭 PAGENOTE
+                        <br/>
+                      </div>
                     }
+                  </div>
+                </div>
+
+                <div className='tab setting-part'>
+                  <label>
+                    <Switch checked={openInTab} onChange={(checked)=>{this.toggleSwitch(checked,'openInTab')}}>
+                    </Switch>
+                    <span>新开页面打开 <a href="/me">PAGENOTE/ME</a></span>
                   </label>
+                </div>
+
+                <div className='tab setting-part'>
+                  <CheckVersionPart version='0.12.3'>
+                    <label>
+                      <Switch checked={track!=='disable'} onChange={(checked)=>{this.toggleSwitch(checked?'enable':'disable','track')}}>
+                      </Switch>
+                      <span>开启用户体验收集计划 <a href="/page?id=why_track">了解详情</a></span>
+                    </label>
+                  </CheckVersionPart>
+                </div>
+
+                <div className='bookmark setting-part'>
+                  <label>
+                    <Switch checked={enableBookmark} onChange={(checked)=>{this.toggleSwitch(checked,'enableBookmark')}}>
+                    </Switch>
+                    <span>启用智能书签</span>
+                  </label>
+                  <div className='tip'>
+                    {
+                      enableBookmark? '开启后请不要（也无法）手动操作 pagenote 书签文件夹（pagenote将根据标记自动重置）':''
+                    }
+                  </div>
+                </div>
+                <Popconfirm placement="topLeft" title={'确定重置以上配置内容？'} onConfirm={this.resetAll} okText="确认" cancelText="取消">
+                  <Button>一键重置</Button>
+                </Popconfirm>
+              </section>
+            </TabPane>
+            <TabPane tab="云盘设置" key="2">
+              <div className="setting-part">
+                <CheckVersionPart version='0.12.4'>
+                  {
+                    cloud.server && <CloudForm defaultData={cloud} onSubmit={this.saveCloudInfo} />
+                  }
                 </CheckVersionPart>
-              </Panel>
-            </Collapse>
-
-          </div>
-
-          {/*<div className='images setting-part'>*/}
-          {/*    <label>*/}
-          {/*        <input type="checkbox" checked={enableCollectImage} onChange={(e)=>this.toggleBookmark(e,'enableCollectImage')}/>*/}
-          {/*        开启图片抓取*/}
-          {/*        <span className='tip'>*/}
-          {/*            创建标记后，自动抓取网页内的图片并保存*/}
-          {/*        </span>*/}
-          {/*    </label>*/}
-          {/*</div>*/}
-
-          <div className='setting-part'>
-            <div className="tip">
-              配置修改后，已打开的标签页刷新后生效。
-              {/*以上配置还不够？了解更多<a href="/pricing">付费定制化服务</a>*/}
-            </div>
-          </div>
+              </div>
+            </TabPane>
+            <TabPane tab="账户设置" key="3">
+              <div className="setting-part">
+                <CheckVersionPart version='0.12.4'>
+                  {
+                    userInfo.uid &&
+                    <UserForm defaultData={userInfo} onSubmit={this.saveUserInfo}></UserForm>
+                  }
+                </CheckVersionPart>
+              </div>
+            </TabPane>
+          </Tabs>
         </div>
       </div>
     )

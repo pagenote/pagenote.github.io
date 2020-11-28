@@ -1,6 +1,9 @@
-import React,{useRef} from 'react'
+import React from 'react'
+import { Form, Input, InputNumber, Button ,Select} from 'antd';
 import CheckVersionPart from "../../pages/CheckVersionPart";
 import './function-setting.scss'
+
+const Option = Select.Option;
 
 const defaultFuns = {
   baidu:{
@@ -62,112 +65,125 @@ const defaultFuns = {
     }
 };
 
-export default function FunctionIconSetting({funItem={name:'',shortcut:'',clickScript:'',clickUrl:'',icon:'',dbClickScript:'',mouseoverScript:''},groupIndex,itemIndex,onSave}) {
-  const nameInput = useRef(null);
-  const iconInput = useRef(null);
-  const shortcutInput = useRef(null);
-  const urlInput = useRef(null);
-  const scriptInput = useRef(null);
-  const dbInput = useRef(null);
-  const hoverInput = useRef(null);
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
 
+const validateMessages = {
+  required: '${label} 必填',
+  types: {
+    email: '${label} is not a valid email!',
+    number: '${label} is not a valid number!',
+  },
+  number: {
+    range: '${label} must be between ${min} and ${max}',
+  },
+};
 
-  const save = function () {
+const getFieldsSchema = function (){
+  return {
+    name:'',shortcut:'',clickScript:'',clickUrl:'',icon:'',dbClickScript:'',mouseoverScript:''
+  }
+}
+
+export default function FunctionIconSetting({groupIndex,itemIndex,onSave,initFunItem }) {
+  const funItem = {...getFieldsSchema(),...initFunItem}
+  const [form] = Form.useForm();
+  const save = function (values) {
     const fun = {
-      name: nameInput.current.value || '',
-      shortcut: shortcutInput.current.value || '',
-      clickScript: scriptInput.current.value || '',
-      clickUrl: urlInput.current.value || '',
-      icon: iconInput.current.value || '',
-      dbClickScript: dbInput.current.value || '',
-      mouseoverScript: hoverInput.current.value || '',
+      name: values.name,
+      shortcut: values.shortcut,
+      clickScript: values.clickScript,
+      clickUrl: values.clickUrl,
+      icon: values.icon,
+      dbClickScript: values.dbClickScript,
+      mouseoverScript: values.mouseoverScript,
     };
-    if(!fun.icon){
-      alert('图标必填')
-      return;
-    }
-    if(!fun.name){
-      alert('按钮名称必填')
-      return;
-    }
-    if(!fun.clickScript && !fun.clickUrl && !fun.mouseoverScript && !fun.dbClickScript){
+
+    if(!values.clickScript && !values.clickUrl && !values.mouseoverScript && !values.dbClickScript){
       alert('执行函数与跳转链接至少填写一个');
       return;
     }
     onSave(fun,groupIndex,itemIndex)
   };
 
-
-  const setTheme = function (e) {
-    const type = e.target.value;
+  const setTheme = function (type) {
      const values = defaultFuns[type];
+     const settingValue = {...getFieldsSchema(),...values}
      if(!values){
        return;
      }
-     nameInput.current.value = values.name || '';
-     shortcutInput.current.value = values.shortcut || '';
-     scriptInput.current.value = values.clickScript || '';
-     urlInput.current.value = values.clickUrl || '';
-     iconInput.current.value = values.icon || '';
-     dbInput.current.value = values.dbClickScript || '';
-     hoverInput.current.value = values.mouseoverScript || ''
+     form.setFieldsValue(settingValue)
   };
 
   const show = groupIndex>-1 && itemIndex>-1;
   return(
     <div className='function-setting-form'>
-      <h4>
-        按钮设置
-        <a target='_blank' href="/page?id=study_setting">了解如何配置</a>
-        {
-          show &&
-          <div>
-            使用预设：
-            <select name="" id="" onChange={setTheme}>
-              <option value="-"></option>
-                {
-                    Object.keys(defaultFuns).map((key)=>(
-                        <option key={key} value={key}>{defaultFuns[key].name}</option>
-                    ))
-                }
-            </select>
-          </div>
-        }
-      </h4>
-      <div>
-        {show?'':'选择一个功能按钮进行设置'}
-      </div>
-
       {
         show &&
         <div>
-          <div>
-            <div className="label">按钮名称：</div><input placeholder='取一个名字吧，不要重复' ref={nameInput} type="text" defaultValue={funItem.name}/>
-          </div>
-          <div>
-            <div className="label">按钮图标 <a target='_blank' href="https://www.iconfont.cn/">找图</a></div>
-            <input placeholder='svg图片或者网络https链接图片' ref={iconInput} type="text" defaultValue={funItem.icon}/>
-          </div>
-          <div>
-            <div className="label">快捷键</div><input placeholder='一个字母或数字,可选' maxLength={1} ref={shortcutInput} type="text" defaultValue={funItem.shortcut} />
-          </div>
-          <div>
-            <div className="label">跳转链接</div><input placeholder='链接里用${keyword}表示替换值' ref={urlInput} type="text" defaultValue={funItem.clickUrl} />
-          </div>
-          <CheckVersionPart version='0.12.3'>
-            <div className="label">单击执行函数</div><textarea placeholder='高级功能，可选，与跳转链接互斥。确保安全的一段执行脚本：(function(){})();' ref={scriptInput} type="text" defaultValue={funItem.clickScript}/>
-          </CheckVersionPart>
-          <CheckVersionPart version='0.12.3'>
-            <div className="label">双击执行函数</div>
-            <textarea placeholder='双击执行函数' ref={dbInput} type="text" defaultValue={funItem.dbClickScript}/>
-          </CheckVersionPart>
-          <CheckVersionPart version='0.12.3'>
-            <div className="label">鼠标经过函数</div>
-            <textarea placeholder='鼠标经过执行函数' ref={hoverInput} type="text" defaultValue={funItem.mouseoverScript}/>
-          </CheckVersionPart>
-          <button onClick={save}>
-            保存
-          </button>
+          <a target='_blank' href="/page?id=study_setting">了解如何配置</a>
+          <Form {...layout} form={form} initialValues={funItem} name="basic-setting" onFinish={save} validateMessages={validateMessages}>
+            <Form.Item label="使用预设">
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Select a person"
+                optionFilterProp="children"
+                onChange={setTheme}
+                // onFocus={onFocus}
+                // onBlur={onBlur}
+                // onSearch={onSearch}
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                <Option value="-"></Option>
+                {
+                  Object.keys(defaultFuns).map((key)=>(
+                    <Option key={key} value={key}>{defaultFuns[key].name}</Option>
+                  ))
+                }
+
+              </Select>
+            </Form.Item>
+
+            <Form.Item name={'name'} label="按钮名称" rules={[{ required: true }]}>
+              <Input placeholder='取一个名字吧，不要重复' />
+            </Form.Item>
+            <Form.Item name={'icon'} label={<a target='_blank' href="https://www.iconfont.cn/">按钮图标</a>}
+                       rules={[{ required: true, message:'必须设置一个SVG格式的图标哦' }]}>
+              <Input placeholder='svg图片或者网络https链接图片' />
+            </Form.Item>
+            <Form.Item name={'shortcut'} label="快捷键" rules={[{ pattern:/^[a-z0-9]{0,1}$/, message:'快键键只能选一个数字或者字母哦' }]}>
+              <Input placeholder='一个字母或数字,可选' />
+            </Form.Item>
+            <Form.Item name={'clickUrl'} label="跳转链接" rules={[]}>
+              <Input placeholder='链接里用${keyword}表示替换值' />
+            </Form.Item>
+            <CheckVersionPart version='0.12.4'>
+              <Form.Item name={'clickScript'} label="单击执行函数" rules={[]}>
+                <Input placeholder='高级功能，可选，与跳转链接互斥。确保安全的一段执行脚本：(function(){})();' />
+              </Form.Item>
+            </CheckVersionPart>
+            <CheckVersionPart version='0.12.4'>
+              <Form.Item name={'dbClickScript'} label="双击执行函数">
+                <Input placeholder='双击执行函数' />
+              </Form.Item>
+            </CheckVersionPart>
+            <CheckVersionPart version='0.12.4'>
+              <Form.Item name={'mouseoverScript'} label="鼠标经过函数">
+                <Input placeholder='鼠标经过执行函数' />
+              </Form.Item>
+            </CheckVersionPart>
+
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+              <Button type="primary" htmlType="submit">
+                保存
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       }
     </div>
