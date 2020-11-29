@@ -88,11 +88,11 @@ export default function Footer() {
                         </li>
                         <li>
                             <p className='wechat-finder'>
-                                公众号[pagenote]
+                                公众号 pagenote
                                 <img className='wechat-qrcode' src="/img/wechat.jpg" alt="微信公众号"/>
                             </p>
                             <p>
-                                <a href="/page?id=developer">开发者</a>
+                                <a href="https://github.com/rowthan/pagenote">GitHub</a>
                             </p>
                         </li>
                     </ul>

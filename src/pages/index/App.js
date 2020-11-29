@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import InstallBar from '../../components/InstallBar';
-import Glance from '../../components/Functions';
 import './styles.scss'
 const initData = 'JTdCJTIyc3RlcHMlMjI6JTVCJTdCJTIyeCUyMjo3NTAsJTIyeSUyMjo1MzgsJTIyaWQlMjI6JTIyZGl2LnJpZ2h0LWNvbnRlbnQlM0VzZWN0aW9uJTIyLCUyMnRleHQlMjI6JTIyJUU0JUI4JTgwJUU1JTg4JTg3JUU1JThBJTlGJUU4JTgzJUJEJUU5JTgzJUJEJUU1JThGJUFGJUU0JUJCJUE1JUU1JTlDJUE4JUU1JThCJUJFJUU5JTgwJTg5JUU0JUI4JTgwJUU2JUFFJUI1JUU1JTg2JTg1JUU1JUFFJUI5JUU1JUJDJTgwJUU1JUE3JThCJUUzJTgwJTgyJTIyLCUyMnRpcCUyMjolMjIlRTUlQjAlQjElRTUlOUMlQTglRTYlOUMlQUMlRTklQTElQjUlRTUlQjAlOUQlRTglQUYlOTUlRTQlQjglODAlRTQlQjglOEIlRTUlOTAlQTclRUYlQkMlOEMlRTklOUElOEYlRTQlQkUlQkYlRTUlOEIlQkUlRTklODAlODklRTQlQjglODAlRTYlQUUlQjUlRTYlOTYlODclRTUlQUQlOTclRTUlOEQlQjMlRTUlOEYlQUYlRUYlQkMlODElMjIsJTIyYmclMjI6JTIycmdiYSgxMTQsMjA4LDI1NSklMjIsJTIydGltZSUyMjoxNjA1NDE2MzMwNzM4LCUyMmlzQWN0aXZlJTIyOnRydWUsJTIyb2Zmc2V0WCUyMjowLjUsJTIyb2Zmc2V0WSUyMjowLjk5LCUyMnBhcmVudFclMjI6NDk2LCUyMnByZSUyMjolMjIlRTUlOUMlQTglRTclQkQlOTElRTklQTElQjUlRTklODclOEMlRTklQUIlOTglRTQlQkElQUUlRTUlODUlQjMlRTklOTQlQUUlRTglQUYlOEQlRTUlOUMlQTglRTQlQkIlQkIlRTYlODQlOEYlRTclQkQlOTElRTklQTElQjUlRTUlODYlODUlRTUlOEIlQkUlRTklODAlODklRTQlQjglODAlRTYlQUUlQjUlRTUlODUlQjMlRTklOTQlQUUlRTUlODYlODUlRTUlQUUlQjklRTglQkYlOUIlRTglQTElOEMlRTklQUIlOTglRTQlQkElQUUlRUYlQkMlOUIlRTUlQTQlOUElRTclQTclOEQlRTklQTIlOUMlRTglODklQjIlRTUlOEYlQUYlRTQlQkIlQTUlRTklODAlODklRTYlOEIlQTklRUYlQkMlOEMlRTUlQkYlQUIlRTYlOEQlQjclRTklOTQlQUUlRTQlQjglODAlRTklOTQlQUUlRTklQUIlOTglRTQlQkElQUUlRTUlOUMlQTglRTclQkQlOTElRTklQTElQjUlRTklODclOEMlRTclOTUlOTklRTQlQjglOEIlRTQlQjglODAlRTYlQUUlQjUlRTclQUMlOTQlRTglQUUlQjAlRTUlOUMlQTglRTclQkQlOTElRTklQTElQjUlRTklODclOEMlRTclOTUlOTklRTQlQjglOEIlRTQlQkQlQTAlRTglODclQUElRTUlQjclQjElRTclOUElODQlRTclQUMlOTQlRTglQUUlQjAlRUYlQkMlOEMlRTYlOTQlQUYlRTYlOEMlODElRTYlOEYlOTIlRTUlODUlQTUlRTYlOTYlODclRTUlQUQlOTclRTMlODAlODElRTUlOUIlQkUlRTclODklODclRTclQUQlODklRTUlODYlODUlRTUlQUUlQjklRTMlODAlODIlRTUlODglQjclRTYlOTYlQjAlRTclQkQlOTElRTklQTElQjUlRTYlODklOTMlRTUlQkMlODAlRTclQUMlOTQlRTglQUUlQjAlRTQlQjklOUYlRTQlQkUlOUQlRTYlOTclQTclRTUlQUQlOTglRTUlOUMlQTglRTclQkQlOTElRTklQTElQjUlRTklOTglODUlRTglQUYlQkIlRTUlQTQlQTclRTclQkElQjIlRTclOTQlOUYlRTYlODglOTAlRTQlQkQlQTAlRTclOUElODQlRTclQUMlOTQlRTglQUUlQjAlRTUlQTQlQTclRTclQkElQjIlRTMlODAlODIlRTklODAlOUElRTglQkYlODclRTUlQTQlQTclRTclQkElQjIlRTUlOEYlQUYlRTQlQkIlQTUlRTUlQkYlQUIlRTklODAlOUYlRTYlQkIlOUElRTUlOEElQTglRTUlQUUlOUElRTQlQkQlOEQlRTUlODglQjAlRTYlQTAlODclRTglQUUlQjAlRTclOUElODQlRTQlQkQlOEQlRTclQkQlQUUlRTMlODAlODIlRTglQUUlQjAlRTUlQkQlOTUlRTclQkQlOTElRTklQTElQjUlRTUlQkYlQUIlRTclODUlQTclRUYlQkMlOEMlRTYlODglQUElRTUlOUIlQkUlRTUlQUYlQjklRTQlQkQlQTAlRTclOUElODQlRTclQkQlOTElRTklQTElQjUlRTglQkYlOUIlRTglQTElOEMlRTUlQkYlQUIlRTclODUlQTclRTQlQkYlOUQlRTUlQUQlOTglRUYlQkMlOEMlRTQlQjglOEQlRTclOTQlQTglRTYlODklOTMlRTUlQkMlODAlRTclQkQlOTElRTklQTElQjUlRTQlQjklOUYlRTglODMlQkQlRTUlQkYlQUIlRTklODAlOUYlRTYlOUYlQTUlRTclOUMlOEIlRTUlOEUlODYlRTUlOEYlQjIlRTclQkQlOTElRTklQTElQjUlRTglQUUlQjAlRTUlQkQlOTUlRTQlQkElODYlRTYlOUIlQjQlRTUlQTUlQkQlRTclOUElODQlRTclQUUlQTElRTclOTAlODYlRTQlQkQlQTAlRTclOUElODQlRTclQUMlOTQlRTglQUUlQjAlRTYlQTAlQjklRTYlOEQlQUUlRTYlQTAlODclRTclQUQlQkUlRTMlODAlODElRTUlOUYlOUYlRTUlOTAlOEQlRTMlODAlODElRTYlOTclQTUlRTYlOUMlOUYlRTclQUQlODklRTYlOTYlQjklRTUlQkMlOEYlRTglODElOUElRTUlOTAlODglRTYlOTUlQjQlRTclOTAlODYlRTclQUMlOTQlRTglQUUlQjAlRUYlQkMlOEMlRTUlQkYlQUIlRTklODAlOUYlRTYlQTMlODAlRTclQjQlQTIlRTclQUMlOTQlRTglQUUlQjAlRTMlODAlODIlRTYlOEIlQTUlRTYlOUMlODklRTQlQkQlQTAlRTQlQjglQUElRTQlQkElQkElRTclOUElODQlRTclOUYlQTUlRTglQUYlODYlRTYlOTglOUYlRTclOTAlODMlRTklQUIlOTglRTUlQkElQTYlRTglODclQUElRTUlQUUlOUElRTQlQjklODklRUYlQkMlOEMlRTYlOEYlOTIlRTQlQkIlQjYlMjBBUEklMjAlRTYlODklQTklRTUlQjElOTUlRTQlQkQlQTAlRTUlOEYlQUYlRTQlQkIlQTUlRTglODclQUElRTUlQUUlOUElRTQlQjklODklRTQlQkQlQTAlRTYlODMlQjMlRTglQTYlODElRTclOUElODQlRTUlOEElOUYlRTglODMlQkQlRTMlODAlODIlRTUlQTQlOEQlRTUlODglQjYlRTMlODAlODElRTYlOTAlOUMlRTclQjQlQTIlRTMlODAlODElRTclQkYlQkIlRTglQUYlOTElRUYlQkMlOEMlRTclOTQlOUElRTglODclQjMlRTglODclQUElRTUlQUUlOUElRTQlQjklODklRTglQTclQTYlRTUlOEYlOTElRTclOUElODQlRTglODQlOUElRTYlOUMlQUMlRTMlODAlODIlRTUlODklOEQlRTUlQkUlODAlMjBodHRwczovL3BhZ2Vub3RlLmNuL3NldHRpbmdQQUdFTk9URSUyMCVFNyU5QSU4NCVFNCVCQyU5OCVFNSU4QSVCRiVFNiU4OCU5MSVFNyU5QSU4NCVFNCVCQyU5OCVFNSU4QSVCRiVFRiVCQyU5QSVFNiVCMiVBMSVFNiU5QyU4OSVFNSVCOSVCRiVFNSU5MSU4QSVFMyU4MCU4MSVFNCVCOCU4RCVFOSU5QyU4MCVFOCVBNiU4MSVFNyU5OSVCQiVFNSVCRCU5NSVFMyU4MCU4MiVFNSU4RiVBRiVFNSVBRSU4QyVFNSU4NSVBOCVFNyVBNiVCQiVFNyVCQSVCRiVFNCVCRCVCRiVFNyU5NCVBOCVFNyU5QSU4NCVFNSVCNyVBNSVFNSU4NSVCNyVFMyU4MCU4MiVFNiU5NCVBRiVFNiU4QyU4MSVFOSVBQiU5OCVFNSVCQSVBNiVFOCU4NyVBQSVFNSVBRSU5QSVFNCVCOSU4OSVFMyU4MCU4MiVFNSU4QSU5RiVFOCU4MyVCRCVFNSVCQyU4MCVFNSU4RiU5MSVFNiVBMCVCOSVFNiU4RCVBRSVFNyU5NCVBOCVFNiU4OCVCNyVFNSU4RiU4RCVFOSVBNiU4OCVFNSVBRSU5RSVFNiU5NyVCNiVFOCVCMCU4MyVFNiU5NSVCNCVFMyU4MCU4MiUyMiwlMjJzdWZmaXglMjI6JTIyJUU1JThCJUJFJUU5JTgwJTg5JUU0JUI4JTgwJUU2JUFFJUI1JUU2JTk2JTg3JUU2JTlDJUFDJUUzJTgwJTgxJUU5JTgwJTg5JUU2JThCJUE5JUU0JUI4JTgwJTIyJTdEJTVELCUyMnNldHRpbmclMjI6JTdCJTIyYmFySW5mbyUyMjolN0IlMjJyaWdodCUyMjoxMjYsJTIydG9wJTIyOjU3LCUyMnN0YXR1cyUyMjolMjJmb2xkJTIyJTdEJTdELCUyMnVybCUyMjolMjJodHRwOi8vMC4wLjAuMDo4MDgwLyUyMiwlMjJsYXN0TW9kaWZpZWQlMjI6MTYwNTQxNjQ0NzI4MiwlMjJpY29uJTIyOiUyMmh0dHA6Ly8wLjAuMC4wOjgwODAvZmF2aWNvbi5pY28lMjIsJTIydGl0bGUlMjI6JTIyUEFHRU5PVEUlMjAlRTUlQjAlOEYlRTglODAlOEMlRTclQkUlOEUlRTclOUElODQlRTclQUMlOTQlRTglQUUlQjAlRTUlQjclQTUlRTUlODUlQjclMjIsJTIyZGVzY3JpcHRpb24lMjI6JTIycGFnZW5vdGUlMjAtJTIwJUU1JTgzJThGJUU1JTlDJUE4JUU2JTlDJUFDJUU1JUFEJTkwJUU0JUI4JThBJUU0JUI4JTgwJUU2JUEwJUI3JUU0JUI4JUJBJUU3JUJEJTkxJUU5JUExJUI1JUU1JTgxJTlBJUU3JUFDJTk0JUU4JUFFJUIwJTIyLCUyMmltYWdlcyUyMjolNUIlMjJodHRwOi8vMC4wLjAuMDo4MDgwL2ltZy93ZWNoYXQuanBnJTIyJTVELCUyMnNuYXBzaG90cyUyMjolNUIlNUQsJTIydmVyc2lvbiUyMjoyLCUyMmNhdGVnb3JpZXMlMjI6JTVCJTIyUEFHRU5PVEUlRTQlQkIlOEIlRTclQkIlOEQlMjIlNUQsJTIybm90ZSUyMjolMjIlMjIlN0Q=';
 
@@ -201,63 +199,9 @@ export default class Index extends Component{
                   勾选一段文本、选择一个颜色、批注一段笔记、生成一个提纲、可以锚点定位、创建截图快照、贴上一个个标签、管理平台整理、支持导入导出
                 </p>
               </p>
-              {/*<p>*/}
-              {/*  Check a section of key content in any web page to highlight it.*/}
-              {/*</p>*/}
-              {/*<p>*/}
-              {/*  A variety of colors can be selected, support shortcut key one key highlight*/}
-              {/*</p>*/}
-              {/*<p>*/}
-              {/*  Under the marked content, leave your own notes*/}
-              {/*</p>*/}
-              {/*<p>*/}
-              {/*  Generate an outline of your notes*/}
-              {/*</p>*/}
-              {/*<p>*/}
-              {/*  Save the snapshot of your web page, you can quickly view the history of the web page without opening the web page*/}
-              {/*</p>*/}
-              {/*<p>*/}
-              {/*  You can customize what you want. Copy, search, translate, and even custom trigger scripts.*/}
-              {/*</p>*/}
             </section>
           </div>
         </section>
-
-        {/*<section className='points fl'>*/}
-        {/*  <div className='point main'>*/}
-        {/*    <div>*/}
-        {/*      <h2 id='range'>*/}
-        {/*        收录重点*/}
-        {/*      </h2>*/}
-        {/*      <article>*/}
-        {/*        只需要一个简单的点击，即可标记收集你的重点、网页。*/}
-        {/*      </article>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*  <div className='point note'>*/}
-        {/*    <div>*/}
-        {/*      <h2>*/}
-        {/*        标注笔记*/}
-        {/*      </h2>*/}
-        {/*      <article>*/}
-        {/*        快捷地为网页添加标注。*/}
-        {/*        <br/>一个网页一处笔记，把笔记留在网页里。*/}
-        {/*      </article>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*  <div className='point manage'>*/}
-        {/*    <div>*/}
-        {/*      <h2>*/}
-        {/*        轻松管理*/}
-        {/*      </h2>*/}
-        {/*      <article>*/}
-        {/*        高效地管理你的标记，智能关联书签、分类。拥有个人知识星球。*/}
-        {/*      </article>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*</section>*/}
-
-        {/*<Glance />*/}
       </div>
     )
   }

@@ -27,7 +27,19 @@
     "version": "0.12.3",
     "support": ["chrome","firefox"]
   },
+  "notification": {
+    "0.12.3": {
+      "zh_ch": "0.12.3 有个大变化",
+      "en": ""
+    },
+    "0.12.4": {
+      "zh_ch": "0.12.4 云盘开始",
+      "en": ""
+    }
+  },
   "chrome": "0.12.3",
   "firefox": "0.12.3",
-  "edge": "0.12.3"
+  "edge": "0.12.3",
+  "default": "0.12.2",
+  "offline": "0.12.2"
 }
