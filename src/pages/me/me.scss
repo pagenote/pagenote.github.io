@@ -253,6 +253,14 @@ svg{
           cursor: pointer;
           &:hover{
             background: #fafafa;
+            .action-bar{
+              display: inline-block;
+            }
+          }
+          .action-bar{
+            position: absolute;
+            right: 100px;
+            display: none;
           }
           .group-title-name{
             border-left: 4px solid #52c41a;

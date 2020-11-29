@@ -2,12 +2,22 @@ import Expand from "../assets/icon/more.svg";
 import PageItem from "./PageItem";
 import React,{Fragment} from "react";
 import ColorHash from 'color-hash';
+import MarkDownIcon from "../assets/icon/markdown.svg";
+import {exportMd} from "../utils";
 
 const colorHash = new ColorHash();
 
 export default function Group({group,toggleExpandGroup,groupPagesObject,selectedPagesKey,selectPage,expand}) {
   const color = colorHash.hex(group);
   const matched= (groupPagesObject[group]||{}).matched;
+
+  const exportAllMd = function (e){
+    e.stopPropagation();
+    const pages = groupPagesObject[group].pages;
+    console.log(pages)
+    exportMd(pages)
+  }
+
   return(
     <Fragment>
       {
@@ -17,7 +27,12 @@ export default function Group({group,toggleExpandGroup,groupPagesObject,selected
              onClick={() => toggleExpandGroup(group)}>
               <span className='group-title-name' style={{borderColor:color}}>
                   {group}
+
+                  <span className='action-bar'>
+                    <span data-tip='导出全组为markdown' onClick={exportAllMd}><MarkDownIcon width={24} height={24} /></span>
+                  </span>
                   <span className='group-breif'>
+
                     <span className='group-info'>{groupPagesObject[group] ? groupPagesObject[group].pages.length : 0}</span>
                     <Expand
                       width={12} height={12}

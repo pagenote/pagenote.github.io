@@ -79,18 +79,18 @@ export default function InstallBar() {
               `}</style>
                     <span className="install-btns">
                         <a href="https://addons.mozilla.org/addon/page-note?src=external-release"
-                           data-tip='最新版本：0.12.3'
+                           data-tip='最新版本：0.12.3,'
                            className={`browser-install-btn firefox ${chromeType==='Firefox'?'active':''}`}>
                             FireFox
                         </a>
                         <a
-                          data-tip='最新版本：0.12.3'
+                          data-tip='最新版本：0.12.3, 审核中：0.12.4'
                           href="https://chrome.google.com/webstore/detail/pagenotehighlight-and-tak/hpekbddiphlmlfjebppjhemobaopekmp?utm_source=blog"
                            className={`browser-install-btn chrome ${chromeType==='Chrome'?'active':''}`}>
                             Chrome
                         </a>
                         <a
-                          data-tip='最新版本：0.12.3'
+                          data-tip='最新版本：0.12.3, 审核中：0.12.4'
                           href="https://microsoftedge.microsoft.com/addons/detail/ablhdlecfphodoohfacojdngdfkgneaa"
                            className={`browser-install-btn edge ${chromeType==='Edge'?'active':''}`}>
                             Edge

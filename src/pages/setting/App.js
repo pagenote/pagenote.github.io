@@ -557,7 +557,7 @@ export default class SettingRender extends Component{
                   </div>
                 </div>
                 <Popconfirm placement="topLeft" title={'确定重置以上配置内容？'} onConfirm={this.resetAll} okText="确认" cancelText="取消">
-                  <Button>一键重置</Button>
+                  <Button>一键重置</Button> <span className='tip'>如果发现功能异常，可以尝试重置配置</span>
                 </Popconfirm>
               </section>
             </TabPane>

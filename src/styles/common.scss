@@ -47,6 +47,7 @@
   transform: translateY(-20px);
 }
 *[data-tip]{
+  position: relative;
   &:hover::after{
     display: block;
     z-index: 99999;

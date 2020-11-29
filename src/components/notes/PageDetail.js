@@ -6,12 +6,15 @@ import DropLabel from "../DropLabel";
 import DateIcon from "../../assets/icon/date.svg";
 import Tag from "../../assets/icon/tag.svg";
 import DeleteIcon from "../../assets/draw/delete.svg";
+import MarkDownIcon from "../../assets/icon/markdown.svg";
 // import NoteIcon from "../../assets/icon/note.svg";
 import CameraIcon from "../../assets/icon/camera.svg";
 // import LightHeader from '../../lib/light-header';
 // import loadscript from "../../utils/loadscript";
 import Editor from "../editor/Editor";
 import DropLabels from "../droplabel/DropLabel";
+import {message} from "antd";
+import {exportMd} from "../../utils";
 
 // TODO 支持设置字号
 export default class PageDetail extends Component{
@@ -181,6 +184,16 @@ export default class PageDetail extends Component{
         this.savePage(selectedPage);
     };
 
+    exportFile =(type='md')=>{
+        switch (type){
+            case 'md':
+                exportMd([this.props.selectedPage]);
+                break;
+            default:
+                message.error('请选择导出类型')
+        }
+    }
+
 
 
     render() {
@@ -209,6 +222,7 @@ export default class PageDetail extends Component{
                                          <DateIcon />
                                          <span>{new Date(selectedPage.lastModified).toLocaleDateString()}</span>
                                     </div>
+                                    <span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>
                                     <div className='category'>
                                         <Tag/>
                                         <DropLabels

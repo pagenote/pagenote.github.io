@@ -34,6 +34,13 @@ export default class Release extends Component{
                     </div>
                     <div className="right col-9">
                         <div className="brief">
+                            <h3>0.12.4 云盘起点</h3>
+                            <ul>
+                                <li>plugin 支持 双击事件和鼠标经过事件</li>
+                            </ul>
+                            <a href="https://mp.weixin.qq.com/s/I_rUuKVRjVfzpwEWKqIxCA">了解更多详情</a>
+                        </div>
+                        <div className="brief">
                             <h3>0.12.3 插件更开放</h3>
                             <ul>
                                 <li>plugin 支持 双击事件和鼠标经过事件</li>
