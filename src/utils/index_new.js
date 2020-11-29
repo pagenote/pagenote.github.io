@@ -13,8 +13,12 @@ export const connectServer = function(callback){
             try{
                 const tempData = currentPage.plainData || {};
                 tempData.keys = data[key].keys;
-                pages.push(tempData);
-                pageObject[key] = tempData;
+                if(tempData.isDelete || !tempData.url || !tempData.steps){
+                    console.log('isDelete ',tempData)
+                }else{
+                    pages.push(tempData);
+                    pageObject[key] = tempData;
+                }
             }catch (e) {
                 console.error(e)
             }
