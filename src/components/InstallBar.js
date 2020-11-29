@@ -4,6 +4,7 @@ import React,{useState,useEffect,useRef}  from 'react';
 // import 'antd/es/modal/style/modal.less'
 // import 'antd/lib/modal/style/index.css';
 import {getBrowserTypeAndVersion} from '../utils/document'
+import version from '../../public/version.json'
 
 export default function InstallBar() {
   const offlineInstall = function () {
@@ -79,24 +80,24 @@ export default function InstallBar() {
               `}</style>
                     <span className="install-btns">
                         <a href="https://addons.mozilla.org/addon/page-note?src=external-release"
-                           data-tip='最新版本：0.12.3,'
+                           data-tip={`最新版本：${version.firefox}`}
                            className={`browser-install-btn firefox ${chromeType==='Firefox'?'active':''}`}>
                             FireFox
                         </a>
                         <a
-                          data-tip='最新版本：0.12.3, 审核中：0.12.4'
+                          data-tip={`最新版本：${version.chrome}`}
                           href="https://chrome.google.com/webstore/detail/pagenotehighlight-and-tak/hpekbddiphlmlfjebppjhemobaopekmp?utm_source=blog"
                            className={`browser-install-btn chrome ${chromeType==='Chrome'?'active':''}`}>
                             Chrome
                         </a>
                         <a
-                          data-tip='最新版本：0.12.3, 审核中：0.12.4'
+                          data-tip={`最新版本：${version.edge}`}
                           href="https://microsoftedge.microsoft.com/addons/detail/ablhdlecfphodoohfacojdngdfkgneaa"
                            className={`browser-install-btn edge ${chromeType==='Edge'?'active':''}`}>
                             Edge
                         </a>
                         <a
-                          data-tip='最新版本：0.12.1'
+                          data-tip={`最新版本：${version.offline}`}
                           className={`browser-install-btn ee ${chromeType==='ee'?'active':''}`}
                            href="https://ext.chrome.360.cn/webstore/detail/gielpddfollkffnbiegekliodnahhpfa">360</a>
                         <a className="browser-install-btn offline wechat-finder" data-tip='最新版本：0.12.0'>

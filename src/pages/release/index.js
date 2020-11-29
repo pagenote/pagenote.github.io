@@ -36,9 +36,9 @@ export default class Release extends Component{
                         <div className="brief">
                             <h3>0.12.4 云盘起点</h3>
                             <ul>
-                                <li>plugin 支持 双击事件和鼠标经过事件</li>
+                                <li>内测开始了，<a href="https://mp.weixin.qq.com/s/s-E4M7tp6ErCw1U2T3L7lQ">支持 webdav</a></li>
+                                <li>GitHub 已同步更新，<a href="https://mp.weixin.qq.com/s/nDQB3XKqUB2NIkVht_Tiwg">了解详情</a></li>
                             </ul>
-                            <a href="https://mp.weixin.qq.com/s/I_rUuKVRjVfzpwEWKqIxCA">了解更多详情</a>
                         </div>
                         <div className="brief">
                             <h3>0.12.3 插件更开放</h3>
