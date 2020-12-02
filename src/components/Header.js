@@ -119,6 +119,9 @@ export default class Header extends Component{
                     </a>
                 </div>
                 <div>
+                    <a href="/draft">
+                        临时记事本
+                    </a>
                     <span className='me-link'>
                         {/*{*/}
                         {/*    userInfo.name ?*/}

@@ -525,51 +525,49 @@ export default class SettingRender extends Component{
                     }
                   </div>
                 </div>
-
-                <div className='tab setting-part'>
-                  <label>
-                    <Switch checked={openInTab} onChange={(checked)=>{this.toggleSwitch(checked,'openInTab')}}>
-                    </Switch>
-                    <span>新开页面打开 <a href="/me">PAGENOTE/ME</a></span>
-                  </label>
-                </div>
-
-                <div className='tab setting-part'>
-                  <CheckVersionPart version='0.12.3'>
-                    <label>
-                      <Switch checked={track!=='disable'} onChange={(checked)=>{this.toggleSwitch(checked?'enable':'disable','track')}}>
-                      </Switch>
-                      <span>开启用户体验收集计划 <a href="/page?id=why_track">了解详情</a></span>
-                    </label>
-                  </CheckVersionPart>
-                </div>
-
-                <div className='bookmark setting-part'>
-                  <label>
-                    <Switch checked={enableBookmark} onChange={(checked)=>{this.toggleSwitch(checked,'enableBookmark')}}>
-                    </Switch>
-                    <span>启用智能书签</span>
-                  </label>
-                  <div className='tip'>
-                    {
-                      enableBookmark? '开启后请不要（也无法）手动操作 pagenote 书签文件夹（pagenote将根据标记自动重置）':''
-                    }
-                  </div>
-                </div>
-                <Popconfirm placement="topLeft" title={'确定重置以上配置内容？'} onConfirm={this.resetAll} okText="确认" cancelText="取消">
-                  <Button>一键重置</Button> <span className='tip'>如果发现功能异常，可以尝试重置配置</span>
+                <Popconfirm placement="topLeft" title={'确定重置「基础配置」「功能开关」？'} onConfirm={this.resetAll} okText="确认" cancelText="取消">
+                <span className='tip'>如果发现功能异常，可以尝试<Button type="link">一键重置</Button></span>
                 </Popconfirm>
               </section>
             </TabPane>
-            <TabPane tab="云盘设置" key="2">
+            <TabPane tab="功能开关" key="4">
+              <div className='tab setting-part'>
+                <label>
+                  <Switch checked={openInTab} onChange={(checked)=>{this.toggleSwitch(checked,'openInTab')}}>
+                  </Switch>
+                  <span>新开页面打开 <a href="/me">PAGENOTE/ME</a></span>
+                </label>
+              </div>
+              <div className='tab setting-part'>
+                <CheckVersionPart version='0.12.3'>
+                  <label>
+                    <Switch checked={track!=='disable'} onChange={(checked)=>{this.toggleSwitch(checked?'enable':'disable','track')}}>
+                    </Switch>
+                    <span>开启用户体验收集计划 <a href="/page?id=why_track">了解详情</a></span>
+                  </label>
+                </CheckVersionPart>
+              </div>
+
+              <div className='bookmark setting-part'>
+                <label>
+                  <Switch checked={enableBookmark} onChange={(checked)=>{this.toggleSwitch(checked,'enableBookmark')}}>
+                  </Switch>
+                  <span>启用智能书签</span>
+                </label>
+                <div className='tip'>
+                  {
+                    enableBookmark? '开启后请不要（也无法）手动操作 pagenote 书签文件夹（pagenote将根据标记自动重置）':''
+                  }
+                </div>
+              </div>
+            </TabPane>
+            <TabPane tab="账户设置" key="2">
               <div className="setting-part">
                 <CheckVersionPart version='0.12.4'>
                   <h2>内测功能，阅读公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzkxNDE3OTQ3Mg==&mid=2247483739&idx=1&sn=30d794d96e6094e7d143b09df4232062&chksm=c17315a4f6049cb228dce756ac30d1832c3515a94ca1c54530c4e379c5541f3dbeade34aa126&token=36436624&lang=zh_CN#rd">了解详情</a></h2>
                   <CloudForm defaultData={cloud} onSubmit={this.saveCloudInfo} />
                 </CheckVersionPart>
               </div>
-            </TabPane>
-            <TabPane tab="账户设置" key="3">
               <div className="setting-part">
                 <CheckVersionPart version='0.12.4'>
                   {

@@ -34,6 +34,12 @@ export default class Release extends Component{
                     </div>
                     <div className="right col-9">
                         <div className="brief">
+                            <h3>0.12.5 问题修复</h3>
+                            <ul>
+                                <li>修复 0.12.4 数据存储不同步的问题</li>
+                            </ul>
+                        </div>
+                        <div className="brief">
                             <h3>0.12.4 云盘起点</h3>
                             <ul>
                                 <li>内测开始了，<a href="https://mp.weixin.qq.com/s/s-E4M7tp6ErCw1U2T3L7lQ">支持 webdav</a></li>
