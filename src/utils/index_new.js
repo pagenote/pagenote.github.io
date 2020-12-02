@@ -13,9 +13,9 @@ export const connectServer = function(callback){
             try{
                 const tempData = currentPage.plainData || {};
                 tempData.keys = data[key].keys;
-                if(tempData.isDelete || !tempData.url || !tempData.steps){
-                    console.log('isDelete ',tempData)
-                }else{
+                const isValidate = (tempData.steps && tempData.steps.length) ||  (tempData.snapshots && tempData.snapshots.length);
+                console.log(isValidate,key,tempData);
+                if(isValidate){
                     pages.push(tempData);
                     pageObject[key] = tempData;
                 }
