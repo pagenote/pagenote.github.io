@@ -45,6 +45,12 @@ const users = [
     type: 2,
     time:'2020-11-30'
   },
+  {
+    name:'***240',
+    amount: 10,
+    type: 2,
+    time:'2020-12-2'
+  },
 ];
 
 const payType={
