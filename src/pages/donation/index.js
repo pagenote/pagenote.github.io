@@ -57,12 +57,18 @@ const users = [
     type: 2,
     time:'2020-12-2'
   },
+  {
+    name:'*檬',
+    amount: 20,
+    type: 2,
+    time:'2020-12-3'
+  },
 ];
 
 const payType={
   1:'支付宝',
   2:'微信',
-}
+};
 
 export default class CreatePage extends Component{
 
