@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "0.12.5",
+      "for_max_version": "",
+      "for_min_version":"",
+      "content": {
+        "zh_cn": "清理了一些历史功能，下线"
+      }
+    },
+    {
+      "version": "0.12.4",
+      "for_max_version": "",
+      "for_min_version":"",
+      "content": {
+        "zh_cn": "云盘上传备份功能开始内测使用"
+      }
+    },
+    {
       "version": "0.12.3",
       "for_max_version": "",
       "for_min_version":"",
