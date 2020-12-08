@@ -94,6 +94,9 @@ export default function Footer() {
                             <p>
                                 <a href="https://github.com/rowthan/pagenote">GitHub</a>
                             </p>
+                            <p>
+                                <a href="https://github.com/rowthan/pagenote/issue">bug反馈</a>
+                            </p>
                         </li>
                     </ul>
                 </div>
