@@ -151,6 +151,7 @@ export default class SettingRender extends Component{
       if(data){
         this.setState({
           cloud: data,
+          fetchTime: new Date(),
         })
       }
     })
@@ -611,16 +612,14 @@ export default class SettingRender extends Component{
             </TabPane>
             <TabPane tab="账户设置" key="2">
               <div className="setting-part">
-                <CheckVersionPart version='0.12.4'>
+                <CheckVersionPart version='0.13.0'>
                   <h2>内测功能，阅读公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzkxNDE3OTQ3Mg==&mid=2247483739&idx=1&sn=30d794d96e6094e7d143b09df4232062&chksm=c17315a4f6049cb228dce756ac30d1832c3515a94ca1c54530c4e379c5541f3dbeade34aa126&token=36436624&lang=zh_CN#rd">了解详情</a></h2>
                   <CloudForm defaultData={cloud} onSubmit={this.saveCloudInfo} />
                 </CheckVersionPart>
               </div>
               <div className="setting-part">
                 <CheckVersionPart version='0.12.4'>
-                  {
-                    <UserForm defaultData={userInfo} onSubmit={this.saveUserInfo}></UserForm>
-                  }
+                  <UserForm defaultData={userInfo} onSubmit={this.saveUserInfo}></UserForm>
                 </CheckVersionPart>
               </div>
             </TabPane>

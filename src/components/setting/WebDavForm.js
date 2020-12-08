@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Form, Input, AutoComplete, Button } from 'antd';
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -15,6 +15,10 @@ const validateMessages = {
   },
 };
 
+const options = [
+  { value: 'https://dav.jianguoyun.com/dav/' },
+];
+
 export default function UserForm({defaultData={},onSubmit}) {
   return (
     <Form {...layout}  initialValues={defaultData} name="control-hooks" onFinish={onSubmit} validateMessages={validateMessages}>
@@ -22,7 +26,13 @@ export default function UserForm({defaultData={},onSubmit}) {
         <Input placeholder='关注公众号，获取邀请码' />
       </Form.Item>
       <Form.Item name={['server']} label="云盘服务商地址" rules={[{ required: true }]}>
-        <Input placeholder='你的云盘所支持webdav的服务地址，如：https://dav.jianguoyun.com/dav/' />
+        <AutoComplete
+          options={options}
+          placeholder="你的云盘所支持webdav的服务地址"
+          filterOption={(inputValue, option) =>
+            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+          }
+        />
       </Form.Item>
       <Form.Item name={'username'} label="账户名称" rules={[{ required: true }]}>
         <Input placeholder='云盘账户' />
