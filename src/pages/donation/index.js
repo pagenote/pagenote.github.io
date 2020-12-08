@@ -77,8 +77,7 @@ export default class CreatePage extends Component{
       <div className='donation'>
         <p>
           <p>
-            <span className='light-me green'>打赏是让我们知道「PAGENOTE 的努力有了一些价值，帮助我们发展得更好」，任意金额都是鼓励。</span>
-            如果觉得给你带来了一点帮助，支持一下吧。金额随意。
+            <span className='light-me green'>为 PAGENOTE 打赏鼓气，帮助发展更好，任意金额都是鼓励。</span>
           </p>
           <p>
             <img src="/dashang.jpg" alt="支持pagenote"/>
@@ -86,14 +85,14 @@ export default class CreatePage extends Component{
           <p>
             如果未来 PAGENOTE 提供部分付费高级功能、版本，打赏用户将得到最大程度的优惠。
             <br/>
-            当然，PAGENOTE 承诺 <span className='light-me'>「你现在能使用的功能，在未来也将继续可以使用，不会因为没有付费而针对你停止服务」</span>
+            <span className='light-me'>「你现在能使用的功能，在未来也将继续可以使用，不会因为没有付费而针对你停止服务」</span>
           </p>
-          <p>
-            PAGENOTE 需要你的支持和鼓励，但同时希望营造一个良好的用户、产品关系--PAGENOTE 能够很好的发展，PAGENOTE 值的用户自发地为之付费。
-          </p>
+          {/*<p>*/}
+          {/*  PAGENOTE 需要你的支持和鼓励，但同时希望营造一个良好的用户、产品关系--PAGENOTE 能够很好的发展，PAGENOTE 值的用户自发地为之付费。*/}
+          {/*</p>*/}
         </p>
         <div className='donation-users'>
-            <h4>感谢以下用户的打赏支持：</h4>
+            <h4>感谢以下用户的支持：</h4>
             <div>
               <table>
                 <thead>
