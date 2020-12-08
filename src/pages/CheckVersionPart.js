@@ -1,9 +1,10 @@
 import { isLow } from "../utils";
-
+import versions from '../../public/version.json'
 
 export default function CheckVersionPart({children,version}) {
   const currentVersion = document.documentElement.dataset.version || '';
   const needUpload = isLow(currentVersion,version);
+  const notPublic = isLow(versions.latest.version,version);
   return (
     <div className='version_check'>
       <style jsx='true'>
@@ -46,7 +47,13 @@ export default function CheckVersionPart({children,version}) {
         {
           needUpload &&
           <div className='mask'>
-            <span>当前版本<b>{currentVersion}</b>, 需要<a href="/release">升级</a>到 <b>{version}</b>才可使用本模块</span>
+            {
+              notPublic?
+                <span>
+                  此功能还在开发中，预计将在 {version} 中可用
+                </span>:
+                <span>当前版本<b>{currentVersion}</b>, 需要<a href="/release">升级</a>到 <b>{version}</b>才可使用本模块</span>
+            }
           </div>
         }
         {children}
