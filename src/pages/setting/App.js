@@ -194,6 +194,7 @@ export default class SettingRender extends Component{
         shortCuts: setting.shortCuts || '',
         actionGroup: setting.actionGroup || [],
         // colorIndex: -1,
+        fetchTime: new Date().getTime,
       })
     })
   },200);
@@ -402,7 +403,7 @@ export default class SettingRender extends Component{
 
 
   render() {
-    const {colors=[],shortCuts=[],colorIndex,modalPosition,track,openInTab,langType,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo,cloud} = this.state;
+    const {colors=[],shortCuts=[],colorIndex,modalPosition,track,openInTab,langType,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo,cloud,fetchTime} = this.state;
     let funItem = {};
     try{
       funItem = actionGroup[settingIndex.groupIndex][settingIndex.itemIndex]
@@ -412,7 +413,7 @@ export default class SettingRender extends Component{
 
     return (
       <div className='setting-page'>
-        <div className='pagenote-bar'>
+        <div className='pagenote-bar' key={fetchTime}>
           <Tabs defaultActiveKey="1">
             <TabPane tab="基础配置" key="1">
               <section>
@@ -618,7 +619,6 @@ export default class SettingRender extends Component{
               <div className="setting-part">
                 <CheckVersionPart version='0.12.4'>
                   {
-                    userInfo.uid &&
                     <UserForm defaultData={userInfo} onSubmit={this.saveUserInfo}></UserForm>
                   }
                 </CheckVersionPart>
