@@ -85,7 +85,7 @@ const config = {
       // 使用正则匹配命中路由
       rewrites: [
         {
-          from: /^\/me|new|page|release|setting|donation|rate|privacy|draft$/,
+          from: /^\/me|new|page|release|setting|donation|rate|privacy|draft|about|doctor$/,
           to: function(context) {
             return   context.parsedUrl.pathname+'.html';
           }
