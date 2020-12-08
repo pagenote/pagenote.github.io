@@ -9,7 +9,7 @@ import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import CheckVersionPart from "../CheckVersionPart";
 import throttle from 'lodash/throttle';
 import './setting.scss';
-import { Collapse, message,Switch, Button, Slider,Popconfirm,Tabs,Drawer } from 'antd';
+import { Collapse, message,Switch, Button, Slider,Popconfirm,Tabs,Drawer,Radio } from 'antd';
 import 'antd/dist/antd.css';
 // import 'antd/es/collapse/style/index.css'
 import UserForm from "../../components/setting/UserForm";
@@ -56,6 +56,25 @@ const predefineTheme = [
     colors:['#00bcd4','#e0f7fa','#80deea','#26c6da','#00acc1','#00838f','#006064'],
   }];
 
+const languages = [
+  {
+    name:'简体中文',
+    value:'zh_CN',
+  },
+  {
+    name:'English',
+    value:'en',
+  },
+  {
+    name:'日本語',
+    value:'ja',
+  },
+  {
+    name:'Deutsch',
+    value:'de',
+  }
+]
+
 export default class SettingRender extends Component{
   constructor(props) {
     super(props);
@@ -67,6 +86,7 @@ export default class SettingRender extends Component{
       matchType: "smart",
       maxRecord: 30,
       openInTab: false,
+      langType: 'zh_CN',
       shortCuts: "PAGENOTE",
       enableBookmark: true,
       enableCollectImage: false,
@@ -169,6 +189,7 @@ export default class SettingRender extends Component{
         enableBookmark: setting.enableBookmark || false,
         enableCollectImage: setting.enableCollectImage || false,
         openInTab: setting.openInTab,
+        langType: setting.langType || 'zh_cn',
         track: setting.track || 'enable',
         shortCuts: setting.shortCuts || '',
         actionGroup: setting.actionGroup || [],
@@ -243,13 +264,14 @@ export default class SettingRender extends Component{
   },20);
 
   saveSetting= throttle(()=>{
-    const {colors,maxRecord,track,openInTab,shortCuts,enableBookmark,enableCollectImage,actionGroup} = this.state;
+    const {colors,maxRecord,track,openInTab,langType,shortCuts,enableBookmark,enableCollectImage,actionGroup} = this.state;
     const settings = {
       colors: colors || [],
       maxRecord: maxRecord,
       enableBookmark: enableBookmark,
       enableCollectImage: enableCollectImage,
       openInTab: openInTab,
+      langType: langType,
       shortCuts: shortCuts || [],
       actionGroup: actionGroup,
       track:track,
@@ -369,10 +391,18 @@ export default class SettingRender extends Component{
     });
   };
 
+  setLocale=(e)=>{
+    this.setState({
+      langType:e.target.value
+    },()=>{
+      this.saveSetting();
+    })
+  }
+
 
 
   render() {
-    const {colors=[],shortCuts=[],colorIndex,modalPosition,track,openInTab,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo,cloud} = this.state;
+    const {colors=[],shortCuts=[],colorIndex,modalPosition,track,openInTab,langType,maxRecord,enableBookmark,colorPickerPro,enableCollectImage,actionGroup,settingIndex,userInfo,cloud} = this.state;
     let funItem = {};
     try{
       funItem = actionGroup[settingIndex.groupIndex][settingIndex.itemIndex]
@@ -525,9 +555,26 @@ export default class SettingRender extends Component{
                     }
                   </div>
                 </div>
-                <Popconfirm placement="topLeft" title={'确定重置「基础配置」「功能开关」？'} onConfirm={this.resetAll} okText="确认" cancelText="取消">
-                <span className='tip'>如果发现功能异常，可以尝试<Button type="link">一键重置</Button></span>
-                </Popconfirm>
+
+                <div className="language setting-part">
+                  <CheckVersionPart version='0.13.1'>
+                    <Radio.Group onChange={this.setLocale} value={langType}>
+                      {
+                        languages.map((item)=>(
+                          <Radio value={item.value}>{item.name}</Radio>
+                        ))
+                      }
+                    </Radio.Group>
+                  </CheckVersionPart>
+                </div>
+
+                <div className="reset setting-part">
+                  <CheckVersionPart version='0.12.5'>
+                    <Popconfirm placement="topLeft" title={'确定重置「基础配置」「功能开关」？'} onConfirm={this.resetAll} okText="确认" cancelText="取消">
+                      <span className='tip'>如果发现功能异常，可以尝试<Button type="link">一键重置</Button></span>
+                    </Popconfirm>
+                  </CheckVersionPart>
+                </div>
               </section>
             </TabPane>
             <TabPane tab="功能开关" key="4">
