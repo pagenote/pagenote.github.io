@@ -1,9 +1,14 @@
 {
   "latest": {
-    "version": "0.12.5",
-    "support": ["chrome","firefox"]
+    "version": "0.13.0",
+    "support": ["firefox"]
   },
   "notification": {
+    "0.13.0": {
+      "zh_cn": "0.13.0 能上传能下载的云盘功能来了",
+      "en": "",
+      "link": "https://mp.weixin.qq.com/s/41cT8ub4iNjzrunwrxksDw"
+    },
     "0.12.5": {
       "zh_cn": "0.12.5 云盘内测，可以开始用了，快来看看吧",
       "en": "",
@@ -11,7 +16,7 @@
     }
   },
   "chrome": "0.12.5",
-  "firefox": "0.12.5",
+  "firefox": "0.13.0",
   "edge": "0.12.5",
   "360": "0.12.1",
   "default": "0.12.2",
