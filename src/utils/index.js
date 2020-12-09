@@ -1,9 +1,9 @@
-export function isLow(current='',compareVersion) {
+export function isLow(current='',compareVersion='',separator='.') {
     if(current===compareVersion){
         return false;
     }
-    const firstVersion = current.split('.');
-    const secondVersion = compareVersion.split('.');
+    const firstVersion = current.split(separator);
+    const secondVersion = compareVersion.split(separator);
     let isOld = true;
     for(let i=0; i<secondVersion.length; i++) {
         const preVersion = parseInt(firstVersion[i]);

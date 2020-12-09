@@ -332,7 +332,7 @@ export default class Me extends Component{
         const groupKeys = Object.keys(groupPagesObject).sort(function (pre,next) {
             return searchString ?
               (groupPagesObject[pre].matched > groupPagesObject[next].matched ? -1 : 1):
-              (isLow(next,pre) ? -1 :1)
+              (isLow(next||'',pre||'','/') ? -1 :1)
         });
 
         const barSize = Number.isInteger(+size) ? size + 'px' : '';
@@ -349,14 +349,6 @@ export default class Me extends Component{
         }
         return (
           <div className='me' data-pagenote='1' style={{width: bookWidth+'px'}}>
-              {/*<div className='more-icon'>*/}
-              {/*    <p>*/}
-              {/*        <AsideMore onClick={this.toggleAside}  />*/}
-              {/*    </p>*/}
-              {/*   <p>*/}
-              {/*       <a href="/setting"><Setting /></a>*/}
-              {/*   </p>*/}
-              {/*</div>*/}
               <Aside onImportData={this.onImportData}
                      exportData={this.exportData}
                      pageSize={pages.length}
@@ -366,11 +358,8 @@ export default class Me extends Component{
               <div className={`pages-and-detail ${expand ? 'expand' : 'fold'}`}
                    style={{ border: `1px solid ${bgColor}`,backgroundColor: bgColor,left: pageMeOffset+'px',width: bookWidth-pageMeOffset+'px'  }}>
                   <LoadPage connected={connected} doConnect={this.doConnect} emptyGroup={groupKeys.length === 0}/>
-
                   {
-                      groupKeys.length > 0 &&
                       <Fragment>
-                          {/* 分组详情 单页打开*/}
                           <section className={`pages`} style={{width: barSize,background: bgColor}}>
                               <div className='title' style={{backgroundColor: bgColor}}>
                                   <a className='logo-title' href='/'>
@@ -387,40 +376,15 @@ export default class Me extends Component{
                               </div>
                               <div className='content'>
                                   <div className={`page-group active`}>
-                                      <div className={`page-container ${grid ? 'grid' : 'list'}`}
-                                           onKeyUp={this.onKeyUP}>
+                                      <div className={`page-container ${grid ? 'grid' : 'list'}`} onKeyUp={this.onKeyUP}>
                                           {
-                                              !grid ?
-                                                Array.from(selectedGroupsKey).map((group) => (
-                                                  <Group key={group} groupPagesObject={groupPagesObject}
-                                                         group={group} selectedPagesKey={selectedPagesKey}
-                                                         expand={expandGroups.has(group)}
-                                                         selectPage={this.selectPage}
-                                                         toggleExpandGroup={this.toggleExpandGroup}/>
-                                                )):
-                                                <div className='grid-group'>
-                                                    {
-                                                        cols.map((value,colIndex)=>(
-                                                          <div key={value} className='grid-group-col' style={{width:100/cols.length+"%"}}>
-                                                              {
-                                                                  Array.from(selectedGroupsKey).map((group,index) => (
-                                                                    <Fragment key={group}>
-                                                                        {
-                                                                            index % cols.length === colIndex &&
-                                                                            <Group key={group} groupPagesObject={groupPagesObject}
-                                                                                   expand={expandGroups.has(group)}
-                                                                                   group={group} selectedPagesKey={selectedPagesKey}
-                                                                                   selectPage={this.selectPage}
-                                                                                   toggleExpandGroup={this.toggleExpandGroup}/>
-                                                                        }
-                                                                    </Fragment>
-
-                                                                  ))
-                                                              }
-                                                          </div>
-                                                        ))
-                                                    }
-                                                </div>
+                                            groupKeys.map((group) => (
+                                              <Group key={group} groupPagesObject={groupPagesObject}
+                                                     group={group} selectedPagesKey={selectedPagesKey}
+                                                     expand={expandGroups.has(group)}
+                                                     selectPage={this.selectPage}
+                                                     toggleExpandGroup={this.toggleExpandGroup}/>
+                                            ))
                                           }
                                           {
                                               selectedGroupsKey.size === 0 &&

@@ -14,7 +14,6 @@ export const connectServer = function(callback){
                 const tempData = currentPage.plainData || {};
                 tempData.keys = data[key].keys;
                 const isValidate = (tempData.steps && tempData.steps.length) ||  (tempData.snapshots && tempData.snapshots.length);
-                console.log(isValidate,key,tempData);
                 if(isValidate){
                     pages.push(tempData);
                     pageObject[key] = tempData;
@@ -92,7 +91,7 @@ export const groupPages = function (groupType,pages) {
             break;
         case 2:
             result = groupBy(function (page) {
-                return page.categories || [page.category || 'default' ];
+                return (page.categories && page.categories.length) ? page.categories : [page.category || 'default' ];
             });
             break;
         default:
