@@ -1,42 +1,19 @@
 {
   "versions": [
     {
-      "version": "0.12.5",
-      "for_max_version": "",
-      "for_min_version":"",
+      "version": "0.13.0",
+      "main_version": "0.13.+",
+      "main_label": "云盘存储",
+      "sub_label": "把数据放到云盘里",
       "content": {
-        "zh_cn": "清理了一些历史功能，下线"
-      }
-    },
-    {
-      "version": "0.12.4",
-      "for_max_version": "",
-      "for_min_version":"",
-      "content": {
-        "zh_cn": "云盘上传备份功能开始内测使用"
-      }
-    },
-    {
-      "version": "0.12.3",
-      "for_max_version": "",
-      "for_min_version":"",
-      "content": {
-        "zh_cn": "<h3>\n <a href=\"https://pagenote.cn/release\">0.12.3 插件更开放</a>\n</h3>\n  <ul>\n <li>新的默认插件配置方案</li>\n                       <li>所有配置内容迁移至setting平台</li>\n<li>开放新的draft页面，支持编写草稿</li>\n<li>修复Firefox新打开标签页后台运行时，插件植入失败的情况</li>\n </ul>"
+        "zh_cn": "从现在起，数据除了可以放在本地，也可以存储到云端。"
       },
-      "tooltip": {
-        "zh_cn": "扩展有一些调整，DIY需要注意一下。"
-      }
-    },
-    {
-      "version": "0.12.2",
-      "for_max_version": "",
-      "for_min_version":"",
-      "content": {
-        "zh_cn": "<h3>\n                            <a href=\"https://pagenote.cn/release\">0.12.2 样式大重构</a>\n                        </h3>\n                        <ul>\n                            <li>操作界面更简洁</li>\n                            <li>增加了提示信息</li>\n                            <li>增加了一个实验性功能：「阅读进度条」</li>\n                            <li>制作了一个简单的 <a href=\"https://pagenote.cn\">视频</a>，让你更快的了解各类操作</li>\n                        </ul>"
-      },
-      "tooltip": {
-        "zh_cn": "欢迎来到新的世界"
-      }
+      "items": [
+        ["FEATURE","支持云盘数据下载","开放国际化入口","快捷键不区分大小写","错误日志收集器"],
+        ["BUG FIX:","修复跨行无法高亮，重写高亮算法","version比较计算错误"],
+        ["CHANGES:","不再支持0.12.0版本以下数据","popup不再提示更新内容","彻底下线历史管理页"],
+        ["REFACTOR","代码重构梳理 background 拆分、读写收敛"]
+      ]
     }
   ]
 }

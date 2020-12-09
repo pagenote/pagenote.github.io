@@ -2,6 +2,19 @@ import React, {Component} from 'react'
 import InstallBar from "../../components/InstallBar";
 import './release.scss';
 import CommonPage from "../CommonPage";
+import changelog from '../../../public/changelog.json'
+
+const mainVersion = {};
+changelog.versions.forEach((version)=>{
+    const tempMainVersion = version.main_version || '-';
+    mainVersion[tempMainVersion] = mainVersion[tempMainVersion] || {
+        mainLabel: version.main_label,
+        versions: [],
+    };
+    mainVersion[tempMainVersion].versions.push(version);
+})
+console.log(mainVersion);
+
 
 export default class Release extends Component{
 
@@ -16,20 +29,63 @@ export default class Release extends Component{
                     <InstallBar className='install-btns' />
                     <strong className='slogan'>PAGENNOTE 小而美的笔记工具</strong>
                 </section>
+                {
+                   Object.keys(mainVersion).map((version,index)=>(
+                      <div key={version} className='row version latest' id='version12'>
+                          <div className="left col-3">
+                              <div className="version-number">
+                                  {version}
+                                  <div>{mainVersion[version].mainLabel}</div>
+                                  {
+                                      index===0 &&
+                                      <p>
+                                          <div style={{fontSize:'12px'}}>
+                                              关注微信公众号
+                                          </div>
+                                          <img width={80} src="/img/wechat.jpg" alt="关注微信公证号，搜索 pagenote"/>
+                                          <div style={{fontSize:'12px'}}>
+                                              <a href="/page?id=future">功能规划</a>
+                                          </div>
+                                      </p>
+                                  }
+                              </div>
+                          </div>
+                          <div className="right col-9">
+                              {
+                                  mainVersion[version].versions.map((subVersion)=>(
+                                    <div className="brief" key={subVersion.version}>
+                                        <h3>{subVersion.version} {subVersion.sub_label}</h3>
+                                        {
+                                            subVersion.items ?
+                                              <ul>
+                                                  {
+                                                      subVersion.items.map((item)=>(
+                                                         <li>
+                                                             {
+                                                                 item.map((subItem)=>(
+                                                                   <div dangerouslySetInnerHTML = {{ __html: subItem}}></div>
+                                                                 ))
+                                                             }
+                                                         </li>
+                                                      ))
+                                                  }
+                                              </ul>
+                                              :
+                                              <div dangerouslySetInnerHTML = {{ __html: subVersion.content['zh_cn']}}></div>
+                                        }
+
+                                    </div>
+                                  ))
+                              }
+                          </div>
+                      </div>
+                    ))
+                }
                 <div className='row version latest' id='version12'>
                     <div className="left col-3">
                         <div className="version-number">
                             0.12.+
                             <div>插件市场</div>
-                            <p>
-                                <div style={{fontSize:'12px'}}>
-                                    关注微信公众号
-                                </div>
-                                <img width={80} src="/img/wechat.jpg" alt="关注微信公证号，搜索 pagenote"/>
-                                <div style={{fontSize:'12px'}}>
-                                    <a href="/page?id=future">功能规划</a>
-                                </div>
-                            </p>
                         </div>
                     </div>
                     <div className="right col-9">
