@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import ReactDOM from "react-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { getBrowserTypeAndVersion} from "../utils/document";
 import '../styles/common.scss'
+import {sendEvent} from "../utils";
 
 // 设置滚动title
 export default function CommonPage(Component,useHead=true,useFooter=true) {
@@ -30,18 +32,23 @@ export default function CommonPage(Component,useHead=true,useFooter=true) {
     , mountNode);
 }
 
-if(window.location.protocol.indexOf('https')>-1){
+const track = window.location.protocol.indexOf('https')>-1;
+if(track){
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-LBE869KVBS');
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(function (registration) {
-      console.log('Service Worker 注册成功!');
-    }).catch(function (err) {
-      console.log(err);
-    });
+  const browser = getBrowserTypeAndVersion();
+  if(['firefox','safari'].includes(browser.type.toLowerCase())){
+     sendEvent('me','view',window.location.pathname,'','pageview');
+  } else{
+    gtag('js', new Date());
+    gtag('config', 'G-LBE869KVBS');
   }
 }
 
+if ('serviceWorker' in navigator && window.location.protocol.indexOf('https')>-1) {
+  navigator.serviceWorker.register('/sw.js').then(function (registration) {
+    console.log('Service Worker 注册成功!');
+  }).catch(function (err) {
+    console.log(err);
+  });
+}

@@ -1,3 +1,5 @@
+import Bridge from "./extensionBridge";
+
 export function isLow(current='',compareVersion='',separator='.') {
     if(current===compareVersion){
         return false;
@@ -48,6 +50,11 @@ export function exportMd(pages=[]) {
 
     const name = `pagenote[${markCount}lights]`;
     funDownload(content, name+'.md');
+}
+
+const bridgeCli = new Bridge(document.getElementById('messenger'),'page','extension');
+export function sendEvent(category,eventAction='',eventLabel='',eventValue='',hitType='event') {
+    bridgeCli.sendMessage('active',[category,eventAction,eventLabel,eventValue,hitType]);
 }
 
 var funDownload = function (content, filename) {

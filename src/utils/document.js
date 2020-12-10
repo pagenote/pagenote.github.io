@@ -84,9 +84,11 @@ function getBrowserTypeAndVersion() {
     type = 'Safari';
     version = matchSafari[2];
   }
+  const platform = /Mac/ig.test(userAgent);
   return {
     type,
-    version
+    version,
+    iOS: platform,
   };
 }
 
