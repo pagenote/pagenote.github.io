@@ -63,6 +63,12 @@ const users = [
     type: 2,
     time:'2020-12-3'
   },
+  {
+    name:'*浩',
+    amount: 5,
+    type: 1,
+    time:'2020-12-10'
+  },
 ];
 
 const payType={
@@ -87,9 +93,6 @@ export default class CreatePage extends Component{
             <br/>
             <span className='light-me'>「你现在能使用的功能，在未来也将继续可以使用，不会因为没有付费而针对你停止服务」</span>
           </p>
-          {/*<p>*/}
-          {/*  PAGENOTE 需要你的支持和鼓励，但同时希望营造一个良好的用户、产品关系--PAGENOTE 能够很好的发展，PAGENOTE 值的用户自发地为之付费。*/}
-          {/*</p>*/}
         </p>
         <div className='donation-users'>
             <h4>感谢以下用户的支持：</h4>
