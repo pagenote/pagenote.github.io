@@ -52,9 +52,9 @@ export function exportMd(pages=[]) {
     funDownload(content, name+'.md');
 }
 
-const bridgeCli = new Bridge(document.getElementById('messenger'),'page','extension');
+// const bridgeCli = new Bridge(document.getElementById('messenger'),'page','extension');
 export function sendEvent(category,eventAction='',eventLabel='',eventValue='',hitType='event') {
-    bridgeCli.sendMessage('active',[category,eventAction,eventLabel,eventValue,hitType]);
+    // bridgeCli.sendMessage('active',[category,eventAction,eventLabel,eventValue,hitType]);
 }
 
 var funDownload = function (content, filename) {
