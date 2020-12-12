@@ -97,10 +97,10 @@ export default function InstallBar() {
                             Edge
                         </a>
                         <a
-                          data-tip={`最新版本：${version.offline}`}
+                          data-tip={`最新版本：${version['360']}`}
                           className={`browser-install-btn ee ${chromeType==='ee'?'active':''}`}
                            href="https://ext.chrome.360.cn/webstore/detail/gielpddfollkffnbiegekliodnahhpfa">360</a>
-                        <a className="browser-install-btn offline wechat-finder" data-tip='最新版本：0.12.0'>
+                        <a className="browser-install-btn offline wechat-finder" data-tip={`最新版本：${version.offline}`}>
                             <span>
                                 离线安装
                             </span>
