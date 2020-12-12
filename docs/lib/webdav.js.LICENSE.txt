@@ -1,9 +1,0 @@
-/*! http://mths.be/base64 v0.1.0 by @mathias | MIT license */
-
-/**
-     * @license nested-property https://github.com/cosmosio/nested-property
-     *
-     * The MIT License (MIT)
-     *
-     * Copyright (c) 2014-2020 Olivier Scherrer <pode.fr@gmail.com>
-     */

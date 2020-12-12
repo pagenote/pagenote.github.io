@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import  style from '../styles/dropmenu.module.scss'
 
 export default function DropMeun({list,selected,onSelect}) {
-    const selectedItem = list.find((item)=>{return item.value === selected});
+    const selectedItem = list.find((item)=>{return item.value === selected}) || {};
     const [hasSelected, setHas] = useState(false);
     const doSelect = function (value) {
         onSelect(value);

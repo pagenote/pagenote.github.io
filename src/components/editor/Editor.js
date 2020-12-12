@@ -76,7 +76,7 @@ export default class Editor extends Component{
       "version" : ""
     },this.props.data || {});
     const editor = new EditorJS({
-      holder : 'pagenote-editor',
+      holder : this.props.id || 'pagenote-editor',
       placeholder: this.props.placeholder||'',
       readOnly: this.props.readonly,
       tools: tools,
@@ -116,7 +116,7 @@ export default class Editor extends Component{
   render() {
     return (
       <div className='editor'>
-        <div id="pagenote-editor"></div>
+        <div id={this.props.id || "pagenote-editor"}></div>
       </div>
     )
   }

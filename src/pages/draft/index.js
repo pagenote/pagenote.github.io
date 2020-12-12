@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Editor from '../../components/editor/Editor'
 import '../page/page.scss'
-import CommonPage from "../CommonPage";
+// import CommonPage from "../CommonPage";
 import './new.scss'
 
 
@@ -30,4 +30,4 @@ export default class CreatePage extends Component{
   }
 }
 
-CommonPage(CreatePage)
+// CommonPage(CreatePage)

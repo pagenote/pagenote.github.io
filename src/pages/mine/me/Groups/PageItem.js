@@ -1,22 +1,10 @@
 import React from 'react'
-import './pageitem.scss'
+
 export default function PageItem({page,onSelect,active}) {
     const steps = page.steps || {};
     const images = page.images || [];
     return(
-        <div key={page.url} title={page.url} className={`page-item ${active?'active':''}`} onClick={()=>onSelect(page)} style={{backgroundImage:`url(${images[0]})`}}>
-            <svg t="1593351193751" className="selected-icon" viewBox="0 0 1024 1024" version="1.1"
-                 xmlns="http://www.w3.org/2000/svg" p-id="2250" width="32" height="32">
-                <path
-                    d="M1024 1024V158.398C1024 70.86 953.14 0 865.602 0H0l1024 1024zM905.942 171.278L643.313 479.621s-19.084 26.63-45.714 0L483.425 327.394s-15.194-19.084 3.773-34.286c7.656-3.771 19.084-11.429 34.286 3.773l102.746 79.883 251.31-232.116s15.201-15.194 30.401-3.766c7.658 3.766 11.429 15.195 0.001 30.396z m0 285.524"
-                    p-id="2251" fill="#1296db"></path>
-            </svg>
-            {/*<svg t="1594012219077" className="icon" viewBox="0 0 1024 1024" version="1.1"*/}
-            {/*     xmlns="http://www.w3.org/2000/svg" p-id="2189" width="16" height="16">*/}
-            {/*    <path*/}
-            {/*        d="M722.2 85.5L939 300.3c24.3 21.2 26.9 58.1 5.7 82.4-21.2 24.3-58.1 26.9-82.4 5.7-2-1.8-3.9-3.7-5.7-5.7L834 365.5 613.4 678.3l69.3 69.3c20.3 25 16.5 61.8-8.6 82.1-21.5 17.5-52.4 17.4-73.8-0.2L192.8 418.7c-21.2-24.3-18.6-61.2 5.7-82.4 22-19.1 54.7-19.1 76.7 0l67.9 69.3 313-220.9L640 168c-24.3-21.2-26.9-58.1-5.7-82.4 21.2-24.3 58.1-26.9 82.4-5.7 2 1.8 3.9 3.7 5.7 5.7l-0.2-0.1z m-327.3 622l-81.3-80.4C248 706.3 144.3 821.5 125.5 845.5 98.2 879.3 77.1 917.6 63 958.7c41.1-13.9 79.4-34.9 113.2-62 24-18.8 139.2-122.5 218-189.2h0.7z"*/}
-            {/*        p-id="2190" fill="#1296db"></path>*/}
-            {/*</svg>*/}
+        <div key={page.url} title={page.url} className={`page-item ${active?'active':''}`} onClick={()=>onSelect(page.url)} style={{backgroundImage:`url(${images[0]})`}}>
             <div className='page-header'>
                 <div className='page-title' title={page.url}>
                     <img className='page-icon' src={page.icon||images[0]} alt=""/>

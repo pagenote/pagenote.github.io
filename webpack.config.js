@@ -75,6 +75,7 @@ const config = {
     ],
     alias: {
       // 'react-dom': '@hot-loader/react-dom'
+      '@': require('path').resolve(__dirname, 'src')
     }
   },
   devServer: {
@@ -85,7 +86,7 @@ const config = {
       // 使用正则匹配命中路由
       rewrites: [
         {
-          from: /^\/me|new|page|release|setting|donation|rate|privacy|draft|about|doctor$/,
+          from: /^\/me|new|page|release|setting|donation|rate|privacy|draft|about|doctor|mine$/,
           to: function(context) {
             return   context.parsedUrl.pathname+'.html';
           }
