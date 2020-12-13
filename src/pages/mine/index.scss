@@ -3,9 +3,9 @@
 }
 
 .page-menus{
-  //position: fixed;
+  position: sticky;
   //left: 0;
-  //top:0;
+  top:0;
   width: 160px;
   flex-shrink: 0;
   min-height: 100vh;

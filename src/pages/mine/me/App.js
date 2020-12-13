@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
+import { Select } from 'antd';
 import WebPage from "./page/WebPage";
 import Groups from './Groups/Groups';
-import {fetchGroups} from "../api";
+import {fetchGroups} from "../../../utils/api";
 import './me.scss'
 
+const { Option } = Select;
 const groupTypes = [
     {
         value: 2,
@@ -20,7 +22,6 @@ const groupTypes = [
 ];
 const predefineSize = window.innerWidth - 160 - 2;
 
-
 export default class Me extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +33,7 @@ export default class Me extends Component {
             barSize: 400,
 
 
-            groupType: '',
+            groupType: 1,
             searchString: '',
             groups: [
                 {
@@ -58,18 +59,31 @@ export default class Me extends Component {
     }
 
     componentDidMount() {
-        fetchGroups((result={})=>{
-            const groups = result.groups || [];
-            let selectedArray = [];
-            try{
-                const selectedKeys = localStorage.getItem('selectedKeys');
-                selectedArray = selectedKeys.split(',');
-            }catch (e){
+        this.fetchGroupList();
+        this.initSelected();
+    }
 
-            }
+    initSelected=()=>{
+        let selectedArray = [];
+        try{
+            const selectedKeys = localStorage.getItem('selectedKeys');
+            selectedArray = selectedKeys.split(',');
+            selectedArray = selectedArray.filter((item)=>{
+                return !!item
+            })
+        }catch (e){
+
+        }
+        this.setState({
+            selectedPageKeys: new Set(selectedArray)
+        })
+    }
+
+    fetchGroupList=()=>{
+        fetchGroups(this.state.groupType,(result={})=>{
+            const groups = result.groups || [];
             this.setState({
                 groups: groups,
-                selectedPageKeys: new Set(selectedArray)
             })
         })
     }
@@ -83,20 +97,35 @@ export default class Me extends Component {
         localStorage.setItem('selectedKeys',Array.from(selectedPageKeys).toString());
     }
 
+    changeGroupType=(type)=>{
+        this.setState({
+            groupType: type
+        },()=>{
+            this.fetchGroupList();
+        })
+    }
+
     render() {
-        const {theme = {}, barSize,groups,selectedPageKeys} = this.state;
+        const {theme = {}, barSize,groups,selectedPageKeys,groupType} = this.state;
         const bgColor = theme.bgColor;
         return (
           <div className={`pages-and-detail`}
-               style={{border: `1px solid ${bgColor}`, backgroundColor: bgColor, width: predefineSize + 'px'}}>
+               style={{border: `1px solid ${bgColor}`, backgroundColor: bgColor}}>
               <section className='pages' style={{width: barSize, background: bgColor}}>
+                  <Select defaultValue={groupType} style={{ width: 120 }} bordered={false} onChange={this.changeGroupType}>
+                      {
+                          groupTypes.map((item)=>(
+                            <Option value={item.value}>{item.label}</Option>
+                          ))
+                      }
+                  </Select>
                   <Groups groups={groups} selectPage={this.selectPage} selectedPageKeys={selectedPageKeys}></Groups>
               </section>
               <aside className='split-line' onMouseDown={this.dragSize} style={{color: '#fff'}}>
                   <div className='left' onClick={() => this.setSize(350)}>left&lt;</div>
                   <div className='right' onClick={() => this.setSize(predefineSize - 4)}>&gt;right</div>
               </aside>
-              <WebPage width={predefineSize - barSize} keys={Array.from(selectedPageKeys)}></WebPage>
+              <WebPage keys={Array.from(selectedPageKeys)}></WebPage>
           </div>
         )
     }

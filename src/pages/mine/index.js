@@ -12,22 +12,24 @@ import {
 } from "react-router-dom";
 import Loadable from 'react-loadable';
 import Draft from '../draft/index';
+import SettingPage from '../setting/App';
 import AsideMore from "../../assets/icon/aside-more.svg";
 import Setting from "../../assets/icon/setting.svg";
 import Doc from '../../assets/icon/doc.svg'
 import WebPage from '../../assets/icon/webpage.svg'
 import './index.scss'
 
-const SettingPage = Loadable({
-  loader: () => import('../setting/index'),
-  loading: <div>加载中</div>,
-});
+// const SettingPage = Loadable({
+//   loader: () => import('../setting/index'),
+//   loading: <div>加载中</div>,
+// });
 
 const DraftPage = Loadable({
   loader: () => import('../draft/index'),
   loading: <div>加载中</div>,
 });
 
+const predefineSize = window.innerWidth - 160 - 2;
 const RouteMe = function(){
   return (
     <Router>
@@ -37,7 +39,7 @@ const RouteMe = function(){
           <NavLink activeClassName="active" exact={true} to="/draft">临时记事本</NavLink>
           <NavLink activeClassName="active" exact={true} to="/setting">设置</NavLink>
         </div>
-        <div className='page-container'>
+        <div className='page-container' style={{width: predefineSize + 'px'}}>
           <Switch>
             <Route exact path="/">
               <App />
@@ -46,7 +48,7 @@ const RouteMe = function(){
               <Draft></Draft>
             </Route>
             <Route exact path="/setting">
-              <div>社会</div>
+              <SettingPage></SettingPage>
             </Route>
           </Switch>
         </div>

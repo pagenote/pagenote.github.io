@@ -1,0 +1,133 @@
+import Bridge from "./extensionBridge";
+import { isLow } from "./index";
+
+function checkValid(page){
+  const {steps=[],snapshots=[],images=[]} = page || {}
+  const hasData = !!(steps.length || snapshots.length);
+  return hasData;
+}
+
+export let getBridge = function (){
+  const element = document.getElementById('messenger');
+  const bridgeCli = new Bridge(element,'page','extension');
+  if(element){
+    getBridge = function (){
+      return bridgeCli
+    }
+  }
+  return bridgeCli;
+}
+
+// 缓存数据，当服务不可用时使用该值
+let tempDatas = {};
+let tempGroups = {};
+export const fetchGroups = function (groupType=2,callback){
+  if(tempGroups[groupType]){
+    callback(tempGroups[groupType])
+  }
+  // 立即返回缓存，并拉取最新数据，然后重置
+  const bridge = getBridge()
+  bridge.sendMessage('get_data',{},function (result){
+    if(result && result.data){
+      tempDatas = result.data;
+    }
+
+    const groupObject = {};
+    Object.keys(tempDatas).forEach((key)=>{
+      const currentPage = tempDatas[key].plainData || {};
+      if(checkValid(currentPage)){
+        try{
+          switch (groupType){
+            case 2:
+              const categories = currentPage.categories || [];
+              categories.forEach((category)=> {
+                const groupKey = category ? category.trim() : '';
+                if(groupKey){
+                  groupObject[category] = groupObject[category] || [];
+                  groupObject[category].push(currentPage);
+                }
+              });
+              break;
+            case 1: // date
+              const groupKey = new Date(currentPage.lastModified).toLocaleDateString();
+              groupObject[groupKey] = groupObject[groupKey] || [];
+              groupObject[groupKey].push(currentPage);
+              break;
+            case 0:
+              const domainKey = currentPage.keys[0];
+              groupObject[domainKey] = groupObject[domainKey] || [];
+              groupObject[domainKey].push(currentPage);
+              break;
+          }
+        }catch (e) {
+          console.error(e)
+        }
+      }
+    });
+
+    const groups = [];
+    Object.keys(groupObject).forEach((key)=>{
+      groups.push({
+        label: key,
+        pages: groupObject[key],
+      })
+    })
+    groups.sort((pre,next)=>{
+      return isLow(pre.label,next.label,'/') ? 1 : -1;
+    })
+    tempGroups[groupType] = groups;
+
+    callback({
+      groups: groups,
+    });
+  })
+}
+
+// bridge 模式只支持单通信通道，暂不支持并行发送，需要加锁处理
+let requestLock = false;
+export const getPage = function (key){
+  return new Promise((resolve,reject)=>{
+    const page = tempDatas[key];
+    if(page){
+      resolve(page.plainData);
+    }else{
+      const bridge = getBridge();
+      if(requestLock){
+        setTimeout(()=>{
+          getPage(key).then((result)=>{
+            resolve(result)
+          })
+        },1000)
+      }else{
+        requestLock = true;
+        bridge.sendMessage('get_page_detail',{key:key}, ({data})=>{
+          requestLock = false;
+          resolve(data ? data.plainData : null);
+        })
+      }
+    }
+  });
+}
+
+export const getSetting= function (callback){
+  const bridge = getBridge();
+  bridge.sendMessage('get_setting',{},function ({data,type}){
+    const setting = data || {};
+    callback(setting);
+  })
+}
+
+export const fetchUserInfo = function (callback){
+ getBridge().sendMessage('get_user_info',{},({data={},type})=>{
+    callback(data);
+  })
+}
+
+export const fetchCloudInfo = function (callback){
+  getBridge().sendMessage('get_cloud_account',{},({data={},type})=>{
+    callback(data);
+  })
+}
+
+
+

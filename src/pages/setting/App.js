@@ -14,6 +14,8 @@ import 'antd/dist/antd.css';
 // import 'antd/es/collapse/style/index.css'
 import UserForm from "../../components/setting/UserForm";
 import CloudForm from "../../components/setting/WebDavForm";
+import { getSetting,fetchUserInfo,fetchCloudInfo } from "../../utils/api";
+
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
 
@@ -129,15 +131,15 @@ export default class SettingRender extends Component{
     // this.modal = Modal.info({
     //   content: '正在连接PAGENOTE。如果长时间连接失败，请确保已安装最新版PAGENOTE',
     // });
-    bridge = new Bridge(document.getElementById('messenger'),'page','extension');
-    this.getSetting();
+    // bridge = new Bridge(document.getElementById('messenger'),'page','extension');
+    this.initSetting();
     this.addClickListener();
     this.getUserInfo();
     this.getCloudAccount();
   }
 
   getUserInfo=()=>{
-    bridge.sendMessage('get_user_info',{},({data={},type})=>{
+    fetchUserInfo((data)=>{
       if(data){
         this.setState({
           userInfo: data,
@@ -147,7 +149,7 @@ export default class SettingRender extends Component{
   };
 
   getCloudAccount=()=>{
-    bridge.sendMessage('get_cloud_account',{},({data={},type})=>{
+    fetchCloudInfo( (data)=>{
       if(data){
         this.setState({
           cloud: data,
@@ -178,9 +180,8 @@ export default class SettingRender extends Component{
     })
   };
 
-  getSetting= throttle(()=>{
-    bridge.sendMessage('get_setting',{},({data,type})=>{
-      const setting = data || {};
+  initSetting= throttle(()=>{
+    getSetting((setting)=>{
       this.setState({
         colors: setting.colors || [],
         themeId: setting.themeId || '',
@@ -283,7 +284,7 @@ export default class SettingRender extends Component{
     },()=>{
       message.destroy();
       message.success('修改成功。已打开的网页刷新后生效');
-      this.getSetting();
+      this.initSetting();
     });
   },1000);
 
@@ -291,7 +292,7 @@ export default class SettingRender extends Component{
     bridge.sendMessage('reset_setting',{
     },()=>{
       message.success('重置成功');
-      this.getSetting();
+      this.initSetting();
     });
   }
 
