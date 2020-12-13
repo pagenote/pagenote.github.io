@@ -109,6 +109,13 @@ export const getPage = function (key){
   });
 }
 
+export const savePage = function (key,plainData){
+  getBridge().sendMessage('save_data',{
+    key:key,
+    plainData:plainData
+  })
+}
+
 export const getSetting= function (callback){
   const bridge = getBridge();
   bridge.sendMessage('get_setting',{},function ({data,type}){
