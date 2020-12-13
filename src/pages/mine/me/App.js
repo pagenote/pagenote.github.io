@@ -54,7 +54,7 @@ export default class Me extends Component {
                     ]
                 }
             ],
-            selectedPageKeys: new Set(),
+            selectedPageKeysArray: [],
         };
     }
 
@@ -67,15 +67,12 @@ export default class Me extends Component {
         let selectedArray = [];
         try{
             const selectedKeys = localStorage.getItem('selectedKeys');
-            selectedArray = selectedKeys.split(',');
-            selectedArray = selectedArray.filter((item)=>{
-                return !!item
-            })
+            selectedArray = selectedKeys.split(',')
         }catch (e){
 
         }
         this.setState({
-            selectedPageKeys: new Set(selectedArray)
+            selectedPageKeysArray: selectedArray||[]
         })
     }
 
@@ -89,12 +86,17 @@ export default class Me extends Component {
     }
 
     selectPage=(pageKey)=>{
-        const {selectedPageKeys} = this.state;
-        selectedPageKeys.has(pageKey) ? selectedPageKeys.delete(pageKey) : selectedPageKeys.add(pageKey);
+        const {selectedPageKeysArray} = this.state;
+        const index = selectedPageKeysArray.indexOf(pageKey);
+        if(index>=0){
+            selectedPageKeysArray.splice(index,1);
+        }else{
+            selectedPageKeysArray.push(pageKey);
+        }
         this.setState({
-            selectedPageKeys
+            selectedPageKeysArray
         });
-        localStorage.setItem('selectedKeys',Array.from(selectedPageKeys).toString());
+        localStorage.setItem('selectedKeys',selectedPageKeysArray.join(','));
     }
 
     changeGroupType=(type)=>{
@@ -106,7 +108,7 @@ export default class Me extends Component {
     }
 
     render() {
-        const {theme = {}, barSize,groups,selectedPageKeys,groupType} = this.state;
+        const {theme = {}, barSize,groups,selectedPageKeysArray,groupType} = this.state;
         const bgColor = theme.bgColor;
         return (
           <div className={`pages-and-detail`}
@@ -119,13 +121,13 @@ export default class Me extends Component {
                           ))
                       }
                   </Select>
-                  <Groups groups={groups} selectPage={this.selectPage} selectedPageKeys={selectedPageKeys}></Groups>
+                  <Groups groups={groups} selectPage={this.selectPage} selectedPageKeysArray={selectedPageKeysArray}></Groups>
               </section>
               <aside className='split-line' onMouseDown={this.dragSize} style={{color: '#fff'}}>
                   <div className='left' onClick={() => this.setSize(350)}>left&lt;</div>
                   <div className='right' onClick={() => this.setSize(predefineSize - 4)}>&gt;right</div>
               </aside>
-              <WebPage keys={Array.from(selectedPageKeys)}></WebPage>
+              <WebPage keys={selectedPageKeysArray}></WebPage>
           </div>
         )
     }

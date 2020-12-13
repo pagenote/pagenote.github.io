@@ -30,7 +30,7 @@ export default function Group({group,expand,activePageKeys,toggleExpandGroup,sel
         {
           pages.map((page)=>(
             <PageItem key={page.url}
-              active={activePageKeys.has(page.url)}
+              active={activePageKeys.includes(page.url)}
               page={page}
               onSelect={selectPage}/>
           ))

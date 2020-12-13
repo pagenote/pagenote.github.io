@@ -20,7 +20,7 @@ export default class Groups extends Component{
 
 
   render() {
-    const {groups=[],selectedPageKeys,selectPage} = this.props;
+    const {groups=[],selectedPageKeysArray,selectPage} = this.props;
     const {expandGroups} = this.state;
     return (
       <div className='groups'>
@@ -30,7 +30,7 @@ export default class Groups extends Component{
               key={group.label}
               group={group}
               expand={expandGroups.has(group.label)}
-              activePageKeys={selectedPageKeys}
+              activePageKeys={selectedPageKeysArray}
               toggleExpandGroup={this.toggleExpandGroup}
               selectPage={selectPage}
             />
