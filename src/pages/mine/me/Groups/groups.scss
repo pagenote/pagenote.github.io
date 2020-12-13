@@ -3,7 +3,7 @@
   padding: 12px;
   .group-item{
     transition: all 0.3s ease-out;
-    transform: translate(0, 0);
+    //transform: translate(0, 0);
     width: 100%;
     box-sizing: border-box;
     padding: 4px 8px;
@@ -94,9 +94,9 @@
     border-left: 1px solid #eaeaea;
     border-radius: 6px;
     background-color: #f7f48b !important;
-    .page-cliper{
-      background: #faad14;
-    }
+    //.page-cliper{
+    //  background: #faad14;
+    //}
     .page-header{
       text-shadow: 1px 0px 1px #fff;
     }
@@ -121,14 +121,14 @@
     right: 0;
     top: 0;
   }
-  .page-cliper{
-    width: 8px;
-    border-radius: 50%;
-    position: absolute;
-    right: -18px;
-    top: 12px;
-    height: 8px;
-  }
+  //.page-cliper{
+  //  width: 10px;
+  //  height: 10px;
+  //  border-radius: 50%;
+  //  position: fixed;
+  //  //left: 100px;
+  //  //top: 100px;
+  //}
   .page-header{
     //display: flex;
     ////justify-content: space-between;

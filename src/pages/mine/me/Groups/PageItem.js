@@ -4,7 +4,11 @@ export default function PageItem({page,onSelect,active}) {
     const steps = page.steps || {};
     const images = page.images || [];
     return(
-        <div key={page.url} title={page.url} className={`page-item ${active?'active':''}`} onClick={()=>onSelect(page.url)} style={{backgroundImage:`url(${images[0]})`}}>
+        <div key={page.url} title={page.url}
+             data-page={page.url}
+             className={`page-item ${active?'active':''}`}
+             onClick={(e)=>onSelect(page.url,e)}
+             style={{backgroundImage:`url(${images[0]})`}}>
             <div className='page-header'>
                 <div className='page-title' title={page.url}>
                     <img className='page-icon' src={page.icon||images[0]} alt=""/>
@@ -22,7 +26,7 @@ export default function PageItem({page,onSelect,active}) {
                     </a>
                 </div>
             </div>
-            <div className='page-cliper'></div>
+            {/*<div className='page-cliper'></div>*/}
             <div className='page-lights'>
                 {
                     steps.slice(0,3).map((step,index)=>(

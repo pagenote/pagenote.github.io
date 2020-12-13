@@ -2,9 +2,11 @@ import React, {Component} from 'react'
 import { Select } from 'antd';
 import WebPage from "./page/WebPage";
 import Groups from './Groups/Groups';
+import whatsElement from 'whats-element/pure';
 import {fetchGroups} from "../../../utils/api";
 import './me.scss'
 
+const whats = new whatsElement();
 const { Option } = Select;
 const groupTypes = [
     {
@@ -55,6 +57,9 @@ export default class Me extends Component {
                 }
             ],
             selectedPageKeysArray: [],
+            selectedPagesInfo:{
+
+            }
         };
     }
 
@@ -85,7 +90,7 @@ export default class Me extends Component {
         })
     }
 
-    selectPage=(pageKey)=>{
+    selectPage=(pageKey,e)=>{
         const {selectedPageKeysArray} = this.state;
         const index = selectedPageKeysArray.indexOf(pageKey);
         if(index>=0){
@@ -97,6 +102,8 @@ export default class Me extends Component {
             selectedPageKeysArray
         });
         localStorage.setItem('selectedKeys',selectedPageKeysArray.join(','));
+        // const info = whats.compute(e.target);
+        // console.log(info);
     }
 
     changeGroupType=(type)=>{
@@ -105,6 +112,12 @@ export default class Me extends Component {
         },()=>{
             this.fetchGroupList();
         })
+    }
+
+    gotoTarget=(top,element)=>{
+        document.querySelector('.pages').scrollTop=top-100;
+
+        // element.scrollIntoView();
     }
 
     render() {
@@ -121,12 +134,39 @@ export default class Me extends Component {
                           ))
                       }
                   </Select>
-                  <Groups groups={groups} selectPage={this.selectPage} selectedPageKeysArray={selectedPageKeysArray}></Groups>
+                  <Groups groups={groups}
+                          selectPage={this.selectPage}
+                          selectedPageKeysArray={selectedPageKeysArray}
+                          size={barSize}
+                  >
+                  </Groups>
               </section>
               <aside className='split-line' onMouseDown={this.dragSize} style={{color: '#fff'}}>
                   <div className='left' onClick={() => this.setSize(350)}>left&lt;</div>
                   <div className='right' onClick={() => this.setSize(predefineSize - 4)}>&gt;right</div>
+
+                  <div className='selected-targets'>
+                      {
+                          selectedPageKeysArray.map((key,index)=> {
+                              const relativeElement = document.querySelector('.page-item[data-page="'+key+'"]');
+                              console.log(relativeElement)
+                              const info = whats.compute(relativeElement);
+
+                              const height = document.querySelector(".groups").scrollHeight;
+                              console.log(info,relativeElement)
+                              const elementTop = relativeElement? relativeElement.offsetTop : -1000;
+                              return (
+                                <aside onClick={()=>{this.gotoTarget(elementTop,relativeElement)}} key={key} style={{top: ((elementTop)/height)*window.innerHeight+'px'}}>
+                                    <div className='target-info'>
+                                        {key}
+                                    </div>
+                                </aside>
+                              )
+                          })
+                      }
+                  </div>
               </aside>
+
               <WebPage keys={selectedPageKeysArray}></WebPage>
           </div>
         )

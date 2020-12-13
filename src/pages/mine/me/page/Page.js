@@ -1,5 +1,5 @@
 import React, {Component,Fragment} from 'react';
-import debounce from 'lodash/debounce'
+import throttle from 'lodash/throttle'
 import {message} from "antd";
 import BigPicture from "bigpicture";
 import DropLabel from "@/components/DropLabel";
@@ -12,7 +12,8 @@ import Editor from "@/components/editor/Editor";
 import DropLabels from "@/components/droplabel/DropLabel";
 // import '@/components/notes/PageDetail.scss';
 import './page.scss';
-import {getPage} from "@/utils/api";
+import {getPage,savePage} from "@/utils/api";
+import {exportMd} from "../../../../utils";
 
 
 // TODO 支持设置字号
@@ -80,19 +81,49 @@ export default class PageDetail extends Component{
 
     }
 
+    exportFile =(type='md')=>{
+        switch (type){
+            case 'md':
+                exportMd([this.state.pageDetail]);
+                break;
+            default:
+                message.error('请选择导出类型')
+        }
+    }
+
+    saveEditorPage =(data)=>{
+        const blocks = data.blocks || [];
+        const steps = [];
+        let tempStep = {};
+        let tempTip = '';
+        blocks.forEach((block)=>{
+            if(block.type==='lightheader'){
+                tempStep = block.data.light;
+                tempStep.tip = ''; // 清空批注
+                steps.push(tempStep);
+            } else {
+                tempStep.tip = tempStep.tip + block.data.text + '</br>'; // 否则为批注
+            }
+        });
+        const page = this.state.pageDetail;
+        page.steps = steps;
+        this.savePageInfo(page);
+    };
+
+    savePageInfo = throttle((plainData)=>{
+        const key = this.props.pageKey;
+        savePage(key,plainData);
+    },2000);
 
     render() {
         const {pageDetail,loading}  = this.state;
         const {steps=[],title,url,note,lastModified} = (pageDetail || {})
         const pageMd5 = window.btoa(url);
         const blocks = this.renderBlocks();
-        return <div className="web-page-item">
+        return <div className="web-page-item" data-page={url}>
             {
                 loading===false ?
                   <Fragment>
-                      {/*<div className="side-bar">*/}
-                      {/*    <DeleteIcon className='icon delete-page-icon' width={16} height={16} onClick={this.deletePage} />*/}
-                      {/*</div>*/}
                       <div>
                           <div className='page-header'>
                               <div className='page-header-meta'>
@@ -105,7 +136,7 @@ export default class PageDetail extends Component{
                                           <DateIcon />
                                           <span>{new Date(lastModified).toLocaleDateString()}</span>
                                       </div>
-                                      {/*<span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>*/}
+                                      <span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>
                                   </div>
                               </div>
                           </div>
@@ -121,15 +152,15 @@ export default class PageDetail extends Component{
                                       }
                                       {
                                           steps.map((step,index)=>(
-                                            <div className='light' key={step[6]+index}>
-                                                <p style={{borderColor: step[5]}} className='refer'>
+                                            <div className='light' key={step.id+index}>
+                                                <p style={{borderColor: step.bg}} className='refer'>
                                                     <svg onClick={()=>this.deleteLight(index)} t="1593394105976" className="icon delete-icon" viewBox="0 0 1024 1024" version="1.1"
                                                          xmlns="http://www.w3.org/2000/svg" p-id="2228" width="16" height="16">
                                                         <path
                                                           d="M810.666667 170.666667 661.333333 170.666667 618.666667 128 405.333333 128 362.666667 170.666667 213.333333 170.666667 213.333333 256 810.666667 256M256 810.666667C256 857.6 294.4 896 341.333333 896L682.666667 896C729.6 896 768 857.6 768 810.666667L768 298.666667 256 298.666667 256 810.666667Z"
                                                           p-id="2229" fill="#707070"></path>
                                                     </svg>
-                                                    <span className='light-keyword' style={{borderColor: step[5]}}>{step[3]}</span>
+                                                    <span className='light-keyword' style={{borderColor: step.bg}}>{step.text}</span>
                                                 </p>
                                                 <div className='note'>
                                                     <div className='editor-text-target'>

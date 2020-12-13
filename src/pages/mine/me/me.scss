@@ -96,17 +96,17 @@ svg{
     flex-shrink: 0;
     width: 2px;
     background: #fff;
-    cursor: col-resize;
+    //cursor: col-resize;
     position: relative;
     z-index: 1;
     display: block;
     box-sizing: border-box;
-    &:hover{
-      border:1px dashed red;
-      .left,.right{
-        display: block;
-      }
-    }
+    //&:hover{
+    //  border:1px dashed red;
+    //  .left,.right{
+    //    display: block;
+    //  }
+    //}
     .left,.right{
       display: none;
       color: #fff;
@@ -122,6 +122,41 @@ svg{
     .right{
       bottom: 0;
       left: 0;
+    }
+  }
+  .selected-targets{
+    height: 100%;
+    z-index: 2;
+    position: absolute;
+    left: -3px;
+    top: 60px;
+    aside{
+      cursor: pointer;
+      position: absolute;
+      top:0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      &:hover{
+        .target-info{
+          display:block;
+        }
+      }
+      .target-info{
+        display: none;
+        width: 100px;
+        left: -100px;
+        position: absolute;
+        background: #3e3e3e;
+        color: #fff;
+        font-size: 12px;
+        padding: 4px;
+        border-radius: 4px;
+        white-space: pre-line;
+        word-break: break-word;
+      }
     }
   }
 }

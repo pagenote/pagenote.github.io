@@ -48,11 +48,15 @@
     margin-right: 12px;
   }
   .page-header{
+    position: sticky;
+    top: 0;
+    z-index:2;
     display: flex;
     justify-content: space-between;
-    border: 1px solid #efefef;
+    border: 1px solid rgb(239, 239, 239);
     border-radius: 4px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+    background: rgba(255,255,255,0.95);
     &:hover{
       .delete-page-icon{
         display: block;
@@ -60,7 +64,7 @@
     }
     .page-link{
       //max-width: 480px;
-      margin-bottom: 24px;
+      margin-bottom: 4px;
       font-weight: 500;
       white-space: pre-line;
       word-break: break-word;
