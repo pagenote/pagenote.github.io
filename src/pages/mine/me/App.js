@@ -149,11 +149,9 @@ export default class Me extends Component {
                       {
                           selectedPageKeysArray.map((key,index)=> {
                               const relativeElement = document.querySelector('.page-item[data-page="'+key+'"]');
-                              console.log(relativeElement)
-                              const info = whats.compute(relativeElement);
+                              // const info = whats.compute(relativeElement);
 
                               const height = document.querySelector(".groups").scrollHeight;
-                              console.log(info,relativeElement)
                               const elementTop = relativeElement? relativeElement.offsetTop : -1000;
                               return (
                                 <aside onClick={()=>{this.gotoTarget(elementTop,relativeElement)}} key={key} style={{top: ((elementTop)/height)*window.innerHeight+'px'}}>

@@ -28,6 +28,7 @@ export const fetchGroups = function (groupType=2,callback){
   // 立即返回缓存，并拉取最新数据，然后重置
   const bridge = getBridge()
   bridge.sendMessage('get_data',{},function (result){
+    console.log(result)
     if(result && result.data){
       tempDatas = result.data;
     }
@@ -87,24 +88,19 @@ export const fetchGroups = function (groupType=2,callback){
 let requestLock = false;
 export const getPage = function (key){
   return new Promise((resolve,reject)=>{
-    const page = tempDatas[key];
-    if(page){
-      resolve(page.plainData);
-    }else{
-      const bridge = getBridge();
-      if(requestLock){
-        setTimeout(()=>{
-          getPage(key).then((result)=>{
-            resolve(result)
-          })
-        },1000)
-      }else{
-        requestLock = true;
-        bridge.sendMessage('get_page_detail',{key:key}, ({data})=>{
-          requestLock = false;
-          resolve(data ? data.plainData : null);
+    const bridge = getBridge();
+    if(requestLock){
+      setTimeout(()=>{
+        getPage(key).then((result)=>{
+          resolve(result)
         })
-      }
+      },1000)
+    }else{
+      requestLock = true;
+      bridge.sendMessage('get_page_detail',{key:key}, ({data})=>{
+        requestLock = false;
+        resolve(data ? data.plainData : null);
+      })
     }
   });
 }
