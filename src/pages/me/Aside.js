@@ -7,15 +7,18 @@ import Setting from "../../assets/icon/setting.svg";
 import AsideMore from '../../assets/icon/aside-more.svg'
 import './aside.scss'
 import {notification,Popover} from "antd";
+import CheckVersionPart from "../CheckUser";
 
 
 export default  function Aside({onImportData,exportData,pageSize,setColor}) {
   return(
     <aside className='aside-bar'>
       <div className='action-tips'>
-        {/*<label className='action-button'>*/}
-        {/*  <ImportIcon />导入<input id="import-data" type="file" style={{display: "none"}} onChange={onImportData} />*/}
-        {/*</label>*/}
+        <label className='action-button'>
+          <CheckVersionPart version='0.13.3'>
+            <ImportIcon />导入<input id="import-data" type="file" style={{display: "none"}} onChange={onImportData} />
+          </CheckVersionPart>
+        </label>
         <span onClick={exportData} className='action-button'>
             <ExportIcon />备份
         </span>
