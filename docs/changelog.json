@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "0.13.2",
+      "main_version": "0.13.+",
+      "main_label": "云盘存储",
+      "sub_label": "修复一些问题",
+      "content": {
+        "zh_cn": "修复重复高亮关键字问题、修复数据还原不成功、增加英文支持"
+      },
+      "items": [
+        ["fix:","高亮语法修复：根据上下文高亮，避免重复高亮关键词","数据还原失败问题修复",""],
+        ["feature:","根据浏览器语言，自动切换为中、英文。（非中文时，则使用英文，陆续支持 <a href='https://github.com/rowthan/pagenote/tree/master/src/locale'>其他语言</a>"],
+        ["optimize:","优先同步近期数据"]
+      ]
+    },
+    {
       "version": "0.13.1",
       "main_version": "0.13.+",
       "main_label": "云盘存储",
