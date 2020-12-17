@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import Loadable from 'react-loadable';
 import Loading from '../../components/Loading';
-import Bridge from "../../utils/extensionBridge";
-import {convertColor, computePosition} from "../../utils/document";
+import {convertColor, computePosition} from "@/utils/document";
 import AddIcon from '../../assets/icon/add.svg'
 import CopyIcon from '../../assets/icon/default_copy.svg';
 import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
@@ -14,7 +13,7 @@ import 'antd/dist/antd.css';
 // import 'antd/es/collapse/style/index.css'
 import UserForm from "../../components/setting/UserForm";
 import CloudForm from "../../components/setting/WebDavForm";
-import { getSetting,fetchUserInfo,fetchCloudInfo } from "../../utils/api";
+import { getSetting,saveSetting,fetchUserInfo,fetchCloudInfo,resetSetting,setUserInfo } from "@/utils/api";
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -29,7 +28,6 @@ const SliderPicker = Loadable({
   loading: Loading,
 });
 
-let bridge = null;
 String.prototype.replaceCharAt = function(n,c){
   return this.substr(0, n)+ c + this.substr(n+1,this.length-1-n);
 };
@@ -128,10 +126,6 @@ export default class SettingRender extends Component{
   }
 
   componentDidMount() {
-    // this.modal = Modal.info({
-    //   content: '正在连接PAGENOTE。如果长时间连接失败，请确保已安装最新版PAGENOTE',
-    // });
-    // bridge = new Bridge(document.getElementById('messenger'),'page','extension');
     this.initSetting();
     this.addClickListener();
     this.getUserInfo();
@@ -165,7 +159,7 @@ export default class SettingRender extends Component{
       message.error('邀请码不正确，公众号 pagenote 获取');
       return;
     }
-    bridge.sendMessage('set_cloud_account',values,()=>{
+    setUserInfo(values,()=>{
       message.success('保存成功');
     })
   };
@@ -279,21 +273,18 @@ export default class SettingRender extends Component{
       actionGroup: actionGroup,
       track:track,
     };
-    bridge.sendMessage('save_setting',{
-      ...settings,
-    },()=>{
+
+    saveSetting(settings,(result)=>{
       message.destroy();
       message.success('修改成功。已打开的网页刷新后生效');
-      this.initSetting();
-    });
+    })
   },1000);
 
   resetAll = ()=>{
-    bridge.sendMessage('reset_setting',{
-    },()=>{
+    resetSetting(()=>{
       message.success('重置成功');
       this.initSetting();
-    });
+    })
   }
 
   onCloseDrawer=()=>{

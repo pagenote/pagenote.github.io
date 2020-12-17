@@ -86,6 +86,7 @@ export const fetchGroups = function (groupType=2,callback){
 
 // bridge 模式只支持单通信通道，暂不支持并行发送，需要加锁处理
 let requestLock = false;
+// page
 export const getPage = function (key){
   return new Promise((resolve,reject)=>{
     const bridge = getBridge();
@@ -112,6 +113,7 @@ export const savePage = function (key,plainData){
   })
 }
 
+// 设置
 export const getSetting= function (callback){
   const bridge = getBridge();
   bridge.sendMessage('get_setting',{},function ({data,type}){
@@ -120,9 +122,36 @@ export const getSetting= function (callback){
   })
 }
 
+export const saveSetting = function (setting,callback){
+  const bridge = getBridge();
+  bridge.sendMessage('save_setting',{
+    ...setting
+  },function ({data,type}){
+    const setting = data || {};
+    callback(setting);
+  })
+}
+
+export const resetSetting = function (callback){
+  const bridge = getBridge();
+  bridge.sendMessage('reset_setting',{},function ({data,type}){
+    const setting = data || {};
+    callback(setting);
+  })
+}
+
+// 账户
 export const fetchUserInfo = function (callback){
  getBridge().sendMessage('get_user_info',{},({data={},type})=>{
     callback(data);
+  })
+}
+
+export const setUserInfo = function (values,callback){
+  const bridge = getBridge();
+  bridge.sendMessage('set_user_info',values,function ({data,type}){
+    const setting = data || {};
+    callback(setting);
   })
 }
 
