@@ -22,13 +22,13 @@ export let getBridge = function (){
 let tempDatas = {};
 let tempGroups = {};
 export const fetchGroups = function (groupType=2,callback){
-  if(tempGroups[groupType]){
-    callback(tempGroups[groupType])
-  }
+  // if(tempGroups[groupType]){
+  //   callback(tempGroups[groupType])
+  //   return;
+  // }
   // 立即返回缓存，并拉取最新数据，然后重置
   const bridge = getBridge()
   bridge.sendMessage('get_data',{},function (result){
-    console.log(result)
     if(result && result.data){
       tempDatas = result.data;
     }
@@ -55,7 +55,7 @@ export const fetchGroups = function (groupType=2,callback){
               groupObject[groupKey].push(currentPage);
               break;
             case 0:
-              const domainKey = currentPage.keys[0];
+              const domainKey = (currentPage.keys||['default'])[0];
               groupObject[domainKey] = groupObject[domainKey] || [];
               groupObject[domainKey].push(currentPage);
               break;

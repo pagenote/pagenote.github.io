@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Select } from 'antd';
+import { Select,Spin } from 'antd';
 import WebPage from "./page/WebPage";
 import Groups from './Groups/Groups';
 import {fetchGroups} from "@/utils/api";
@@ -36,6 +36,8 @@ export default class Me extends Component {
 
             groupType: 1,
             searchString: '',
+
+            fetching: false,
             groups: [
                 // {
                 //     label: '默认分组',
@@ -88,10 +90,14 @@ export default class Me extends Component {
     }
 
     fetchGroupList=()=>{
+        this.setState({
+            fetching: true,
+        })
         fetchGroups(this.state.groupType,(result={})=>{
             const groups = result.groups || [];
             this.setState({
                 groups: groups,
+                fetching: false,
             },()=>{
                 this.computeTarget()
             })
@@ -158,7 +164,7 @@ export default class Me extends Component {
     }
 
     render() {
-        const {theme = {}, barSize,groups,selectedPageKeysArray,groupType,targetInfos,muilPage} = this.state;
+        const {theme = {}, barSize,groups,fetching,selectedPageKeysArray,groupType,targetInfos,muilPage} = this.state;
         const bgColor = theme.bgColor;
         return (
           <div className={`pages-and-detail`}
@@ -171,12 +177,14 @@ export default class Me extends Component {
                           ))
                       }
                   </Select>
-                  <Groups groups={groups}
-                          selectPage={this.selectPage}
-                          selectedPageKeysArray={selectedPageKeysArray}
-                          size={barSize}
-                  >
-                  </Groups>
+                  <Spin spinning={fetching}>
+                      <Groups groups={groups}
+                              selectPage={this.selectPage}
+                              selectedPageKeysArray={selectedPageKeysArray}
+                              size={barSize}
+                      >
+                      </Groups>
+                  </Spin>
               </section>
               <aside className='split-line' onMouseDown={this.dragSize} style={{color: '#fff'}}>
                   <div className='left' onClick={() => this.setSize(350)}>left&lt;</div>
