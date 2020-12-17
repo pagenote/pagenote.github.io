@@ -100,12 +100,12 @@ export default function InstallBar() {
                           data-tip={`最新版本：${version['360']}`}
                           className={`browser-install-btn ee ${chromeType==='ee'?'active':''}`}
                            href="https://ext.chrome.360.cn/webstore/detail/gielpddfollkffnbiegekliodnahhpfa">360</a>
-                        <a className="browser-install-btn offline wechat-finder" data-tip={`最新版本：${version.offline}`}>
-                            <span>
-                                离线安装
-                            </span>
-                            <img className='wechat-qrcode' src="/img/wechat.jpg" alt="微信公众号"/>
-                        </a>
+                        {/*<a className="browser-install-btn offline wechat-finder" data-tip={`最新版本：${version.offline}`}>*/}
+                        {/*    <span>*/}
+                        {/*        离线安装*/}
+                        {/*    </span>*/}
+                        {/*    <img className='wechat-qrcode' src="/img/wechat.jpg" alt="微信公众号"/>*/}
+                        {/*</a>*/}
                     </span>
     </span>
   )

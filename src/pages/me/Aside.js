@@ -7,6 +7,7 @@ import Setting from "../../assets/icon/setting.svg";
 import AsideMore from '../../assets/icon/aside-more.svg'
 import './aside.scss'
 import {notification,Popover} from "antd";
+import CheckVersionPart from "../CheckUser";
 
 
 export default  function Aside({onImportData,exportData,pageSize,setColor}) {
