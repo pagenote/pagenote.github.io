@@ -13,6 +13,7 @@ import {
 import Loadable from 'react-loadable';
 import Draft from '../draft/index';
 import SettingPage from '../setting/App';
+import DonationIcon from '@/assets/icon/donation.svg'
 import AsideMore from "../../assets/icon/aside-more.svg";
 import Setting from "../../assets/icon/setting.svg";
 import Doc from '../../assets/icon/doc.svg'
@@ -35,9 +36,14 @@ const RouteMe = function(){
     <Router>
       <div class='pagenote-me'>
         <div className='page-menus'>
-          <NavLink activeClassName="active" exact={true} to="/">我的PAGE</NavLink>
-          <NavLink activeClassName="active" exact={true} to="/draft">临时记事本</NavLink>
-          <NavLink activeClassName="active" exact={true} to="/setting">设置</NavLink>
+          <div className="menus">
+            <NavLink activeClassName="active" exact={true} to="/">我的PAGE</NavLink>
+            <NavLink activeClassName="active" exact={true} to="/draft">临时记事本</NavLink>
+            <NavLink activeClassName="active" exact={true} to="/setting">设置</NavLink>
+          </div>
+          <a href="/donation">
+            <DonationIcon></DonationIcon>
+          </a>
         </div>
         <div className='page-container' style={{width: predefineSize + 'px'}}>
           <Switch>

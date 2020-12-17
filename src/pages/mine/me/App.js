@@ -2,11 +2,10 @@ import React, {Component} from 'react'
 import { Select } from 'antd';
 import WebPage from "./page/WebPage";
 import Groups from './Groups/Groups';
-import whatsElement from 'whats-element/pure';
-import {fetchGroups} from "../../../utils/api";
+import {fetchGroups} from "@/utils/api";
+import {gotoTarget} from "@/pages/mine/me/utils";
 import './me.scss'
 
-const whats = new whatsElement();
 const { Option } = Select;
 const groupTypes = [
     {
@@ -38,26 +37,31 @@ export default class Me extends Component {
             groupType: 1,
             searchString: '',
             groups: [
-                {
-                    label: '默认分组',
-                    pages: [
-                        {
-                            categories: [],
-                            description: "描述内容",
-                            icon: "",
-                            lastModified: 0,
-                            note: "笔记",
-                            // snapshots: [],
-                            steps: [],
-                            title: 'title内容',
-                            url: 'https://baidu.com',
-                            version: 2
-                        }
-                    ]
-                }
+                // {
+                //     label: '默认分组',
+                //     pages: [
+                //         {
+                //             categories: [],
+                //             description: "描述内容",
+                //             icon: "",
+                //             lastModified: 0,
+                //             note: "笔记",
+                //             // snapshots: [],
+                //             steps: [],
+                //             title: 'title内容',
+                //             url: 'https://baidu.com',
+                //             version: 2
+                //         }
+                //     ]
+                // }
             ],
+            muilPage: window.localStorage.getItem('muilPage')==='1',
             selectedPageKeysArray: [],
             selectedPagesInfo:{
+
+            },
+            // 锚点信息
+            targetInfos:{
 
             }
         };
@@ -72,7 +76,9 @@ export default class Me extends Component {
         let selectedArray = [];
         try{
             const selectedKeys = localStorage.getItem('selectedKeys');
-            selectedArray = selectedKeys.split(',')
+            selectedArray = selectedKeys.split(',').filter((value)=>{
+                return !!value
+            })
         }catch (e){
 
         }
@@ -86,24 +92,61 @@ export default class Me extends Component {
             const groups = result.groups || [];
             this.setState({
                 groups: groups,
+            },()=>{
+                this.computeTarget()
             })
         })
     }
 
+    computeTarget=()=>{
+        const pageItems = document.querySelectorAll('.page-item[data-page]');
+        const {targetInfos} = this.state;
+        pageItems.forEach((pageItem)=>{
+            const offsetTop = pageItem.offsetTop || -1000
+            targetInfos[pageItem.dataset['page']] = offsetTop;
+        })
+        this.setState({
+            targetInfos: targetInfos
+        })
+    }
+
+    toggleMultSelect=()=>{
+        const isMult = !this.state.muilPage;
+        this.setState({
+            muilPage: isMult,
+        },()=>{
+            window.localStorage.setItem('muilPage',isMult?'1':'0');
+        })
+    }
+
     selectPage=(pageKey,e)=>{
-        const {selectedPageKeysArray} = this.state;
-        const index = selectedPageKeysArray.indexOf(pageKey);
-        if(index>=0){
-            selectedPageKeysArray.splice(index,1);
+        let {selectedPageKeysArray,muilPage} = this.state;
+        if(muilPage){
+            const index = selectedPageKeysArray.indexOf(pageKey);
+            if(index>=0){
+                selectedPageKeysArray.splice(index,1);
+            }else{
+                selectedPageKeysArray.push(pageKey);
+            }
         }else{
-            selectedPageKeysArray.push(pageKey);
+            selectedPageKeysArray = [pageKey]
         }
+
         this.setState({
             selectedPageKeysArray
+        },()=>{
+            gotoTarget(pageKey,[0,1])
         });
         localStorage.setItem('selectedKeys',selectedPageKeysArray.join(','));
         // const info = whats.compute(e.target);
         // console.log(info);
+    }
+
+    removeSelectPages=()=>{
+        this.setState({
+            selectedPageKeysArray:[]
+        })
+        localStorage.setItem('selectedKeys','');
     }
 
     changeGroupType=(type)=>{
@@ -114,14 +157,8 @@ export default class Me extends Component {
         })
     }
 
-    gotoTarget=(top,element)=>{
-        document.querySelector('.pages').scrollTop=top-100;
-
-        // element.scrollIntoView();
-    }
-
     render() {
-        const {theme = {}, barSize,groups,selectedPageKeysArray,groupType} = this.state;
+        const {theme = {}, barSize,groups,selectedPageKeysArray,groupType,targetInfos,muilPage} = this.state;
         const bgColor = theme.bgColor;
         return (
           <div className={`pages-and-detail`}
@@ -148,13 +185,10 @@ export default class Me extends Component {
                   <div className='selected-targets'>
                       {
                           selectedPageKeysArray.map((key,index)=> {
-                              const relativeElement = document.querySelector('.page-item[data-page="'+key+'"]');
-                              // const info = whats.compute(relativeElement);
-
                               const height = document.querySelector(".groups").scrollHeight;
-                              const elementTop = relativeElement? relativeElement.offsetTop : -1000;
+                              const elementTop = targetInfos[key] || -1000;
                               return (
-                                <aside onClick={()=>{this.gotoTarget(elementTop,relativeElement)}} key={key} style={{top: ((elementTop)/height)*window.innerHeight+'px'}}>
+                                <aside onClick={()=>{gotoTarget(key)}} key={key} style={{top: ((elementTop)/height)*window.innerHeight+'px'}}>
                                     <div className='target-info'>
                                         {key}
                                     </div>
@@ -165,7 +199,13 @@ export default class Me extends Component {
                   </div>
               </aside>
 
-              <WebPage keys={selectedPageKeysArray}></WebPage>
+              <WebPage
+                muilPage={muilPage}
+                keys={selectedPageKeysArray}
+                toggleMultSelect={this.toggleMultSelect}
+                removeSelectPages={this.removeSelectPages}>
+
+              </WebPage>
           </div>
         )
     }

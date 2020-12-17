@@ -14,17 +14,20 @@
   background: #f3f3f3;
   padding: 12px;
   list-style: none;
-  a{
-    display: block;
-    color:#333;
-    padding: 4px 12px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    &.active,&:hover{
-      background: white;
+  .menus{
+    a{
+      display: block;
+      color:#333;
+      padding: 4px 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      &.active,&:hover{
+        background: white;
+      }
     }
   }
+
 }
 
 .page-container{

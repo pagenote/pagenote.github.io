@@ -129,7 +129,7 @@ svg{
     z-index: 2;
     position: absolute;
     left: -3px;
-    top: 60px;
+    top: 0px;
     aside{
       cursor: pointer;
       position: absolute;
@@ -146,8 +146,8 @@ svg{
       }
       .target-info{
         display: none;
-        width: 100px;
-        left: -100px;
+        width: 200px;
+        left: -200px;
         position: absolute;
         background: #3e3e3e;
         color: #fff;
@@ -236,41 +236,6 @@ svg{
   .sort-icon{
     margin-left: 12px;
     cursor: pointer;
-  }
-}
-.notes{
-  position: relative;
-  top: 0;
-  min-width: 30%;
-  max-height: 100vh;
-  overflow: auto;
-  flex-grow: 1;
-  flex-shrink: 1;
-  box-sizing: border-box;
-  background-color: rgba(255,255,255,0.5);
-  //border-left: 1px dashed #fff;
-  &.ispopup{
-    position: absolute;
-    top:0;
-    z-index: 999;
-    width: 100% !important;
-    background: rgba(0,0,0,0.5);
-  }
-  .title{
-    background: #fff;
-    padding-left: 24px;
-  }
-  .content{
-    //position: sticky;
-    //top: 0;
-    //background-image: url("/img/bg.png");
-    padding: 12px 24px;
-  }
-  .empty-tip{
-    border-radius: 6px;
-    background: #fff;
-    //border: 1px solid;
-    //box-shadow: 3px -2px 0 1px #fddf06;
   }
 }
 
