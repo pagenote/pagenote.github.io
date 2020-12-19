@@ -1,19 +1,20 @@
-import {connectServer} from "@/utils/index_new";
 
+let leftTimer = null;
+let rightTimer = null;
 export const gotoTarget=(key,side=[1,1])=>{
 
   if(side[0]){
     const leftElement = document.querySelector('.page-item[data-page="'+key+'"]')
     if(leftElement){
-      // document.querySelector('.pages').scrollTop=leftElement.offsetTop - 40;
-      gotoPosition(document.querySelector('.pages'),0,leftElement.offsetTop - 40)
+      clearInterval(leftTimer)
+      leftTimer = gotoPosition(document.querySelector('.pages'),0,leftElement.offsetTop - 24)
     }
   }
   if(side[1]){
     const rightElement = document.querySelector('.web-page-item[data-page="'+key+'"]');
     if(rightElement){
-      // document.querySelector('.notes').scrollTop = rightElement.offsetTop - 40;
-      gotoPosition(document.querySelector('.notes'),0,rightElement.offsetTop - 40)
+      clearInterval(rightTimer)
+      rightTimer = gotoPosition(document.querySelector('.notes'),0,rightElement.offsetTop - 8)
     }
   }
 }
@@ -46,4 +47,5 @@ function gotoPosition(container,targetX,targetY,callback){
     container.scrollLeft = x;
     container.scrollTop = y;
   }
+  return timer;
 }

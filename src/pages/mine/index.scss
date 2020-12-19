@@ -12,19 +12,29 @@
   //border-radius: 12px;
   box-sizing: border-box;
   background: #f3f3f3;
-  padding: 12px;
+  //padding: 12px;
   list-style: none;
+  font-size: 12px;
+  font-family: system-ui, "PingFang SC", STHeiti, sans-serif;
   .menus{
     a{
+      margin: 2px;
       display: block;
-      color:#333;
-      padding: 4px 12px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 6px;
+      color:#4f4f4d;
+      padding: 10px 12px;
+      font-weight: 600;
+      //border-radius: 6px;
       &.active,&:hover{
-        background: white;
+        background: #e8e4d7;
       }
+    }
+  }
+  .menus-footer{
+    margin: 2px;
+    padding: 12px;
+    .version{
+      font-size: 12px;
+      color: #999;
     }
   }
 

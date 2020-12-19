@@ -1,6 +1,6 @@
 import React from "react";
-import { notification } from "antd";
-import App from "./me/App";
+import { notification , Tooltip,Popover} from "antd";
+import App from "./me/Me";
 import CommonPage from "../CommonPage";
 import CheckVersion from "../CheckVersion";
 import {
@@ -18,6 +18,9 @@ import AsideMore from "../../assets/icon/aside-more.svg";
 import Setting from "../../assets/icon/setting.svg";
 import Doc from '../../assets/icon/doc.svg'
 import WebPage from '../../assets/icon/webpage.svg'
+import WechatIcon from '@/assets/icon/wechat.svg'
+import RateIcon from '@/assets/icon/rate.svg';
+import Menus from './me/menu/Menus';
 import './index.scss'
 
 // const SettingPage = Loadable({
@@ -29,22 +32,13 @@ const DraftPage = Loadable({
   loader: () => import('../draft/index'),
   loading: <div>加载中</div>,
 });
-
-const predefineSize = window.innerWidth - 160 - 2;
+const sideWidth = 180;
+const predefineSize = window.innerWidth - sideWidth - 2;
 const RouteMe = function(){
   return (
     <Router>
       <div class='pagenote-me'>
-        <div className='page-menus'>
-          <div className="menus">
-            <NavLink activeClassName="active" exact={true} to="/">我的PAGE</NavLink>
-            <NavLink activeClassName="active" exact={true} to="/draft">临时记事本</NavLink>
-            <NavLink activeClassName="active" exact={true} to="/setting">设置</NavLink>
-          </div>
-          <a href="/donation">
-            <DonationIcon></DonationIcon>
-          </a>
-        </div>
+        <Menus sideWidth={sideWidth}></Menus>
         <div className='page-container' style={{width: predefineSize + 'px'}}>
           <Switch>
             <Route exact path="/">

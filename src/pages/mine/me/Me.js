@@ -6,6 +6,8 @@ import Groups from './Groups/Groups';
 import {fetchGroups,filterGroups} from "@/utils/api";
 import {gotoTarget} from "@/pages/mine/me/utils";
 import SearchFilter from "@/pages/mine/me/SearchFilter";
+import GroupFooter from "@/pages/mine/me/Groups/GroupFooter";
+import CommonHeader from './CommonHeader/index';
 import './me.scss'
 
 const { Option } = Select;
@@ -134,7 +136,7 @@ export default class Me extends Component {
             if(index>=0){
                 selectedPageKeysArray.splice(index,1);
             }else{
-                selectedPageKeysArray.push(pageKey);
+                selectedPageKeysArray.unshift(pageKey);
             }
         }else{
             selectedPageKeysArray = [pageKey]
@@ -184,6 +186,9 @@ export default class Me extends Component {
           <div className={`pages-and-detail`}
                style={{border: `1px solid ${bgColor}`, backgroundColor: bgColor}}>
               <section className='pages' style={{width: barSize, background: bgColor}}>
+                  <CommonHeader>
+
+                  </CommonHeader>
                   <Select defaultValue={groupType} style={{ width: 120 }} bordered={false} onChange={this.changeGroupType}>
                       {
                           groupTypes.map((item)=>(
@@ -200,6 +205,7 @@ export default class Me extends Component {
                       >
                       </Groups>
                   </Spin>
+                  <GroupFooter />
               </section>
               <aside className='split-line' onMouseDown={this.dragSize} style={{color: '#fff'}}>
                   <div className='left' onClick={() => this.setSize(350)}>left&lt;</div>
@@ -211,7 +217,7 @@ export default class Me extends Component {
                               const height = document.querySelector(".groups").scrollHeight;
                               const elementTop = targetInfos[key] || -1000;
                               return (
-                                <aside onClick={()=>{gotoTarget(key)}} key={key} style={{top: ((elementTop)/height)*window.innerHeight+'px'}}>
+                                <aside onClick={()=>{gotoTarget(key)}} key={key} style={{top: ((elementTop)/height)*window.innerHeight+20+'px'}}>
                                     <div className='target-info'>
                                         {key}
                                     </div>
@@ -227,7 +233,6 @@ export default class Me extends Component {
                 keys={selectedPageKeysArray}
                 toggleMultSelect={this.toggleMultSelect}
                 removeSelectPages={this.removeSelectPages}>
-
               </WebPage>
           </div>
         )

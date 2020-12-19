@@ -1,5 +1,6 @@
 import Bridge from "./extensionBridge";
 import { isLow } from "./index";
+import {funDownload} from "@/utils/document";
 
 function checkValid(page){
   const {steps=[],snapshots=[],images=[]} = page || {}
@@ -157,6 +158,35 @@ export const savePage = function (key,plainData){
     plainData:plainData
   })
 }
+
+export const exportData = ()=>{
+  const pageCnt = Object.keys(tempDatas).length;
+  const exportData = encodeURIComponent(JSON.stringify(tempDatas));
+  const version = document.documentElement.dataset.version || '';
+  funDownload(exportData,`${version}_${pageCnt}.pagenote`);
+};
+
+export const onImportData = (e)=>{
+  var selectedFile = e.target.files[0];
+
+  var reader = new FileReader();//这是核心,读取操作就是由它完成.
+  reader.readAsText(selectedFile);//读取文件的内容,也可以读取文件的URL
+  reader.onload = function () {
+    let datas = null;
+    try{
+      datas = JSON.parse(decodeURIComponent(this.result));
+    }catch (e) {
+      console.log(e,this.result);
+      alert('解析错误，请检查备份文件是否有损坏');
+    }
+    if(datas){
+      const result =  window.confirm('确认导入？可能会覆盖现有数据');
+      if(result){
+        getBridge().sendMessage('import_datas',datas)
+      }
+    }
+  }
+};
 
 // 设置
 export const getSetting= function (callback){

@@ -8,7 +8,7 @@ class MyTool {
     return true;
   }
   render() {
-    const h4 = document.createElement("h4");
+    const h4 = document.createElement("div");
     h4.classList = 'light-head';
     h4.style.borderColor = this.data.color;
     h4.innerHTML=this.data.text;

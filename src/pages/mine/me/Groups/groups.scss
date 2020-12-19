@@ -91,9 +91,7 @@
     margin-bottom: 0;
   }
   &.active{
-    border-left: 1px solid #eaeaea;
-    border-radius: 6px;
-    background-color: #f7f48b !important;
+    background-color: rgb(231,228,214) !important;
     //.page-cliper{
     //  background: #faad14;
     //}
@@ -220,4 +218,11 @@
       color: #afb2b5;
     }
   }
+}
+
+.group-footer{
+  padding: 8px 12px;
+  background: #fff;
+  margin-bottom: 1px;
+  margin-right: 1px;
 }

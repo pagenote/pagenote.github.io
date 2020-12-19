@@ -13,7 +13,7 @@ import DropLabels from "@/components/droplabel/DropLabel";
 // import '@/components/notes/PageDetail.scss';
 import './page.scss';
 import {getPage,savePage} from "@/utils/api";
-import {exportMd} from "../../../../utils";
+import {exportMd} from "@/utils";
 
 
 // TODO 支持设置字号
@@ -50,10 +50,10 @@ export default class PageDetail extends Component{
         steps.forEach((step)=>{
             const pre = typeof step.pre === 'string' ? step.pre : '';
             const suff = typeof step.suffix === 'string' ? step.suffix : '';
-            const middle = document.createElement('light');
-            middle.style = `border-bottom: 1px solid ${step.bg||''}`;
-            middle.innerText = step.text;
-            const text = `${pre}<light style="border-bottom: 1px solid ${step.bg||''}">${middle.outerHTML}</light>${suff}`;
+            // const middle = document.createElement('light');
+            // middle.style = `border-bottom: 1px solid ${step.bg||''}`;
+            // middle.innerText = step.text;
+            const text = `${pre}<light style="font-weight:500;border-bottom: 1px solid ${step.bg||''}">${step.text}</light>${suff}`;
             stepBlocks.push({
                   "type" : "lightheader",
                   "data" : {
@@ -82,6 +82,17 @@ export default class PageDetail extends Component{
     }
     deleteLight=()=>{
 
+    }
+
+    bigPicture(e,snapshot,gallery,index){
+        BigPicture({
+            el: e.target,
+            // imgSrc: snapshot,
+            gallery: gallery,
+            position:index,
+            animationEnd: function() {
+            },
+        });
     }
 
     exportFile =(type='md')=>{
@@ -121,7 +132,8 @@ export default class PageDetail extends Component{
     render() {
         const {pageKey} = this.props;
         const {pageDetail,loading}  = this.state;
-        const {steps=[],title,url,note,lastModified,snapshots=[]} = (pageDetail || {})
+
+        const {steps=[],title,url,note,lastModified,snapshots=[],images=[]} = (pageDetail || {})
         const pageMd5 = window.btoa(url);
         const blocks = this.renderBlocks();
         return <div className="web-page-item" data-page={url}>
@@ -145,6 +157,12 @@ export default class PageDetail extends Component{
                                           <span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>
                                       </div>
                                   </div>
+                                  {
+                                      images.length>0 &&
+                                      <div className='page-img'>
+                                          <img src={images[0]} onClick={(e)=>{this.bigPicture(e,images[0],images.map((s)=>{return {src:s}}))}}/>
+                                      </div>
+                                  }
                               </div>
 
                               <div className="main-content">

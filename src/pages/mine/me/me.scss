@@ -83,7 +83,7 @@ svg{
   box-sizing: border-box;
   height: 100vh;
   position: relative;
-  border-radius: 8px;
+  //border-radius: 8px;
   font-size: 14px;
   //background-image: url("/img/bg.png");
   background-image: url("https://colors.ichuantong.cn/501227b370fe7f4d6e3b3b0993298eab.png");
@@ -95,7 +95,7 @@ svg{
   .split-line{
     flex-shrink: 0;
     width: 2px;
-    background: #fff;
+    background: #e9e8e4;
     //cursor: col-resize;
     position: relative;
     z-index: 1;
