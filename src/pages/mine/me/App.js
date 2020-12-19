@@ -141,11 +141,11 @@ export default class Me extends Component {
         this.setState({
             selectedPageKeysArray
         },()=>{
-            gotoTarget(pageKey,[0,1])
+            setTimeout(()=>{
+                gotoTarget(pageKey,[0,1])
+            },100)
         });
         localStorage.setItem('selectedKeys',selectedPageKeysArray.join(','));
-        // const info = whats.compute(e.target);
-        // console.log(info);
     }
 
     removeSelectPages=()=>{
