@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Editor from '../../components/editor/Editor'
-import '../page/page.scss'
-// import CommonPage from "../CommonPage";
+// import '../page/page.scss'
 import ExportIcon from '@/assets/icon/export.svg'
 import ImportIcon from '@/assets/icon/import.svg'
 import './new.scss'
@@ -15,7 +14,7 @@ export default class CreatePage extends Component{
 
 
   render() {
-    let data = null;
+    let data = {};
     try{
       data = JSON.parse(localStorage.getItem('new_page'))
     }catch (e) {
@@ -33,12 +32,15 @@ export default class CreatePage extends Component{
               }
             </span>
             </div>
-            {/*<div>*/}
-            {/*  <ImportIcon width={16} height={16}></ImportIcon>*/}
-            {/*  <ExportIcon width={16} height={16}></ExportIcon>*/}
-            {/*</div>*/}
+            <div>
+              <ImportIcon width={16} height={16}></ImportIcon>
+              <ExportIcon width={16} height={16}></ExportIcon>
+            </div>
           </div>
-          <Editor placeholder='在这里记录写什么吧，数据存储在你浏览器本地，你可以把这里当做一个草稿记事本' data={data} onSave={this.saveData}></Editor>
+          <Editor
+            placeholder='在这里记录写什么吧，数据存储在你浏览器本地，你可以把这里当做一个草稿记事本'
+            data={data}
+            onSave={this.saveData} />
         </div>
       </div>
     )

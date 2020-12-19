@@ -183,7 +183,7 @@ export default class Me extends Component {
         const {theme = {}, barSize,groups,fetching,selectedPageKeysArray,groupType,targetInfos,muilPage} = this.state;
         const bgColor = theme.bgColor;
         return (
-          <div className={`pages-and-detail`}
+          <div className={`notes-in-webpage`}
                style={{border: `1px solid ${bgColor}`, backgroundColor: bgColor}}>
               <section className='pages' style={{width: barSize, background: bgColor}}>
                   <CommonHeader>
@@ -208,8 +208,8 @@ export default class Me extends Component {
                   <GroupFooter />
               </section>
               <aside className='split-line' onMouseDown={this.dragSize} style={{color: '#fff'}}>
-                  <div className='left' onClick={() => this.setSize(350)}>left&lt;</div>
-                  <div className='right' onClick={() => this.setSize(predefineSize - 4)}>&gt;right</div>
+                  {/*<div className='left' onClick={() => this.setSize(350)}>left&lt;</div>*/}
+                  {/*<div className='right' onClick={() => this.setSize(predefineSize - 4)}>&gt;right</div>*/}
 
                   <div className='selected-targets'>
                       {

@@ -11,15 +11,8 @@ import {
   Link
 } from "react-router-dom";
 import Loadable from 'react-loadable';
-import Draft from '../draft/index';
+import Draft from './notebook/index';
 import SettingPage from '../setting/App';
-import DonationIcon from '@/assets/icon/donation.svg'
-import AsideMore from "../../assets/icon/aside-more.svg";
-import Setting from "../../assets/icon/setting.svg";
-import Doc from '../../assets/icon/doc.svg'
-import WebPage from '../../assets/icon/webpage.svg'
-import WechatIcon from '@/assets/icon/wechat.svg'
-import RateIcon from '@/assets/icon/rate.svg';
 import Menus from './me/menu/Menus';
 import './index.scss'
 
@@ -45,10 +38,10 @@ const RouteMe = function(){
               <App />
             </Route>
             <Route exact path="/draft">
-              <Draft></Draft>
+              <Draft />
             </Route>
             <Route exact path="/setting">
-              <SettingPage></SettingPage>
+              <SettingPage />
             </Route>
           </Switch>
         </div>

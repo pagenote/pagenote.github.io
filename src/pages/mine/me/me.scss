@@ -78,7 +78,7 @@ svg{
     border-top:1px solid;
   }
 }
-.pages-and-detail{
+.notes-in-webpage{
   display: flex;
   box-sizing: border-box;
   height: 100vh;
@@ -89,9 +89,6 @@ svg{
   background-image: url("https://colors.ichuantong.cn/501227b370fe7f4d6e3b3b0993298eab.png");
   overflow: hidden;
   transition: all 0.5s ease-in-out;
-  &.expand{
-    flex-wrap: wrap;
-  }
   .split-line{
     flex-shrink: 0;
     width: 2px;
@@ -101,28 +98,6 @@ svg{
     z-index: 1;
     display: block;
     box-sizing: border-box;
-    //&:hover{
-    //  border:1px dashed red;
-    //  .left,.right{
-    //    display: block;
-    //  }
-    //}
-    .left,.right{
-      display: none;
-      color: #fff;
-      background: #000;
-      padding: 0 4px;
-      position: absolute;
-      cursor: pointer;
-    }
-    .left{
-      top: 0;
-      right: 0;
-    }
-    .right{
-      bottom: 0;
-      left: 0;
-    }
   }
   .selected-targets{
     height: 100%;
@@ -255,24 +230,7 @@ svg{
 }
 
 
-@media screen and (max-width: 720px){
-  .pages-and-detail{
-    flex-wrap: wrap;
-  }
-  .pages,.notes{
-    width: 100% !important;
-    margin-left: 0;
-    margin-bottom: 24px;
-  }
-  .pages{
-    .tab-item{
-      width: calc(50% - 8px);
-    }
-    .page-header{
-      max-width: 320px;
-    }
-  }
-}
+
 @keyframes fade_out{
   0%{
     opacity: 1;

@@ -8,6 +8,7 @@ import InternetIcon from '@/assets/icon/internet.svg'
 import NoteBookIcon from '@/assets/icon/notebook.svg';
 import BugIcon from '@/assets/icon/bug.svg'
 import SettingIcon from '@/assets/icon/setting.svg'
+import PlanIcon from '@/assets/icon/plan.svg'
 
 export default function Menus({sideWidth}){
   return(
@@ -17,7 +18,7 @@ export default function Menus({sideWidth}){
           <InternetIcon/>网页笔记
         </NavLink>
         <NavLink activeClassName="active" exact={true} to="/draft">
-          <NoteBookIcon/>记事本
+          <NoteBookIcon/>文稿
         </NavLink>
         <NavLink activeClassName="active" exact={true} to="/setting">
           <SettingIcon/>设置
@@ -44,6 +45,9 @@ export default function Menus({sideWidth}){
             <a href="https://github.com/rowthan/pagenote/issues" target='_blank'>
               <BugIcon></BugIcon>
             </a>
+          </Tooltip>
+          <Tooltip title='功能规划'>
+            <PlanIcon />
           </Tooltip>
 
         </div>

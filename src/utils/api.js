@@ -237,4 +237,55 @@ export const fetchCloudInfo = function (callback){
 }
 
 
+// paper
+export const getPaperDetail = function (key,callback){
+  let paper = {
+    data:{},
+  };
+  try{
+    paper = JSON.parse(localStorage.getItem(key))
+  }catch (e){
+
+  }
+  callback(paper)
+
+}
+
+export const savePaper = function (key,data,callback){
+  const blocks = data.blocks || [];
+  localStorage.setItem(key,JSON.stringify({
+    data:data,
+    id: key,
+    lastModified: new Date().getTime(),
+    title: blocks[0]?blocks[0].data.text:'',
+    abstract: blocks[1]?blocks[1].data.text:'',
+  }));
+  callback()
+}
+
+export const deletePaper = function (key,callback){
+  localStorage.removeItem(key);
+  callback();
+}
+
+export const getPapers = function (callback){
+  const datas = localStorage.valueOf();
+  const result = [];
+  for(let i in datas ){
+    const key = /^paper_(.*)/.exec(i);
+    try{
+      if(key && key[1]){
+        const a = JSON.parse(datas[i]);
+        result.push(a)
+      }
+    }catch (e){
+      if(key[1]){
+        localStorage.removeItem(i)
+      }
+    }
+  }
+  callback(result);
+}
+
+
 
