@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
-import { Select,Spin } from 'antd';
+import { Select,Spin,Input } from 'antd';
+import debounce from 'lodash/debounce'
 import WebPage from "./page/WebPage";
 import Groups from './Groups/Groups';
-import {fetchGroups} from "@/utils/api";
+import {fetchGroups,filterGroups} from "@/utils/api";
 import {gotoTarget} from "@/pages/mine/me/utils";
+import SearchFilter from "@/pages/mine/me/SearchFilter";
 import './me.scss'
 
 const { Option } = Select;
@@ -163,6 +165,18 @@ export default class Me extends Component {
         })
     }
 
+    onSearch=debounce((value)=>{
+        this.setState({
+            fetching: true,
+        })
+        filterGroups(value,(result)=>{
+            this.setState({
+                groups: result,
+                fetching: false,
+            })
+        })
+    },500)
+
     render() {
         const {theme = {}, barSize,groups,fetching,selectedPageKeysArray,groupType,targetInfos,muilPage} = this.state;
         const bgColor = theme.bgColor;
@@ -177,6 +191,7 @@ export default class Me extends Component {
                           ))
                       }
                   </Select>
+                  <SearchFilter onSearch={this.onSearch}/>
                   <Spin spinning={fetching}>
                       <Groups groups={groups}
                               selectPage={this.selectPage}

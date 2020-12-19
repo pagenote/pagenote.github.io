@@ -20,7 +20,8 @@ export let getBridge = function (){
 
 // 缓存数据，当服务不可用时使用该值
 let tempDatas = {};
-let tempGroups = {};
+let tempGroupsObject = {};
+let tempGroupsArray = [];
 export const fetchGroups = function (groupType=2,callback){
   // if(tempGroups[groupType]){
   //   callback(tempGroups[groupType])
@@ -76,12 +77,56 @@ export const fetchGroups = function (groupType=2,callback){
     groups.sort((pre,next)=>{
       return isLow(pre.label,next.label,'/') ? 1 : -1;
     })
-    tempGroups[groupType] = groups;
+    tempGroupsArray = groups;
+    tempGroupsObject[groupType] = groups;
 
     callback({
       groups: groups,
     });
   })
+}
+
+// 过滤信息
+export const filterGroups = function (keyword,callback){
+  if(!keyword){
+    callback(tempGroupsArray)
+    return tempGroupsArray;
+  }
+  try{
+    const resultGroups = [];
+    tempGroupsArray.forEach((group)=>{
+      const tempGroupPages = group.pages.filter((page)=>{
+        const plainData = page;
+        if(plainData.description.indexOf(keyword)>-1){
+          return true;
+        }
+        else if(plainData.note.indexOf(keyword)>-1){
+          return true;
+        }
+        else if(plainData.title.indexOf(keyword)>-1){
+          return true;
+        }
+        else if(plainData.url.indexOf(keyword)>-1){
+          return true;
+        }
+        let stepMatched = plainData.steps.filter((step)=>{
+
+          return (step.text||'').indexOf(keyword)>-1
+            || (step.tip||'').indexOf(keyword)>-1
+        })
+        return stepMatched.length>0;
+      })
+      if(tempGroupPages.length){
+        resultGroups.push({
+          label: group.label,
+          pages: tempGroupPages,
+        })
+      }
+    })
+    callback(resultGroups);
+  }catch (e){
+    callback(tempGroupsArray);
+  }
 }
 
 // bridge 模式只支持单通信通道，暂不支持并行发送，需要加锁处理
