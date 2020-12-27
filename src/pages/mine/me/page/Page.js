@@ -95,6 +95,12 @@ export default class PageDetail extends Component{
         });
     }
 
+    deleteSnapshot =(index)=>{
+        const page = this.state.pageDetail;
+        page.snapshots.splice(index,1);
+        this.savePageInfo(page)
+    };
+
     exportFile =(type='md')=>{
         switch (type){
             case 'md':

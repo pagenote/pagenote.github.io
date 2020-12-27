@@ -48,8 +48,6 @@ export default class WebPage extends Component{
           {/*<span className='action-icon-button'>*/}
           {/*  <MarkdownIcon />*/}
           {/*</span>*/}
-        </CommonHeader>
-        <div className="notes-header">
           <Tooltip title='多选模式：一次可以选择多个PAGE浏览、操作；专注模式：一次只可选中一个PAGE浏览'>
             <Switch
               onChange={toggleMultSelect}
@@ -61,6 +59,9 @@ export default class WebPage extends Component{
               // defaultChecked
             />
           </Tooltip>
+        </CommonHeader>
+        <div className="notes-header">
+
           {
             muilPage &&
             <div className='selected-pages'>
