@@ -9,6 +9,8 @@ import NoteBookIcon from '@/assets/icon/notebook.svg';
 import BugIcon from '@/assets/icon/bug.svg'
 import SettingIcon from '@/assets/icon/setting.svg'
 import PlanIcon from '@/assets/icon/plan.svg'
+import ChangeLogIcon from '@/assets/icon/changelog.svg';
+import MaterialIcon from "@/assets/icon/material.svg";
 
 export default function Menus({sideWidth}){
   return(
@@ -17,8 +19,12 @@ export default function Menus({sideWidth}){
         <NavLink activeClassName="active" exact={true} to="/">
           <InternetIcon/>网页笔记
         </NavLink>
-        <NavLink activeClassName="active" exact={true} to="/draft">
+        {/*<NavLink activeClassName="active" exact={true} to="/material">*/}
+        {/*  <MaterialIcon/>素材库*/}
+        {/*</NavLink>*/}
+        <NavLink activeClassName="active" exact={true} to="/paper">
           <NoteBookIcon/>文稿
+        {/*  TODO 支持导入写作模板 自定义模板*/}
         </NavLink>
         <NavLink activeClassName="active" exact={true} to="/setting">
           <SettingIcon/>设置
@@ -42,18 +48,22 @@ export default function Menus({sideWidth}){
             </a>
           </Tooltip>
           <Tooltip title='反馈bug'>
-            <a href="https://github.com/rowthan/pagenote/issues" target='_blank'>
+            <a href="/doctor" target='_blank'>
               <BugIcon></BugIcon>
             </a>
           </Tooltip>
-          <Tooltip title='功能规划'>
-            <PlanIcon />
-          </Tooltip>
-
         </div>
-        <p className='version'>
+        <div className='version'>
           PAGENOTE {document.documentElement.dataset.version}
-        </p>
+        </div>
+        <div>
+          <Tooltip title='功能规划'>
+            <a target='_blank' href="/page?id=future"> <PlanIcon /></a>
+          </Tooltip>
+          <Tooltip title='更新日志'>
+            <a target='_blank' href="/release"> <ChangeLogIcon /></a>
+          </Tooltip>
+        </div>
       </div>
     </div>
   )
