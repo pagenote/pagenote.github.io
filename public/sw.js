@@ -1,12 +1,9 @@
-var version = '0.13.3';
+var version = '0.14.0';
 var cacheName = 'pre_cache_'+version;
 var apiCacheName = 'runtime_cache'+version;
 var cacheFiles = [
     '/',
-    '/draft',
-    '/setting',
     '/me',
-    '/donation',
     'https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js',
     'https://unpkg.com/react@16.13.1/umd/react.production.min.js'
 ];

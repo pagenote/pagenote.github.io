@@ -1,7 +1,7 @@
 import Bridge from "./extensionBridge";
 import { isLow } from "./index";
 import {funDownload} from "@/utils/document";
-import paperIntroduce from '../pages/mine/notebook/introduce.json'
+import paperIntroduce from '../pages/me/notebook/introduce.json'
 
 function checkValid(page){
   const {steps=[],snapshots=[],images=[]} = page || {}

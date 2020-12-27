@@ -1,46 +1,54 @@
 import React from "react";
-import { notification } from "antd";
-import App from "./App";
+import { notification , Tooltip,Popover} from "antd";
+import App from "./me/Me";
 import CommonPage from "../CommonPage";
 import CheckVersion from "../CheckVersion";
 import {
   HashRouter as Router,
   Switch,
   Route,
+  NavLink,
   Link
 } from "react-router-dom";
-// import Page from '../draft/index'
-// import SettingPage from '../setting/index'
-import AsideMore from "../../assets/icon/aside-more.svg";
-import Setting from "../../assets/icon/setting.svg";
-import Doc from '../../assets/icon/doc.svg'
-import WebPage from '../../assets/icon/webpage.svg'
+import Loadable from 'react-loadable';
+import Draft from './notebook/index';
+import SettingPage from '../setting/App';
+import Menus from './me/menu/Menus';
 import './index.scss'
 
+// const SettingPage = Loadable({
+//   loader: () => import('../setting/index'),
+//   loading: <div>加载中</div>,
+// });
+
+const DraftPage = Loadable({
+  loader: () => import('../draft/index'),
+  loading: <div>加载中</div>,
+});
+const sideWidth = 180;
+const predefineSize = window.innerWidth - sideWidth - 2;
 const RouteMe = function(){
   return (
     <Router>
-      <div>
-        <div className='more-icon'>
-          <p data-tip='查看我的PAGENOTE'>
-            <Link to="/"><WebPage/></Link>
-          </p>
-          <p data-tip='临时记事本'>
-            <a href="/draft"><Doc /></a>
-          </p>
-          <p data-tip='个性化设置PAGENOTE'>
-            <a href="/setting"><Setting /></a>
-          </p>
+      <div class='pagenote-me'>
+        <Menus sideWidth={sideWidth}></Menus>
+        <div className='page-container' style={{width: predefineSize + 'px'}}>
+          <Switch>
+            <Route exact path="/">
+              <App />
+            </Route>
+            <Route exact path="/paper">
+              <Draft />
+            </Route>
+            <Route exact path="/setting">
+              <SettingPage />
+            </Route>
+          </Switch>
         </div>
-        <Switch>
-          <Route exact path="/">
-            <App />
-          </Route>
-        </Switch>
       </div>
     </Router>
   )
 };
 
-CommonPage(CheckVersion(RouteMe,'0.12.1'),false,false);
+CommonPage(CheckVersion(RouteMe,'0.13.0'),false,false);
 

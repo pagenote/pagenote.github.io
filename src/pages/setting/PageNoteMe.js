@@ -4,7 +4,7 @@ import BigPicture from "bigpicture";
 import {funDownload} from "../../utils/document";
 import AsideMore from "../../assets/icon/aside-more.svg";
 import Setting from "../../assets/icon/setting.svg";
-import Aside from "../me/Aside";
+import Aside from "../me_old/Aside";
 import LoadPage from "../../components/tips/LoadPage";
 import PagesIcon from "../../assets/icon/pages.svg";
 import DropMenu from "../../components/DropMenu";

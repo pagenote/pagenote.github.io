@@ -4,9 +4,9 @@ import debounce from 'lodash/debounce'
 import WebPage from "./page/WebPage";
 import Groups from './Groups/Groups';
 import {fetchGroups,filterGroups} from "@/utils/api";
-import {gotoTarget} from "@/pages/mine/me/utils";
-import SearchFilter from "@/pages/mine/me/SearchFilter";
-import GroupFooter from "@/pages/mine/me/Groups/GroupFooter";
+import {gotoTarget} from "@/pages/me/me/utils";
+import SearchFilter from "@/pages/me/me/SearchFilter";
+import GroupFooter from "@/pages/me/me/Groups/GroupFooter";
 import CommonHeader from './CommonHeader/index';
 import './me.scss'
 
