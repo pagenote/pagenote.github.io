@@ -19,3 +19,4 @@ package-lock.jso
 
 yarn.lock
 dist/report.html
+package-lock.json

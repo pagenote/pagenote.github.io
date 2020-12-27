@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+    <meta name="description" content="让你在每一个网页上做笔记"/>
+    <title>把笔记留在网页里 pagenote 小而美的网页标记工具</title>
+
+    <style>
+        body{
+            padding: 0;
+            font-size: 14px;
+            background-color: rgb(248, 249, 250);
+        }
+        .desc-container{
+            /*width: 70%;*/
+            max-width: 800px;
+            height: auto;
+            margin: 0 auto;
+            font-family: serif;
+        }
+        a.language{
+            padding: 2px;
+            color: #03A9F4;
+            text-decoration: none;
+        }
+        a.language.active{
+            background-color: #03A9F4;
+            color: #fff;
+        }
+        .slogan{
+            display: inline-block;
+            margin-bottom: 1em;
+            margin-top: 1em;
+            font-size: 3.44rem;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #000000;
+            border-radius: 8px;
+            border: 1px solid #48d4e6;
+            background-color: #48d4e6;
+        }
+        .slogan .light-name{
+            color: #fff;
+        }
+        .slogan .common-des{
+            display: inline-block;
+            background-color: #fff;
+        }
+        .pagenote-description{
+            font-size: 1.19rem;
+            line-height: 1.6em;
+            font-weight: bold;
+        }
+
+        .extension-btns{
+            text-align: center;
+            margin: 2em;
+        }
+        a.browser-install-btn{
+            display: none;
+            margin: 0 1em;
+            padding: 6px 24px;
+            font-size: 1.4em;
+            border-radius: 24px;
+            box-shadow: 0 4px 10px 0 rgba(39, 43, 49, 0.2);
+            background-color: #00bdb8;
+            color: #fff;
+            font-weight: bolder;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        a.browser-install-btn.firefox{
+            background-color: #FF5722;
+        }
+        a.browser-install-btn:hover{
+            opacity: 0.85;
+        }
+
+        .steps{
+            margin: 2em 0;
+        }
+
+        .have-try{
+            text-align: center;
+        }
+        .have-try .demo-show{
+            height: 260px;
+            background: rgb(248, 249, 250);
+            /*background-image: url("https://addons.cdn.mozilla.net/user-media/previews/full/234/234253.png?modified=1586014931");*/
+        }
+
+        .desc-box{
+            margin: 80px 0;
+            display: flex;
+            /*flex-wrap: wrap;*/
+            justify-content: space-between;
+            font-size: 1.14em;
+        }
+        .desc-box .left-desc,.desc-box .right-text{
+            width: 50%;
+            flex-shrink: 1;
+            margin: 0 24px;
+            box-sizing: border-box;
+        }
+        .desc-box .left-desc{
+            padding: 1em;
+            border: 1px dashed #03A9F4;
+            font-size: 12px;
+            border-radius: 12px;
+            background-color: #fff;
+        }
+        .section-text h2{
+            font-size: 38px;
+            border-bottom: 0;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        .section-text h2:hover{
+            border-bottom: 2px solid #c8a6ff;
+        }
+
+        footer{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="desc-container">
+    <div style="text-align: center">
+        <h1 class="slogan"><span class="light-name">网页</span> <span class="common-des">里面留</span> <span class="light-name">笔记</span></h1>
+    </div>
+    <div class="pagenote-description">
+        <p>PAGENOTE 是一个网页里的荧光笔插件。你可以用它来勾画重点、记录笔记、整理在网页里记录的所有内容。
+            <span class="for-highlight">帮助你将注意力聚焦在重要内容。</span>
+            提供一种最简单的书签管理方式。
+        </p>
+        <div id="paint-man" class="">
+        </div>
+    </div>
+
+    <p>
+        一切功能都从「勾选一段文本」开始。
+    </p>
+
+    <div class="steps">
+        <section class="have-try">
+            <div class="demo-show">
+                <video controls="controls" width="400px" src="./pagenote.mp4"></video>
+                <!--                    <ul style="padding-top: 60px;font-size: 24px">-->
+                <!--                        <li>mark some keywords in the web page.</li>-->
+                <!--                        <li>leave some message in current site</li>-->
+                <!--                        <li>remind you next time when you visit the page</li>-->
+                <!--                        <li>search the web page by keywords. a new way to save bookmark</li>-->
+                <!--                        <li>share it to your friends</li>-->
+                <!--                    </ul>-->
+            </div>
+        </section>
+        <section class="desc-box section1">
+            <div class="left-desc">
+                ***********************
+                <br>
+                本插件是可免费使用的。选择一段文字，然后点击出现的按钮，就能生成一个「光点」。
+                <p>
+                    长按圆点，可以拖拽移动「光点」到任意位置。
+                </p>
+                ***********************
+            </div>
+            <div class="right-text">
+                <div class="section-text">
+                    <h2>高亮 &amp; 留言</h2>
+                    <p>高亮一段关键内容，并留下你的想法。</p>
+                </div>
+            </div>
+        </section>
+        <section class="desc-box section2">
+            <div class="left-desc">
+                ***********************
+                <br>
+                <p>
+                    本段内容有两个『光点』，一个已经点亮，你可以看到它对应的高亮内容和留言笔记。
+                </p>
+                <p>
+                    另外一个已经被熄灭，你需要点亮它才能看到对应的内容。
+                </p>
+                <br>
+                ***********************
+            </div>
+            <div class="right-text">
+                <div class="section-text">
+                    <h2>点亮 &amp; 熄灭</h2>
+                    <p>选择性显示/隐藏『光点』。</p>
+                </div>
+            </div>
+        </section>
+        <section class="desc-box section3">
+            <div class="left-desc">
+                ***********************
+                <br>
+                非常方便您去查找之前标记过的内容。可以通过高亮的文本、或者你自己的留言笔记去关键字搜索。
+                <p>
+                    点击浏览器右上角 <b>pagenote 的图标</b>，在弹出页中可以查看你所有标记过的内容。
+                </p>
+                <br>
+                ***********************
+            </div>
+            <div class="right-text">
+                <div class="section-text">
+                    <h2>搜索 &amp; 管理</h2>
+                    <p>一种全新的书签管理器</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        copyright©2020 <a href="https://github.com/rowthan/pagenote">rowthan</a>
+    </footer>
+</div>
+<script src="./pagenote.js"></script>
+
+<script>
+    var data = 'JTdCJTIyc3RlcHMlMjI6JTVCJTVCNjMzLDE4OCwlMjJwJTIyLCUyMiVFOCU4RCVBNyVFNSU4NSU4OSVFNyVBQyU5NCVFNiU4RiU5MiVFNCVCQiVCNiUyMiwlMjIlRTUlOUMlQTglRTYlOUMlQUMlRTclQkQlOTElRTclQUIlOTklRTQlQjglOEElRTUlOEYlQUYlRTQlQkIlQTUlRTklODAlODklRTYlOEIlQTklRTQlQjglODAlRTYlQUUlQjUlRTYlOTYlODclRTYlOUMlQUMlRTglQUYlOTUlRTQlQjglODAlRTglQUYlOTUlMjIsJTIycmdiYSgxMTQsMjA4LDI1NSwwLjg4KSUyMiwxNTg2MDU2MDgxMzIwLHRydWUlNUQsJTVCOTA3LDI5NSwlMjJwJTIyLCUyMiVFNyVBQyU5NCVFOCVBRSVCMCUyMiwlMjIlRTQlQkQlQTAlRTUlOEYlQUYlRTQlQkIlQTUlRTclOTUlOTklRTQlQjglOEIlRTQlQkQlQTAlRTclOUElODQlRTclQUMlOTQlRTglQUUlQjAlRUYlQkMlOEMlRTclODQlQjYlRTUlOTAlOEUlRTUlOEYlQUYlRTQlQkIlQTUlRTklODAlOUElRTglQkYlODclRTYlOTAlOUMlRTclQjQlQTIlRTUlODUlQjMlRTklOTQlQUUlRTglQUYlOEQlRTclOUElODQlRTYlOTYlQjklRTUlQkMlOEYlRTYlODklQkUlRTUlODglQjAlRTglQkYlOTklRTQlQjglQUElRTclQkQlOTElRTklQTElQjUlMjIsJTIycmdiYSgxMTQsMjA4LDI1NSwwLjg4KSUyMiwxNTg2MDU2MTAyNjA0LGZhbHNlJTVELCU1QjM5MSw4MjcsJTIyZGl2LmxlZnQtZGVzYyUyMiwlMjIlRTklODAlODklRTYlOEIlQTklRTQlQjglODAlRTYlQUUlQjUlRTYlOTYlODclRTUlQUQlOTclMjIsJTIyJUU5JTgwJTg5JUU2JThCJUE5JUU0JUI4JTgwJUU2JUFFJUI1JUU2JTk2JTg3JUU1JUFEJTk3JUVGJUJDJThDJUU2JThDJTg5JUU5JTkyJUFFJUU4JTg3JUFBJUU1JThBJUE4JUU1JTg3JUJBJUU3JThFJUIwJUU1JTlDJUE4JUU2JTk2JTg3JUU2JTlDJUFDJUU1JThGJUIzJUU0JUI4JThCJUU4JUE3JTkyJTIyLCUyMiNjOGE2ZmYlMjIsMTU4NjA1Njc4OTQ5Nyx0cnVlJTVELCU1QjQyMywxMjE0LCUyMnNlY3Rpb24uZGVzYy1ib3guc2VjdGlvbjMlM0VkaXYubGVmdC1kZXNjJTIyLCUyMiVFNSU4NSVCMyVFOSU5NCVBRSVFNSVBRCU5NyVFNiU5MCU5QyVFNyVCNCVBMiUyMiwlMjIlRTQlQjglOEQlRTUlQkYlODUlRTUlQUQlOTglRTQlQjklQTYlRTclQUQlQkUlRUYlQkMlOEMlRTQlQjklOUYlRTglODMlQkQlRTYlODklQkUlRTUlODglQjAlRTQlQkQlQTAlRTglQUUlQjAlRTUlQkQlOTUlRTglQkYlODclRTclOUElODQlRTclQkQlOTElRTklQTElQjUlMjIsJTIycmdiYSgyNTEsJTIwMTgxLCUyMDIxNCwlMjAwLjg0KSUyMiwxNTg2MDU2OTA0MjAzLHRydWUlNUQsJTVCNDc2LDEzMTQsJTIyYiUyMiwlMjJwYWdlbm90ZSUyMCVFNyU5QSU4NCVFNSU5QiVCRSVFNiVBMCU4NyUyMiwlMjIlRTclQTElQUUlRTQlQkYlOUQlRTQlQkQlQTAlRTUlQjclQjIlRTclQkIlOEYlRTUlQUUlODklRTglQTMlODUlRTQlQkElODYlRTYlOEYlOTIlRTQlQkIlQjYlMjIsJTIycmdiYSgyNTEsJTIwMTgxLCUyMDIxNCwlMjAwLjg0KSUyMiwxNTg2MDgxNzk4MTkxLHRydWUlNUQsJTVCNDk5LDEwMjUsJTIyc2VjdGlvbi5kZXNjLWJveC5zZWN0aW9uMiUzRWRpdi5sZWZ0LWRlc2MlM0VwOm50aC1jaGlsZCgyKSUyMiwlMjIlRTQlQjglODAlRTQlQjglQUElRTUlQjclQjIlRTclQkIlOEYlRTclODIlQjklRTQlQkElQUUlMjIsJTIyJUU1JTk3JUE4JUVGJUJDJThDJUU4JUJGJTk5JUU0JUI4JUFBJUU1JTg1JTg5JUU3JTgyJUI5JUU1JUI3JUIyJUU3JUJCJThGJUU3JTgyJUI5JUU0JUJBJUFFJTIyLCUyMiM2ZmUyZDUlMjIsMTU4NjA4MjgxODM4MSx0cnVlJTVELCU1QjQ3NCwxMDc2LCUyMnNlY3Rpb24uZGVzYy1ib3guc2VjdGlvbjIlM0VkaXYubGVmdC1kZXNjJTNFcDpudGgtY2hpbGQoMyklMjIsJTIyJUU4JUEyJUFCJUU3JTg2JTg0JUU3JTgxJUFEJTIyLCUyMiVFNCVCRCVBMCVFNSVCNyVCMiVFNyVCQiU4RiVFNiU4OCU5MCVFNSU4QSU5RiVFNyU4MiVCOSVFNCVCQSVBRSVFNyU5QyU4QiVFOCVBNyU4MSVFNiU4OCU5MSVFNCVCQSU4NiUyMiwlMjJyZ2JhKDAsMCwwLDAuNSklMjIsMTU4NjA4MjgzMjcwMSxmYWxzZSU1RCU1RCwlMjJzZXR0aW5nJTIyOiU3QiU3RCwlMjJ1cmwlMjI6JTIyaHR0cDovL2xvY2FsaG9zdDo2MzM0Mi9lYXN5c2hhcmUvZGVtby9pbmRleC5odG1sJTIyLCUyMmxhc3RNb2RpZmllZCUyMjoxNTg2MDgzOTYwMDQ3LCUyMmljb24lMjI6JTIyaHR0cDovL2xvY2FsaG9zdDo2MzM0Mi9mYXZpY29uLmljbyUyMiU3RA=='
+
+    var dataEn = 'JTdCJTIyc3RlcHMlMjI6JTVCJTVCNzI3LDI5OSwlMjJkaXYucGFnZW5vdGUtZGVzY3JpcHRpb24lMjIsJTIyZm9jdXMlMjBvbiUyMGtleSUyMHJlZmVyZW5jZXMlMjIsJTIySGklRUYlQkMlOEN0aGlzJTIwaXMlMjBOb3RlUGFnZS4lMjIsJTIycmdiYSgxMTQsMjA4LDI1NSwwLjg4KSUyMiwxNTg1OTk5NDgzMDgzLHRydWUlNUQsJTVCNTEzLDgxMywlMjJkaXYubGVmdC1kZXNjJTIyLCUyMmZyZWUlMjIsJTIySXQlMjBpcyUyMGZyZWUsJTIwc28sJTIwaGF2ZSUyMGElMjB0cnkuJTIyLCUyMnJnYmEoMTE0LDIwOCwyNTUsMC44OCklMjIsMTU4NjAwOTUwMDQ4Nyx0cnVlJTVELCU1Qjg3OSwxMDU2LCUyMmRpdi5sZWZ0LWRlc2M6bnRoLWNoaWxkKDIpJTIyLCUyMm1lc3NhZ2UlMjBub3RlZCUyMiwlMjJZRUFIISUyMFRyeSUyMHRvJTIwY2xpY2slMjB0aGUlMjBiYWxsJTIyLCUyMnJnYmEoMjUxLCUyMDE4MSwlMjAyMTQsJTIwMC44NCklMjIsMTU4NjAxMTczMzczMyx0cnVlJTVELCU1QjQ5NCwxMzg4LCUyMnNlY3Rpb24uZGVzYy1ib3guc2VjdGlvbjMlM0VkaXYubGVmdC1kZXNjJTNFcCUzRWIlMjIsJTIycGFnZW5vdGUlMjBpY29uJTIyLCUyMiUzQ2ltZyUyMHNyYz0lNUMlMjJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUJvQUFBQWVDQVlBQUFBeTJ3N1lBQUFBNzBsRVFWUklEV053WC96NFB3aGZmUEhqUHdnc3Z2QUJ6SWVKNDZKaDZrdDN2VVpSRDlJUEFpQjVrTjc2L1cvQWJBYVlRVENOMUxZSVpEN0lNWFN4Q0dUWnFFWHdpSWZGS2FIRUFFc0RWQWs2V0VwclBmUUduR3FSVXgzVkxPby8vZzZjbkVIRXA1Ly9hR2ZSenovL3dCWWRldkFOVEY5Ly9STk13L0lSMVh3RU12WDhjMGptdlB2dUY5Z1NFRUYxaTI2OS9mVS9kTlV6Y0NKSjMvemkvK2VmRUI5U3phSVpaejc4UC9uaysvL2tqUy9nS1JFVVRJMEhJRVVPS081Z3dRYWl5VTUxeUlZUXd4NjFDQ1hjaVFreW1KclJvQnNOT25nSWpDWUdlRkRBOGdleDlHalFqUVlkUEFUb2xoZ0FDa1FoVXNJT3huUUFBQUFBU1VWT1JLNUNZSUk9JTVDJTIyJTNFJm5ic3A7SGF2ZSUyMGElMjB0cnklMjIsJTIyIzZmZTJkNSUyMiwxNTg2MDEzMDM2MzU2LHRydWUlNUQsJTVCNDkyLDg1NCwlMjJkaXYubGVmdC1kZXNjJTNFcDpudGgtY2hpbGQoMyklMjIsJTIyYmFsbCUyMiwlMjJiYWxsJTNDaW1nJTIwc3JjPSU1QyUyMmRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQzRBQUFBeUNBWUFBQUFqcmVuWEFBQUIwRWxFUVZSb0JlMmF6MHJEUUJERzgvNzJJQXFDVnkrK2doNThCcjBFb3loSkl6VWdiY0ZZMDFiUWtXOTFRazEzN1RTbDJTek1RRWlUN3AvZmZqczdhWGNTVWFBVzdjcjlzcHpUZFRtbHkvRXpuUmNwblQ3ZDAyRjJTNE0wTmdjKzR4NitReG1VUloxZHJSWDRhRkhSMWFRd1FBZHBURzBPREFadG9DMlhmWHg5MHNWNFpHMS9LL0JrOW1xVWF3UDZYeDNNQnRwMjJVMDVOZkNEN0Zla0xDWVIrSEErMnd0d2N6QVlBUHF5V1ZxOTBkRXdxZFhmQ0k3cGJIYXc3MnYwYWJOaVdkRkpma2RRM2dtT0JYUTJldXdjbWtWQjM3WkZYQ3dxbzd3Vi9PRzlOSkdCRy9GMVJrUUNTOVBnTm12Z1dDUytRRjM5MmhidUgzQ016bFhaOS8ybThqVTQvQWxUNHh2UTFUL1lWbjIrQnZlNUVGMnd6ZnRnWkRQZ1BrSmVFMHA2emFFeVFzQ1hWdXBMT1RCSGVGcjFCVWpLQWVaSVdyaHY1UlM4NnhsUnhWVng0VDhxZFJWMUZYVVZvUUxxS2tLaE5LcW9xNmlyQ0JWUVZ4RUtwVkZGWFVWZFJhaUF1b3BRcUhBM2hJTGRnc1B1WjVDYm5yeHRHK1EyTStDRDNkZ0hmSkNwRkhhWklKTlhEQS9sKzVBUDJpcGR5UER3ZVo4TEZuMnZKcXVZeXlSbzgyUTl6OGtGK093alZIS2VoeG40REdpa3hQSHpvczY2OFplMk14NVNYYVJjTnIyRWNKei92SVNBWFA0M2JWWUE5LzZvWEs4QUFBQUFTVVZPUks1Q1lJST0lNUMlMjIlM0UlMjIsJTIycmdiYSgxMTQsMjA4LDI1NSwwLjg4KSUyMiwxNTg2MDEzMzM4NzY3LHRydWUlNUQsJTVCODM3LDExMTIsJTIyZGl2LmxlZnQtZGVzYzpudGgtY2hpbGQoMiklM0VwOm50aC1jaGlsZCgzKSUyMiwlMjJjbGljayUyMiwlMjJZRVMhJTIweW91JTIwaGF2ZSUyMGZpeGVkJTIwdGhlJTIwbWVzc2FnZSUyMiwlMjJyZ2JhKDI1MSwlMjAxODEsJTIwMjE0LCUyMDAuODQpJTIyLDE1ODYwODIzOTgzNTgsZmFsc2UlNUQlNUQsJTIyc2V0dGluZyUyMjolN0IlN0QsJTIydXJsJTIyOiUyMmh0dHA6Ly9sb2NhbGhvc3Q6NjMzNDIvZWFzeXNoYXJlL2RlbW8vaW5kZXhfZW4uaHRtbCUyMiwlMjJsYXN0TW9kaWZpZWQlMjI6MTU4NjA4MjQxMTAwOCwlMjJpY29uJTIyOiUyMmh0dHA6Ly9sb2NhbGhvc3Q6NjMzNDIvZmF2aWNvbi5pY28lMjIlN0Q=';
+
+    var isEn = window.location.href.indexOf('en.html')>-1;
+    var storeKey = isEn?'pagenote-guide-en':'pagenote-guide-cn';
+
+
+    var pagenote = new PageNote(storeKey);
+    pagenote.init(isEn?dataEn:data);
+
+    var isChrome = navigator.userAgent.indexOf('Chrome')>-1;
+    var isFirefox = navigator.userAgent.indexOf('Firefox')>-1;
+
+
+    if(isChrome){
+        document.querySelector('.chrome').style.display='inline-block';
+    } else if(isFirefox) {
+        document.querySelector('.firefox').style.display='inline-block';
+    } else{
+        [].forEach.call(document.querySelectorAll('.browser-install-btn'),function (item) {
+            item.style.display='inline-block';
+        })
+    }
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162459604-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-162459604-2');
+</script>
+
+</body>
+</html>
