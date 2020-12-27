@@ -1,7 +1,8 @@
 import React,{Component} from "react";
 import Notebook from './Notebook';
-import {getPapers,savePaper} from "@/utils/api";
-import CreateIcon from '@/assets/icon/create_paper.svg'
+import {getPapers,savePaper,deletePaper} from "@/utils/api";
+import CreateIcon from '@/assets/icon/create_paper.svg';
+import DeleteIcon from '@/assets/icon/delete.svg'
 import './index.scss'
 
 
@@ -38,7 +39,7 @@ export default class NoteBooks extends Component{
     getPapers((result)=>{
       this.setState({
         papers: result,
-        currentKey: result[0] ? result[0].id : '',
+        currentKey: this.state.currentKey || (result[0] ? result[0].id : ''),
       })
     });
   }
@@ -63,6 +64,15 @@ export default class NoteBooks extends Component{
   };
 
 
+  deleteCuttentPaper=()=>{
+    const {currentKey} = this.state;
+    deletePaper(currentKey,()=>{
+      this.initData();
+      this.setState({
+        currentKey:''
+      })
+    })
+  }
 
   render() {
     const {papers,currentKey} = this.state;
@@ -73,14 +83,22 @@ export default class NoteBooks extends Component{
             <span className='action-icon' onClick={this.createNew}>
               <CreateIcon />
             </span>
+
           </div>
           <div className="notebook-content">
             {
               papers.map((paper)=>{
+                const title = document.createElement('div');
+                title.innerHTML = paper.title||'';
+                const abstract = document.createElement('div');
+                abstract.innerHTML = paper.abstract||'';
                 return(
-                  <div onClick={()=>this.setPaper(paper.id)} className={`paper-item ${paper.id===currentKey?'active':''}`} key={paper.id} data-paper={paper.id}>
-                    <div>{paper.title}</div>
-                    <div>{paper.abstract}</div>
+                  <div onClick={()=>this.setPaper(paper.id)}
+                       className={`paper-item ${paper.id===currentKey?'active':''}`}
+                       key={paper.id}
+                       data-paper={paper.id}>
+                    <div className='paper-title'>{title.innerText}</div>
+                    <div className='paper-abstract'>{abstract.innerText}</div>
                   </div>
                 )
               })
@@ -89,7 +107,11 @@ export default class NoteBooks extends Component{
         </div>
         <div className='notebook-detail'>
           <div className='notebook-header'>
-            操作区域
+            {
+              currentKey && <span className='action-icon delete' onClick={this.deleteCuttentPaper}>
+              <DeleteIcon />
+            </span>
+            }
           </div>
           <div className="notebook-content">
             {
@@ -97,6 +119,7 @@ export default class NoteBooks extends Component{
               <Notebook
                 key={currentKey}
                 paperKey={currentKey}
+                onChange={this.initData}
               />
             }
           </div>

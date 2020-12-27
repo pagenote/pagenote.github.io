@@ -1,6 +1,7 @@
 import Bridge from "./extensionBridge";
 import { isLow } from "./index";
 import {funDownload} from "@/utils/document";
+import paperIntroduce from '../pages/mine/notebook/introduce.json'
 
 function checkValid(page){
   const {steps=[],snapshots=[],images=[]} = page || {}
@@ -260,23 +261,29 @@ export const savePaper = function (key,data,callback){
     title: blocks[0]?blocks[0].data.text:'',
     abstract: blocks[1]?blocks[1].data.text:'',
   }));
-  callback()
+  typeof callback === 'function' && callback()
 }
 
 export const deletePaper = function (key,callback){
   localStorage.removeItem(key);
-  callback();
+  typeof callback==='function' && callback();
 }
 
 export const getPapers = function (callback){
   const datas = localStorage.valueOf();
   const result = [];
+  datas.paper_introduce = JSON.stringify(paperIntroduce);
   for(let i in datas ){
     const key = /^paper_(.*)/.exec(i);
     try{
-      if(key && key[1]){
+      if((key && key[1])){
+        // debugger
         const a = JSON.parse(datas[i]);
-        result.push(a)
+        if(a.title){
+          result.push(a)
+        }else{
+          deletePaper(i)
+        }
       }
     }catch (e){
       if(key[1]){

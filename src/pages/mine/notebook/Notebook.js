@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Editor from '@/components/editor/Editor'
 import {getPaperDetail,savePaper} from "@/utils/api";
+import Draft from '@/components/Draft'
 import './notebook.scss'
 
 export default class Notebook extends Component{
@@ -23,8 +24,14 @@ export default class Notebook extends Component{
     })
   }
 
+  onChange=(result)=>{
+    const {paperKey,onChange} = this.props;
+    savePaper(paperKey,result);
+    onChange(paperKey,result)
+  }
+
   render() {
-    const {paperKey} = this.props;
+
     const {data} = this.state;
     return (
       <div className='notebook'>
@@ -38,9 +45,9 @@ export default class Notebook extends Component{
         {
           data.time &&
           <Editor
-            placeholder='开始记录些什么吧，数据存储在你浏览器本地'
+            placeholder='开始记录些什么吧，数据存储在你浏览器本地。仅你当前浏览器可查看'
             data={data}
-            onSave={(result)=>savePaper(paperKey,result)} />
+            onSave={this.onChange} />
         }
 
       </div>

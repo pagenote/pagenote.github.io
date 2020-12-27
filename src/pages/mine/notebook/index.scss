@@ -9,17 +9,36 @@
       padding: 12px;
       font-size: 14px;
       font-weight: 500;
+      border-bottom: 1px solid #dcdcdc;
       &.active{
         background: #e2e2e2;
+      }
+      .paper-title,.paper-abstract{
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .paper-abstract{
+        color: #999;
+        font-weight: normal;
       }
     }
   }
   .notebook-detail{
     flex-grow: 1;
   }
+  .notebook-menus,.notebook-detail{
+    max-height: 99vh;
+    overflow: auto;
+  }
   .notebook-header{
+    position: sticky;
+    top:0;
     box-shadow: -1px 1px 2px 0px #eee;
     padding: 12px;
+    background: #fff;
+    z-index: 2;
     .action-icon{
       padding: 4px;
       background-color: #fff;
@@ -33,6 +52,10 @@
           fill: #1e88e5;
         }
       }
+      //&.delete{
+      //  position: absolute;
+      //  right: 0;
+      //}
       svg{
         margin: 0;
       }
