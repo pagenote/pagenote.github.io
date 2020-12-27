@@ -46,7 +46,7 @@ export default class RatePage extends Component{
           title="运行日志"
           subTitle="检测运行状态是否正常，重启浏览器后日志清空。"
         >
-
+          <a href="https://github.com/rowthan/pagenote/issues">反馈bug</a>
         </PageHeader>
         <Table
           columns={columns}
