@@ -5,6 +5,9 @@ import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import Page from './Page';
 import { gotoTarget } from "@/pages/mine/me/utils";
 import CleanIcon from '@/assets/icon/clean.svg';
+import DeleteIcon from '@/assets/icon/delete.svg'
+import MarkdownIcon from '@/assets/icon/md.svg'
+import {savePage} from "@/utils/api";
 import './webpage.scss'
 
 function getLink(url){
@@ -19,14 +22,33 @@ export default class WebPage extends Component{
     console.log(e.target)
   }
 
+  deletePage=(keys)=>{
+    if(keys.length>1){
+      const check = window.confirm('确定删除');
+      if(!check){
+        return;
+      }
+    }
+    const {removeSelectPages} = this.props;
+    keys.forEach((key)=>{
+      savePage(key,null);
+    })
+    removeSelectPages();
+  }
+
 
   render() {
     const {keys,removeSelectPages,muilPage,toggleMultSelect} = this.props;
     return(
       <section className='notes'>
-        {/*<CommonHeader>*/}
-
-        {/*</CommonHeader>*/}
+        <CommonHeader>
+          <span className='action-icon-button'>
+            <DeleteIcon onClick={()=>{this.deletePage(keys)}} />
+          </span>
+          {/*<span className='action-icon-button'>*/}
+          {/*  <MarkdownIcon />*/}
+          {/*</span>*/}
+        </CommonHeader>
         <div className="notes-header">
           <Tooltip title='多选模式：一次可以选择多个PAGE浏览、操作；专注模式：一次只可选中一个PAGE浏览'>
             <Switch
@@ -64,7 +86,7 @@ export default class WebPage extends Component{
           <Empty
             description={
             <span>
-              请在左侧选择 PAGE
+              请在左侧选择 PAGE 后查看
             </span>
           }></Empty>
         }

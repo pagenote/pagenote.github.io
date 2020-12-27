@@ -141,7 +141,7 @@ export default class PageDetail extends Component{
                 loading===false ?
                   <Fragment>
                       {
-                          pageDetail?
+                          (pageDetail && pageDetail.url)?
                           <div>
                               <div className='page-header'>
                                   <div className='page-header-meta'>
