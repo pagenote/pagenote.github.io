@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Select,Spin,Input } from 'antd';
+import { Select,Spin } from 'antd';
 import debounce from 'lodash/debounce'
 import WebPage from "./page/WebPage";
 import Groups from './Groups/Groups';
@@ -25,7 +25,6 @@ const groupTypes = [
         label: '按日期分组'
     },
 ];
-const predefineSize = window.innerWidth - 160 - 2;
 
 export default class Me extends Component {
     constructor(props) {
@@ -186,17 +185,20 @@ export default class Me extends Component {
           <div className={`notes-in-webpage`}
                style={{border: `1px solid ${bgColor}`, backgroundColor: bgColor}}>
               <section className='pages' style={{width: barSize, background: bgColor}}>
-                  <CommonHeader>
+                  {/*<CommonHeader>*/}
 
-                  </CommonHeader>
-                  <Select defaultValue={groupType} style={{ width: 120 }} bordered={false} onChange={this.changeGroupType}>
-                      {
-                          groupTypes.map((item)=>(
-                            <Option value={item.value}>{item.label}</Option>
-                          ))
-                      }
-                  </Select>
-                  <SearchFilter onSearch={this.onSearch}/>
+                  {/*</CommonHeader>*/}
+                  <div className='page-filter'>
+                      <Select defaultValue={groupType} style={{ width: 120 }} bordered={false} onChange={this.changeGroupType}>
+                          {
+                              groupTypes.map((item)=>(
+                                <Option value={item.value}>{item.label}</Option>
+                              ))
+                          }
+                      </Select>
+                      <SearchFilter onSearch={this.onSearch}/>
+                  </div>
+
                   <Spin spinning={fetching}>
                       <Groups groups={groups}
                               selectPage={this.selectPage}

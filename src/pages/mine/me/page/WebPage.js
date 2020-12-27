@@ -24,9 +24,9 @@ export default class WebPage extends Component{
     const {keys,removeSelectPages,muilPage,toggleMultSelect} = this.props;
     return(
       <section className='notes'>
-        <CommonHeader>
+        {/*<CommonHeader>*/}
 
-        </CommonHeader>
+        {/*</CommonHeader>*/}
         <div className="notes-header">
           <Tooltip title='多选模式：一次可以选择多个PAGE浏览、操作；专注模式：一次只可选中一个PAGE浏览'>
             <Switch

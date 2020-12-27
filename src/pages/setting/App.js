@@ -8,7 +8,7 @@ import FunctionIconSetting from "../../components/setting/FunctionIconSetting";
 import CheckVersionPart from "../CheckVersionPart";
 import throttle from 'lodash/throttle';
 import './setting.scss';
-import { Collapse, message,Switch, Button, Slider,Popconfirm,Tabs,Drawer,Radio } from 'antd';
+import { Collapse, message,Switch, Button, Slider,Popconfirm,Tabs,Drawer,Radio, Spin } from 'antd';
 import 'antd/dist/antd.css';
 // import 'antd/es/collapse/style/index.css'
 import UserForm from "../../components/setting/UserForm";
@@ -550,17 +550,17 @@ export default class SettingRender extends Component{
                   </div>
                 </div>
 
-                <div className="language setting-part">
-                  <CheckVersionPart version='0.13.3'>
-                    <Radio.Group onChange={this.setLocale} value={langType}>
-                      {
-                        languages.map((item)=>(
-                          <Radio value={item.value}>{item.name}</Radio>
-                        ))
-                      }
-                    </Radio.Group>
-                  </CheckVersionPart>
-                </div>
+                {/*<div className="language setting-part">*/}
+                {/*  <CheckVersionPart version='0.13.3'>*/}
+                {/*    <Radio.Group onChange={this.setLocale} value={langType}>*/}
+                {/*      {*/}
+                {/*        languages.map((item)=>(*/}
+                {/*          <Radio value={item.value}>{item.name}</Radio>*/}
+                {/*        ))*/}
+                {/*      }*/}
+                {/*    </Radio.Group>*/}
+                {/*  </CheckVersionPart>*/}
+                {/*</div>*/}
 
                 <div className="reset setting-part">
                   <CheckVersionPart version='0.12.5'>

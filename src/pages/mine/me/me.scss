@@ -208,9 +208,9 @@ svg{
   border-right:none;
   max-height: 100vh;
   overflow: auto;
-  .sort-icon{
-    margin-left: 12px;
-    cursor: pointer;
+  .page-filter{
+    display: flex;
+    justify-content: space-between;
   }
 }
 

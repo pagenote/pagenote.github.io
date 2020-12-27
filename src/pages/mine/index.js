@@ -37,7 +37,7 @@ const RouteMe = function(){
             <Route exact path="/">
               <App />
             </Route>
-            <Route exact path="/draft">
+            <Route exact path="/paper">
               <Draft />
             </Route>
             <Route exact path="/setting">
