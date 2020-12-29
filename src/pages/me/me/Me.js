@@ -8,6 +8,7 @@ import {gotoTarget} from "@/pages/me/me/utils";
 import SearchFilter from "@/pages/me/me/SearchFilter";
 import GroupFooter from "@/pages/me/me/Groups/GroupFooter";
 import CommonHeader from './CommonHeader/index';
+import CheckVersion from "@/pages/CheckVersion";
 import './me.scss'
 
 const { Option } = Select;
@@ -26,7 +27,7 @@ const groupTypes = [
     },
 ];
 
-export default class Me extends Component {
+class Me extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -240,3 +241,5 @@ export default class Me extends Component {
         )
     }
 }
+
+export default CheckVersion(Me,'0.13.2')

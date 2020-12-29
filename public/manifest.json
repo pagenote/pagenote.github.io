@@ -2,7 +2,7 @@
   "name": "一页一记",
   "short_name": "PAGENOTE",
   "start_url": "/me",
-  "display": "minimal-ui",
+  "display": "standalone",
   "background_color": "#333",
   "description": "一页一记，小而美的笔记工具",
   "orientation": "portrait-primary",

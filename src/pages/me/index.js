@@ -2,7 +2,6 @@ import React from "react";
 import { notification , Tooltip,Popover} from "antd";
 import App from "./me/Me";
 import CommonPage from "../CommonPage";
-import CheckVersion from "../CheckVersion";
 import {
   HashRouter as Router,
   Switch,
@@ -50,5 +49,5 @@ const RouteMe = function(){
   )
 };
 
-CommonPage(CheckVersion(RouteMe,'0.13.0'),false,false);
+CommonPage(RouteMe,false,false);
 

@@ -3,11 +3,12 @@ import Notebook from './Notebook';
 import {getPapers,savePaper,deletePaper} from "@/utils/api";
 import CreateIcon from '@/assets/icon/create_paper.svg';
 import DeleteIcon from '@/assets/icon/delete.svg'
+import CheckVersion from "@/pages/CheckVersion";
 import './index.scss'
 
 
 
-export default class NoteBooks extends Component{
+class NoteBooks extends Component{
 
   constructor(props) {
     super(props);
@@ -128,3 +129,5 @@ export default class NoteBooks extends Component{
     )
   }
 }
+
+export default CheckVersion(NoteBooks,'0.13.2');
