@@ -72,6 +72,11 @@
         font-size: 12px;
         color: #268ebd;
         text-decoration: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        display: block;
+        max-height: 3em;
         &:hover{
           color:#337ab7;
           text-decoration: underline;
