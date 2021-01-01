@@ -16,8 +16,10 @@ const validateMessages = {
 };
 
 export default function UserForm({defaultData={},onSubmit}) {
+  const [form] = Form.useForm();
+  form.setFieldsValue(defaultData);
   return (
-    <Form {...layout}  initialValues={defaultData} name="control-hooks" onFinish={onSubmit} validateMessages={validateMessages}>
+    <Form {...layout}  form={form} name="control-hooks" onFinish={onSubmit} validateMessages={validateMessages}>
       <Form.Item name={'uid'} label="用户ID" rules={[{ required: true }]}>
         <Input disabled />
       </Form.Item>

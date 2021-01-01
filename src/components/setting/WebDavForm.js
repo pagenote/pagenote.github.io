@@ -19,7 +19,7 @@ const options = [
   { value: 'https://dav.jianguoyun.com/dav/' },
 ];
 
-export default function UserForm({defaultData={},onSubmit}) {
+export default function WebDavForm({defaultData={},onSubmit}) {
   return (
     <Form {...layout}  initialValues={defaultData} name="control-hooks" onFinish={onSubmit} validateMessages={validateMessages}>
       <Form.Item name={['invite_code']} label="邀请码" rules={[{ required: true }]}>

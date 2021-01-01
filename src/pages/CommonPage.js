@@ -2,10 +2,10 @@ import React, {Component} from 'react'
 import ReactDOM from "react-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { getBrowserTypeAndVersion} from "../utils/document";
-import '../styles/common.scss'
-import {sendEvent} from "../utils";
+import { getBrowserTypeAndVersion} from "@/utils/document";
+import {sendEvent} from "@/utils/api";
 
+import '../styles/common.scss'
 // 设置滚动title
 export default function CommonPage(Component,useHead=true,useFooter=true) {
   const mountNode = document.getElementById("app");

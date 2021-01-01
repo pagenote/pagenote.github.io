@@ -1,0 +1,11 @@
+.frame{
+  display: flex;
+  height: 100vh;
+  .left{
+    width: 25%;
+    border-right: 1px solid #e8e8e8;
+  }
+  .right{
+    width: 75%;
+  }
+}

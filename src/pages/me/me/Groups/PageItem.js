@@ -11,7 +11,7 @@ export default function PageItem({page,onSelect,active}) {
              style={{backgroundImage:`url(${images[0]})`}}>
             <div className='page-header'>
                 <div className='page-title' title={page.url}>
-                    <img className='page-icon' src={page.icon||images[0]} alt=""/>
+                    <img className={`page-icon ${page.lastSyncTime?'synced':''}`} src={page.icon||images[0]} alt=""/>
                     {page.title || page.url}
                 </div>
                 <div className='page-link'>

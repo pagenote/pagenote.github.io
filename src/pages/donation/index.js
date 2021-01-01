@@ -83,6 +83,11 @@ const users = [
     amount: 25,
     type: 2,
     time:'2020-12-30'
+  },{
+    name:'白*',
+    amount: 5,
+    type: 2,
+    time:'2021-01-01'
   },
 ];
 

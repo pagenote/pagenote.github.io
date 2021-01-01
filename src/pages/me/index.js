@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 import Loadable from 'react-loadable';
 import Draft from './notebook/index';
-import SettingPage from '../setting/App';
+import SettingPage from './setting';
 import Menus from './me/menu/Menus';
 import './index.scss'
 
@@ -39,7 +39,7 @@ const RouteMe = function(){
             <Route exact path="/paper">
               <Draft />
             </Route>
-            <Route exact path="/setting">
+            <Route path="/setting">
               <SettingPage />
             </Route>
           </Switch>
