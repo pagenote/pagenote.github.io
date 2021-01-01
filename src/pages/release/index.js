@@ -25,10 +25,7 @@ export default class Release extends Component{
     render() {
         return (
             <div className='release'>
-                <section className="row">
-                    <InstallBar className='install-btns' />
-                    <strong className='slogan'>PAGENNOTE 小而美的笔记工具</strong>
-                </section>
+                <InstallBar />
                 {
                    Object.keys(mainVersion).map((version,index)=>(
                       <div key={version} className='row version latest' id='version12'>
