@@ -3,8 +3,49 @@ import React,{useState,useEffect,useRef}  from 'react';
 // import 'antd/es/modal/style/index.less'
 // import 'antd/es/modal/style/modal.less'
 // import 'antd/lib/modal/style/index.css';
-import {getBrowserTypeAndVersion} from '../utils/document'
+import {getBrowserTypeAndVersion} from '@/utils/document'
+import ChromeSvg from '@/assets/icon/image/chrome.svg'
+import FirefoxSvg from '@/assets/icon/image/firefox.svg'
+import EdgeSvg from '@/assets/icon/image/edge.svg'
+import SanSvg from '@/assets/icon/image/360.svg'
 import version from '../../public/version.json'
+import HotSvg from '@/assets/icon/image/hot.svg'
+import {isLow} from "@/utils";
+
+
+let platforms = [
+  {
+    title:'Firefox',
+    browser:'firefox',
+    version:version.firefox,
+    link:'https://addons.mozilla.org/addon/page-note?src=external-release',
+    icon: FirefoxSvg,
+  },
+  {
+    title:'Chrome',
+    browser:'chrome',
+    version:version.chrome,
+    link:'https://chrome.google.com/webstore/detail/pagenotehighlight-and-tak/hpekbddiphlmlfjebppjhemobaopekmp?utm_source=blog',
+    icon: ChromeSvg,
+  },
+  {
+    title:'Edge',
+    browser:'edge',
+    version:version.edge,
+    link:'https://microsoftedge.microsoft.com/addons/detail/ablhdlecfphodoohfacojdngdfkgneaa',
+    icon: EdgeSvg,
+  },
+  {
+    title:'360',
+    browser:'ee',
+    version:version["360"],
+    link:'https://ext.chrome.360.cn/webstore/detail/gielpddfollkffnbiegekliodnahhpfa',
+    icon: SanSvg
+  }
+]
+platforms = platforms.sort((pre,next)=>{
+  return isLow(pre.version,next.version)?1:-1
+})
 
 export default function InstallBar() {
   const offlineInstall = function () {
@@ -18,95 +59,77 @@ export default function InstallBar() {
   const [chromeType,setType] = useState('');
     useEffect(()=>{
         const browserType = getBrowserTypeAndVersion().type;
-        console.log(browserType)
-        setType(browserType)
+        setType(browserType.toLowerCase())
     });
   return(
-    <span>
+    <div>
       <style jsx='true'>{`
-                .install-btns{
-                  //display: inline-block;
-                  //width: 220px;
-                  //padding: 0 12px;
-                  margin: 12px 0;
-                  text-align:center;
-                }
-                a.browser-install-btn{
-                  display: inline-block;
-                  position: relative;
-                  margin-right: 12px;
-                  margin-bottom:12px;
-                  padding: 6px 20px;
-                  font-size: 1em;
-                  line-height: 20px;
-                  border-radius: 24px;
-                  box-shadow: 0 4px 10px 0 rgba(39, 43, 49, 0.2);
-                  background-color: #00bdb8;
-                  color: #fff;
-                  font-weight: bolder;
-                  text-decoration: none;
-                  white-space: nowrap;
-                }
-                a.browser-install-btn.offline{
-                    background:#7e8281;
-                }
-                a.browser-install-btn.ee{
-                    background-color: #1976d2;
-                }
-                a.browser-install-btn.firefox {
-                  background-color: #FF5722;
-                }
-                a.browser-install-btn.edge{
-                  background-color: #003abd;
-                }
-                a.browser-install-btn.active{
-                  line-height: 34px;
-                }
-                
-                .wechat-finder{
-                  position:relative;
-                }
-                .wechat-finder .wechat-qrcode{
-                    display:none;
-                    width: 100px;
-                    height: 100px;
-                    position: absolute;
-                    top: -30px;
-                    left: 100%;
-                }
-                .wechat-finder:hover .wechat-qrcode{
-                    display: block;
-                }
-              `}</style>
-                    <span className="install-btns">
-                        <a href="https://addons.mozilla.org/addon/page-note?src=external-release"
-                           data-tip={`最新版本：${version.firefox}`}
-                           className={`browser-install-btn firefox ${chromeType==='Firefox'?'active':''}`}>
-                            FireFox
-                        </a>
-                        <a
-                          data-tip={`最新版本：${version.chrome}`}
-                          href="https://chrome.google.com/webstore/detail/pagenotehighlight-and-tak/hpekbddiphlmlfjebppjhemobaopekmp?utm_source=blog"
-                           className={`browser-install-btn chrome ${chromeType==='Chrome'?'active':''}`}>
-                            Chrome
-                        </a>
-                        <a
-                          data-tip={`最新版本：${version.edge}`}
-                          href="https://microsoftedge.microsoft.com/addons/detail/ablhdlecfphodoohfacojdngdfkgneaa"
-                           className={`browser-install-btn edge ${chromeType==='Edge'?'active':''}`}>
-                            Edge
-                        </a>
-                        <a
-                          data-tip={`最新版本：${version['360']}`}
-                          className={`browser-install-btn ee ${chromeType==='ee'?'active':''}`}
-                           href="https://ext.chrome.360.cn/webstore/detail/gielpddfollkffnbiegekliodnahhpfa">360</a>
-                        {/*<a className="browser-install-btn offline wechat-finder" data-tip={`最新版本：${version.offline}`}>*/}
-                        {/*    <span>*/}
-                        {/*        离线安装*/}
-                        {/*    </span>*/}
-                        {/*    <img className='wechat-qrcode' src="/img/wechat.jpg" alt="微信公众号"/>*/}
-                        {/*</a>*/}
-                    </span>
-    </span>
+          .install-btns{
+            margin: 12px 0;
+            text-align:center;
+          }
+          .install-slogan{
+            text-align: center;
+          }
+          a.browser-install-btn{
+            display: inline-block;
+            position: relative;
+            margin-right: 12px;
+            margin-bottom:12px;
+            padding: 6px 20px;
+            font-size: 1em;
+            line-height: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px 0 rgba(39, 43, 49, 0.2);
+            //background-color: #00bdb8;
+            //color: #fff;
+            font-weight: bolder;
+            text-decoration: none;
+            white-space: nowrap;
+          }
+          a.browser-install-btn.active{
+             background: #00BCD4;
+             color: #fff;
+          }
+          
+          .wechat-finder{
+            position:relative;
+          }
+          .wechat-finder .wechat-qrcode{
+              display:none;
+              width: 100px;
+              height: 100px;
+              position: absolute;
+              top: -30px;
+              left: 100%;
+          }
+          .wechat-finder:hover .wechat-qrcode{
+              display: block;
+          }
+        `}</style>
+          <h3 className="install-slogan">
+            <strong className='slogan'>PAGENOTE 小而美的笔记工具</strong>
+          </h3>
+          <div className="install-btns">
+            {
+              platforms.map((item)=>(
+                <a href={item.link}
+                   key={item.link}
+                   data-tip={`最新版本：${item.version}`}
+                   className={`browser-install-btn firefox ${chromeType===item.browser?'active':''}`}
+                >
+                  <img  width={28} height={28} src={item.icon} alt={item.title}/>
+                  <div>
+                    <div>
+                      {item.title}
+                      {item.version===version.latest.version? <img src={HotSvg} alt="最新"/>:''}
+                    </div>
+                    {item.version}
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+    </div>
   )
 };
