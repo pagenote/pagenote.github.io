@@ -1,12 +1,10 @@
 import React,{Component} from "react";
 import {Empty, Switch, Tooltip} from 'antd';
 import CommonHeader from '../CommonHeader/index';
-import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import Page from './Page';
 import { gotoTarget } from "@/pages/me/me/utils";
 import CleanIcon from '@/assets/icon/clean.svg';
 import DeleteIcon from '@/assets/icon/delete.svg'
-import MarkdownIcon from '@/assets/icon/md.svg'
 import {savePage} from "@/utils/api";
 import './webpage.scss'
 

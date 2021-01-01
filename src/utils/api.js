@@ -3,6 +3,7 @@ import { isLow } from "./index";
 import {funDownload} from "@/utils/document";
 import paperIntroduce from '../pages/me/notebook/introduce.json'
 
+// 0.13.4 版本后不再需要校验
 function checkValid(page){
   const {steps=[],snapshots=[],images=[]} = page || {}
   const hasData = !!(steps.length || snapshots.length);
@@ -39,6 +40,7 @@ export const fetchGroups = function (groupType=2,callback){
     const groupObject = {};
     Object.keys(tempDatas).forEach((key)=>{
       const currentPage = tempDatas[key].plainData || {};
+      currentPage.lastSyncTime = tempDatas[key].lastSyncTime;
       if(checkValid(currentPage)){
         try{
           switch (groupType){
@@ -237,6 +239,18 @@ export const fetchCloudInfo = function (callback){
   })
 }
 
+export const saveCloudInfo = function (info,callback){
+  getBridge().sendMessage('set_cloud_account',info,function ({data}){
+    callback(data)
+  })
+}
+
+export const checkStatus = function (callback){
+  getBridge().sendMessage('check_pagenote_status',{},function ({data}){
+    callback(data)
+  })
+}
+
 
 // paper
 export const getPaperDetail = function (key,callback){
@@ -292,6 +306,10 @@ export const getPapers = function (callback){
     }
   }
   callback(result);
+}
+
+export function sendEvent(category,eventAction='',eventLabel='',eventValue='',hitType='event') {
+  getBridge().sendMessage('track',[category,eventAction,eventLabel,eventValue,hitType]);
 }
 
 

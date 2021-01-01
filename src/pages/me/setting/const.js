@@ -1,0 +1,24 @@
+export const predefineTheme = [
+  {
+    id:'theme-simple',
+    label:'最简单',
+    desc:'',
+    colors:['#ffc106'],
+  },
+  {
+    id:'theme-default',
+    label:'默认色',
+    desc:'默认有多色，有深浅，半透明色',
+    colors:['#72D0FF','#ffbea9','#c8a6ff','#6fe2d5','#FFDE5D','#FBB5D6'],
+  },
+  {
+    id:'theme-1',
+    label:'七彩风',
+    desc:'赤橙黄绿蓝靛紫，适用于显著地为标记做分类',
+    colors:['#03a9f4','#f44336','#ff5722','#ffc107','#4caf50','#673ab7','#9c27b0'],
+  },{
+    id:'theme-2',
+    label:'山水风',
+    desc:'一套青色风，适用于重要程度区分',
+    colors:['#00bcd4','#e0f7fa','#80deea','#26c6da','#00acc1','#00838f','#006064'],
+  }]

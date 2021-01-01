@@ -26,7 +26,7 @@ export default function Menus({sideWidth}){
           <NoteBookIcon/>文稿
         {/*  TODO 支持导入写作模板 自定义模板*/}
         </NavLink>
-        <NavLink activeClassName="active" exact={true} to="/setting">
+        <NavLink activeClassName="active" to="/setting">
           <SettingIcon/>设置
         </NavLink>
       </div>
