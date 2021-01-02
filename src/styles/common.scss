@@ -79,3 +79,18 @@
     fill: #1e88e5
   }
 }
+
+.new-notification{
+  position: relative;
+  &:after{
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: -6px;
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #ff4436;
+    border-radius: 4px;
+  }
+}

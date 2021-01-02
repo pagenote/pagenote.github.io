@@ -26,7 +26,7 @@ export default function Menus({sideWidth}){
     <div className='page-menus' style={{width:sideWidth+'px'}}>
       <div className="menus">
         <NavLink activeClassName="active" exact={true} to="/">
-          <span className='new-notification'>
+          <span className=''>
             <InternetIcon/>{t('note in page')}
           </span>
         </NavLink>
