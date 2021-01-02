@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { notification , Tooltip,Popover} from "antd";
 import App from "./me/Me";
 import CommonPage from "../CommonPage";
@@ -13,6 +13,7 @@ import Loadable from 'react-loadable';
 import Draft from './notebook/index';
 import SettingPage from './setting';
 import Menus from './me/menu/Menus';
+import useSize from './hooks/useSize'
 import './index.scss'
 
 // const SettingPage = Loadable({
@@ -25,8 +26,9 @@ const DraftPage = Loadable({
   loading: <div>加载中</div>,
 });
 const sideWidth = 180;
-const predefineSize = window.innerWidth - sideWidth - 2;
+
 const RouteMe = function(){
+  const predefineSize = useSize().width - sideWidth - 2;
   return (
     <Router>
       <div className='pagenote-me'>
