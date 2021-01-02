@@ -95,7 +95,8 @@ const resources = {
       "Account":"账户配置",
       "Store":"存储设置",
       "sync to cloud":"同步至云端",
-      "last sync at":"上次同步："
+      "last sync at":"上次同步：",
+      "Download MarkDown":"导出为 Markdown"
     }
   }
 };

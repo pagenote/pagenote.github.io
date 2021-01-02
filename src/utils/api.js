@@ -139,11 +139,11 @@ export const filterGroups = function (keyword,callback){
 
 // bridge 模式只支持单通信通道，暂不支持并行发送，需要加锁处理
 let requestLock = false;
-// page
+// page 返回 plainData
 export const getPage = function (key,callback){
   const tempPage = tempDatas[key]
   if(tempPage){
-    callback(tempPage);
+    callback(tempPage.plainData);
   }
 
   const bridge = getBridge();
@@ -155,9 +155,18 @@ export const getPage = function (key,callback){
     requestLock = true;
     bridge.sendMessage('get_page_detail',{key:key}, ({data})=>{
       requestLock = false;
+      if(data && data.plainData){
+        tempDatas[key] = data.plainData;
+      }
       callback(data ? data.plainData : null);
     })
   }
+}
+
+export const getPages = function (keys,callback){
+  getBridge().sendMessage('get_data',{keys:keys},function ({data}){
+    callback(data)
+  })
 }
 
 export const savePage = function (key,plainData){
