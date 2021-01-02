@@ -20,7 +20,7 @@ export default class RatePage extends Component{
           <div className="rate-container">
               <InstallBar />
               <p>
-                  点击上方对应浏览器，前往评分
+                  点击上方对应浏览器，前往评分。让更多人看到 PAGENOTE
               </p>
           </div>
       </div>

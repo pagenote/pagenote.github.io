@@ -52,7 +52,7 @@ function Cloud(){
   }
 
   const saveInfo = function (values){
-    if(values.invite_code!=='PAGENOTE_CSN'){
+    if(values.invite_code!=='PAGENOTE-CSN'){
       message.error(t('error invite code. Get it in wechat'))
       return;
     }
