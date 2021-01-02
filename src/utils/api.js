@@ -60,7 +60,11 @@ export const fetchGroups = function (groupType=2,callback){
               groupObject[groupKey].push(currentPage);
               break;
             case 0:
-              const domainKey = (currentPage.keys||['default'])[0];
+              let domainKey = (currentPage.keys||[])[0];
+              if(!domainKey){
+                const match = window.location.href.match(/:\/\/(.*?)\//)
+                domainKey = match?match[1]:'default'
+              }
               groupObject[domainKey] = groupObject[domainKey] || [];
               groupObject[domainKey].push(currentPage);
               break;
