@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import {Popover, Tooltip} from "antd";
+import {Popover, Tooltip,Button} from "antd";
 import { useTranslation } from 'react-i18next';
 import DonationIcon from "@/assets/icon/donation.svg";
 import WechatIcon from "@/assets/icon/wechat.svg";
@@ -16,6 +16,12 @@ import DoctorIcon from '@/assets/icon/doctor.svg'
 
 export default function Menus({sideWidth}){
   const { t, i18n } = useTranslation();
+
+  const changeLanguage = function (lang){
+    i18n.changeLanguage(lang);
+    localStorage.setItem('lang',lang)
+  }
+
   return(
     <div className='page-menus' style={{width:sideWidth+'px'}}>
       <div className="menus">
@@ -73,6 +79,11 @@ export default function Menus({sideWidth}){
         </div>
         <div className='version'>
           PAGENOTE {document.documentElement.dataset.version}
+        </div>
+        <div className='language'>
+          <Button type="dashed" size='small' onClick={()=>changeLanguage(i18n.language==='en'?'zh_CN':"en")}>
+            {i18n.language==='en'?'中文':"English"}
+          </Button>
         </div>
       </div>
     </div>

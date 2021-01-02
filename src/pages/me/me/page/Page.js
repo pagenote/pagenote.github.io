@@ -14,10 +14,11 @@ import DropLabels from "@/components/droplabel/DropLabel";
 import './page.scss';
 import {getPage,savePage} from "@/utils/api";
 import {exportMd} from "@/utils";
+import {withTranslation} from "react-i18next";
 
 
 // TODO 支持设置字号
-export default class PageDetail extends Component{
+class PageDetail extends Component{
     constructor(props) {
         super(props);
         this.state={
@@ -136,7 +137,7 @@ export default class PageDetail extends Component{
     },2000);
 
     render() {
-        const {pageKey} = this.props;
+        const {pageKey,t} = this.props;
         const {pageDetail,loading}  = this.state;
 
         const {steps=[],title,url,note,lastModified,snapshots=[],images=[]} = (pageDetail || {})
@@ -236,16 +237,20 @@ export default class PageDetail extends Component{
                               {/*      </div>*/}
                           </div>:
                             <div>
-                                加载失败！未获取到 {pageKey} 相关信息
-                                <Button onClick={this.fetchPageInfo}>重新加载</Button>
+                                {t('fetch error')}
+                                {t('loading page',{
+                                    page: pageKey
+                                })}
                             </div>
                       }
                   </Fragment>:
                   <div>
-                  正在加载 <a href={pageKey} target='_blank'>{pageKey}</a>
+                      {t('loading')}
+                   <a href={pageKey} target='_blank'>{pageKey}</a>
                   </div>
             }
-
         </div>;
     }
 }
+
+export default withTranslation()(PageDetail)

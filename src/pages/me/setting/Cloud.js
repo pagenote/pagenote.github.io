@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react';
 import { fetchCloudInfo,saveCloudInfo,checkStatus } from "@/utils/api";
 import {AutoComplete, Button, Form, Input, message, Spin,PageHeader, Descriptions,Alert} from "antd";
 import CheckVersion from "@/pages/CheckVersion";
+import {useTranslation} from "react-i18next";
 
 const layout = {
   labelCol: { span: 4 },
@@ -30,6 +31,7 @@ const STATUS={
 }
 
 function Cloud(){
+  const { t, i18n } = useTranslation();
   const [form] = Form.useForm();
   const [cloud,setCloud] = useState({});
   const [loading,setLoading] = useState(false);
@@ -51,14 +53,14 @@ function Cloud(){
 
   const saveInfo = function (values){
     if(values.invite_code!=='PAGENOTE_CSN'){
-      message.error('邀请码不正确，请关注微信公众号获取')
+      message.error(t('error invite code. Get it in wechat'))
       return;
     }
     setSaving(true);
     saveCloudInfo(values,function (result){
       getInfo();
       console.log('save result',result)
-      message.success('已保存');
+      message.success(t('saved'));
     });
   }
 
@@ -84,8 +86,8 @@ function Cloud(){
       <div className='header-info'>
         <PageHeader
           // ghost={false}
-          title="云盘存储设置"
-          subTitle={<Alert message={server.validate?'已联通':'未联通'} type={server.validate?'success':'error'} showIcon />}
+          title={t('cloud store setting')}
+          subTitle={<Alert message={server.validate?t("connected"):t("unconnected")} type={server.validate?'success':'error'} showIcon />}
           // extra={[
           //   <Button onClick={checkCloud} key="1" type="primary">
           //     刷新状态
@@ -93,13 +95,13 @@ function Cloud(){
           // ]}
         >
           <Descriptions size="small" column={2}>
-            <Descriptions.Item label="检测时间">{new Date(server.lastCheckTime).toLocaleString()}</Descriptions.Item>
-            <Descriptions.Item label="日志">
+            <Descriptions.Item label={t('last check time')}>{new Date(server.lastCheckTime).toLocaleString()}</Descriptions.Item>
+            <Descriptions.Item label={t('logs')}>
               {
                 server.msg
               }
             </Descriptions.Item>
-            <Descriptions.Item label="说明">
+            <Descriptions.Item label={t('tips')}>
               {
                 server.validate?'':`1、请确认账号密码正确；2、可能是受到云盘服务商限制，请稍等片刻，将会自动重试联通。点击保存，可手动重试`
               }
@@ -111,7 +113,7 @@ function Cloud(){
         </PageHeader>
       </div>
       <Form {...layout} form={form}   name="control-hooks" onFinish={saveInfo} validateMessages={validateMessages}>
-        <Form.Item name={['invite_code']} label="邀请码" rules={[{ required: true }]}>
+        <Form.Item name={['invite_code']} label={t('invite code')} rules={[{ required: true }]}>
           <Input placeholder='关注公众号，获取邀请码' />
         </Form.Item>
         <Form.Item name={['server']} label="云盘服务商地址" rules={[{ required: true }]}>
