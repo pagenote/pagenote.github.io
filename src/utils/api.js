@@ -200,7 +200,7 @@ export const getSetting= function (callback){
   })
 }
 
-export const saveSetting = function (setting,callback){
+export const saveSetting = function (setting,callback=function (){}){
   const bridge = getBridge();
   bridge.sendMessage('save_setting',{
     ...setting

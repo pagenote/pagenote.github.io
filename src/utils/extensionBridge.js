@@ -1,6 +1,8 @@
 var Bridge = function (element,clientId='page',targetId='extension') {
     if(!element){
-        return;
+        element = document.createElement('div');
+        element.id = 'messenger'
+        document.documentElement.appendChild(element)
     }
 
     const listeners = {};

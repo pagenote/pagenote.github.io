@@ -12,6 +12,7 @@ import Account from './Account'
 import PluginIcon from '@/assets/icon/plugin.svg'
 import AccountIcon from '@/assets/icon/account.svg'
 import CloudIcon from '@/assets/icon/cloud.svg'
+import CheckVersion from "@/pages/CheckVersion";
 import './index.scss'
 
 const Setting = function (){
@@ -47,9 +48,7 @@ const Setting = function (){
               <Cloud />
             </Route>
             <Route exact path={`/setting/extension`}>
-              <div>
-                <Extension/>
-              </div>
+              <Extension/>
             </Route>
             <Route>
               <Redirect to="/setting/extension" />
@@ -61,4 +60,4 @@ const Setting = function (){
   )
 }
 
-export default Setting
+export default CheckVersion(Setting,'0.0.1')

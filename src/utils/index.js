@@ -1,4 +1,4 @@
-export function isLow(current='',compareVersion='',separator='.') {
+export function isLow(current='0.0.0',compareVersion='',separator='.') {
     if(current===compareVersion){
         return false;
     }
