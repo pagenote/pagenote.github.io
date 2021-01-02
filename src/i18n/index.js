@@ -16,7 +16,8 @@ const resources = {
       "add_action_group_tip":"You can add buttons vertically",
       "setting_pen":"custom you pen to highlight🖌",
       "max marked in a page":"you can highlight most {{number}} marks in a single webpage",
-      "script_tip":"For developer "
+      "script_tip":"For developer ",
+      "last sync at":"last sync at ："
     }
   },
   zh_CN: {
@@ -87,12 +88,14 @@ const resources = {
       "${keyword} in your link means the selected text":"链接里用${keyword}表示替换值",
       "click script":"单击执行函数",
       "For more info":"了解API",
-      "delete":"delete",
+      "delete":"删除",
       "script_tip":"可选，与跳转链接互斥。确保安全的一段执行脚本：(function(){})();",
       "icon":"按钮图标",
       "Extension":"插件配置",
       "Account":"账户配置",
-      "Store":"存储设置"
+      "Store":"存储设置",
+      "sync to cloud":"同步至云端",
+      "last sync at":"上次同步："
     }
   }
 };

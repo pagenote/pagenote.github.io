@@ -145,16 +145,18 @@
       background-repeat: no-repeat;
       background-size: 14px 14px;
       background-position: left center;
+      &.un-synced{
+        filter: grayscale(1);
+        .page-icon{
+          border: 1px solid red;
+        }
+      }
       .page-icon{
         display: inline-block;
         width: 16px;
         height: 16px;
         vertical-align: middle;
         margin-right: 4px;
-        filter: grayscale(1);
-        &.synced{
-          filter: grayscale(0);
-        }
       }
     }
     .page-link{

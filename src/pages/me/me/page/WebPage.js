@@ -8,6 +8,7 @@ import CleanIcon from '@/assets/icon/clean.svg';
 import DeleteIcon from '@/assets/icon/delete.svg'
 import {savePage} from "@/utils/api";
 import './webpage.scss'
+import CloudIcon from "@/assets/icon/cloud.svg";
 
 function getLink(url){
   return url.replace(/http[s]+:\/\/(www\.)?/,'').substr(0,10);
@@ -43,7 +44,14 @@ class WebPage extends Component{
       <section className='notes'>
         <CommonHeader>
           <span className='action-icon-button'>
-            <DeleteIcon onClick={()=>{this.deletePage(keys)}} />
+            <Tooltip title={t('delete')}>
+              <DeleteIcon onClick={()=>{this.deletePage(keys)}} />
+            </Tooltip>
+          </span>
+          <span className='action-icon-button' onClick={this.createNew}>
+            <Tooltip title={t('sync to cloud')}>
+              <CloudIcon fill={'#03A9F4'} />
+            </Tooltip>
           </span>
           {/*<span className='action-icon-button'>*/}
           {/*  <MarkdownIcon />*/}
@@ -73,7 +81,6 @@ class WebPage extends Component{
                 ))
               }
               <span className='selected-item clean' onClick={removeSelectPages}>
-                <CleanIcon></CleanIcon>
                 {t("remove selected")}
               </span>
             </div>
