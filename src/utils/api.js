@@ -136,23 +136,24 @@ export const filterGroups = function (keyword,callback){
 // bridge 模式只支持单通信通道，暂不支持并行发送，需要加锁处理
 let requestLock = false;
 // page
-export const getPage = function (key){
-  return new Promise((resolve,reject)=>{
-    const bridge = getBridge();
-    if(requestLock){
-      setTimeout(()=>{
-        getPage(key).then((result)=>{
-          resolve(result)
-        })
-      },1000)
-    }else{
-      requestLock = true;
-      bridge.sendMessage('get_page_detail',{key:key}, ({data})=>{
-        requestLock = false;
-        resolve(data ? data.plainData : null);
-      })
-    }
-  });
+export const getPage = function (key,callback){
+  const tempPage = tempDatas[key]
+  if(tempPage){
+    callback(tempPage);
+  }
+
+  const bridge = getBridge();
+  if(requestLock){
+    setTimeout(()=>{
+      getPage(key,callback)
+    },1000)
+  }else{
+    requestLock = true;
+    bridge.sendMessage('get_page_detail',{key:key}, ({data})=>{
+      requestLock = false;
+      callback(data ? data.plainData : null);
+    })
+  }
 }
 
 export const savePage = function (key,plainData){

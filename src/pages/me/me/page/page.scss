@@ -7,6 +7,10 @@
   color: #333;
   background: rgba(255,255,255,0.9);
 
+  &.single{
+    min-height: 85vh;
+  }
+
   &:hover{
     .side-bar{
       display: block;
@@ -45,6 +49,7 @@
   }
   .date{
     display: inline-block;
+    width: 170px;
     margin-right: 12px;
   }
   .page-header{

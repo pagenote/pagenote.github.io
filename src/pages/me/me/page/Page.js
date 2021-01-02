@@ -1,6 +1,6 @@
 import React, {Component,Fragment} from 'react';
 import throttle from 'lodash/throttle'
-import {message,Button} from "antd";
+import {message,Spin,Button} from "antd";
 import BigPicture from "bigpicture";
 import DropLabel from "@/components/DropLabel";
 import DateIcon from "@/assets/icon/date.svg";
@@ -24,6 +24,7 @@ class PageDetail extends Component{
         this.state={
             pageDetail: null,
             loading: false,
+            fetchError: false,
         }
     }
 
@@ -35,11 +36,13 @@ class PageDetail extends Component{
         const {pageKey} = this.props;
         this.setState({
             loading: true,
-        })
-        getPage(pageKey).then((result)=>{
-            this.setState({
-                pageDetail: result,
-                loading: false,
+        },()=>{
+            getPage(pageKey,(result)=>{
+                this.setState({
+                    pageDetail: result,
+                    loading: false,
+                    fetchError: !result,
+                })
             })
         })
     }
@@ -137,118 +140,110 @@ class PageDetail extends Component{
     },2000);
 
     render() {
-        const {pageKey,t} = this.props;
-        const {pageDetail,loading}  = this.state;
+        const {pageKey,t,selectedSize} = this.props;
+        const {pageDetail,loading,fetchError}  = this.state;
 
         const {steps=[],title,url,note,lastModified,snapshots=[],images=[]} = (pageDetail || {})
         const pageMd5 = window.btoa(url);
         const blocks = this.renderBlocks();
-        return <div className="web-page-item" data-page={url}>
-            {
-                loading===false ?
-                  <Fragment>
-                      {
-                          (pageDetail && pageDetail.url)?
-                          <div>
-                              <div className='page-header'>
-                                  <div className='page-header-meta'>
-                                      <div className='page-link'>
-                                          <div>{title||url}</div>
-                                          <a target='_blank' href={url} className='link'>{title!==url?url:''}</a>
-                                      </div>
-                                      <div className='meta-info'>
-                                          <div className='date'>
-                                              <DateIcon />
-                                              <span>{new Date(lastModified).toLocaleString()}</span>
-                                          </div>
-                                          <span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>
-                                      </div>
-                                  </div>
-                                  {
-                                      images.length>0 &&
-                                      <div className='page-img'>
-                                          <img src={images[0]} onClick={(e)=>{this.bigPicture(e,images[0],images.map((s)=>{return {src:s}}))}}/>
-                                      </div>
-                                  }
-                              </div>
+        return <div className={`web-page-item ${selectedSize>1?'multi':'single'}`} data-page={url}>
+            <Spin spinning={loading}>
+                <div>
+                    <div className='page-header'>
+                        <div className='page-header-meta'>
+                            <div className='page-link'>
+                                <div>{title||url||pageKey}</div>
+                                <a target='_blank' href={url||pageKey} className='link'>{url||pageKey}</a>
+                            </div>
+                            <div className='meta-info'>
+                                <div className='date'>
+                                    <DateIcon />
+                                    <span>{new Date(lastModified).toLocaleString()}</span>
+                                </div>
+                                <span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>
+                            </div>
+                        </div>
+                        {
+                            images.length>0 &&
+                            <div className='page-img'>
+                                <img src={images[0]} onClick={(e)=>{this.bigPicture(e,images[0],images.map((s)=>{return {src:s}}))}}/>
+                            </div>
+                        }
+                    </div>
 
-                              <div className="main-content">
-                                  <div className="left-content">
-                                      <div className='lights'>
-                                          {
-                                              steps.length===0 &&
-                                              <div className='empty-lights'>
-                                                  没有此页面上留下笔记。<a href={url} target='_blank'>去添加</a>
+                    <div className="main-content">
+                        <div className="left-content">
+                            <div className='lights'>
+                                {
+                                    steps.length===0 &&
+                                    <div className='empty-lights'>
+                                        没有此页面上留下笔记。<a href={url} target='_blank'>去添加</a>
+                                    </div>
+                                }
+                                {
+                                    steps.map((step,index)=>(
+                                      <div className='light' key={step.id+index}>
+                                          <p style={{borderColor: step.bg}} className='refer'>
+                                              <svg onClick={()=>this.deleteLight(index)} t="1593394105976" className="icon delete-icon" viewBox="0 0 1024 1024" version="1.1"
+                                                   xmlns="http://www.w3.org/2000/svg" p-id="2228" width="16" height="16">
+                                                  <path
+                                                    d="M810.666667 170.666667 661.333333 170.666667 618.666667 128 405.333333 128 362.666667 170.666667 213.333333 170.666667 213.333333 256 810.666667 256M256 810.666667C256 857.6 294.4 896 341.333333 896L682.666667 896C729.6 896 768 857.6 768 810.666667L768 298.666667 256 298.666667 256 810.666667Z"
+                                                    p-id="2229" fill="#707070"></path>
+                                              </svg>
+                                              <span className='light-keyword' style={{borderColor: step.bg}}>{step.text}</span>
+                                          </p>
+                                          <div className='note'>
+                                              <div className='editor-text-target'>
                                               </div>
-                                          }
-                                          {
-                                              steps.map((step,index)=>(
-                                                <div className='light' key={step.id+index}>
-                                                    <p style={{borderColor: step.bg}} className='refer'>
-                                                        <svg onClick={()=>this.deleteLight(index)} t="1593394105976" className="icon delete-icon" viewBox="0 0 1024 1024" version="1.1"
-                                                             xmlns="http://www.w3.org/2000/svg" p-id="2228" width="16" height="16">
-                                                            <path
-                                                              d="M810.666667 170.666667 661.333333 170.666667 618.666667 128 405.333333 128 362.666667 170.666667 213.333333 170.666667 213.333333 256 810.666667 256M256 810.666667C256 857.6 294.4 896 341.333333 896L682.666667 896C729.6 896 768 857.6 768 810.666667L768 298.666667 256 298.666667 256 810.666667Z"
-                                                              p-id="2229" fill="#707070"></path>
-                                                        </svg>
-                                                        <span className='light-keyword' style={{borderColor: step.bg}}>{step.text}</span>
-                                                    </p>
-                                                    <div className='note'>
-                                                        <div className='editor-text-target'>
-                                                        </div>
-                                                        <div className='editor-bar-target'>
+                                              <div className='editor-bar-target'>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                              ))
-                                          }
+                                              </div>
+                                          </div>
                                       </div>
-                                  </div>
-                                  <div className="right-content">
-                                      <Editor id={pageMd5} tools={['marker','paragraph','lightheader']} key={url} data={{blocks:blocks}} onSave={this.saveEditorPage} />
+                                    ))
+                                }
+                            </div>
+                        </div>
+                        <div className="right-content">
+                            <Editor id={pageMd5} tools={['marker','paragraph','lightheader']} key={url} data={{blocks:blocks}} onSave={this.saveEditorPage} />
+                        </div>
+                    </div>
+                    <div className="snapshots">
+                        {
+                            snapshots.map((item,index)=>(
+                              <div key={item} className='snapshot'>
+                                  <img className='snapshot-img'
+                                       src={item}
+                                       onClick={(e)=>{this.bigPicture(e,snapshots[index],snapshots.map((s)=>{return {src:s}}),index)}} alt="网页快照"/>
+                                  <div className='snapshot-tips'>
+                                      <svg onClick={()=>this.deleteSnapshot(index)} t="1593394105976" className="icon delete-icon" viewBox="0 0 1024 1024" version="1.1"
+                                           xmlns="http://www.w3.org/2000/svg" p-id="2228" width="16" height="16">
+                                          <path
+                                            d="M810.666667 170.666667 661.333333 170.666667 618.666667 128 405.333333 128 362.666667 170.666667 213.333333 170.666667 213.333333 256 810.666667 256M256 810.666667C256 857.6 294.4 896 341.333333 896L682.666667 896C729.6 896 768 857.6 768 810.666667L768 298.666667 256 298.666667 256 810.666667Z"
+                                            p-id="2229" fill="#707070"></path>
+                                      </svg>
                                   </div>
                               </div>
-                              <div className="snapshots">
-                                  {
-                                      snapshots.map((item,index)=>(
-                                        <div key={index} className='snapshot'>
-                                            <img className='snapshot-img'
-                                                 src={item}
-                                                 onClick={(e)=>{this.bigPicture(e,snapshots[index],snapshots.map((s)=>{return {src:s}}),index)}} alt="网页快照"/>
-                                            <div className='snapshot-tips'>
-                                                <svg onClick={()=>this.deleteSnapshot(index)} t="1593394105976" className="icon delete-icon" viewBox="0 0 1024 1024" version="1.1"
-                                                     xmlns="http://www.w3.org/2000/svg" p-id="2228" width="16" height="16">
-                                                    <path
-                                                      d="M810.666667 170.666667 661.333333 170.666667 618.666667 128 405.333333 128 362.666667 170.666667 213.333333 170.666667 213.333333 256 810.666667 256M256 810.666667C256 857.6 294.4 896 341.333333 896L682.666667 896C729.6 896 768 857.6 768 810.666667L768 298.666667 256 298.666667 256 810.666667Z"
-                                                      p-id="2229" fill="#707070"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                      ))
-                                  }
-                              </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                {
 
-                              {/*      <div className='summary' >*/}
-                              {/*<textarea  placeholder='为该网页添加一段总结、笔记、评价...'*/}
-                              {/*           defaultValue={note}*/}
-                              {/*           onChange={this.modifyNote}>*/}
-                              {/*</textarea>*/}
-                              {/*      </div>*/}
-                          </div>:
+                  <div>
+                      {
+                          fetchError &&
                             <div>
                                 {t('fetch error')}
                                 {t('loading page',{
                                     page: pageKey
                                 })}
+                                <Button onClick={this.fetchPageInfo}>{t('retry')}</Button>
                             </div>
                       }
-                  </Fragment>:
-                  <div>
-                      {t('loading')}
-                   <a href={pageKey} target='_blank'>{pageKey}</a>
                   </div>
-            }
+                }
+            </Spin>
         </div>;
     }
 }

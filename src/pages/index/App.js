@@ -148,7 +148,7 @@ export default class Index extends Component{
             </div>
             {
               keyPoints.map((item)=>(
-                <div className={`key-title ${lightItems.has(item.id)?'active':''}`}
+                <div key={item.id} className={`key-title ${lightItems.has(item.id)?'active':''}`}
                      onClick={()=>this.setActive(item.id)}
                 >
                   <span className='key-point' id={item.id}>

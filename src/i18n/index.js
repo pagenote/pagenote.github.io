@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import {getBrowserTypeAndVersion} from "@/utils/document";
 
 // the translations
 // (tip move them in a JSON file and import them)
@@ -9,7 +10,8 @@ const resources = {
       "note in page": "Notes in Page",
       "paper": "Paper",
       "setting": "Setting",
-      "loading page": "Not found the info about {{page}}"
+      "loading page": "Not found the info about {{page}}",
+      "type-tips":'Muilt-Page: select muilt-page once time. Single-Page: Only one page can be selected once time'
     }
   },
   zh_CN: {
@@ -26,7 +28,7 @@ const resources = {
       "By Tags":"按标签分组",
       "By Domain":"按域名分组",
       "By Time":"按日期分组",
-      "Muilt-Page: select muilt-page once time. Single-Page: Only one page can be selected once time":"多选模式：一次可以选择多个PAGE浏览、操作；专注模式：一次只可选中一个PAGE浏览",
+      "type-tips":"多选模式：一次可以选择多个PAGE浏览、操作；专注模式：一次只可选中一个PAGE浏览",
       "muilt-page":"多选模式",
       "single-page":"专注模式",
       "remove selected":"清空选中",
@@ -61,8 +63,8 @@ const resources = {
   }
 };
 
-let initLang = localStorage.getItem('lang');
-if(['zh_CN','zh_TW',"zh"].includes(initLang)){
+let initLang = localStorage.getItem('lang') || window.navigator.language;
+if(['zh-CN','zh_CN','zh_TW',"zh"].includes(initLang)){
   initLang = 'zh_CN';
 }else{
   initLang = 'en';

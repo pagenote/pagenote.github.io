@@ -48,7 +48,7 @@ class WebPage extends Component{
           {/*<span className='action-icon-button'>*/}
           {/*  <MarkdownIcon />*/}
           {/*</span>*/}
-          <Tooltip title={t('Muilt-Page: select muilt-page once time. Single-Page: Only one page can be selected once time')}>
+          <Tooltip title={t('type-tips')}>
             <Switch
               onChange={toggleMultSelect}
               checked={muilPage}
@@ -80,7 +80,7 @@ class WebPage extends Component{
           }
         </div>
         {keys.map((url)=>(
-          <Page key={url} pageKey={url} />
+          <Page key={url} pageKey={url} selectedSize={keys.length} />
         ))}
         {
           keys.length ===0 &&

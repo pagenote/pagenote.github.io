@@ -30,7 +30,7 @@ export default function PageItem({page,onSelect,active}) {
             <div className='page-lights'>
                 {
                     steps.slice(0,3).map((step,index)=>(
-                        <div key={step.id} title={(step.text||step.tip||'')} className='page-light' style={{borderColor: step.bg}}>
+                        <div key={step.id+index} title={(step.text||step.tip||'')} className='page-light' style={{borderColor: step.bg}}>
                             {(step.text||step.tip||'').substr(0,50)}
                         </div>
                     ))
