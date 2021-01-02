@@ -50,6 +50,10 @@ function Cloud(){
   }
 
   const saveInfo = function (values){
+    if(values.invite_code!=='PAGENOTE_CSN'){
+      message.error('邀请码不正确，请关注微信公众号获取')
+      return;
+    }
     setSaving(true);
     saveCloudInfo(values,function (result){
       getInfo();
@@ -97,7 +101,7 @@ function Cloud(){
             </Descriptions.Item>
             <Descriptions.Item label="说明">
               {
-                server.validate?'':`当前受到云盘服务商限制，请稍等片刻，将会自动重试联通。`
+                server.validate?'':`1、请确认账号密码正确；2、可能是受到云盘服务商限制，请稍等片刻，将会自动重试联通。点击保存，可手动重试`
               }
               {
                 (!server.validate&&server.server===options[0].value)? <a target='_blank' href="https://help.jianguoyun.com/?p=2064">坚果云说明</a>:''

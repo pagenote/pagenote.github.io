@@ -103,15 +103,15 @@ export default class CreatePage extends Component{
       <div className='donation'>
         <p>
           <p>
-            <span className='light-me green'>为 PAGENOTE 打赏鼓气，帮助发展更好，任意金额都是鼓励。</span>
-          </p>
-          <p>
-            <img src="/dashang.jpg" alt="支持pagenote"/>
+            <span className='light-me green'>为 PAGENOTE 鼓气，每一次赞赏都会加速我们更好地发展。</span>
           </p>
           <p>
             如果未来 PAGENOTE 提供部分付费高级功能、版本，打赏用户将得到最大程度的优惠。
             <br/>
             <span className='light-me'>「你现在能使用的功能，在未来也将继续可以使用，不会因为没有付费而针对你停止服务」</span>
+          </p>
+          <p>
+            <img src="/dashang.jpg" alt="支持pagenote"/>
           </p>
         </p>
         <div className='donation-users'>

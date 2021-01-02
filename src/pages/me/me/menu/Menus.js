@@ -11,6 +11,7 @@ import SettingIcon from '@/assets/icon/setting.svg'
 import PlanIcon from '@/assets/icon/plan.svg'
 import ChangeLogIcon from '@/assets/icon/changelog.svg';
 import MaterialIcon from "@/assets/icon/material.svg";
+import DoctorIcon from '@/assets/icon/doctor.svg'
 
 export default function Menus({sideWidth}){
   return(
@@ -38,18 +39,14 @@ export default function Menus({sideWidth}){
             </a>
           </Tooltip>
           <Popover title='关注微信公众号' content={<div><img width={140} height={140} src="/img/wechat.jpg" alt=""/> </div>}>
-            <WechatIcon>
-            </WechatIcon>
+            <a>
+              <WechatIcon />
+            </a>
           </Popover>
           <Tooltip title='为 PAGENOTE 评分'>
             <a href="/rate" target='_blank'>
               <RateIcon>
               </RateIcon>
-            </a>
-          </Tooltip>
-          <Tooltip title='反馈bug'>
-            <a href="/doctor" target='_blank'>
-              <BugIcon></BugIcon>
             </a>
           </Tooltip>
         </div>
@@ -58,10 +55,22 @@ export default function Menus({sideWidth}){
         </div>
         <div>
           <Tooltip title='功能规划'>
-            <a target='_blank' href="/page?id=future"> <PlanIcon /></a>
+            <a target='_blank' href="/page?id=future"><PlanIcon /></a>
           </Tooltip>
+          <Tooltip title='系统健康监测、日志'>
+            <a target='_blank' href="/doctor">
+              <DoctorIcon />
+            </a>
+          </Tooltip>
+          {/*<Tooltip title='反馈bug'>*/}
+          {/*  <a href="/doctor" target='_blank'>*/}
+          {/*    <BugIcon />*/}
+          {/*  </a>*/}
+          {/*</Tooltip>*/}
           <Tooltip title='更新日志'>
-            <a target='_blank' href="/release"> <ChangeLogIcon /></a>
+            <a target='_blank' href="/release">
+              <ChangeLogIcon />
+            </a>
           </Tooltip>
         </div>
       </div>
