@@ -11,7 +11,12 @@ const resources = {
       "paper": "Paper",
       "setting": "Setting",
       "loading page": "Not found the info about {{page}}",
-      "type-tips":'Muilt-Page: select muilt-page once time. Single-Page: Only one page can be selected once time'
+      "type-tips":'Muilt-Page: select muilt-page once time. Single-Page: Only one page can be selected once time',
+      "limited_action_group":"Up to {{count}}",
+      "add_action_group_tip":"You can add buttons vertically",
+      "setting_pen":"custom you pen to highlight🖌",
+      "max marked in a page":"you can highlight most {{number}} marks in a single webpage",
+      "script_tip":"For developer "
     }
   },
   zh_CN: {
@@ -56,9 +61,38 @@ const resources = {
       "last check time":"检测时间",
       "logs":"日志",
       "tips":"说明",
-      "invite code":"邀请码"
-
-
+      "invite code":"邀请码",
+      "reset success":"重置成功",
+      "Only some letters, numbers and punctuation are supported":"仅支持字母、数字和部分标点符号",
+      "limited_action_group":"最多设置{{count}}个",
+      "add_action_group_tip":"你可以纵向添加按钮",
+      "click any module to custom setting":"点击下方你想要个性化的模块进行设置",
+      "single click to copy, dbclick for copy and save it to history":"单击仅复制，双击复制且保存到下方的历史面板中。暂不可自定义",
+      "shortcut":"快捷键",
+      "custom your Buttons":"自定义我的 PAGENOTE 按钮",
+      "setting_pen":"设置标记画笔🖌",
+      "highlight background color":"高亮背景色",
+      "confirm":"确认",
+      "cancel":"取消",
+      "max marked in a page":"单页面最多标记{{number}}个",
+      "Confirm to reset extension setting?":"确定重置「基础配置」「功能开关」？",
+      "a script or a link is required":"执行函数与跳转链接至少填写一个",
+      "use pre-defined":"使用预设",
+      "select a pre-defined action button":"选择一个预设方案",
+      "button name or description":"按钮名称、功能介绍",
+      "svg file is supported":"必须设置一个SVG格式的图标哦",
+      "only one key is supported":"快键键只能选一个数字或者字母哦",
+      "optional":"可选的",
+      "jump link":"跳转链接",
+      "${keyword} in your link means the selected text":"链接里用${keyword}表示替换值",
+      "click script":"单击执行函数",
+      "For more info":"了解API",
+      "delete":"delete",
+      "script_tip":"可选，与跳转链接互斥。确保安全的一段执行脚本：(function(){})();",
+      "icon":"按钮图标",
+      "Extension":"插件配置",
+      "Account":"账户配置",
+      "Store":"存储设置"
     }
   }
 };

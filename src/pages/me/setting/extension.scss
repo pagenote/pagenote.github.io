@@ -28,7 +28,7 @@
     }
     .function-custom{
       display: flex;
-      padding-left: 50px;
+      padding-left: 20px;
       .action-group{
         margin-right: 12px;
         &:hover{
@@ -96,16 +96,6 @@
 }
 
 .color-modal{
-  display: none;
-  &.show{
-    display: block;
-    z-index: 99;
-    position: fixed;
-    background: rgba(255,255,255,0.96);
-    border-radius: 4px;
-    padding: 12px;
-    border: 1px solid #d2d2d2;
-  }
   .setting-title{
     font-size: 14px;
     font-weight: bold;
@@ -124,6 +114,7 @@
   .setting-item{
     padding: 4px 0;
     border-bottom: 1px solid #dedede;
+    margin: 12px 0;
     .setting-label{
       //display: inline-block;
       //width: 100px;
@@ -147,7 +138,6 @@
       width: 34px;
     }
   }
-
 }
 
 

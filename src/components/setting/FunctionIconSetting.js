@@ -1,7 +1,8 @@
 import React from 'react'
-import { Form, Input, InputNumber, Button ,Select} from 'antd';
+import {Form, Input, InputNumber, Button, Select, message} from 'antd';
 import CheckVersionPart from "../../pages/CheckVersionPart";
 import './function-setting.scss'
+import {useTranslation} from "react-i18next";
 
 const Option = Select.Option;
 
@@ -87,7 +88,8 @@ const getFieldsSchema = function (){
   }
 }
 
-export default function FunctionIconSetting({groupIndex,itemIndex,onSave,initFunItem }) {
+export default function FunctionIconSetting({groupIndex,itemIndex,onSave,initFunItem,deleteIcon }) {
+  const { t } = useTranslation();
   const funItem = {...getFieldsSchema(),...initFunItem}
   const [form] = Form.useForm();
   const save = function (values) {
@@ -102,7 +104,7 @@ export default function FunctionIconSetting({groupIndex,itemIndex,onSave,initFun
     };
 
     if(!values.clickScript && !values.clickUrl && !values.mouseoverScript && !values.dbClickScript){
-      alert('执行函数与跳转链接至少填写一个');
+      message.error(t('a script or a link is required'));
       return;
     }
     onSave(fun,groupIndex,itemIndex)
@@ -123,20 +125,18 @@ export default function FunctionIconSetting({groupIndex,itemIndex,onSave,initFun
       {
         show &&
         <div>
-          <a target='_blank' href="/page?id=study_setting">了解如何配置</a>
           <Form {...layout} form={form} initialValues={funItem} name="basic-setting" onFinish={save} validateMessages={validateMessages}>
-            <Form.Item label="使用预设">
+            <Form.Item label={t("use default Plan")}>
               <Select
                 showSearch
                 style={{ width: 200 }}
-                placeholder="选择一个预设方案"
+                placeholder={t('select a pre-defined action button')}
                 optionFilterProp="children"
                 onChange={setTheme}
                 filterOption={(input, option) =>
                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Option value="-">-</Option>
                 {
                   Object.keys(defaultFuns).map((key)=>(
                     <Option key={key} value={key}>{defaultFuns[key].name}</Option>
@@ -146,39 +146,44 @@ export default function FunctionIconSetting({groupIndex,itemIndex,onSave,initFun
               </Select>
             </Form.Item>
 
-            <Form.Item name={'name'} label="按钮名称" rules={[{ required: true }]}>
-              <Input placeholder='取一个名字吧，不要重复' />
+            <Form.Item name={'name'} label={t('button name or description')} rules={[{ required: true }]}>
+              <Input />
             </Form.Item>
-            <Form.Item name={'icon'} label={<a target='_blank' href="https://www.iconfont.cn/">按钮图标</a>}
-                       rules={[{ required: true, message:'必须设置一个SVG格式的图标哦' }]}>
-              <Input placeholder='svg图片或者网络https链接图片' />
+            <Form.Item name={'icon'} label={<a target='_blank' href="https://www.iconfont.cn/">{t('icon')}</a>}
+                       rules={[{ required: true, message:t("svg file is supported") }]}>
+              <Input />
             </Form.Item>
-            <Form.Item name={'shortcut'} label="快捷键" rules={[{ pattern:/^[a-z0-9]{0,1}$/, message:'快键键只能选一个数字或者字母哦' }]}>
-              <Input placeholder='一个字母或数字,可选' />
+            <Form.Item name={'shortcut'} label={t('shortcut')} rules={[{ pattern:/^[a-z0-9A-Z]{0,1}$/, message:t('only one key is supported') }]}>
+              <Input placeholder={t('optional')} />
             </Form.Item>
-            <Form.Item name={'clickUrl'} label="跳转链接" rules={[]}>
-              <Input placeholder='链接里用${keyword}表示替换值' />
+            <Form.Item name={'clickUrl'} label={t('jump link')} rules={[]}>
+              <Input placeholder={t('${keyword} in your link means the selected text')} />
             </Form.Item>
             <CheckVersionPart version='0.12.4'>
-              <Form.Item name={'clickScript'} label="单击执行函数" rules={[]}>
-                <Input placeholder='高级功能，可选，与跳转链接互斥。确保安全的一段执行脚本：(function(){})();' />
+              <Form.Item name={'clickScript'} label={<a target='_blank' href="/page?id=study_setting">{t('click script')}{t('For more info')}</a>} rules={[]}>
+                <Input.TextArea placeholder={t('script_tip')} />
               </Form.Item>
             </CheckVersionPart>
-            <CheckVersionPart version='0.12.4'>
-              <Form.Item name={'dbClickScript'} label="双击执行函数">
-                <Input placeholder='双击执行函数' />
-              </Form.Item>
-            </CheckVersionPart>
-            <CheckVersionPart version='0.12.4'>
-              <Form.Item name={'mouseoverScript'} label="鼠标经过函数">
-                <Input placeholder='鼠标经过执行函数' />
-              </Form.Item>
-            </CheckVersionPart>
+            {/*<CheckVersionPart version='0.12.4'>*/}
+            {/*  <Form.Item name={'dbClickScript'} label="双击执行函数">*/}
+            {/*    <Input placeholder='双击执行函数' />*/}
+            {/*  </Form.Item>*/}
+            {/*</CheckVersionPart>*/}
+            {/*<CheckVersionPart version='0.12.4'>*/}
+            {/*  <Form.Item name={'mouseoverScript'} label="鼠标经过函数">*/}
+            {/*    <Input placeholder='鼠标经过执行函数' />*/}
+            {/*  </Form.Item>*/}
+            {/*</CheckVersionPart>*/}
 
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-              <Button type="primary" htmlType="submit">
-                保存
-              </Button>
+              <div>
+                <Button type="primary" htmlType="submit">
+                  {t('submit')}
+                </Button>
+                <Button onClick={deleteIcon}>
+                  {t('delete')}
+                </Button>
+              </div>
             </Form.Item>
           </Form>
         </div>

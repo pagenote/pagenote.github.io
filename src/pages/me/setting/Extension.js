@@ -2,7 +2,7 @@ import {useState,useEffect} from 'react'
 import {computePosition, convertColor} from "@/utils/document";
 import CopyIcon from "@/assets/icon/default_copy.svg";
 import AddIcon from "@/assets/icon/add.svg";
-import {Button, Drawer, Popconfirm, Slider,Modal} from "antd";
+import {Button, Input, Popconfirm, Slider, Modal, message, Tooltip, Spin} from "antd";
 import FunctionIconSetting from "@/components/setting/FunctionIconSetting";
 import CheckVersionPart from "@/pages/CheckVersionPart";
 import Loadable from "react-loadable";
@@ -13,6 +13,7 @@ import {predefineTheme} from './const';
 import { getSetting,saveSetting,resetSetting } from "@/utils/api";
 import CloseIcon from '@/assets/icon/close.svg'
 import './extension.scss';
+import {useTranslation} from "react-i18next";
 
 String.prototype.replaceCharAt = function(n,c){
   return this.substr(0, n)+ c + this.substr(n+1,this.length-1-n);
@@ -30,40 +31,53 @@ const SliderPicker = Loadable({
 
 
 function Extension(){
-
+  const { t, i18n } = useTranslation();
+  const [loading,setLoading] = useState(false);
   const [colorIndex,setColorIndex] = useState(-1);
   const [settingIndex,setSettingIndex] = useState({
     groupIndex:-1,
     itemIndex:-1,
   });
   const [setting,setSetting] = useState({});
+
   const {maxRecord=0,colors=[],shortCuts='',actionGroup=[]} = setting;
 
+
   useEffect(()=>{
-    getSetting(function (result){
-      setSetting(result);
-    })
+    fetchSetting()
   },[]);
 
-  const saveSet=function (value){
-    setSetting(value);
-
+  const fetchSetting = function (){
+    setLoading(true);
+    getSetting(function (result){
+      setSetting(result);
+      setLoading(false);
+    })
   }
+
+  const updateSet= throttle(function (showMessage=true){
+    const value = JSON.parse(JSON.stringify(setting))
+    setSetting(value);
+    saveSetting(value,function (){
+      if(showMessage){
+        message.success(t('saved'))
+      }
+    });
+  },2000)
 
   const setShortKey=(e)=>{
     const key = (e.key||'').toUpperCase();
     if(!/[A-Z0-9\[\];',.`]/.test(key) || colorIndex<0){
-      alert('仅支持字母、数字和部分标点符号');
+      message.error(t('Only some letters, numbers and punctuation are supported'));
       return;
     }
     setting.shortCuts = shortCuts.replaceCharAt(colorIndex,key).substr(0,colors.length);
-    setSetting(setting)
+    updateSet(true)
   };
 
   const changeLimit = function (value){
     setting.maxRecord = value;
-    setSetting(setting)
-    saveSetting()
+    updateSet(false)
   }
 
   const onCloseDrawer=()=>{
@@ -81,18 +95,13 @@ function Extension(){
     const actionGroup = setting.actionGroup;
     actionGroup[groupIndex][itemIndex] = funItem;
     setSetting(setting);
-
-    saveSetting();
     onCloseDrawer();
+    updateSet(true)
   };
 
   const setColor = (color, index) => {
-    const hasIndex = colors.indexOf(color);
-    if(hasIndex>-1 && hasIndex!==index){
-      return;
-    }
-    colors[index] = color.hex;
-    setSetting(setting);
+    setting.colors[index] = color.hex;
+    updateSet();
   };
 
   const setColors =(colors)=> {
@@ -115,22 +124,19 @@ function Extension(){
       group.splice(itemIndex,1);
     }
     setting.actionGroup = actionGroup;
-    setSetting(setting);
-    setSettingIndex({
-      groupIndex:-1,
-      itemIndex:-1,
-    })
+    onCloseDrawer();
+    updateSet();
   };
 
   const addItem=(type='item',groupIndex,itemIndex)=>{
     switch (type) {
       case 'item':
         if(actionGroup[groupIndex].length>=4){
-          alert('最多设置4个子按钮');
+          message.error(t('limited_action_group',{count:4}));
           return;
         }
         actionGroup[groupIndex].push({
-          name: '定义一个名称吧：'+new Date().toLocaleTimeString(),
+          name: new Date().toLocaleTimeString(),
           shortcut: '',
           clickScript: '',
           clickUrl: '',
@@ -139,12 +145,12 @@ function Extension(){
         itemIndex++;
         break;
       case 'group':
-        if(actionGroup.length>=3){
-          alert('最多设置3组');
+        if(actionGroup.length>=2){
+          message.error(t('limited_action_group',{count:2})+t('add_action_group_tip'));
           return;
         }
         actionGroup.push([{
-          name: '定义一个名称吧：'+new Date().toLocaleTimeString(),
+          name: new Date().toLocaleTimeString(),
           shortcut: '',
           clickScript: '',
           clickUrl: '',
@@ -159,12 +165,14 @@ function Extension(){
       itemIndex:itemIndex,
     };
     setting.actionGroup = actionGroup;
-    setSetting(setting);
     setSettingIndex(newSettingIndex);
   };
 
   const resetAll = ()=>{
-    resetSetting();
+    resetSetting(function (){
+      message.success(t('reset success'))
+      fetchSetting()
+    });
   };
 
   let funItem = {};
@@ -175,10 +183,10 @@ function Extension(){
   }
 
   return(
-    <section>
+    <Spin spinning={loading}>
       <div className='pagenote setting-part'>
         <div className='tip'>
-          点击下方你想要个性化的模块进行设置。
+          {t('click any module to custom setting')}
         </div>
         <div className='function-container'>
           <div className='function-area'>
@@ -201,8 +209,11 @@ function Extension(){
               }
             </div>
             <div className='function-custom'>
-              <div className='action-group' data-tip='单击仅复制，双击复制且保存到下方的历史面板中。暂不可自定义'>
-                <CopyIcon className='function-item'/>
+
+              <div className='action-group'>
+                <Tooltip title={t('single click to copy, dbclick for copy and save it to history')}>
+                  <CopyIcon className='function-item'/>
+                </Tooltip>
               </div>
               {
                 actionGroup.map((group,index)=>(
@@ -210,108 +221,98 @@ function Extension(){
                     {group.map((action,i)=>{
                       const image = /^<svg/.test(action.icon) ?  `data:image/svg+xml;base64,${window.btoa(action.icon)}` : action.icon;
                       return(
-                        <div onClick={()=>{setIconFun(index,i)}} key={action.name+action.icon+i}
-                             data-tip={`${action.name}${action.shortcut?' 快捷键：'+action.shortcut:''}`}
-                             className={`function-item ${(settingIndex.groupIndex===index && settingIndex.itemIndex===i)?'active':''}`}
-                             style={{ backgroundImage: `url(${image})`}}>
-                          <span className="delete" onClick={(e)=>{deleteFun(index,i);e.stopPropagation()}}>
-                              <CloseIcon />
-                          </span>
-                        </div>
+                        <Tooltip title={`${action.name}${action.shortcut?action.shortcut:''}`}>
+                          <div onClick={()=>{setIconFun(index,i)}} key={action.name+action.icon+i}
+                               className={`function-item ${(settingIndex.groupIndex===index && settingIndex.itemIndex===i)?'active':''}`}
+                               style={{ backgroundImage: `url(${image})`}}>
+                          </div>
+                        </Tooltip>
+
                       )
                     })}
-                    <div className='function-item' data-tip='点击添加一个按钮'>
+                    <div className='function-item'>
                       <AddIcon  onClick={()=>addItem('item',index,group.length-1)}/>
                     </div>
                   </div>
                 ))
               }
-              <div className='action-group' data-tip='点击添加一个按钮分组'>
+              <div className='action-group'>
                 <AddIcon className='function-item' onClick={()=>{addItem('group')}} />
               </div>
             </div>
           </div>
           <Modal
-            title={`自定义我的 PAGENOTE 按钮`}
+            title={t("custom your Buttons")}
             onCancel={onCloseDrawer}
             footer={null}
             visible={settingIndex.groupIndex>-1 && settingIndex.itemIndex>-1}
           >
-            <FunctionIconSetting key={settingIndex.groupIndex+'-'+settingIndex.itemIndex} onSave={saveFun} initFunItem={funItem} groupIndex={settingIndex.groupIndex} itemIndex={settingIndex.itemIndex} />
+            <FunctionIconSetting
+              key={settingIndex.groupIndex+'-'+settingIndex.itemIndex}
+              deleteIcon={()=>deleteFun(settingIndex.groupIndex,settingIndex.itemIndex)}
+               onSave={saveFun} initFunItem={funItem}
+               groupIndex={settingIndex.groupIndex} itemIndex={settingIndex.itemIndex} />
           </Modal>
           <Modal
             mask={true}
             visible={colorIndex>=0}
             onCancel={()=>setColorIndex(-1)}
             footer={null}
-            title='设置标记画笔🖌'>
-            <div>
-              <div className='setting-title'>
-                色块修改
-              </div>
+            title={t('setting_pen')}>
+            <div className='color-modal'>
               <div className='setting-item'>
-                <div className='setting-label'>选取高亮背景色：</div>
+                <div className='setting-label'>{t('highlight background color')}</div>
                   <SliderPicker onChangeComplete={(color)=>{setColor(color,colorIndex)}} color={colors[colorIndex]} />
-
-                  <CompactPicker
-                    onChangeComplete={(color)=>{setColor(color,colorIndex)}}
-                    colors={[...predefineTheme[0].colors,...predefineTheme[1].colors,...predefineTheme[2].colors]}
-                    color={colors[colorIndex]} />
+                  {/*<CompactPicker*/}
+                  {/*  onChangeComplete={(color)=>{setColor(color,colorIndex)}}*/}
+                  {/*  colors={[...predefineTheme[0].colors,...predefineTheme[1].colors,...predefineTheme[2].colors]}*/}
+                  {/*  color={colors[colorIndex]} />*/}
               </div>
               <div className='setting-item'>
                 <span className='setting-label'>
-                    快捷键：
+                  {t('shortcut')}
                 </span>
-                <input readOnly onKeyUp={setShortKey} value={shortCuts[colorIndex]}/>
+                <Input readOnly onKeyUp={setShortKey} onInput={setShortKey} value={shortCuts[colorIndex]}/>
               </div>
             </div>
 
-            <div className='predefine-theme'>
-              <div className='setting-title'>一键设置</div>
-              <div>
-                {
-                  predefineTheme.map((item)=>(
-                    <div key={item.label}>
-                      <button onClick={()=>setColors(item.colors)}>{item.label}</button>
-                      {
-                        item.colors.map((color)=>(
-                          <span key={color} className='set-color-item' style={{background:color}}></span>
-                        ))
-                      }
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
+            {/*<div className='predefine-theme'>*/}
+            {/*  <div className='setting-title'>一键设置</div>*/}
+            {/*  <div>*/}
+            {/*    {*/}
+            {/*      predefineTheme.map((item)=>(*/}
+            {/*        <div key={item.label}>*/}
+            {/*          <button onClick={()=>setColors(item.colors)}>{item.label}</button>*/}
+            {/*          {*/}
+            {/*            item.colors.map((color)=>(*/}
+            {/*              <span key={color} className='set-color-item' style={{background:color}}></span>*/}
+            {/*            ))*/}
+            {/*          }*/}
+            {/*        </div>*/}
+            {/*      ))*/}
+            {/*    }*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </Modal>
         </div>
       </div>
 
       <div className='limit setting-part'>
         <div className='mark-count'>
-          <Slider value={maxRecord} tipFormatter={(value)=>{return '单页面最多标记'+value+'个'}} max={50} min={0}  onChange={changeLimit} />
-        </div>
-        <div className='tip'>
-          {
-            maxRecord === 0 &&
-            <div>
-              当设置为0，等同于<b>关闭 PAGENOTE</b> ：不可进行标记、已有标记的页面也将无法使用 PAGENOTE 功能。
-              <br/>
-              你可以设置为0来关闭 PAGENOTE
-              <br/>
-            </div>
-          }
+          <Slider value={maxRecord} tipFormatter={(value)=>{return (t('max marked in a page',{
+            number: value
+          }))}} max={50} min={0}  onChange={changeLimit} />
         </div>
       </div>
 
       <div className="reset setting-part">
         <CheckVersionPart version='0.12.5'>
-          <Popconfirm placement="topLeft" title={'确定重置「基础配置」「功能开关」？'} onConfirm={resetAll} okText="确认" cancelText="取消">
-            <Button type="link">一键重置</Button>
+          <Popconfirm placement="topLeft" title={t('Confirm to reset extension setting?')} onConfirm={resetAll} okText={t('confirm')} cancelText={t('cancel')}>
+            <Button type="link">{t('Reset')}</Button>
           </Popconfirm>
         </CheckVersionPart>
       </div>
-    </section>
+    </Spin>
   )
 }
 

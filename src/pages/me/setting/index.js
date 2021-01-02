@@ -14,25 +14,27 @@ import AccountIcon from '@/assets/icon/account.svg'
 import CloudIcon from '@/assets/icon/cloud.svg'
 import CheckVersion from "@/pages/CheckVersion";
 import './index.scss'
+import {useTranslation} from "react-i18next";
 
 const Setting = function (){
+  const { t } = useTranslation();
   return(
     <Frame>
       <Left width={0.2}>
         <div className="setting-left-tabs">
           <nav>
             <NavLink activeClassName="active" to="/setting/extension">
-              <PluginIcon/>插件配置
+              <PluginIcon/>{t('Extension')}
             </NavLink>
           </nav>
           <nav>
             <NavLink activeClassName="active" to={`/setting/account`}>
-              <AccountIcon/>账户配置
+              <AccountIcon/>{t('Account')}
             </NavLink>
           </nav>
           <nav>
             <NavLink activeClassName="active" to={`/setting/store`}>
-              <CloudIcon/>存储设置
+              <CloudIcon/>{t("Store")}
             </NavLink>
           </nav>
         </div>
