@@ -193,7 +193,7 @@ class Me extends Component {
                       <Select defaultValue={groupType} style={{ width: 120 }} bordered={false} onChange={this.changeGroupType}>
                           {
                               groupTypes.map((item)=>(
-                                <Option value={item.value}>{item.label}</Option>
+                                <Option key={item.value} value={item.value}>{item.label}</Option>
                               ))
                           }
                       </Select>

@@ -47,7 +47,7 @@ platforms = platforms.sort((pre,next)=>{
   return isLow(pre.version,next.version)?1:-1
 })
 
-export default function InstallBar() {
+export default function InstallBar({children}) {
   const offlineInstall = function () {
     console.log('不推荐');
       // Modal.info({
@@ -69,6 +69,9 @@ export default function InstallBar() {
             text-align:center;
           }
           .install-slogan{
+            text-align: center;
+          }
+          .slot{
             text-align: center;
           }
           a.browser-install-btn{
@@ -129,6 +132,9 @@ export default function InstallBar() {
                 </a>
               ))
             }
+          </div>
+          <div className='slot'>
+            {children}
           </div>
     </div>
   )

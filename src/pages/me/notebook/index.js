@@ -130,4 +130,4 @@ class NoteBooks extends Component{
   }
 }
 
-export default CheckVersion(NoteBooks,'0.13.2');
+export default NoteBooks;

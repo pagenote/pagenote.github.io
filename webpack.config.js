@@ -96,7 +96,7 @@ const config = {
       // 使用正则匹配命中路由
       rewrites: [
         {
-          from: /^\/me|new|page|release|setting|donation|rate|privacy|draft|about|doctor|me_old$/,
+          from: /^\/me|new|page|release|setting|donation|rate|privacy|draft|about|doctor|me_old|uninstall$/,
           to: function(context) {
             return   context.parsedUrl.pathname+'.html';
           }
@@ -105,12 +105,12 @@ const config = {
     }
   },
   // TODO 区分dev prd
-  externals: {
-    // '@editorjs/editorjs': 'EditorJS',
-    'react':'React',
-    'react-dom': 'ReactDOM',
-    // 'react-color': 'ReactColor'
-  },
+  // externals: {
+  //   // '@editorjs/editorjs': 'EditorJS',
+  //   'react':'React',
+  //   'react-dom': 'ReactDOM',
+  //   // 'react-color': 'ReactColor'
+  // },
   plugins: [
     new CopyPlugin({
       patterns: [{ from: 'public' }],

@@ -29,7 +29,7 @@ const predefineSize = window.innerWidth - sideWidth - 2;
 const RouteMe = function(){
   return (
     <Router>
-      <div class='pagenote-me'>
+      <div className='pagenote-me'>
         <Menus sideWidth={sideWidth}></Menus>
         <div className='page-container' style={{width: predefineSize + 'px'}}>
           <Switch>

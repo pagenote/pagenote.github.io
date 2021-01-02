@@ -17,7 +17,7 @@ function NeedUpload(current,need) {
           `
           }
         </style>
-        <InstallBar></InstallBar>
+        <InstallBar />
         <p>
           {
             current ?
@@ -37,10 +37,7 @@ function NeedUpload(current,need) {
 
 
 export default function CheckVersion(Com,version) {
-  const currentVersion = document.documentElement.dataset.version || '';
+  const currentVersion = document.documentElement.dataset.version;
   const needUpload = isLow(currentVersion,version);
-  if(needUpload){
-    console.log('需要升级后才可使用',currentVersion)
-  }
   return needUpload? NeedUpload(currentVersion,version) : Com
 }
