@@ -1,5 +1,6 @@
 import React,{Component} from "react";
 import {Empty, Switch, Tooltip} from 'antd';
+import { withTranslation,Translation } from 'react-i18next';
 import CommonHeader from '../CommonHeader/index';
 import Page from './Page';
 import { gotoTarget } from "@/pages/me/me/utils";
@@ -12,7 +13,7 @@ function getLink(url){
   return url.replace(/http[s]+:\/\/(www\.)?/,'').substr(0,10);
 }
 
-export default class WebPage extends Component{
+class WebPage extends Component{
   constructor(props) {
     super(props);
   }
@@ -21,8 +22,9 @@ export default class WebPage extends Component{
   }
 
   deletePage=(keys)=>{
+    const {t} = this.props;
     if(keys.length>1){
-      const check = window.confirm('确定删除');
+      const check = window.confirm(t("confirm delete?"));
       if(!check){
         return;
       }
@@ -36,7 +38,7 @@ export default class WebPage extends Component{
 
 
   render() {
-    const {keys,removeSelectPages,muilPage,toggleMultSelect} = this.props;
+    const {keys,removeSelectPages,muilPage,toggleMultSelect,t} = this.props;
     return(
       <section className='notes'>
         <CommonHeader>
@@ -46,12 +48,12 @@ export default class WebPage extends Component{
           {/*<span className='action-icon-button'>*/}
           {/*  <MarkdownIcon />*/}
           {/*</span>*/}
-          <Tooltip title='多选模式：一次可以选择多个PAGE浏览、操作；专注模式：一次只可选中一个PAGE浏览'>
+          <Tooltip title={t('Muilt-Page: select muilt-page once time. Single-Page: Only one page can be selected once time')}>
             <Switch
               onChange={toggleMultSelect}
               checked={muilPage}
-              checkedChildren="多选模式"
-              unCheckedChildren="专注模式"
+              checkedChildren={t("muilt-page")}
+              unCheckedChildren={t("single-page")}
               // checkedChildren={<CheckOutlined />}
               // unCheckedChildren={<CloseOutlined />}
               // defaultChecked
@@ -72,7 +74,7 @@ export default class WebPage extends Component{
               }
               <span className='selected-item clean' onClick={removeSelectPages}>
                 <CleanIcon></CleanIcon>
-                清空选中
+                {t("remove selected")}
               </span>
             </div>
           }
@@ -85,7 +87,7 @@ export default class WebPage extends Component{
           <Empty
             description={
             <span>
-              请在左侧选择 PAGE 后查看
+              {t("select a page on the left side")}
             </span>
           }></Empty>
         }
@@ -93,3 +95,4 @@ export default class WebPage extends Component{
     )
   }
 }
+export default withTranslation()(WebPage)

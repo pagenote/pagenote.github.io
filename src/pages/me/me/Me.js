@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Select,Spin } from 'antd';
+import { withTranslation,Translation } from 'react-i18next';
 import debounce from 'lodash/debounce'
 import WebPage from "./page/WebPage";
 import Groups from './Groups/Groups';
@@ -12,20 +13,7 @@ import CheckVersion from "@/pages/CheckVersion";
 import './me.scss'
 
 const { Option } = Select;
-const groupTypes = [
-    {
-        value: 2,
-        label: '按标签分组'
-    },
-    {
-        value: 0,
-        label: '按域名分组'
-    },
-    {
-        value: 1,
-        label: '按日期分组'
-    },
-];
+
 
 class Me extends Component {
     constructor(props) {
@@ -180,6 +168,21 @@ class Me extends Component {
     },500)
 
     render() {
+        const {t} = this.props;
+        const groupTypes = [
+            {
+                value: 2,
+                label: t('By Tags')
+            },
+            {
+                value: 0,
+                label: t('By Domain')
+            },
+            {
+                value: 1,
+                label: t('By Time')
+            },
+        ];
         const {theme = {}, barSize,groups,fetching,selectedPageKeysArray,groupType,targetInfos,muilPage} = this.state;
         const bgColor = theme.bgColor;
         return (
@@ -242,4 +245,4 @@ class Me extends Component {
     }
 }
 
-export default CheckVersion(Me,'0.13.2')
+export default withTranslation()(CheckVersion(Me,'0.13.2'))

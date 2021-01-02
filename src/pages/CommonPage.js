@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { getBrowserTypeAndVersion} from "@/utils/document";
 import {sendEvent} from "@/utils/api";
+import '../i18n';
 
 import '../styles/common.scss'
 // 设置滚动title

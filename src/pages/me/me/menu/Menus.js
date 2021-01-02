@@ -1,5 +1,6 @@
 import {NavLink} from "react-router-dom";
 import {Popover, Tooltip} from "antd";
+import { useTranslation } from 'react-i18next';
 import DonationIcon from "@/assets/icon/donation.svg";
 import WechatIcon from "@/assets/icon/wechat.svg";
 import RateIcon from "@/assets/icon/rate.svg";
@@ -14,50 +15,47 @@ import MaterialIcon from "@/assets/icon/material.svg";
 import DoctorIcon from '@/assets/icon/doctor.svg'
 
 export default function Menus({sideWidth}){
+  const { t, i18n } = useTranslation();
   return(
     <div className='page-menus' style={{width:sideWidth+'px'}}>
       <div className="menus">
         <NavLink activeClassName="active" exact={true} to="/">
-          <InternetIcon/>网页笔记
+          <span className='new-notification'>
+            <InternetIcon/>{t('note in page')}
+          </span>
         </NavLink>
         {/*<NavLink activeClassName="active" exact={true} to="/material">*/}
         {/*  <MaterialIcon/>素材库*/}
         {/*</NavLink>*/}
         <NavLink activeClassName="active" exact={true} to="/paper">
-          <NoteBookIcon/>文稿
+          <NoteBookIcon/>{t('paper')}
         {/*  TODO 支持导入写作模板 自定义模板*/}
         </NavLink>
         <NavLink activeClassName="active" to="/setting">
-          <SettingIcon/>设置
+          <SettingIcon/>{t('setting')}
         </NavLink>
       </div>
       <div className='menus-footer'>
         <div>
-          <Tooltip title='赞赏'>
+          <Tooltip title={t('donation for us')}>
             <a href="/donation" target='_blank'>
-              <DonationIcon></DonationIcon>
+              <DonationIcon/>
             </a>
           </Tooltip>
-          <Popover title='关注微信公众号' content={<div><img width={140} height={140} src="/img/wechat.jpg" alt=""/> </div>}>
+          <Popover title={t('follow us in wechat')} content={<div><img width={140} height={140} src="/img/wechat.jpg" alt=""/> </div>}>
             <a>
               <WechatIcon />
             </a>
           </Popover>
-          <Tooltip title='为 PAGENOTE 评分'>
+          <Tooltip title={t('Rate for PAGENOTE')}>
             <a href="/rate" target='_blank'>
-              <RateIcon>
-              </RateIcon>
+              <RateIcon/>
             </a>
           </Tooltip>
-        </div>
-        <div className='version'>
-          PAGENOTE {document.documentElement.dataset.version}
-        </div>
-        <div>
-          <Tooltip title='功能规划'>
+          <Tooltip title={t('feature in future')}>
             <a target='_blank' href="/page?id=future"><PlanIcon /></a>
           </Tooltip>
-          <Tooltip title='系统健康监测、日志'>
+          <Tooltip title={t('system monitor, report a bug')}>
             <a target='_blank' href="/doctor">
               <DoctorIcon />
             </a>
@@ -67,11 +65,14 @@ export default function Menus({sideWidth}){
           {/*    <BugIcon />*/}
           {/*  </a>*/}
           {/*</Tooltip>*/}
-          <Tooltip title='更新日志'>
+          <Tooltip title={t('Release Notes')}>
             <a target='_blank' href="/release">
               <ChangeLogIcon />
             </a>
           </Tooltip>
+        </div>
+        <div className='version'>
+          PAGENOTE {document.documentElement.dataset.version}
         </div>
       </div>
     </div>
