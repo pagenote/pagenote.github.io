@@ -81,9 +81,11 @@ export default function Menus({sideWidth}){
           PAGENOTE {document.documentElement.dataset.version}
         </div>
         <div className='language'>
-          <Button type="dashed" size='small' onClick={()=>changeLanguage(i18n.language==='en'?'zh_CN':"en")}>
-            {i18n.language==='en'?'中文':"English"}
-          </Button>
+          <Tooltip title='切换语言；Change language'>
+            <Button type="dashed" size='small' onClick={()=>changeLanguage(i18n.language==='en'?'zh_CN':"en")}>
+              {i18n.language==='en'?'中文':"English"}
+            </Button>
+          </Tooltip>
         </div>
       </div>
     </div>
