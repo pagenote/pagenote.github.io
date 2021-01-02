@@ -7,7 +7,7 @@ import {getBrowserTypeAndVersion} from "@/utils/document";
 const resources = {
   en: {
     translation: {
-      "note in page": "Notes in Page",
+      "note in page": "Notes in WebPage",
       "paper": "Paper",
       "setting": "Setting",
       "loading page": "Not found the info about {{page}}",
@@ -17,7 +17,8 @@ const resources = {
       "setting_pen":"custom you pen to highlight🖌",
       "max marked in a page":"you can highlight most {{number}} marks in a single webpage",
       "script_tip":"For developer ",
-      "last sync at":"last sync at ："
+      "last sync at":"last sync at ：",
+      "for donation user":"This function is for donation user first. Request and will be work after {{days}} days",
     }
   },
   zh_CN: {
@@ -96,7 +97,9 @@ const resources = {
       "Store":"存储设置",
       "sync to cloud":"同步至云端",
       "last sync at":"上次同步：",
-      "Download MarkDown":"导出为 Markdown"
+      "Download MarkDown":"导出 MarkDown",
+      "for donation user":"此功能为赞助用户优享。申请后{{days}}将开放",
+      "To upgrade":"去升级"
     }
   }
 };

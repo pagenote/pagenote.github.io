@@ -1,14 +1,16 @@
-import React,{Component} from "react";
+import React from "react";
 import {Empty, Switch, Tooltip} from 'antd';
-import {withTranslation, Translation, useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import CommonHeader from '../CommonHeader/index';
 import Page from './Page';
 import { gotoTarget } from "@/pages/me/me/utils";
 import DeleteIcon from '@/assets/icon/delete.svg'
-import {getPage, savePage,getPages} from "@/utils/api";
+import { savePage,getPages } from "@/utils/api";
 import {exportMd} from "@/utils";
 import CloudIcon from "@/assets/icon/cloud.svg";
 import MarkdownIcon from "@/assets/icon/markdown.svg"
+import CheckVersionIcon from '@/components/CheckVersionIcon'
+import CheckUserIcon from '@/components/CheckUserIcon'
 import './webpage.scss'
 
 function getLink(url){
@@ -50,15 +52,26 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
           </Tooltip>
         </span>
         <span className='action-icon-button'>
-          <Tooltip title={t('sync to cloud')}>
-            <CloudIcon fill={'#03A9F4'} />
-          </Tooltip>
+          <CheckVersionIcon version='0.13.5' title={t('sync to cloud')}>
+            <Tooltip title={t('sync to cloud')}>
+              <CloudIcon fill={'#03A9F4'} />
+            </Tooltip>
+          </CheckVersionIcon>
         </span>
-        <span className='action-icon-button' onClick={downloadMd}>
-          <Tooltip title={t('Download MarkDown')}>
-            <MarkdownIcon />
-          </Tooltip>
+        <span className='action-icon-button'>
+          <CheckVersionIcon version='0.13.5' title={t('Download MarkDown')}>
+            <Tooltip title={t('Download MarkDown')}>
+              <MarkdownIcon onClick={downloadMd} />
+            </Tooltip>
+          </CheckVersionIcon>
         </span>
+        {/*<span className='action-icon-button'>*/}
+        {/*  <CheckUserIcon needType={2} title={t('download markdown')}>*/}
+        {/*    <Tooltip title={t('Download MarkDown')}>*/}
+        {/*      <MarkdownIcon onClick={downloadMd} />*/}
+        {/*    </Tooltip>*/}
+        {/*  </CheckUserIcon>*/}
+        {/*</span>*/}
         <Tooltip title={t('type-tips')}>
           <Switch
             onChange={toggleMultSelect}
