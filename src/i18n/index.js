@@ -19,6 +19,9 @@ const resources = {
       "script_tip":"For developer ",
       "last sync at":"last sync at ：",
       "for donation user":"This function is for donation user first. Request and will be work after {{days}} days",
+      "tio_for_clipboard_title":"Tip: how to store copy item to here",
+      "clipboard_description":"double click the copy button, and the item will display in this place for you to review and re-copy(just click the card item).",
+      "i_got_it":"Got it. Hide next time"
     }
   },
   zh_CN: {
@@ -100,7 +103,11 @@ const resources = {
       "Download MarkDown":"导出 MarkDown",
       "for donation user":"此功能为赞助用户优享。申请后{{days}}将开放",
       "To upgrade":"去升级",
-      "Confirm to delete selected pages?":"确认删除选中页面？"
+      "Confirm to delete selected pages?":"确认删除选中页面？",
+      "tio_for_clipboard_title":"提示：如何使用剪切板",
+      "clipboard_description":"双击复制按钮，在复制同时也将其保存到历史面板中，供你回顾已经再次复制（单击任意一条复制内容卡片即可）",
+      "i_got_it":"知道了。下次不再提示",
+      "clipboard":"剪切板"
     }
   }
 };

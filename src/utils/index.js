@@ -50,6 +50,24 @@ export function exportMd(pages=[]) {
     funDownload(content, name+'.md');
 }
 
+export function getDomain(url){
+    const match = url.match(/:\/\/(.*?)\//)
+    const domainKey = match?match[1]: url;
+    return domainKey;
+}
+
+export function writeTextToClipboard(text) {
+    try {
+        return  navigator.clipboard.writeText(text)
+    } catch (e) {
+        const textarea = document.createElement('textarea');
+        textarea.textContent = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('Copy', false, null);
+        document.body.removeChild(textarea)
+    }
+}
 
 var funDownload = function (content, filename) {
     var eleLink = document.createElement('a');

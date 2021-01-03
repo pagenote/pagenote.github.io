@@ -1,0 +1,40 @@
+.clipboard{
+  max-width: 900px;
+  min-width: 600px;
+  margin: 0 auto;
+  background: #f9f9f9;
+  padding: 24px;
+  img{
+    max-width: 100%;
+  }
+}
+.clipboard-item{
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  height: fit-content;
+  box-shadow: 0 1px 4px 0 rgba(21,27,38,.08);
+  transition: all .25s ease-out;
+  margin: 12px 0;
+  &:hover{
+    transition: all .25s ease-out;
+    box-shadow: 0 1px 12px 0 rgba(21,27,38,.2);
+  }
+  .clipboard-header{
+    display: flex;
+    justify-content: space-between;
+    height: 2.8rem;
+    padding: .8rem;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .12px;
+    border-bottom: 1px solid #e8e8ea;
+    a{
+      margin-left: 8px;
+    }
+  }
+  .clipboard-body{
+    padding: 0.8rem;
+  }
+}

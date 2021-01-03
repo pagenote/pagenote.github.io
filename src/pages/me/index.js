@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Loadable from 'react-loadable';
 import Draft from './notebook/index';
+import Clipboard from './clipboard'
 import SettingPage from './setting';
 import Menus from './me/menu/Menus';
 import useSize from './hooks/useSize'
@@ -43,6 +44,9 @@ const RouteMe = function(){
             </Route>
             <Route path="/setting">
               <SettingPage />
+            </Route>
+            <Route path='/clipboard'>
+              <Clipboard />
             </Route>
           </Switch>
         </div>

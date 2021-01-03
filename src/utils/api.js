@@ -1,5 +1,5 @@
 import Bridge from "./extensionBridge";
-import { isLow } from "./index";
+import {getDomain, isLow} from "./index";
 import {funDownload} from "@/utils/document";
 import paperIntroduce from '../pages/me/notebook/introduce.json'
 
@@ -62,8 +62,7 @@ export const fetchGroups = function (groupType=2,callback){
             case 0:
               let domainKey = (currentPage.keys||[])[0];
               if(!domainKey){
-                const match = window.location.href.match(/:\/\/(.*?)\//)
-                domainKey = match?match[1]:'default'
+                domainKey = getDomain(window.location.href);
               }
               groupObject[domainKey] = groupObject[domainKey] || [];
               groupObject[domainKey].push(currentPage);
@@ -327,6 +326,35 @@ export const getPapers = function (callback){
     }
   }
   callback(result);
+}
+
+// clipboard
+export function getClipboards(callback){
+  getBridge().sendMessage('get_runtime',{},function ({data,type}){
+    const clipboard = data.clipboards || [];
+    callback(clipboard);
+  })
+}
+
+export function deleteClipboards(item,callback){
+  getBridge().sendMessage('get_runtime',{},function ({data}) {
+    const clipboard = data.clipboards || [];
+    for(let i=0; i<clipboard.length; i++){
+      const tempItem = clipboard[i];
+      // TODO 增加ID标识符
+      if(JSON.stringify(tempItem) === JSON.stringify(item)){
+        clipboard.splice(i,1);
+        break;
+      }
+    }
+    data.clipboards = clipboard;
+    getBridge().sendMessage('set_runtime',{
+      data:data,
+    },function ({data}) {
+      console.log('set result',data)
+      callback(data.clipboards);
+    })
+  })
 }
 
 export function sendEvent(category,eventAction='',eventLabel='',eventValue='',hitType='event') {

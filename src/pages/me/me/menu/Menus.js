@@ -13,6 +13,7 @@ import PlanIcon from '@/assets/icon/plan.svg'
 import ChangeLogIcon from '@/assets/icon/changelog.svg';
 import MaterialIcon from "@/assets/icon/material.svg";
 import DoctorIcon from '@/assets/icon/doctor.svg'
+import ClipboardIcon from '@/assets/icon/clipboard.svg'
 
 export default function Menus({sideWidth}){
   const { t, i18n } = useTranslation();
@@ -36,6 +37,9 @@ export default function Menus({sideWidth}){
         <NavLink activeClassName="active" exact={true} to="/paper">
           <NoteBookIcon/>{t('paper')}
         {/*  TODO 支持导入写作模板 自定义模板*/}
+        </NavLink>
+        <NavLink activeClassName="active" exact={true} to="/clipboard">
+          <ClipboardIcon/>{t('clipboard')}
         </NavLink>
         <NavLink activeClassName="active" to="/setting">
           <SettingIcon/>{t('setting')}
