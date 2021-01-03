@@ -2,6 +2,7 @@ var Bridge = function (element,clientId='page',targetId='extension') {
     if(!element){
         element = document.createElement('div');
         element.id = 'messenger'
+        element.style.display = 'none';
         document.documentElement.appendChild(element)
     }
 
