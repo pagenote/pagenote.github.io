@@ -1,4 +1,4 @@
-import { isLow } from "../utils";
+import { isLow } from "@/utils";
 
 
 export default function CheckVersionPart({children,version}) {

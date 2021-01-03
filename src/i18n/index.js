@@ -21,7 +21,10 @@ const resources = {
       "for donation user":"This function is for donation user first. Request and will be work after {{days}} days",
       "tio_for_clipboard_title":"Tip: how to store copy item to here",
       "clipboard_description":"double click the copy button, and the item will display in this place for you to review and re-copy(just click the card item).",
-      "i_got_it":"Got it. Hide next time"
+      "i_got_it":"Got it. Hide next time",
+      "required_version":"But version {{version}} is required",
+      "no_latest_version_found":"Did not found the required version with your browser? Wait a moment please, it will come soon maybe 2days",
+      "not_available_now":"This function not available now. It will work in version {{version}}"
     }
   },
   zh_CN: {
@@ -107,7 +110,13 @@ const resources = {
       "tio_for_clipboard_title":"提示：如何使用剪切板",
       "clipboard_description":"双击复制按钮，在复制同时也将其保存到历史面板中，供你回顾已经再次复制（单击任意一条复制内容卡片即可）",
       "i_got_it":"知道了。下次不再提示",
-      "clipboard":"剪切板"
+      "clipboard":"剪切板",
+      "current version":"当前版本",
+      "required_version":"至少需要升级到{{version}}才可继续使用",
+      "no_latest_version_found":"对应平台还没有要求版本？请稍等，正在上架中，预计2天左右可上架。",
+      "not_available_now":"该功能暂不可用，预计在版本 {{version}} 可用。",
+      "You should install PAGENOTE firstly":"你还没有安装 PAGENOTE，安装后再来使用吧 ",
+      "For Help":"反馈"
     }
   }
 };

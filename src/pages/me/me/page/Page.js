@@ -234,10 +234,12 @@ class PageDetail extends Component{
                       {
                           fetchError &&
                             <div>
-                                {t('fetch error')}
-                                {t('loading page',{
-                                    page: pageKey
-                                })}
+                                <span>{t('fetch error')}  </span>
+                                <span>
+                                    {t('loading page',{
+                                        page: pageKey
+                                    })}
+                                </span>
                                 <Button onClick={this.fetchPageInfo}>{t('retry')}</Button>
                             </div>
                       }

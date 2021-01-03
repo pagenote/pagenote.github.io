@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react';
 import { fetchCloudInfo,saveCloudInfo,checkStatus } from "@/utils/api";
 import {AutoComplete, Button, Form, Input, message, Spin,PageHeader, Descriptions,Alert} from "antd";
 import CheckVersion from "@/pages/CheckVersion";
+import CheckVersionPart from "@/pages/CheckVersionPart";
 import {useTranslation} from "react-i18next";
 
 const layout = {
@@ -84,33 +85,35 @@ function Cloud(){
   return(
     <Spin spinning={loading}>
       <div className='header-info'>
-        <PageHeader
-          // ghost={false}
-          title={t('cloud store setting')}
-          subTitle={<Alert message={server.validate?t("connected"):t("unconnected")} type={server.validate?'success':'error'} showIcon />}
-          // extra={[
-          //   <Button onClick={checkCloud} key="1" type="primary">
-          //     刷新状态
-          //   </Button>,
-          // ]}
-        >
-          <Descriptions size="small" column={2}>
-            <Descriptions.Item label={t('last check time')}>{new Date(server.lastCheckTime).toLocaleString()}</Descriptions.Item>
-            <Descriptions.Item label={t('logs')}>
-              {
-                server.msg
-              }
-            </Descriptions.Item>
-            <Descriptions.Item label={t('tips')}>
-              {
-                server.validate?'':`1、请确认账号密码正确；2、可能是受到云盘服务商限制，请稍等片刻，将会自动重试联通。点击保存，可手动重试`
-              }
-              {
-                (!server.validate&&server.server===options[0].value)? <a target='_blank' href="https://help.jianguoyun.com/?p=2064">坚果云说明</a>:''
-              }
-            </Descriptions.Item>
-          </Descriptions>
-        </PageHeader>
+        <CheckVersionPart version='0.13.5'>
+          <PageHeader
+            // ghost={false}
+            title={t('cloud store setting')}
+            subTitle={<Alert message={server.validate?t("connected"):t("unconnected")} type={server.validate?'success':'error'} showIcon />}
+            // extra={[
+            //   <Button onClick={checkCloud} key="1" type="primary">
+            //     刷新状态
+            //   </Button>,
+            // ]}
+          >
+            <Descriptions size="small" column={2}>
+              <Descriptions.Item label={t('last check time')}>{new Date(server.lastCheckTime).toLocaleString()}</Descriptions.Item>
+              <Descriptions.Item label={t('logs')}>
+                {
+                  server.msg
+                }
+              </Descriptions.Item>
+              <Descriptions.Item label={t('tips')}>
+                {
+                  server.validate?'':`1、请确认账号密码正确；2、可能是受到云盘服务商限制，请稍等片刻，将会自动重试联通。点击保存，可手动重试`
+                }
+                {
+                  (!server.validate&&server.server===options[0].value)? <a target='_blank' href="https://help.jianguoyun.com/?p=2064">坚果云说明</a>:''
+                }
+              </Descriptions.Item>
+            </Descriptions>
+          </PageHeader>
+        </CheckVersionPart>
       </div>
       <Form {...layout} form={form}   name="control-hooks" onFinish={saveInfo} validateMessages={validateMessages}>
         <Form.Item name={['invite_code']} label={t('invite code')} rules={[{ required: true }]}>

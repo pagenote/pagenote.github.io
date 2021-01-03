@@ -1,4 +1,4 @@
-import { isLow } from "../utils";
+import { isLow } from "@/utils";
 import versions from '../../public/version.json'
 
 export default function CheckVersionPart({children,version}) {
@@ -50,9 +50,13 @@ export default function CheckVersionPart({children,version}) {
             {
               notPublic?
                 <span>
-                  此功能还在开发中，预计将在 {version} 中可用
+                  {t('not_available_now',{version:currentVersion})}
                 </span>:
-                <span>当前版本<b>{currentVersion}</b>, 需要<a href="/release">升级</a>到 <b>{version}</b>才可使用本模块</span>
+                <span>{t('current version')}<b>{currentVersion}</b>
+                  <span>
+                    {t('required_version',{version:version})}
+                  </span>
+                </span>
             }
           </div>
         }

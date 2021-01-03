@@ -29,7 +29,7 @@ const DraftPage = Loadable({
 const sideWidth = 180;
 
 const RouteMe = function(){
-  const predefineSize = useSize().width - sideWidth - 2;
+  const predefineSize = useSize().width - sideWidth;
   return (
     <Router>
       <div className='pagenote-me'>

@@ -1,9 +1,11 @@
 import InstallBar from "../components/InstallBar";
-import { isLow } from "../utils";
+import { isLow } from "@/utils";
+import {useTranslation} from "react-i18next";
 
 
 function NeedUpload(current,need) {
   return function(){
+    const { t } = useTranslation();
     return(
       <div className='need_upload'>
         <style jsx='true'>
@@ -21,15 +23,21 @@ function NeedUpload(current,need) {
         <p>
           {
             current ?
-              <span>当前版本<b>{current}</b>, 至少需要升级到 <b>{need}</b>才可继续使用</span>
+              <div>
+                <span>{t('current version')}<b>{current}</b> </span>
+                <span>{t('required_version',{version:need})}</span>
+                <div>
+                  {t('no_latest_version_found')}
+                </div>
+              </div>
               :
-            <span>你还没有安装 PAGENOTE，安装后再来使用吧 </span>
+            <span>{t('You should install PAGENOTE firstly')}</span>
           }
         </p>
-        <p>
-          <h3>反馈</h3>
-          <img width={80} src="/img/qq.png" alt=""/>
-        </p>
+        <div>
+          <h3>{t('For Help')}</h3>
+          <img width={80} src="/img/wechat.jpg" alt=""/>
+        </div>
       </div>
     )
   }
