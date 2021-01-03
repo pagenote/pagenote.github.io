@@ -1,11 +1,11 @@
-import React from "react";
-import {Empty, Switch, Tooltip} from 'antd';
+import React,{useState} from "react";
+import {Empty, Switch, Tooltip,Popconfirm} from 'antd';
 import {useTranslation} from 'react-i18next';
 import CommonHeader from '../CommonHeader/index';
 import Page from './Page';
 import { gotoTarget } from "@/pages/me/me/utils";
 import DeleteIcon from '@/assets/icon/delete.svg'
-import { savePage,getPages } from "@/utils/api";
+import { savePage,getPages,syncPages } from "@/utils/api";
 import {exportMd} from "@/utils";
 import CloudIcon from "@/assets/icon/cloud.svg";
 import MarkdownIcon from "@/assets/icon/markdown.svg"
@@ -43,6 +43,14 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
     })
   }
 
+  const [syncing,setSync] = useState(false);
+  const syncToCloud = function (){
+    setSync(true)
+    syncPages(keys,function (){
+      setSync(true)
+    })
+  }
+
   return(
     <section className='notes'>
       <CommonHeader>
@@ -52,9 +60,9 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
           </Tooltip>
         </span>
         <span className='action-icon-button'>
-          <CheckVersionIcon version='0.13.5' title={t('sync to cloud')}>
+          <CheckVersionIcon version='0.13.6' title={t('sync to cloud')}>
             <Tooltip title={t('sync to cloud')}>
-              <CloudIcon fill={'#03A9F4'} />
+              <CloudIcon fill={syncing?'#03A9F4':"#333333"} onClick={syncToCloud} />
             </Tooltip>
           </CheckVersionIcon>
         </span>

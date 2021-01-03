@@ -99,7 +99,8 @@ const resources = {
       "last sync at":"上次同步：",
       "Download MarkDown":"导出 MarkDown",
       "for donation user":"此功能为赞助用户优享。申请后{{days}}将开放",
-      "To upgrade":"去升级"
+      "To upgrade":"去升级",
+      "Confirm to delete selected pages?":"确认删除选中页面？"
     }
   }
 };

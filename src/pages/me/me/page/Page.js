@@ -160,7 +160,7 @@ class PageDetail extends Component{
                                     <DateIcon />
                                     <span>{new Date(lastModified).toLocaleString()}</span>
                                 </div>
-                                <span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>
+                                {/*<span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>*/}
                             </div>
                         </div>
                         {

@@ -176,6 +176,13 @@ export const savePage = function (key,plainData){
   })
 }
 
+export const syncPages = function (keys,callback) {
+  getBridge().sendMessage('sync_pages_to_cloud',{keys:keys},function (result){
+    callback(result);
+    console.log(result,'同步结果')
+  })
+}
+
 export const exportData = ()=>{
   const pageCnt = Object.keys(tempDatas).length;
   const exportData = encodeURIComponent(JSON.stringify(tempDatas));
