@@ -64,7 +64,14 @@ class Me extends Component {
     componentDidMount() {
         this.fetchGroupList();
         this.initSelected();
+        // TODO useVisible
+        document.addEventListener('visibilitychange', this.fetchGroupList);
     }
+
+    componentWillUnmount() {
+        document.removeEventListener('visibilitychange',this.fetchGroupList)
+    }
+
 
     initSelected=()=>{
         let selectedArray = [];
