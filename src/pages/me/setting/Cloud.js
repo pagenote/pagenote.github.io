@@ -87,14 +87,8 @@ function Cloud(){
       <div className='header-info'>
         <CheckVersionPart version='0.13.5'>
           <PageHeader
-            // ghost={false}
             title={t('cloud store setting')}
             subTitle={<Alert message={server.validate?t("connected"):t("unconnected")} type={server.validate?'success':'error'} showIcon />}
-            // extra={[
-            //   <Button onClick={checkCloud} key="1" type="primary">
-            //     刷新状态
-            //   </Button>,
-            // ]}
           >
             <Descriptions size="small" column={2}>
               <Descriptions.Item label={t('last check time')}>{new Date(server.lastCheckTime).toLocaleString()}</Descriptions.Item>

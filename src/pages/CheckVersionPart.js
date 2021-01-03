@@ -52,7 +52,7 @@ export default function CheckVersionPart({children,version}) {
             {
               notPublic?
                 <span>
-                  {t('not_available_now',{version:currentVersion})}
+                  {t('not_available_now',{version:version})}
                 </span>:
                 <span>{t('current version')}<b>{currentVersion}</b>
                   <span>
