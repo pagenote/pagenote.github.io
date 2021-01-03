@@ -1,10 +1,12 @@
 import { isLow } from "@/utils";
 import versions from '../../public/version.json'
+import {useTranslation} from "react-i18next";
 
 export default function CheckVersionPart({children,version}) {
   const currentVersion = document.documentElement.dataset.version || '';
   const needUpload = isLow(currentVersion,version);
   const notPublic = isLow(versions.latest.version,version);
+  const { t } = useTranslation();
   return (
     <div className='version_check'>
       <style jsx='true'>

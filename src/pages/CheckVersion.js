@@ -20,7 +20,7 @@ function NeedUpload(current,need) {
           }
         </style>
         <InstallBar />
-        <p>
+        <div>
           {
             current ?
               <div>
@@ -33,7 +33,7 @@ function NeedUpload(current,need) {
               :
             <span>{t('You should install PAGENOTE firstly')}</span>
           }
-        </p>
+        </div>
         <div>
           <h3>{t('For Help')}</h3>
           <img width={80} src="/img/wechat.jpg" alt=""/>
