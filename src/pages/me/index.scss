@@ -29,6 +29,21 @@
       }
     }
   }
+  .broadcast{
+    //padding: 12px;
+    font-size: 12px;
+    margin-bottom: 24px;
+    .info-item{
+      cursor: pointer;
+      color: #2196F3;
+      margin: 4px 0;
+      padding: 2px;
+      border-radius: 4px;
+      &:hover{
+        color: #364d79;
+      }
+    }
+  }
   .menus-footer{
     margin: 2px;
     padding: 12px;

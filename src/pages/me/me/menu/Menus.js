@@ -1,6 +1,8 @@
+import {useState,useEffect} from 'react'
 import {NavLink} from "react-router-dom";
-import {Popover, Tooltip,Button} from "antd";
+import {Popover, Tooltip,Button,Badge,Carousel} from "antd";
 import { useTranslation } from 'react-i18next';
+import localforage from "localforage";
 import DonationIcon from "@/assets/icon/donation.svg";
 import WechatIcon from "@/assets/icon/wechat.svg";
 import RateIcon from "@/assets/icon/rate.svg";
@@ -14,13 +16,33 @@ import ChangeLogIcon from '@/assets/icon/changelog.svg';
 import MaterialIcon from "@/assets/icon/material.svg";
 import DoctorIcon from '@/assets/icon/doctor.svg'
 import ClipboardIcon from '@/assets/icon/clipboard.svg'
+import BroadCastIcon from '@/assets/icon/broadcast.svg'
+import {getNotifications, readNotifications} from "@/utils/notification";
+import ReadIcon from '@/assets/icon/read.svg'
 
 export default function Menus({sideWidth}){
   const { t, i18n } = useTranslation();
+  const [notifications,setNotification] = useState([])
 
   const changeLanguage = function (lang){
     i18n.changeLanguage(lang);
     localStorage.setItem('lang',lang)
+  }
+
+  useEffect(()=>{
+    fetchNotifi()
+  },[]);
+
+  const fetchNotifi = function (){
+    getNotifications(function (result){
+      setNotification(result);
+    })
+  }
+
+  const readNotifi = function (id){
+    readNotifications(id,function (){
+      fetchNotifi()
+    })
   }
 
   return(
@@ -45,7 +67,23 @@ export default function Menus({sideWidth}){
           <SettingIcon/>{t('setting')}
         </NavLink>
       </div>
+
       <div className='menus-footer'>
+        {
+          notifications.length>0 &&
+          <div className='broadcast'>
+            <Badge size="small" count={notifications.length}>
+              <BroadCastIcon/>
+            </Badge>
+            {
+              notifications.map((notification)=>(
+                <div key={notification.id} className='info-item' onClick={()=>readNotifi(notification.id)}>
+                  <a href={notification.url} target='_blank'>{notification.title}</a>
+                </div>
+              ))
+            }
+          </div>
+        }
         <div>
           <Tooltip title={t('donation for us')}>
             <a href="/donation" target='_blank'>
