@@ -1,6 +1,18 @@
 {
   "versions": [
     {
+      "version": "0.14.0",
+      "main_version": "0.14.+",
+      "main_label": "云盘功能完结",
+      "sub_label": "完备的云盘功能",
+      "content": {
+        "zh_cn": "0.14.0: 云盘功能完结"
+      },
+      "items": [
+        ["feature:","1、doctor平台支持查看日志","2、云盘功能完全可用"," 3、剪切板开放使用"]
+      ]
+    },
+    {
       "version": "0.13.4",
       "main_version": "0.14.+",
       "main_label": "系统优化",

@@ -59,13 +59,13 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
             <DeleteIcon onClick={()=>{deletePage(keys)}} />
           </Tooltip>
         </span>
-        <span className='action-icon-button'>
-          <CheckVersionIcon version='0.13.6' title={t('sync to cloud')}>
-            <Tooltip title={t('sync to cloud')}>
-              <CloudIcon fill={syncing?'#03A9F4':"#333333"} onClick={syncToCloud} />
-            </Tooltip>
-          </CheckVersionIcon>
-        </span>
+        {/*<span className='action-icon-button'>*/}
+        {/*  <CheckVersionIcon version='0.13.6' title={t('sync to cloud')}>*/}
+        {/*    <Tooltip title={t('sync to cloud')}>*/}
+        {/*      <CloudIcon fill={syncing?'#03A9F4':"#333333"} onClick={syncToCloud} />*/}
+        {/*    </Tooltip>*/}
+        {/*  </CheckVersionIcon>*/}
+        {/*</span>*/}
         <span className='action-icon-button'>
           <CheckVersionIcon version='0.13.5' title={t('Download MarkDown')}>
             <Tooltip title={t('Download MarkDown')}>
