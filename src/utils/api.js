@@ -115,6 +115,8 @@ export const filterGroups = function (keyword,callback){
         }
         else if(plainData.url.indexOf(keyword)>-1){
           return true;
+        } else if(plainData.categories && plainData.categories.toString().indexOf(keyword)>-1){
+          return true;
         }
         let stepMatched = plainData.steps.filter((step)=>{
 
