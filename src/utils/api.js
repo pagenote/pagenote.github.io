@@ -95,27 +95,23 @@ export const fetchGroups = function (groupType=2,callback){
 
 // 过滤信息
 export const filterGroups = function (keyword,callback){
+
   if(!keyword){
     callback(tempGroupsArray)
     return tempGroupsArray;
   }
   try{
+    keyword = keyword.toLowerCase();
     const resultGroups = [];
     tempGroupsArray.forEach((group)=>{
       const tempGroupPages = group.pages.filter((page)=>{
         const plainData = page;
-        if(plainData.description.indexOf(keyword)>-1){
+        const string = plainData.description+' '+plainData.note+' '+plainData.title+' '+plainData.url;
+
+        if(string.toLowerCase().indexOf(keyword)>-1){
           return true;
         }
-        else if(plainData.note.indexOf(keyword)>-1){
-          return true;
-        }
-        else if(plainData.title.indexOf(keyword)>-1){
-          return true;
-        }
-        else if(plainData.url.indexOf(keyword)>-1){
-          return true;
-        } else if(plainData.categories && plainData.categories.toString().indexOf(keyword)>-1){
+        else if(plainData.categories && plainData.categories.toString().indexOf(keyword)>-1){
           return true;
         }
         let stepMatched = plainData.steps.filter((step)=>{
