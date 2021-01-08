@@ -7,11 +7,18 @@ import {sendEvent} from "@/utils/api";
 import '../i18n';
 
 import '../styles/common.scss'
+
+const browser = getBrowserTypeAndVersion();
+const block = ['firefox','safari'].includes(browser.type.toLowerCase());
+
 // 设置滚动title
 export default function CommonPage(Component,useHead=true,useFooter=true) {
   const mountNode = document.getElementById("app");
   ReactDOM.render(
     <>
+        {
+            !block && <script async src="https://www.googletagmanager.com/gtag/js?id=G-LBE869KVBS"></script>
+        }
       <style jsx='true'>
        {`
         html,body{
@@ -37,8 +44,8 @@ const track = window.location.protocol.indexOf('https')>-1;
 if(track){
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  const browser = getBrowserTypeAndVersion();
-  if(['firefox','safari'].includes(browser.type.toLowerCase())){
+
+  if(block){
      sendEvent('me','view',window.location.pathname,'','pageview');
   } else{
     gtag('js', new Date());

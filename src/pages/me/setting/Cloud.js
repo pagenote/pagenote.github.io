@@ -45,6 +45,7 @@ function Cloud(){
   const getInfo = function (){
     setLoading(true);
     fetchCloudInfo(function (result){
+      result.server = result.server || options[0];
       setCloud(result)
       setLoading(false);
       setSaving(false);
@@ -104,6 +105,9 @@ function Cloud(){
                 {
                   (!server.validate&&server.server===options[0].value)? <a target='_blank' href="https://help.jianguoyun.com/?p=2064">坚果云说明</a>:''
                 }
+              </Descriptions.Item>
+              <Descriptions.Item label={t('tips')}>
+                当前功能仍然处于公测阶段，功能可能尚不完善，如遇问题可入群反馈。如若希望使用完整有效功能，请等待正式版发布后使用。
               </Descriptions.Item>
             </Descriptions>
           </PageHeader>
