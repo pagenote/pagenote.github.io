@@ -79,7 +79,7 @@ const users = [
     type: 2,
     time:'2020-12-17'
   },{
-    name:'aga*',
+    name:'Again*',
     amount: 25,
     type: 2,
     time:'2020-12-30'
@@ -88,12 +88,33 @@ const users = [
     amount: 5,
     type: 2,
     time:'2021-01-01'
+  },{
+    name:'Log*',
+    amount: 5,
+    type: 3,
+    time:'2021-01-03'
+  },{
+    name:'Again*',
+    amount: 25,
+    type: 3,
+    time:'2021-01-03'
+  },{
+    name:'Log*',
+    amount: 5,
+    type: 2,
+    time:'2021-01-04'
+  },{
+    name:'Se*en',
+    amount: 2.66,
+    type: 2,
+    time:'2021-01-08'
   },
 ];
 
 const payType={
   1:'支付宝',
   2:'微信',
+  3: '文章打赏',
 };
 
 export default class CreatePage extends Component{
