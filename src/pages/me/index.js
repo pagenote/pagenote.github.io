@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,Suspense} from "react";
 import { notification , Tooltip,Popover} from "antd";
 import App from "./me/Me";
 import CommonPage from "../CommonPage";
@@ -11,21 +11,19 @@ import {
 } from "react-router-dom";
 import Loadable from 'react-loadable';
 import Draft from './notebook/index';
-import Clipboard from './clipboard'
-import SettingPage from './setting';
+// import Clipboard from './clipboard'
+// import SettingPage from './setting';
+import { lazy } from '@loadable/component'
 import Menus from './me/menu/Menus';
 import useSize from './hooks/useSize'
 import './index.scss'
 
-// const SettingPage = Loadable({
-//   loader: () => import('../setting/index'),
-//   loading: <div>加载中</div>,
-// });
+const Clipboard = lazy(() => import('./clipboard'));
 
-const DraftPage = Loadable({
-  loader: () => import('../draft/index'),
-  loading: <div>加载中</div>,
-});
+const SettingPage = lazy(() => import('./setting'));
+
+const NotePage = lazy(() => import('./notebook'));
+
 const sideWidth = 180;
 
 const RouteMe = function(){
@@ -37,16 +35,24 @@ const RouteMe = function(){
         <div className='page-container' style={{width: predefineSize + 'px'}}>
           <Switch>
             <Route exact path="/">
-              <App />
+              <Suspense fallback={<div>Loading...</div>}>
+                <App />
+              </Suspense>
             </Route>
             <Route exact path="/paper">
-              <Draft />
+              <Suspense fallback={<div>Loading...</div>}>
+                <NotePage />
+              </Suspense>
             </Route>
             <Route path="/setting">
-              <SettingPage />
+              <Suspense fallback={<div>Loading...</div>}>
+                <SettingPage />
+              </Suspense>
             </Route>
             <Route path='/clipboard'>
-              <Clipboard />
+              <Suspense fallback={<div>Loading...</div>}>
+                <Clipboard />
+              </Suspense>
             </Route>
           </Switch>
         </div>
