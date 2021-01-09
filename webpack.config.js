@@ -96,7 +96,7 @@ const config = {
       // 使用正则匹配命中路由
       rewrites: [
         {
-          from: /^\/me|new|page|release|setting|donation|rate|privacy|draft|about|doctor|me_old|uninstall$/,
+          from: /^\/me|new|page|release|setting|donation|rate|privacy|draft|about|doctor|uninstall$/,
           to: function(context) {
             return   context.parsedUrl.pathname+'.html';
           }

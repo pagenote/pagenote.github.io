@@ -126,10 +126,7 @@ export default class SettingRender extends Component{
   }
 
   componentDidMount() {
-    this.initSetting();
-    this.addClickListener();
-    this.getUserInfo();
-    this.getCloudAccount();
+    window.location.href = '/me#/paper'
   }
 
   getUserInfo=()=>{

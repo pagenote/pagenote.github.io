@@ -119,7 +119,7 @@ export default class Header extends Component{
                     </a>
                 </div>
                 <div>
-                    <a href="/draft">
+                    <a href="/me#/paper">
                         临时记事本
                     </a>
                     <span className='me-link'>
@@ -135,7 +135,7 @@ export default class Header extends Component{
                             笔记管理
                         </a>
                     </span>
-                    <a href="/setting">
+                    <a href="/me#/setting">
                        设置
                     </a>
                     {/*<a href="/new">新建</a>*/}

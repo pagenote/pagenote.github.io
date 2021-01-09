@@ -13,6 +13,10 @@ export default class CreatePage extends Component{
     localStorage.setItem('new_page',JSON.stringify(data));
   };
 
+  componentDidMount() {
+    window.location.href = '/me#/paper'
+  }
+
 
   render() {
     let data = {time: new Date().getTime()};

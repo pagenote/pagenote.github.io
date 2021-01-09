@@ -1,6 +1,6 @@
 {
   "latest": {
-    "version": "0.13.4",
+    "version": "0.13.5",
     "support": ["firefox","chrome","edge"]
   },
   "notification": {
@@ -15,8 +15,8 @@
       "link": "https://mp.weixin.qq.com/s/s-E4M7tp6ErCw1U2T3L7lQ"
     }
   },
-  "chrome": "0.13.4",
-  "firefox": "0.13.4",
+  "chrome": "0.13.5",
+  "firefox": "0.13.5",
   "edge": "0.13.4",
   "360": "0.13.2",
   "default": "0.13.2",
