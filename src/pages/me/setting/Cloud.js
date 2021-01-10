@@ -121,7 +121,7 @@ function Cloud(){
           <AutoComplete
             options={options}
             placeholder="你的云盘所支持webdav的服务地址"
-            filterOption={(inputValue, option) =>
+            filterOption={(inputValue='', option) =>
               (option.value||'').toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
             }
           />
