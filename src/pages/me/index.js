@@ -16,6 +16,7 @@ import Draft from './notebook/index';
 import { lazy } from '@loadable/component'
 import Menus from './me/menu/Menus';
 import useSize from './hooks/useSize'
+import 'antd/dist/antd.css';
 import './index.scss'
 
 const Clipboard = lazy(() => import('./clipboard'));

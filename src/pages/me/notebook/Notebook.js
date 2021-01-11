@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Editor from '@/components/editor/Editor'
 import {getPaperDetail,savePaper} from "@/utils/api";
-import Draft from '@/components/Draft'
 import './notebook.scss'
 
 export default class Notebook extends Component{
