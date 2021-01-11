@@ -45,7 +45,7 @@ function Cloud(){
   const getInfo = function (){
     setLoading(true);
     fetchCloudInfo(function (result){
-      result.server = result.server || options[0];
+      result.server = result.server || options[0].value;
       setCloud(result)
       setLoading(false);
       setSaving(false);
@@ -122,7 +122,7 @@ function Cloud(){
             options={options}
             placeholder="你的云盘所支持webdav的服务地址"
             filterOption={(inputValue='', option) =>
-              (option.value||'').toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+              (option.value).indexOf((inputValue)) !== -1
             }
           />
         </Form.Item>
