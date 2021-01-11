@@ -108,6 +108,11 @@ const users = [
     amount: 2.66,
     type: 2,
     time:'2021-01-08'
+  },{
+    name:'**军',
+    amount: 20,
+    type: 1,
+    time:'2021-01-10'
   },
 ];
 
