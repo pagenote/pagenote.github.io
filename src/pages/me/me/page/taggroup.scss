@@ -1,0 +1,21 @@
+.site-tag-plus {
+  background: #fff;
+  border-style: dashed;
+  svg{
+    margin: 0;
+    vertical-align: baseline;
+  }
+}
+.edit-tag {
+  user-select: none;
+  border-color: #f3f3f3;
+  svg{
+    margin: 0;
+    vertical-align: baseline;
+  }
+}
+.tag-input {
+  width: 78px;
+  margin-right: 8px;
+  vertical-align: top;
+}

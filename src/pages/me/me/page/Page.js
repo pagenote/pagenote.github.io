@@ -1,20 +1,14 @@
-import React, {Component,Fragment} from 'react';
+import React, {Component} from 'react';
 import throttle from 'lodash/throttle'
-import {message,Spin,Button} from "antd";
+import {message,Spin,Button,Select, Tag} from "antd";
 import BigPicture from "bigpicture";
-import DropLabel from "@/components/DropLabel";
 import DateIcon from "@/assets/icon/date.svg";
-import Tag from "@/assets/icon/tag.svg";
-import DeleteIcon from "@/assets/draw/delete.svg";
-import MarkDownIcon from "@/assets/icon/markdown.svg";
-import CameraIcon from "@/assets/icon/camera.svg";
 import Editor from "@/components/editor/Editor";
-import DropLabels from "@/components/droplabel/DropLabel";
-// import '@/components/notes/PageDetail.scss';
 import './page.scss';
 import {getPage,savePage} from "@/utils/api";
 import {exportMd} from "@/utils";
 import {withTranslation} from "react-i18next";
+import TagGroup from './TagGroup'
 
 
 // TODO 支持设置字号
@@ -139,11 +133,20 @@ class PageDetail extends Component{
         savePage(key,plainData);
     },2000);
 
+    setCategories = (categories)=>{
+        const {pageDetail}  = this.state;
+        pageDetail.categories = categories;
+        this.setState({
+            pageDetail: pageDetail,
+        })
+        this.savePageInfo(pageDetail);
+    }
+
     render() {
         const {pageKey,t,selectedSize} = this.props;
         const {pageDetail,loading,fetchError}  = this.state;
 
-        const {steps=[],title,url,note,lastModified,snapshots=[],images=[]} = (pageDetail || {})
+        const {steps=[],title,url,note,lastModified,snapshots=[],images=[],categories=[]} = (pageDetail || {})
         const pageMd5 = window.btoa(url);
         const blocks = this.renderBlocks();
         return <div className={`web-page-item ${selectedSize>1?'multi':'single'}`} data-page={url}>
@@ -160,6 +163,7 @@ class PageDetail extends Component{
                                     <DateIcon />
                                     <span>{new Date(lastModified).toLocaleString()}</span>
                                 </div>
+                                <TagGroup tags={categories} onChange={this.setCategories}/>
                                 {/*<span data-tip='导出为markdown' onClick={()=>this.exportFile('md')}><MarkDownIcon /></span>*/}
                             </div>
                         </div>
@@ -248,6 +252,16 @@ class PageDetail extends Component{
             </Spin>
         </div>;
     }
+}
+
+function tagRender(props) {
+    const { label, value, closable, onClose } = props;
+
+    return (
+      <Tag closable={closable} onClose={onClose} style={{ marginRight: 3 }}>
+          {label}
+      </Tag>
+    );
 }
 
 export default withTranslation()(PageDetail)
