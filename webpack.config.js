@@ -147,9 +147,17 @@ const config = {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
+          minChunks: 2,
           chunks: 'all',
           priority: -10
         },
+        installBar:{
+          test: /installBar/,
+          name: 'install',
+          minChunks: 2,
+          chunks: 'all',
+          priority: 0
+        }
       }
     }
   }

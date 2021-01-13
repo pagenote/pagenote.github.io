@@ -1,7 +1,7 @@
 {
   "latest": {
     "version": "0.13.7",
-    "support": ["firefox","chrome"]
+    "support": ["firefox","chrome","edge"]
   },
   "notification": {
     "0.13.0": {
@@ -17,7 +17,7 @@
   },
   "chrome": "0.13.7",
   "firefox": "0.13.7",
-  "edge": "0.13.4",
+  "edge": "0.13.7",
   "360": "0.13.2",
   "default": "0.13.2",
   "offline": "0.13.3"
