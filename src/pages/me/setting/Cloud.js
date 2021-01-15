@@ -107,7 +107,8 @@ function Cloud(){
                 }
               </Descriptions.Item>
               <Descriptions.Item label={t('tips')}>
-                当前功能仍然处于公测阶段，功能可能尚不完善，如遇问题可入群反馈。如若希望使用完整有效功能，请等待正式版发布后使用。
+                <a target='_blank' href="https://www.yuque.com/docs/share/cc9e268d-04c6-4057-8b1e-f068f2bf60fb">查看受用手册</a>
+                当前功能仍然处于公测阶段，如遇到问题可入群反馈。如若希望使用完整有效功能，请等待正式版发布后使用。公测预计将在 1月30日前截止。
               </Descriptions.Item>
             </Descriptions>
           </PageHeader>
