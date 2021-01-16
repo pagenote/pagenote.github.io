@@ -340,12 +340,13 @@ export function deleteClipboards(item,callback){
     for(let i=0; i<clipboard.length; i++){
       const tempItem = clipboard[i];
       // TODO 增加ID标识符
-      if(JSON.stringify(tempItem) === JSON.stringify(item)){
+      if(tempItem.data === item.data){
         clipboard.splice(i,1);
         break;
       }
     }
     data.clipboards = clipboard;
+    callback(clipboard)
     getBridge().sendMessage('set_runtime',{
       data:data,
     },function ({data}) {
