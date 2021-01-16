@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react'
 import {NavLink} from "react-router-dom";
-import {Popover, Tooltip,Button,Badge,Carousel} from "antd";
+import {Popover, Tooltip,Button,Badge,Tag} from "antd";
 import { useTranslation } from 'react-i18next';
 import localforage from "localforage";
 import DonationIcon from "@/assets/icon/donation.svg";
@@ -19,6 +19,11 @@ import ClipboardIcon from '@/assets/icon/clipboard.svg'
 import BroadCastIcon from '@/assets/icon/broadcast.svg'
 import {getNotifications, readNotifications} from "@/utils/notification";
 import ReadIcon from '@/assets/icon/read.svg'
+import version from '../../../../../public/version.json';
+import { isLow } from "@/utils";
+import './menu.scss'
+
+const { CheckableTag } = Tag;
 
 export default function Menus({sideWidth}){
   const { t, i18n } = useTranslation();
@@ -44,6 +49,9 @@ export default function Menus({sideWidth}){
       fetchNotifi()
     })
   }
+
+  const currentVersion = document.documentElement.dataset.version;
+  const hasNewVersion = isLow(currentVersion,version.latest.version);
 
   return(
     <div className='page-menus' style={{width:sideWidth+'px'}}>
@@ -84,7 +92,8 @@ export default function Menus({sideWidth}){
             }
           </div>
         }
-        <div>
+        <div className='links'>
+          <label>{t('Follow Us')}</label>
           <Tooltip title={t('donation for us')}>
             <a href="/donation" target='_blank'>
               <DonationIcon/>
@@ -100,6 +109,9 @@ export default function Menus({sideWidth}){
               <RateIcon/>
             </a>
           </Tooltip>
+        </div>
+        <div className='links'>
+          <label>{t('For more')}</label>
           <Tooltip title={t('feature in future')}>
             <a target='_blank' href="/page?id=future"><PlanIcon /></a>
           </Tooltip>
@@ -120,14 +132,33 @@ export default function Menus({sideWidth}){
           </Tooltip>
         </div>
         <div className='version'>
-          PAGENOTE {document.documentElement.dataset.version}
+          PAGENOTE {hasNewVersion?<Tooltip title={t('new version is available')}>
+          <a target='_blank' href="/release"><Badge status="Error" >
+            {currentVersion}
+          </Badge></a>
+        </Tooltip>:currentVersion}
         </div>
         <div className='language'>
-          <Tooltip title='切换语言；Change language'>
-            <Button type="dashed" size='small' onClick={()=>changeLanguage(i18n.language==='en'?'zh_CN':"en")}>
-              {i18n.language==='en'?'中文':"English"}
-            </Button>
-          </Tooltip>
+          <CheckableTag
+            key='zh'
+            checked={i18n.language==='zh_CN'}
+            onChange={checked => changeLanguage('zh_CN')}
+          >
+            中文
+          </CheckableTag>
+          <CheckableTag
+            key='en'
+            color="blue"
+            checked={i18n.language==='en'}
+            onChange={checked => changeLanguage("en")}
+          >
+            English
+          </CheckableTag>
+          {/*<Tooltip title='切换语言；Change language'>*/}
+          {/*  <Button type="dashed" size='small' onClick={()=>changeLanguage(i18n.language==='en'?'zh_CN':"en")}>*/}
+          {/*    {i18n.language==='en'?'中文':"English"}*/}
+          {/*  </Button>*/}
+          {/*</Tooltip>*/}
         </div>
       </div>
     </div>

@@ -1,9 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import {getBrowserTypeAndVersion} from "@/utils/document";
 
-// the translations
-// (tip move them in a JSON file and import them)
 const resources = {
   en: {
     translation: {
@@ -32,9 +29,9 @@ const resources = {
       "note in page": "网页笔记",
       "paper": "文稿",
       "setting": "设置",
-      "donation for us": "赞赏",
+      "donation for us": "赞赏，成为赞助者",
       "follow us in wechat":"关注微信公众号",
-      "Rate for PAGENOTE":"为 PAGENOTE 评分",
+      "Rate for PAGENOTE":"为 PAGENOTE 评分，让更多人看见",
       "feature in future":"功能规划",
       "system monitor, report a bug":"系统健康监测、日志；反馈bug",
       "Release Notes":"更新日志",
@@ -116,7 +113,10 @@ const resources = {
       "no_latest_version_found":"对应平台还没有要求版本？请稍等，正在上架中，预计2天左右可上架。",
       "not_available_now":"该功能暂不可用，预计在版本 {{version}} 可用。",
       "You should install PAGENOTE firstly":"你还没有安装 PAGENOTE，安装后再来使用吧 ",
-      "For Help":"反馈"
+      "For Help":"反馈",
+      "Follow Us":"支持我们",
+      "For more": "了解更多",
+      "new version is available":"发现新版本可更新"
     }
   }
 };

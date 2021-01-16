@@ -5,11 +5,7 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  NavLink,
-  Link
 } from "react-router-dom";
-// import Clipboard from './clipboard'
-// import SettingPage from './setting';
 import { lazy } from '@loadable/component'
 import Menus from './me/menu/Menus';
 import useSize from './hooks/useSize'
