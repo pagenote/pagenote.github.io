@@ -105,12 +105,12 @@ const config = {
     }
   },
   // TODO 区分dev prd
-  // externals: {
-  //   // '@editorjs/editorjs': 'EditorJS',
-  //   'react':'React',
-  //   'react-dom': 'ReactDOM',
-  //   // 'react-color': 'ReactColor'
-  // },
+  externals: {
+    // '@editorjs/editorjs': 'EditorJS',
+    'react':'React',
+    'react-dom': 'ReactDOM',
+    // 'react-color': 'ReactColor'
+  },
   plugins: [
     new CopyPlugin({
       patterns: [{ from: 'public' }],
