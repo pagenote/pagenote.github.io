@@ -14,7 +14,7 @@ localforage.config({
 const NOTIFICATION_KEY = 'notification_read_list';
 
 
-export const getNotifications = function (callback) {
+export const getNotifications = function ({version,browser,extensionId},callback) {
   localforage.getItem(NOTIFICATION_KEY).then((result)=>{
     result = result || [];
     const items = [];

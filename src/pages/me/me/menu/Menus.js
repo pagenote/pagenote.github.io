@@ -21,6 +21,7 @@ import {getNotifications, readNotifications} from "@/utils/notification";
 import ReadIcon from '@/assets/icon/read.svg'
 import version from '../../../../../public/version.json';
 import { isLow } from "@/utils";
+import usePagenote from '@/components/usePagenote';
 import './menu.scss'
 
 const { CheckableTag } = Tag;
@@ -28,6 +29,7 @@ const { CheckableTag } = Tag;
 export default function Menus({sideWidth}){
   const { t, i18n } = useTranslation();
   const [notifications,setNotification] = useState([])
+  const pagenote = usePagenote();
 
   const changeLanguage = function (lang){
     i18n.changeLanguage(lang);
@@ -39,7 +41,7 @@ export default function Menus({sideWidth}){
   },[]);
 
   const fetchNotifi = function (){
-    getNotifications(function (result){
+    getNotifications(pagenote,function (result){
       setNotification(result);
     })
   }
@@ -50,7 +52,8 @@ export default function Menus({sideWidth}){
     })
   }
 
-  const currentVersion = document.documentElement.dataset.version;
+
+  const currentVersion = pagenote.version;
   const hasNewVersion = isLow(currentVersion,version.latest.version);
 
   return(

@@ -13,7 +13,6 @@ changelog.versions.forEach((version)=>{
     };
     mainVersion[tempMainVersion].versions.push(version);
 })
-console.log(mainVersion);
 
 
 export default class Release extends Component{
