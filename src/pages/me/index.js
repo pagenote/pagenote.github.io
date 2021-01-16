@@ -1,5 +1,4 @@
 import React,{useState,useEffect,Suspense} from "react";
-import { notification , Tooltip,Popover} from "antd";
 import App from "./me/Me";
 import CommonPage from "../CommonPage";
 import {
@@ -9,8 +8,6 @@ import {
   NavLink,
   Link
 } from "react-router-dom";
-import Loadable from 'react-loadable';
-import Draft from './notebook/index';
 // import Clipboard from './clipboard'
 // import SettingPage from './setting';
 import { lazy } from '@loadable/component'

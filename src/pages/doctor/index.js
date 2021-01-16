@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import CommonPage from "../CommonPage";
 import Bridge from "../../utils/extensionBridge";
+import 'antd/dist/antd.css';
 import './index.scss'
 import { Table,PageHeader,Button } from 'antd';
 

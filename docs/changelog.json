@@ -1,6 +1,28 @@
 {
   "versions": [
     {
+      "version": "0.13.9",
+      "main_version": "0.13.+++",
+      "main_label": "初始化调整",
+      "sub_label": "取消书签管理功能",
+      "content": {
+        "zh_cn": "0.13.9: PAGENOTE 不再读写浏览器书签，将关闭原先「智能书签」功能"
+      },
+      "items": [[
+        "change","PAGENOTE 不再读写浏览器书签，将关闭原先「智能书签」功能"
+      ]]
+    },
+    {
+      "version": "0.13.8",
+      "main_version": "0.13.+++",
+      "main_label": "初始化调整",
+      "sub_label": "修复iframe嵌套页异常",
+      "content": {
+        "zh_cn": "0.13.8: iframe 嵌套页面没有文档内容时初始化异常修复"
+      },
+      "items": []
+    },
+    {
       "version": "0.13.7",
       "main_version": "0.13.++",
       "main_label": "云盘优化",

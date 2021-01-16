@@ -117,8 +117,13 @@ const users = [
     name:'永*恒',
     amount: 5,
     type: 2,
-    time:'2021-01-16'
-  },
+    time:'2021-01-15'
+  },{
+    name:'YW*Y',
+    amount: 50,
+    type: 2,
+    time:'2021-01-15'
+  }
 ];
 
 const payType={
