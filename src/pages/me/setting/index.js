@@ -62,4 +62,4 @@ const Setting = function (){
   )
 }
 
-export default CheckVersion(Setting,'0.0.1')
+export default CheckVersion(Setting,'0.13.5')

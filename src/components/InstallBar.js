@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef}  from 'react';
-// import { Modal } from 'antd';
+import { Popover } from 'antd';
 // import 'antd/es/modal/style/index.less'
 // import 'antd/es/modal/style/modal.less'
 // import 'antd/lib/modal/style/index.css';
@@ -10,6 +10,7 @@ import EdgeSvg from '@/assets/icon/image/edge.svg'
 import SanSvg from '@/assets/icon/image/360.svg'
 import version from '../../public/version.json'
 import HotSvg from '@/assets/icon/image/hot.svg'
+import BroserIcon from '@/assets/icon/image/browser.svg'
 import {isLow} from "@/utils";
 
 
@@ -132,6 +133,20 @@ export default function InstallBar({children}) {
                 </a>
               ))
             }
+            <Popover title={<div>微信扫描获取最新下载链接。<br/>没有你使用的浏览器？<br/>可微信留言反馈你需要支持的浏览器。</div>} content={<img src="/img/wechat.jpg" width={80} alt=""/>}>
+              <a
+                className={`browser-install-btn offline}`}
+                data-tip={`不推荐使用离线安装。未来将下线该方式安装。`}>
+                <img  width={28} height={28} src={BroserIcon} alt={'下载安装包'}/>
+                <div>
+                  <div>
+                    离线安装
+                  </div>
+                  {version.offline}
+                </div>
+              </a>
+            </Popover>
+
           </div>
           <div className='slot'>
             {children}

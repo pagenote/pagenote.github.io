@@ -86,7 +86,7 @@ function Cloud(){
   return(
     <Spin spinning={loading}>
       <div className='header-info'>
-        <CheckVersionPart version='0.13.4'>
+        <CheckVersionPart version='0.13.5'>
           <PageHeader
             title={t('cloud store setting')}
             subTitle={<Alert message={server.validate?t("connected"):t("unconnected")} type={server.validate?'success':'error'} showIcon />}
@@ -149,4 +149,4 @@ function Cloud(){
   )
 }
 
-export default CheckVersion(Cloud,'0.13.3')
+export default CheckVersion(Cloud,'0.13.5')

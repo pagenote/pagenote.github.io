@@ -306,7 +306,7 @@ function Extension(){
       </div>
 
       <div className="reset setting-part">
-        <CheckVersionPart version='0.12.5'>
+        <CheckVersionPart version='0.13.5'>
           <Popconfirm placement="topLeft" title={t('Confirm to reset extension setting?')} onConfirm={resetAll} okText={t('confirm')} cancelText={t('cancel')}>
             <Button type="link">{t('Reset')}</Button>
           </Popconfirm>
@@ -316,4 +316,4 @@ function Extension(){
   )
 }
 
-export default CheckVersion(Extension,'0.13.4')
+export default CheckVersion(Extension,'0.13.5')

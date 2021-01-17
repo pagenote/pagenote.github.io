@@ -252,4 +252,4 @@ class Me extends Component {
     }
 }
 
-export default withTranslation()(CheckVersion(Me,'0.13.2'))
+export default withTranslation()(CheckVersion(Me,'0.13.5'))
