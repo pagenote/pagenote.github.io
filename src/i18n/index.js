@@ -21,7 +21,10 @@ const resources = {
       "i_got_it":"Got it. Hide next time",
       "required_version":"But version {{version}} is required",
       "no_latest_version_found":"Did not found the required version with your browser? Wait a moment please, it will come soon maybe 2days",
-      "not_available_now":"This function not available now. It will work in version {{version}}"
+      "not_available_now":"This function not available now. It will work in version {{version}}",
+      "show highlight context":"Show Context",
+      "hide highlight context":"Hide Context",
+      "context tips":"context：The content before and after the highlight keyword"
     }
   },
   zh_CN: {
@@ -38,9 +41,9 @@ const resources = {
       "By Tags":"按标签分组",
       "By Domain":"按域名分组",
       "By Time":"按日期分组",
-      "type-tips":"多选模式：一次可以选择多个PAGE浏览、操作；专注模式：一次只可选中一个PAGE浏览",
+      "type-tips":"多选模式：一次可以选择多个PAGE浏览、操作；单选模式：一次只可选中一个PAGE浏览，更专注",
       "muilt-page":"多选模式",
-      "single-page":"专注模式",
+      "single-page":"单选模式",
       "remove selected":"清空选中",
       "select a page on the left side":"请在左侧选择 PAGE 后查看",
       "confirm delete?":"确定删除?",
@@ -116,7 +119,10 @@ const resources = {
       "For Help":"反馈",
       "Follow Us":"支持我们",
       "For more": "了解更多",
-      "new version is available":"发现新版本可更新"
+      "new version is available":"发现新版本可更新",
+      "show highlight context":"显示上下文",
+      "hide highlight context":"隐藏上下文",
+      "context tips":"上下文：指高亮关键词的前、后内容，可方便回顾原文内容"
     }
   }
 };

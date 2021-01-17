@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {Empty, Switch, Tooltip,Popconfirm} from 'antd';
 import {useTranslation} from 'react-i18next';
 import CommonHeader from '../CommonHeader/index';
@@ -12,6 +12,7 @@ import MarkdownIcon from "@/assets/icon/markdown.svg"
 import CheckVersionIcon from '@/components/CheckVersionIcon'
 import CheckUserIcon from '@/components/CheckUserIcon'
 import './webpage.scss'
+import {localSql} from "@/utils/notification";
 
 function getLink(url){
   return url.replace(/http[s]?:\/\/(www\.)?/,'').substr(0,10);
@@ -19,6 +20,18 @@ function getLink(url){
 
 const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
   const { t } = useTranslation();
+  const [showContext,setShowContext] = useState(false);
+
+  useEffect(()=>{
+    localSql.getItem('show_context').then((result)=>{
+      setShowContext(result)
+    })
+  },[])
+
+  const toggleContext=function (checked) {
+    setShowContext(checked);
+    localSql.setItem('show_context',checked);
+  }
 
   const deletePage=(keys)=>{
     if(keys.length>1){
@@ -53,41 +66,47 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
 
   return(
     <section className='notes'>
-      <CommonHeader>
-        <span className='action-icon-button'>
+      <CommonHeader className='page-header'>
+        <div className="action">
+          <span className='action-icon-button'>
           <Tooltip title={t('delete')}>
             <DeleteIcon onClick={()=>{deletePage(keys)}} />
           </Tooltip>
         </span>
-        {/*<span className='action-icon-button'>*/}
-        {/*  <CheckVersionIcon version='0.13.6' title={t('sync to cloud')}>*/}
-        {/*    <Tooltip title={t('sync to cloud')}>*/}
-        {/*      <CloudIcon fill={syncing?'#03A9F4':"#333333"} onClick={syncToCloud} />*/}
-        {/*    </Tooltip>*/}
-        {/*  </CheckVersionIcon>*/}
-        {/*</span>*/}
-        <span className='action-icon-button'>
+         {/*<span className='action-icon-button'>*/}
+         {/*  <CheckVersionIcon version='0.13.6' title={t('sync to cloud')}>*/}
+         {/*    <Tooltip title={t('sync to cloud')}>*/}
+         {/*      <CloudIcon fill={syncing?'#03A9F4':"#333333"} onClick={syncToCloud} />*/}
+         {/*    </Tooltip>*/}
+         {/*  </CheckVersionIcon>*/}
+         {/*</span>*/}
+         <span className='action-icon-button'>
           <CheckVersionIcon version='0.13.5' title={t('Download MarkDown')}>
             <Tooltip title={t('Download MarkDown')}>
               <MarkdownIcon onClick={downloadMd} />
             </Tooltip>
           </CheckVersionIcon>
         </span>
-        {/*<span className='action-icon-button'>*/}
-        {/*  <CheckUserIcon needType={2} title={t('download markdown')}>*/}
-        {/*    <Tooltip title={t('Download MarkDown')}>*/}
-        {/*      <MarkdownIcon onClick={downloadMd} />*/}
-        {/*    </Tooltip>*/}
-        {/*  </CheckUserIcon>*/}
-        {/*</span>*/}
-        <Tooltip title={t('type-tips')}>
-          <Switch
-            onChange={toggleMultSelect}
-            checked={muilPage}
-            checkedChildren={t("muilt-page")}
-            unCheckedChildren={t("single-page")}
-          />
-        </Tooltip>
+       </div>
+        <div className='switchs'>
+          <Tooltip title={t('context tips')}>
+            <Switch
+              className='context-switch'
+              onChange={toggleContext}
+              checked={showContext}
+              checkedChildren={t("show highlight context")}
+              unCheckedChildren={t("hide highlight context")}
+            />
+          </Tooltip>
+          <Tooltip title={t('type-tips')}>
+            <Switch
+              onChange={toggleMultSelect}
+              checked={muilPage}
+              checkedChildren={t("muilt-page")}
+              unCheckedChildren={t("single-page")}
+            />
+          </Tooltip>
+        </div>
       </CommonHeader>
       <div className="notes-header">
         {
@@ -107,7 +126,7 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
         }
       </div>
       {keys.map((url)=>(
-        <Page key={url} pageKey={url} selectedSize={keys.length} />
+        <Page key={url+showContext} pageKey={url} selectedSize={keys.length} showContext={showContext} />
       ))}
       {
         keys.length ===0 &&

@@ -43,11 +43,12 @@ class PageDetail extends Component{
 
     renderBlocks=()=>{
         const {pageDetail} = this.state;
+        const {showContext} = this.props;
         const {steps=[]} = pageDetail || {};
         const stepBlocks = [];
         steps.forEach((step)=>{
-            const pre = typeof step.pre === 'string' ? step.pre : '';
-            const suff = typeof step.suffix === 'string' ? step.suffix : '';
+            const pre = (showContext && typeof step.pre === 'string') ? step.pre : '';
+            const suff = (showContext && typeof step.suffix === 'string') ? step.suffix : '';
             // const middle = document.createElement('light');
             // middle.style = `border-bottom: 1px solid ${step.bg||''}`;
             // middle.innerText = step.text;

@@ -59,3 +59,14 @@
 }
 
 
+.page-header{
+  display: flex;
+  justify-content: space-between;
+  .switchs{
+    .context-switch{
+      margin: 0 12px;
+    }
+  }
+}
+
+

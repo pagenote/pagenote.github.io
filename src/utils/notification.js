@@ -13,6 +13,8 @@ localforage.config({
 
 const NOTIFICATION_KEY = 'notification_read_list';
 
+export const localSql = localforage;
+
 
 export const getNotifications = function ({version,browser,extensionId},callback) {
   localforage.getItem(NOTIFICATION_KEY).then((result)=>{

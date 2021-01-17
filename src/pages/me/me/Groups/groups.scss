@@ -1,6 +1,7 @@
 .groups{
   margin-bottom: 24px;
   padding: 12px;
+  user-select: none;
   .group-item{
     transition: all 0.3s ease-out;
     //transform: translate(0, 0);
