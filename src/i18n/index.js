@@ -24,7 +24,8 @@ const resources = {
       "not_available_now":"This function not available now. It will work in version {{version}}",
       "show highlight context":"Show Context",
       "hide highlight context":"Hide Context",
-      "context tips":"context：The content before and after the highlight keyword"
+      "context tips":"context：The content before and after the highlight keyword",
+      "available only in your pc":"The current page is only accessible in your browser.Unauthorized disclosure."
     }
   },
   zh_CN: {
@@ -122,7 +123,10 @@ const resources = {
       "new version is available":"发现新版本可更新",
       "show highlight context":"显示上下文",
       "hide highlight context":"隐藏上下文",
-      "context tips":"上下文：指高亮关键词的前、后内容，可方便回顾原文内容"
+      "context tips":"上下文：指高亮关键词的前、后内容，可方便回顾原文内容",
+      "open in new tab":"新标签页打开",
+      "available only in your pc":"仅在你的浏览器可访问当前页面，未授权公开。",
+      "comeback to home":"返回管理页"
     }
   }
 };

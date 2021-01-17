@@ -11,6 +11,9 @@ import CloudIcon from "@/assets/icon/cloud.svg";
 import MarkdownIcon from "@/assets/icon/markdown.svg"
 import CheckVersionIcon from '@/components/CheckVersionIcon'
 import CheckUserIcon from '@/components/CheckUserIcon'
+import NewTabIcon from '@/assets/icon/new-tab.svg'
+import HomeIcon from '@/assets/icon/home.svg'
+import OfflineIcon from '@/assets/icon/offline.svg'
 import './webpage.scss'
 import {localSql} from "@/utils/notification";
 
@@ -18,7 +21,7 @@ function getLink(url){
   return url.replace(/http[s]?:\/\/(www\.)?/,'').substr(0,10);
 }
 
-const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
+const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect,mode='me'}){
   const { t } = useTranslation();
   const [showContext,setShowContext] = useState(false);
 
@@ -64,15 +67,41 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
     })
   }
 
+  const openInNewTab = function () {
+    const urls = encodeURIComponent(keys);
+    window.open(`/webpage#/${urls}`,urls)
+  }
+
+  const comebackHome = function () {
+    window.localStorage.setItem('selectedKeys',keys.toString());
+    window.open('/me#/','home');
+    window.close();
+  }
+
+  const isInMe = mode === 'me';
+
   return(
     <section className='notes'>
       <CommonHeader className='page-header'>
         <div className="action">
-          <span className='action-icon-button'>
-          <Tooltip title={t('delete')}>
-            <DeleteIcon onClick={()=>{deletePage(keys)}} />
-          </Tooltip>
-        </span>
+          {
+            !isInMe &&
+            <span className='action-icon-button'>
+              <Tooltip title={t('comeback to home')}>
+                <HomeIcon onClick={comebackHome} />
+              </Tooltip>
+            </span>
+          }
+
+          {
+            removeSelectPages &&
+            <span className='action-icon-button'>
+            <Tooltip title={t('delete')}>
+              <DeleteIcon onClick={()=>{deletePage(keys)}} />
+            </Tooltip>
+          </span>
+          }
+
          {/*<span className='action-icon-button'>*/}
          {/*  <CheckVersionIcon version='0.13.6' title={t('sync to cloud')}>*/}
          {/*    <Tooltip title={t('sync to cloud')}>*/}
@@ -87,6 +116,14 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
             </Tooltip>
           </CheckVersionIcon>
         </span>
+        {
+          isInMe &&
+          <span className='action-icon-button'>
+            <Tooltip title={t('open in new tab')}>
+              <NewTabIcon onClick={openInNewTab} />
+            </Tooltip>
+          </span>
+        }
        </div>
         <div className='switchs'>
           <Tooltip title={t('context tips')}>
@@ -98,14 +135,17 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
               unCheckedChildren={t("hide highlight context")}
             />
           </Tooltip>
-          <Tooltip title={t('type-tips')}>
-            <Switch
-              onChange={toggleMultSelect}
-              checked={muilPage}
-              checkedChildren={t("muilt-page")}
-              unCheckedChildren={t("single-page")}
-            />
-          </Tooltip>
+          {
+            toggleMultSelect &&
+            <Tooltip title={t('type-tips')}>
+              <Switch
+                onChange={toggleMultSelect}
+                checked={muilPage}
+                checkedChildren={t("muilt-page")}
+                unCheckedChildren={t("single-page")}
+              />
+            </Tooltip>
+          }
         </div>
       </CommonHeader>
       <div className="notes-header">
@@ -136,6 +176,12 @@ const WebPage = function ({keys,removeSelectPages,muilPage,toggleMultSelect}){
               {t("select a page on the left side")}
             </span>
           }></Empty>
+      }
+      {
+        !isInMe &&
+        <footer>
+          <OfflineIcon /> <span>{t('available only in your pc')}</span>
+        </footer>
       }
     </section>
   )

@@ -32,6 +32,15 @@
     //border: 1px solid;
     //box-shadow: 3px -2px 0 1px #fddf06;
   }
+
+  footer{
+    margin: 12px;
+    font-size: 12px;
+    color: #999;
+    svg{
+      vertical-align: sub;
+    }
+  }
 }
 
 .notes-header{
