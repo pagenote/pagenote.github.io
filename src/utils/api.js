@@ -111,13 +111,13 @@ export const filterGroups = function (keyword,callback){
         if(string.toLowerCase().indexOf(keyword)>-1){
           return true;
         }
-        else if(plainData.categories && plainData.categories.toString().indexOf(keyword)>-1){
+        else if(plainData.categories && plainData.categories.toString().toLowerCase().indexOf(keyword)>-1){
           return true;
         }
         let stepMatched = plainData.steps.filter((step)=>{
 
-          return (step.text||'').indexOf(keyword)>-1
-            || (step.tip||'').indexOf(keyword)>-1
+          return (step.text||'').toLowerCase().indexOf(keyword)>-1
+            || (step.tip||'').toLowerCase().indexOf(keyword)>-1
         })
         return stepMatched.length>0;
       })
