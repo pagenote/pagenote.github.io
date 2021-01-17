@@ -157,6 +157,13 @@ const config = {
           minChunks: 2,
           chunks: 'all',
           priority: 0
+        },
+        version:{
+          test: /(version|changelog|notification)\.json/,
+          name: 'version',
+          minChunks: 2,
+          chunks: 'all',
+          priority: 0
         }
       }
     }

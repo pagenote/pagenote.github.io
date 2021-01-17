@@ -15,9 +15,9 @@
       "link": "https://mp.weixin.qq.com/s/s-E4M7tp6ErCw1U2T3L7lQ"
     }
   },
-  "chrome": "0.13.9",
-  "firefox": "0.13.9",
-  "edge": "0.13.9",
+  "chrome": "0.13.10",
+  "firefox": "0.13.10",
+  "edge": "0.13.10",
   "360": "0.13.5",
   "default": "0.13.2",
   "offline": "0.13.3"
