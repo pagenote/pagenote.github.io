@@ -122,7 +122,12 @@ const users = [
     name:'YW*Y',
     amount: 50,
     type: 2,
-    time:'2021-01-15'
+    time:'2021-01-16'
+  },{
+    name:'思*',
+    amount: 25,
+    type: 2,
+    time:'2021-01-18'
   }
 ];
 
