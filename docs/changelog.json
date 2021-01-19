@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "version": "0.13.10",
+      "main_version": "0.13.++++",
+      "main_label": "菜单&图标",
+      "sub_label": "右键菜单，根据当前页刷新可用菜单项",
+      "content": {
+        "zh_cn": "0.13.10: 不再索要求书签权限。场景化右键菜单"
+      },
+      "items": [[
+        "feat: 根据当前页更新右击可用菜单项",
+        "refactor:不再索要书签权限",
+        "fix: 菜单点击重复监听修复"
+      ]]
+    },
+    {
       "version": "0.13.9",
       "main_version": "0.13.+++",
       "main_label": "初始化调整",
