@@ -128,6 +128,11 @@ const users = [
     amount: 25,
     type: 2,
     time:'2021-01-18'
+  },{
+    name:'酸',
+    amount: 10,
+    type: 2,
+    time:'2021-01-21'
   }
 ];
 

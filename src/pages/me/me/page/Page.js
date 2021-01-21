@@ -52,7 +52,7 @@ class PageDetail extends Component{
             // const middle = document.createElement('light');
             // middle.style = `border-bottom: 1px solid ${step.bg||''}`;
             // middle.innerText = step.text;
-            const text = `${pre}<light style="font-weight:500;border-bottom: 1px solid ${step.bg||''}">${step.text}</light>${suff}`;
+            const text = `${pre}<light class="keyword ${showContext?'context':''}" style="--color: ${step.bg}">${step.text}</light>${suff}`;
             stepBlocks.push({
                   "type" : "lightheader",
                   "data" : {
@@ -64,14 +64,12 @@ class PageDetail extends Component{
                   "readonly": true,
               }
             );
-            if(step.tip){
-                stepBlocks.push({
-                    "type" : "paragraph",
-                    "data" : {
-                        "text" : step.tip
-                    }
-                },)
-            }
+            stepBlocks.push({
+                "type" : "paragraph",
+                "data" : {
+                    "text" : step.tip||''
+                }
+            },)
         });
         return stepBlocks;
     };

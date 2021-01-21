@@ -301,7 +301,7 @@ function Extension(){
         <div className='mark-count'>
           <Slider value={maxRecord} tipFormatter={(value)=>{return (t('max marked in a page',{
             number: value
-          }))}} max={50} min={0}  onChange={changeLimit} />
+          }))}} max={80} min={0}  onChange={changeLimit} />
         </div>
       </div>
 
