@@ -138,6 +138,7 @@ const config = {
       cacheGroups: {
         editor: {
           name:'editors',
+          filename:'editor.js',
           test: /@editorjs/,
           chunks: 'all',
           minChunks: 1,
